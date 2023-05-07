@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/reset"
+            />
+
+        <Button
+            android:id="@+id/solve_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/scramble"
+            />
+
+        <Button
+            android:id="@+id/scramble_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/invisible_image"
+            />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp" >
+
+        <TableRow android:layout_marginLeft="@dimen/cubie_shift" >
+
+            <Button
+                android:id="@+id/cubie1"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie2"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie3"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow android:layout_marginLeft="@dimen/cubie_shift" >
+
+            <Button
+                android:id="@+id/cubie4"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie5"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie6"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow android:layout_marginLeft="@dimen/cubie_shift" >
+
+            <Button
+                android:id="@+id/cubie7"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie8"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie9"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow android:layout_marginTop="@dimen/faces_padding" >
+
+            <Button
+                android:id="@+id/cubie10"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie11"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie12"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie19"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie20"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie21"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie28"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie29"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie30"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie37"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie38"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie39"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/cubie13"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie14"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie15"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie22"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie23"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie24"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie31"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie32"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie33"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie40"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie41"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie42"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/cubie16"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie17"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie18"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie25"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie26"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie27"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie34"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie35"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie36"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie43"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_marginBottom="@dimen/cubie_margin"
+                android:layout_marginEnd="@dimen/cubie_margin"
+                android:layout_marginStart="@dimen/faces_padding"
+                android:layout_marginTop="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie44"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie45"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginStart="@dimen/cubie_shift"
+            android:layout_marginTop="@dimen/faces_padding" >
+
+            <Button
+                android:id="@+id/cubie46"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie47"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie48"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow android:layout_marginStart="@dimen/cubie_shift" >
+
+            <Button
+                android:id="@+id/cubie49"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie50"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie51"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+
+        <TableRow android:layout_marginStart="@dimen/cubie_shift" >
+
+            <Button
+                android:id="@+id/cubie52"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie53"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/cubie54"
+                android:layout_width="@dimen/cubie_size"
+                android:layout_height="@dimen/cubie_size"
+                android:layout_margin="@dimen/cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/color1"
+                android:layout_width="@dimen/color_width"
+                android:layout_height="@dimen/color_height"
+                android:layout_margin="@dimen/color_cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/color2"
+                android:layout_width="@dimen/color_width"
+                android:layout_height="@dimen/color_height"
+                android:layout_margin="@dimen/color_cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/color3"
+                android:layout_width="@dimen/color_width"
+                android:layout_height="@dimen/color_height"
+                android:layout_margin="@dimen/color_cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/color4"
+                android:layout_width="@dimen/color_width"
+                android:layout_height="@dimen/color_height"
+                android:layout_margin="@dimen/color_cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/color5"
+                android:layout_width="@dimen/color_width"
+                android:layout_height="@dimen/color_height"
+                android:layout_margin="@dimen/color_cubie_margin"
+                android:background="@color/solver_btn_color" />
+
+            <Button
+                android:id="@+id/color6"
+                android:layout_width="@dimen/color_width"
+                android:layout_height="@dimen/color_height"
+                android:layout_margin="@dimen/color_cubie_margin"
+                android:background="@color/solver_btn_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

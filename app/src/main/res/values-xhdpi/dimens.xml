@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--
+         Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html
+    -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    
+    
+    <!-- REGULAR SCREEN SIZES  -->
+    <!-- REGULAR SCREEN SIZES  -->
+    <!-- REGULAR SCREEN SIZES  -->
+    <!-- REGULAR SCREEN SIZES  -->
+    
+    <!-- Cubie Dimensions -->
+    <dimen name="cubie_size">23dp</dimen>
+    <dimen name="cubie_shift">77dp</dimen>
+    <dimen name="cubie_margin">1dp</dimen>
+    <dimen name="faces_padding"> 3dp</dimen>
+    
+    <!-- Color Selection Dimensions -->
+    <dimen name="color_height">30dp</dimen>
+    <dimen name="color_width">50dp</dimen>
+    <dimen name="color_cubie_margin">2dp</dimen>
+
+</resources>

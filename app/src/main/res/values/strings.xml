@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Twisty Puzzle Masterz</string>
+    
+    
+    <!-- Navigation options -->
+    <string name="title_section1">Timer</string>
+    <string name="title_section2">Recorded Times</string>
+    <string name="title_section3">Advanced</string>
+    <string name="title_section4">Fridrich Method (CFOP)</string>
+    <string name="title_section5">Beginner</string>
+    <string name="title_section6">Cube Solver</string>
+    <string name="title_section7">Notations</string>
+    
+    
+    
+    <string name="start_time">0.00</string>
+    
+    <!-- Navigation text -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    
+
+    <!-- Main Fragment -->
+    <string name="scramble_algorithm"> Scramble Algorithm</string>
+	<string name="minutes">00:</string>
+	<string name="seconds">00.</string>
+	<string name="milliseconds">000</string>
+	<string name="all_times">All Times: </string>
+
+	
+	<!-- Fridrich List view -->
+	<string name="sample_algorithm">This is some sample text that should never been seen by user</string>
+
+	
+</resources>

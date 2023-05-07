@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="cube_type_array">
+        <item>3x3x3</item>
+        <item>2x2x2</item>
+        <item>4x4x4</item>
+    </string-array>
+ 
+    <string-array name="cubie_colors">
+        <item>White</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Orange</item>
+    </string-array>
+ 
+    
+</resources>

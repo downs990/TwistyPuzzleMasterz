@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/timerActivity"
+    android:background="#0288d1"
+    >
+    
+    <!-- TODO Should be color of drawer menu bar #03a9f4 -->
+
+    <LinearLayout
+        android:layout_alignParentTop="true" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/cubesSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+             />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:gravity="center"
+        android:text="@string/scramble_algorithm"
+        android:textSize="18sp" />
+
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+    <TextView
+        android:id="@+id/minutesTV"
+        android:textColor="#ffffff"
+        android:textStyle="italic"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minutes"
+        android:textSize="50sp" />
+     <TextView
+        android:id="@+id/secondsTV"
+        android:textColor="#ffffff"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seconds"
+        android:textSize="50sp" />
+      <TextView
+        android:id="@+id/millisecondsTV"
+        android:textColor="#ffffff"
+        android:textStyle="italic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/milliseconds"
+        android:textSize="50sp" />
+
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/allTimes"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/all_times"
+        android:textSize="15sp" />
+
+</RelativeLayout>
