@@ -1,8 +1,12 @@
 package com.raifuzu.twistypuzzlemasterz;
 
 import android.graphics.Color;
+import android.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public interface RubiksCube {
 
@@ -21,9 +25,14 @@ public interface RubiksCube {
 	Integer GREEN = Color.GREEN;
 	Integer ORANGE = Color.rgb(255, 165, 0);
 
-	//                       U ,     L  ,   F ,    R  ,    B  ,    D
-	Integer[] colorsArray = { RED, YELLOW, BLUE, WHITE, GREEN, ORANGE };
-
+	Map<String, Integer> colorsMap = new HashMap<String, Integer>() {{
+		put("RED",    RED);     // U
+		put("YELLOW", YELLOW);  // L
+		put("BLUE",   BLUE);	// F
+		put("WHITE",  WHITE);   // R
+		put("GREEN",  GREEN);   // B
+		put("ORANGE", ORANGE);  // D
+	}};
 
 	/**
 	 * The purpose of this method is to find the exact location of a cubie

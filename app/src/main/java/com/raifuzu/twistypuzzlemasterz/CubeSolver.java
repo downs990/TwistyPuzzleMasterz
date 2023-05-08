@@ -2,6 +2,8 @@ package com.raifuzu.twistypuzzlemasterz;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 import com.raifuzu.twistypuzzlemasterz.CubeLayer.Cubie;
 
@@ -11,11 +13,10 @@ import android.widget.Toast;
 
 /**
  * Research for Optimal Solution with AI:
- * <p>
- * https://github.com/BobNisco/RubiksCube https://github.com/stuartsoft/RSolver
- * https://github.com/johnpaulwelsh/AI-Rubiks-Cube
- * https://en.wikipedia.org/wiki/Optimal_solutions_for_Rubik%27s_Cube#Korf.27s_Algorithm
- * <p>
+ * github.com/BobNisco/RubiksCube
+ * github.com/stuartsoft/RSolver
+ * github.com/johnpaulwelsh/AI-Rubiks-Cube
+ * en.wikipedia.org/wiki/Optimal_solutions_for_Rubik%27s_Cube#Korf.27s_Algorithm
  * NOTE: This class solves the Rubik's Cube using the CFOP method.
  *
  * @author downs
@@ -24,12 +25,6 @@ public class CubeSolver {
     private RubiksCubeStructure rubiksCube;
     private View rootView;
 
-    private Integer RED = Color.RED;
-    private Integer YELLOW = Color.YELLOW;
-    private Integer BLUE = Color.BLUE;
-    private Integer WHITE = Color.LTGRAY;
-    private Integer GREEN = Color.GREEN;
-    private Integer ORANGE = Color.rgb(255, 165, 0);
     private String validCubieDisplay = "";
     private ArrayList<Cubie> validCubiesFoundList = new ArrayList<>();
     private ArrayList<Cubie> invalidCubiesFoundList = new ArrayList<>();
@@ -47,23 +42,9 @@ public class CubeSolver {
     }
 
     private Integer convertToIntegerColor(String stringColor) {
-        switch (stringColor) {
-            case "RED":
-                return RED;
-            case "WHITE":
-                return WHITE;
-            case "BLUE":
-                return BLUE;
-            case "ORANGE":
-                return ORANGE;
-            case "YELLOW":
-                return YELLOW;
-            case "GREEN":
-                return GREEN;
-            default:
-                return null;
 
-        }
+        Map<String, Integer> colorsMap = RubiksCube.colorsMap;
+        return colorsMap.get(stringColor);
     }
 
     /**

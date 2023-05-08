@@ -276,7 +276,7 @@ public class RubiksCubeStructure implements RubiksCube {
     /**
      * The purpose of this method is to initialize all of the colors for
      * each cubie in each layer of the cube. This can not be done in any
-     * constructor therefore it was made into a seperate method that can
+     * constructor therefore it was made into a separate method that can
      * be triggered when desired.
      */
 	public void finalizeColors(){

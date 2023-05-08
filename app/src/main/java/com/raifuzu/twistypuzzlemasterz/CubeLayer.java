@@ -273,6 +273,11 @@ public class CubeLayer {
      */
     public class Cubie {
 
+        // Location is a string representation of all faces that intersects this cubie
+        private String location; // Ex. "FRU" or "BL"
+        private boolean correctOrientation = false;
+
+
         private ArrayList<Button> stickers = new ArrayList<Button>();
         private CubieType cubieType = null;//TODO - find out if you even need this.
         private ArrayList<Integer> stickerColorsList = new ArrayList<>();
