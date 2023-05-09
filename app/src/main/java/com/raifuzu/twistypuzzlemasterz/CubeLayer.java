@@ -1,6 +1,9 @@
 package com.raifuzu.twistypuzzlemasterz;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Objects;
 
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.Side;
 
@@ -46,8 +49,8 @@ public class CubeLayer {
                 surfaceLeftButtons);
     }
 
-    public void setAllCubieColors(){
-        for (Cubie currentCubie : myCubies){
+    public void setAllCubieColors() {
+        for (Cubie currentCubie : myCubies) {
             currentCubie.setCubieStickerColors();
         }
     }
@@ -178,8 +181,7 @@ public class CubeLayer {
     public String getCenterColor() {
         final int CENTER_INDEX = 4;
         Integer centerColor = surfaceButtons[CENTER_INDEX].getCurrentTextColor();
-        String colorName = colorIntToString(centerColor);
-        return colorName;
+        return colorIntToString(centerColor);
     }
 
     public Side getSideName() {
@@ -187,38 +189,26 @@ public class CubeLayer {
     }
 
     public static String colorIntToString(Integer colorNum) {
-        String colorString = " ";
-        final Integer ORANGE = Color.rgb(255, 165, 0);
-        // NOTE: Did not accept any constants that I made.
-        if (colorNum.equals(ORANGE)) {
-            colorNum = Color.BLACK;
-        }
+        String colorString = "unknown_color"; // impossible, hopefully.
 
-        switch (colorNum) {
-            case Color.RED:
-                colorString = " RED ";
-                break;
-            case Color.YELLOW:
-                colorString = " YELLOW ";
-                break;
-            case Color.BLUE:
-                colorString = " BLUE ";
-                break;
-            case Color.LTGRAY:
-                colorString = " WHITE ";
-                break;
-            case Color.GREEN:
-                colorString = " GREEN ";
-                break;
-            case Color.BLACK:
-                colorString = " ORANGE ";
-                break;
-            default:
-                break;
+        Map<String, Integer> colorsMap = RubiksCube.colorsMap;
+
+        Object[] keys = colorsMap.keySet().toArray();
+        Iterator<Integer> values = colorsMap.values().iterator();
+
+        int i = 0;
+        while (values.hasNext()) {
+            Integer value = values.next();
+
+            if (Objects.equals(value, colorNum)) {
+                colorString = keys[i].toString();
+            }
+            i++;
         }
 
         return colorString;
     }
+
 
     private String arrayToString(Integer[] listOfColors) {
         String output = "";
@@ -291,7 +281,7 @@ public class CubeLayer {
             }
         }
 
-        public void setCubieStickerColors(){
+        public void setCubieStickerColors() {
             stickerColorsList.clear();
             for (Button sticker : stickers) {
                 stickerColorsList.add(sticker.getCurrentTextColor());
