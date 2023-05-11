@@ -55,6 +55,18 @@ public class CubeLayer {
         }
     }
 
+
+    /**
+     *  This function gives each layer the ability to search for a specific
+     *  cubie.
+     *
+     * @param cubieID - A string representation of the unique colors that make up this cubie
+     * @return - A string representation of all surfaces/sides that intersect/contain this cubie
+     */
+    public String findCubie(String cubieID){
+        return null;
+    }
+
     private void initializeCubies(Button[] surfaceStickers, Button[] surfaceBStickers, Button[] surfaceRStickers,
                                   Button[] surfaceFStickers, Button[] surfaceLStickers) {
 
@@ -268,7 +280,7 @@ public class CubeLayer {
         private boolean correctOrientation = false;
 
 
-        private ArrayList<Button> stickers = new ArrayList<Button>();
+        private ArrayList<Button> stickers = new ArrayList<>();
         private CubieType cubieType = null;//TODO - find out if you even need this.
         private ArrayList<Integer> stickerColorsList = new ArrayList<>();
 

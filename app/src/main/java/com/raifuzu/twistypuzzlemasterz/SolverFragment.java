@@ -165,8 +165,10 @@ public class SolverFragment extends Fragment {
 
 				rubiksCube.finalizeColors();
 				CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
-				String solutionAlg = mySolver.generateSolveAlgorithm();
-				displayAlert("Missing Cubies:", solutionAlg);
+				mySolver.solveCube();
+//				displayAlert("Missing Cubies:", solutionAlg);
+
+
 			}
 		});
 

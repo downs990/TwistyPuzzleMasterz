@@ -41,6 +41,45 @@ public class CubeSolver {
         return this.rubiksCube;
     }
 
+
+    public String solveStickers(String stickersToSolve){
+        return null;
+    }
+
+    public void solveCross(){
+        String crossSolutionAlgorithm = solveStickers("[" +
+                "[WHITE,GREEN]" +
+                "[WHITE,BLUE]" +
+                "[WHITE,ORANGE]" +
+                "[WHITE,RED]" +
+                "]");
+        this.rubiksCube.executeAlgorithm(crossSolutionAlgorithm);
+    }
+    public void solveF2L(){
+        String f2lSolutionAlgorithm = solveStickers("[" +
+                "{ [WHITE,BLUE,ORANGE], [BLUE,ORANGE] }" +
+                "{ [WHITE,BLUE,RED], [BLUE,RED] }" +
+                "{ [WHITE,RED,GREEN], [RED,GREEN] }" +
+                "{ [WHITE,GREEN,ORANGE], [GREEN,ORANGE] }" +
+                "]");
+
+        this.rubiksCube.executeAlgorithm(f2lSolutionAlgorithm);
+    }
+    public void solveOLL(){
+    }
+    public void solvePLL(){
+
+    }
+
+    public void solveCube(){
+        solveCross();
+        solveF2L();
+        solveOLL();
+        solvePLL();
+    }
+
+
+
     private Integer convertToIntegerColor(String stringColor) {
 
         Map<String, Integer> colorsMap = RubiksCube.colorsMap;
@@ -107,7 +146,7 @@ public class CubeSolver {
                 ArrayList<Integer> cubieStickers = cubie.getStickerColors();
                 boolean isValidPiece = false;
                 int index = 0;
-                while (index < validCubies.size() && isValidPiece == false) {
+                while (index < validCubies.size() && !isValidPiece) {
                     ArrayList<Integer> validCubie = validCubies.get(index);
                     //validCubie.remove(INVALID_STICKER);
 
@@ -123,7 +162,7 @@ public class CubeSolver {
                 }
 
                 //This cubie was not found in the valid cubie list
-                if (isValidPiece == false) {
+                if (!isValidPiece) {
                     invalidCubiesFoundList.add(cubie);
                     validCubies.add(cubie.getStickerColors());//TODO- figure out where to remove this?
                 }
@@ -176,7 +215,7 @@ public class CubeSolver {
                 index++;
             }
 
-            if (found == false) {
+            if (!found) {
                 missingCubiesList.add(arrayListToCubieString(piece));
             }
         }
@@ -186,7 +225,7 @@ public class CubeSolver {
         boolean isValid = false;
         String validEdgesStr = "RED WHITE,RED BLUE,RED YELLOW,RED GREEN,"// Top
                 + "BLUE WHITE,BLUE YELLOW,YELLOW GREEN,GREEN WHITE, "// Middle
-                + "ORANGE WHITE, ORANGE BLUE, ORANGE YELLOW, ORANGE GREEN";// Botton
+                + "ORANGE WHITE, ORANGE BLUE, ORANGE YELLOW, ORANGE GREEN";// Bottom
 
         String validCornersStr = "RED WHITE BLUE, RED BLUE YELLOW, RED YELLOW GREEN, RED GREEN WHITE,"// Top
                 + "BLUE WHITE ORANGE, BLUE ORANGE YELLOW, YELLOW ORANGE GREEN, GREEN ORANGE WHITE";// Bottom
@@ -230,16 +269,6 @@ public class CubeSolver {
         }
 
         return isValid;
-    }
-
-    public String generateSolveAlgorithm() {
-
-
-
-
-
-
-        return validCubieDisplay;
     }
 
 }

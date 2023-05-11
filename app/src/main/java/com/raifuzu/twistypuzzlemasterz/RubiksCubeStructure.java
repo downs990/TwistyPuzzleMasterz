@@ -16,9 +16,14 @@ import java.util.ArrayList;
 
 public class RubiksCubeStructure implements RubiksCube {
 
-	private CubeLayer up, left, front, right, back, down;
+	private final CubeLayer up;
+	private final CubeLayer left;
+	private final CubeLayer front;
+	private final CubeLayer right;
+	private final CubeLayer back;
+	private final CubeLayer down;
 	AdvancedArrayList<CubeLayer> rubiksCube = new AdvancedArrayList<>();
-	private View rootView;
+	private final View rootView;
 
 	@SafeVarargs
 	public RubiksCubeStructure(View rootView, AdvancedArrayList<Button[]>... layerList) {
@@ -46,9 +51,8 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	@Override
 	public String getCubeOrientation() {
-		String result = "UP: " + up.getCenterColor() + "RIGHT: " + right.getCenterColor() + "FRONT: "
+		return "UP: " + up.getCenterColor() + "RIGHT: " + right.getCenterColor() + "FRONT: "
 				+ front.getCenterColor();
-		return result;
 	}
 
 	/**
@@ -56,17 +60,6 @@ public class RubiksCubeStructure implements RubiksCube {
 	 */
 	@Override
 	public void resetCube() {
-
-		// Valid representation.
-		//                       U ,     L  ,   F ,    R  ,    B  ,    D
-		//	 			      { RED, YELLOW, BLUE, WHITE, GREEN, ORANGE };
-
-//		up.initializeSolvedColors(RED, GREEN, WHITE, BLUE, YELLOW);
-//		left.initializeSolvedColors(YELLOW, RED, BLUE, ORANGE, GREEN);
-//		front.initializeSolvedColors(BLUE, RED, WHITE, ORANGE, YELLOW);
-//		right.initializeSolvedColors(WHITE, RED, GREEN, ORANGE, BLUE);
-//		back.initializeSolvedColors(GREEN, RED, YELLOW, ORANGE, WHITE);
-//		down.initializeSolvedColors(ORANGE, BLUE, WHITE, GREEN, YELLOW);
 
 		// Valid representation.
 		//                       U ,     L  ,   F ,    R  ,    B  ,    D
@@ -85,13 +78,11 @@ public class RubiksCubeStructure implements RubiksCube {
 		// Example Algorithm: R' D' R D
 
 		String[] moves = algorithm.split(" ");
-		for (int i = 0; i < moves.length; i++) {
+		for (String individualMove : moves) {
 
-			String individualMove = moves[i];
 			String actualMove = individualMove.replace("'", "");
-			actualMove.trim();
-
 			Rotation direction = Rotation.CLOCKWISE;
+
 			if (!individualMove.equals(actualMove)) {
 				// inverted move
 				direction = Rotation.COUNTER_CLOCKWISE;
@@ -130,12 +121,13 @@ public class RubiksCubeStructure implements RubiksCube {
 	@Override
 	public void rotate(CubeLayer layerToRotate, Rotation directionOfRotation) {
 
-		if (layerToRotate.equals(null)) {
+		if (layerToRotate == null) {
 			// This means that the actualMove variable in the executeAlgorithm
 			// method was invalid. One of the moves in the algorithm did not
-			// match any moves in the Side enumeration. This should never
-			// happen.
-			Toast.makeText(rootView.getContext(), "Layer to rotate is null", Toast.LENGTH_LONG).show();
+			// match any moves in the Side enumeration.
+			Toast.makeText(rootView.getContext(),
+					"Invalid algorithm notation character. Can't find layer",
+					Toast.LENGTH_LONG).show();
 		} else {
 
 			if (directionOfRotation == Rotation.CLOCKWISE) {
@@ -144,22 +136,6 @@ public class RubiksCubeStructure implements RubiksCube {
 				rotateCounterClockwise(layerToRotate);
 			}
 		}
-	}
-
-	private AdvancedArrayList<Integer> buttonsToColors(Button[] buttons) {
-		AdvancedArrayList<Integer> colors = new AdvancedArrayList<>();
-
-		for (int buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++) {
-			colors.add(buttons[buttonIndex].getCurrentTextColor());
-		}
-
-		return colors;
-	}
-
-	private Integer getStickerColor(CubeLayer layer, int index) {
-		Button button = layer.getSurfaceButtons()[index];
-		Integer color = button.getCurrentTextColor();
-		return color;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -172,17 +148,17 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 5), getStickerColor(layer, 2));
 
 		// Edges and Corners
-		AdvancedArrayList<Integer> newsurfaceBack = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceLeftButtons()));
-		AdvancedArrayList<Integer> newsurfaceRight = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceBackButtons()));
-		AdvancedArrayList<Integer> newsurfaceFront = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceRightButtons()));
-		AdvancedArrayList<Integer> newsurfaceLeft = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceLeft = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceFrontButtons()));
 
-		layer.initializeScrambledColors(newSurfaceList, newsurfaceBack, newsurfaceRight, newsurfaceFront,
-				newsurfaceLeft);
+		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight, newSurfaceFront,
+				newSurfaceLeft);
 
 	}
 
@@ -195,34 +171,48 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 3), getStickerColor(layer, 6));
 
 		// Edges and Corners
-		AdvancedArrayList<Integer> newsurfaceBack = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceRightButtons()));
-		AdvancedArrayList<Integer> newsurfaceRight = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceFrontButtons()));
-		AdvancedArrayList<Integer> newsurfaceFront = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceLeftButtons()));
-		AdvancedArrayList<Integer> newsurfaceLeft = new AdvancedArrayList<Integer>(
+		AdvancedArrayList<Integer> newSurfaceLeft = new AdvancedArrayList<>(
 				buttonsToColors(layer.getSurfaceBackButtons()));
 
-		layer.initializeScrambledColors(newSurfaceList, newsurfaceBack, newsurfaceRight, newsurfaceFront,
-				newsurfaceLeft);
+		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight, newSurfaceFront,
+				newSurfaceLeft);
 	}
 
+	private AdvancedArrayList<Integer> buttonsToColors(Button[] buttons) {
+		AdvancedArrayList<Integer> colors = new AdvancedArrayList<>();
+
+		for (Button button : buttons) {
+			colors.add(button.getCurrentTextColor());
+		}
+
+		return colors;
+	}
+
+	private Integer getStickerColor(CubeLayer layer, int index) {
+		Button button = layer.getSurfaceButtons()[index];
+		return button.getCurrentTextColor();
+	}
 
 	// Size must always be even (26)
 	public String generateScrambleAlgorithm(int size) {
 
-		String output = "";
+		StringBuilder output = new StringBuilder();
 		for (int i = 0; i < size; i++) {
 			String newSymbol = generateRandomSymbol();
 			if (i == size - 1) {
-				output += newSymbol;
+				output.append(newSymbol);
 			} else {
-				output += newSymbol + " ";
+				output.append(newSymbol).append(" ");
 			}
 		}
 
-		return improveScrambleAlg(output);
+		return improveScrambleAlg(output.toString());
 	}
 
 	private String generateRandomSymbol() {
@@ -238,13 +228,13 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 	// TODO - if you want you could use a regular expression instead of if
-	// statements to generate your scramble algs. 
+	// 	statements to generate your scramble algorithm.
 
 	// remove all occurrences of exactly 2 identical symbols that are
 	// adjacent.
 	private String improveScrambleAlg(String initialAlg) {
 		String[] movesFor3x3 = initialAlg.split(" ");
-		AdvancedArrayList<String> cubeSymbols = new AdvancedArrayList<String>(movesFor3x3);
+		AdvancedArrayList<String> cubeSymbols = new AdvancedArrayList<>(movesFor3x3);
 
 		for (int i = 0; i < cubeSymbols.size() - 2; i += 2) {
 			String symbol1 = cubeSymbols.get(i);
@@ -291,12 +281,12 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	@Override
 	public String toString() {
-		String output = "";
+		StringBuilder output = new StringBuilder();
 
 		for (int i = 0; i < rubiksCube.size(); i++) {
-			output += rubiksCube.get(i).toString();
+			output.append(rubiksCube.get(i).toString());
 		}
 
-		return output;
+		return output.toString();
 	}
 }

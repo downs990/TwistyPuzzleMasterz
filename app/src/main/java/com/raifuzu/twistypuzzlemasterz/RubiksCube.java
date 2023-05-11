@@ -41,8 +41,8 @@ public interface RubiksCube {
 	 * be helpful for determining if the cubie is on the top, middle, or down
 	 * level of the cube.
 	 *
-	 * @param stickers Array of stickers is the cubies unique identifier
-	 * @return List of Layers that contains that cubie. The intersection of those layers is
+	 * @param stickers - Array of stickers is the cubies unique identifier
+	 * @return - List of Layers that contains that cubie. The intersection of those layers is
 	 * the cubie's location.
 	 */
 	ArrayList<CubeLayer> findLocationOfCubie(Color[] stickers);
