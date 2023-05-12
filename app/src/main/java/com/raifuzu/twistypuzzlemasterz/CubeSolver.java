@@ -3,6 +3,7 @@ package com.raifuzu.twistypuzzlemasterz;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.raifuzu.twistypuzzlemasterz.CubeLayer.Cubie;
@@ -22,6 +23,9 @@ import android.widget.Toast;
  * @author downs
  */
 public class CubeSolver {
+
+
+
     private RubiksCubeStructure rubiksCube;
     private View rootView;
 
@@ -30,7 +34,8 @@ public class CubeSolver {
     private ArrayList<Cubie> invalidCubiesFoundList = new ArrayList<>();
     private ArrayList<String> missingCubiesList = new ArrayList<>();
 
-    // TODO - this class will need access to all advanced CFOP algorithms.
+
+
     public CubeSolver(View rootView, RubiksCubeStructure rubiksCube) {
         this.rubiksCube = rubiksCube;
         boolean valid = isValidState();
@@ -42,34 +47,77 @@ public class CubeSolver {
     }
 
 
-    public String solveStickers(String stickersToSolve){
+
+    public String crossSolutionSteps(  Integer[][] stickersToSolve){
+
+
+            // 1. Get all pieces on down layer
+            Map< Integer[], ArrayList<CubeLayer>> cubieLocationsMap = new HashMap<>();
+
+            for(Integer[] cubie : stickersToSolve){
+                ArrayList<CubeLayer> intersectingLayers = this.rubiksCube.findLocationOfCubie(cubie);
+                cubieLocationsMap.put(cubie, intersectingLayers);
+            }
+
+
+            // 2, Rotate down layer until at least 2 pieces are in correct location
+            // 3. Set the cubies that are in correct locations to their correct orientation
+            // 4. Iff 2 cubies are in incorrect locations then swap them
+            // 5. Iff needed, set those 2 cubies to correct orientation
         return null;
     }
 
     public void solveCross(){
-        String crossSolutionAlgorithm = solveStickers("[" +
-                "[WHITE,GREEN]" +
-                "[WHITE,BLUE]" +
-                "[WHITE,ORANGE]" +
-                "[WHITE,RED]" +
-                "]");
+
+        Integer[][] stickersToSolve =  {
+                {RubiksCube.WHITE, RubiksCube.GREEN},
+                {RubiksCube.WHITE, RubiksCube.BLUE},
+                {RubiksCube.WHITE, RubiksCube.ORANGE},
+                {RubiksCube.WHITE, RubiksCube.RED},
+        };
+
+        String crossSolutionAlgorithm = crossSolutionSteps(   stickersToSolve  );
         this.rubiksCube.executeAlgorithm(crossSolutionAlgorithm);
     }
-    public void solveF2L(){
-        String f2lSolutionAlgorithm = solveStickers("[" +
-                "{ [WHITE,BLUE,ORANGE], [BLUE,ORANGE] }" +
-                "{ [WHITE,BLUE,RED], [BLUE,RED] }" +
-                "{ [WHITE,RED,GREEN], [RED,GREEN] }" +
-                "{ [WHITE,GREEN,ORANGE], [GREEN,ORANGE] }" +
-                "]");
 
+
+    public String f2lSolutionSteps(  Integer[][][] stickersToSolve){
+
+        return null;
+    }
+
+    public void solveF2L(){
+        Integer[][][] stickersToSolve = {
+                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.ORANGE}, { RubiksCube.BLUE, RubiksCube.ORANGE}},
+                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.RED}, { RubiksCube.BLUE, RubiksCube.RED}},
+                {{RubiksCube.WHITE, RubiksCube.RED, RubiksCube.GREEN}, { RubiksCube.RED, RubiksCube.GREEN}},
+                {{RubiksCube.WHITE, RubiksCube.GREEN, RubiksCube.ORANGE}, { RubiksCube.GREEN, RubiksCube.ORANGE}},
+        };
+
+        String f2lSolutionAlgorithm = f2lSolutionSteps( stickersToSolve );
         this.rubiksCube.executeAlgorithm(f2lSolutionAlgorithm);
     }
     public void solveOLL(){
+//        String ollSolutionAlgorithm = solveStickers(
+//                SolutionSteps.OLL,
+//                "[" +
+//                "TOP_SURFACE"+
+//                "]");
+//
+//        this.rubiksCube.executeAlgorithm(ollSolutionAlgorithm);
     }
     public void solvePLL(){
-
+//        String pllSolutionAlgorithm = solveStickers(
+//                SolutionSteps.PLL,
+//                "[" +
+//                "TOP_BORDER"+
+//                "]");
+//
+//        this.rubiksCube.executeAlgorithm(pllSolutionAlgorithm);
     }
+
+
+
 
     public void solveCube(){
         solveCross();

@@ -132,7 +132,7 @@ public class SolverFragment extends Fragment {
 				downFront, downLeft);
 
 		// !!!!! THIS LIST IS ONLY USED TO ADD FUNCTIONALITY TO ALL BUTTONS !!
-		AdvancedArrayList<Button> allCubiebButtons = new AdvancedArrayList<Button>(upFace, leftFace, frontFace,
+		AdvancedArrayList<Button> allCubieButtons = new AdvancedArrayList<Button>(upFace, leftFace, frontFace,
 				rightFace, backFace, downFace);
 
 		Button color1 = (Button) rootView.findViewById(R.id.color1);
@@ -149,7 +149,7 @@ public class SolverFragment extends Fragment {
 		selectColor(color6);
 
 		setSelectableColors(color1, color2, color3, color4, color5, color6);
-		setCubieFunctionality(allCubiebButtons);
+		setCubieFunctionality(allCubieButtons);
 
 		// Dynamic Cube Data Structure
 		rubiksCube = new RubiksCubeStructure(rootView, UFaceAndBorder, LFaceAndBorder, FFaceAndBorder, RFaceAndBorder,
@@ -274,9 +274,9 @@ public class SolverFragment extends Fragment {
 		});
 	}
 
-	public void setCubieFunctionality(AdvancedArrayList<Button> allCubiebButtons) {
-		for (int i = 0; i < allCubiebButtons.size(); i++) {
-			Button newButton = allCubiebButtons.get(i);
+	public void setCubieFunctionality(AdvancedArrayList<Button> allCubieButtons) {
+		for (int i = 0; i < allCubieButtons.size(); i++) {
+			Button newButton = allCubieButtons.get(i);
 			clickedFunction(newButton);
 		}
 	}

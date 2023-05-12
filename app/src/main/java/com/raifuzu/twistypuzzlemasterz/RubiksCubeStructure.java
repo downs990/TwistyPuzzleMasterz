@@ -43,11 +43,22 @@ public class RubiksCubeStructure implements RubiksCube {
 		resetCube();
 	}
 
-
+	/**
+	 * The purpose of this method is to find the exact location of a cubie
+	 * by just searching for it's unique colors in the whole cube. This will
+	 * be helpful for determining if the cubie is on the top, middle, or down
+	 * level of the cube.
+	 *
+	 * @param stickers - Array of stickers is the cubies unique identifier
+	 * @return - List of Layers that contains that cubie. The intersection of those layers is
+	 * the cubie's location.
+	 */
 	@Override
-	public ArrayList<CubeLayer> findLocationOfCubie(Color[] stickers) {
+	public ArrayList<CubeLayer> findLocationOfCubie(Integer[] stickers) {
 		return null;
 	}
+
+
 
 	@Override
 	public String getCubeOrientation() {
