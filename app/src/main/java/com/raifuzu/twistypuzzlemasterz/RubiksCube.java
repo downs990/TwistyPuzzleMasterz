@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface RubiksCube {
 
-	enum Side {
+	enum SurfaceName {
 		U, L, F, R, B, D
 	}
 
@@ -33,7 +33,7 @@ public interface RubiksCube {
 	}};
 
 
-	ArrayList<CubeLayer> findLocationOfCubie(Integer[] stickers);
+	ArrayList<SurfaceName> findLocationOfCubie(Integer[] stickers);
 
 
 	String getCubeOrientation();

@@ -13,13 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// THERE IS NO OTHER WAY TO GET THE BACKGROUND COLOR OF A BUTTON.
-//
-// Example:
-// button.setTextColor(color1); button.setBackgroundColor(color1);
-// button.getCurrentTextColor();
-
+ 
 public class SolverFragment extends Fragment {
 	
 	private Integer RED = Color.RED;
@@ -30,6 +24,7 @@ public class SolverFragment extends Fragment {
 	private Integer ORANGE = Color.rgb(255, 165, 0);
 	private Integer selectedColor = WHITE;
 	private RubiksCubeStructure rubiksCube;
+	private RubiksCubeStructure rubiksCubeProper;
 
 	/**
 	 * The fragment argument representing the section number for this fragment.
@@ -154,6 +149,12 @@ public class SolverFragment extends Fragment {
 		// Dynamic Cube Data Structure
 		rubiksCube = new RubiksCubeStructure(rootView, UFaceAndBorder, LFaceAndBorder, FFaceAndBorder, RFaceAndBorder,
 				BFaceAndBorder, DFaceAndBorder);
+
+
+		// TODO: Use this cube instead.
+//		rubiksCubeProper = new RubiksCubeStructure(
+//				rootView,
+//				"ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG");
 
 		// Cool pattern
 		// rubiksCube.executeAlgorithm("U F B' L2 U2 L2 F' B U2 L2 U");

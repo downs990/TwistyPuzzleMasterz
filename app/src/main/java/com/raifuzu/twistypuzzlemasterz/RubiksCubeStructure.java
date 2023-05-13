@@ -1,18 +1,15 @@
 package com.raifuzu.twistypuzzlemasterz;
 
-import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// THERE IS NO OTHER WAY TO GET THE BACKGROUND COLOR OF A BUTTON.
-//
-// Example:
-// button.setTextColor(color1); button.setBackgroundColor(color1);
-// button.getCurrentTextColor();
+import com.raifuzu.twistypuzzlemasterz.CubeLayer.Cubie;
+
+
 
 public class RubiksCubeStructure implements RubiksCube {
 
@@ -22,8 +19,54 @@ public class RubiksCubeStructure implements RubiksCube {
 	private final CubeLayer right;
 	private final CubeLayer back;
 	private final CubeLayer down;
+
 	AdvancedArrayList<CubeLayer> rubiksCube = new AdvancedArrayList<>();
+
+
+
+	private String validCubieDisplay = "";
+	private ArrayList<Cubie> validCubiesFoundList = new ArrayList<>();
+	private ArrayList<Cubie> invalidCubiesFoundList = new ArrayList<>();
+	private ArrayList<String> missingCubiesList = new ArrayList<>();
+
+
+
+
 	private final View rootView;
+
+
+	// TODO: Figure out how to remove buttons from this implementation.
+	// 		( However, I'd like to keep this in as an optional enable/disable. )
+	public RubiksCubeStructure(View rootView, String initialCubeState){
+		this.rootView = rootView;
+
+		ArrayList<String> surfaces = new ArrayList<>();
+
+		int start = 0;
+		int end = 0;
+		for(int i = 0; i <= initialCubeState.length(); i++){
+			if(i % 9 == 0 && i > 0){
+				end = i;
+				start = end - 9;
+
+				// TODO: Make sure you're using the correct cube orientations that match
+				// 		the opencv app.
+
+				// Take 9 chars from initialCubeState at a time, left to right.
+				String currentSurface = initialCubeState.substring(start, end);
+				surfaces.add( currentSurface );
+			}
+		}
+
+		// TODO: Update CubeLayer constructor to init layers from string of colors
+		up = new CubeLayer(rootView, 	surfaces.get(0) );
+		left = new CubeLayer(rootView,  surfaces.get(0) );
+		front = new CubeLayer(rootView, surfaces.get(0) );
+		right = new CubeLayer(rootView, surfaces.get(0) );
+		back = new CubeLayer(rootView,  surfaces.get(0) );
+		down = new CubeLayer(rootView,  surfaces.get(0) );
+
+	}
 
 	@SafeVarargs
 	public RubiksCubeStructure(View rootView, AdvancedArrayList<Button[]>... layerList) {
@@ -31,13 +74,12 @@ public class RubiksCubeStructure implements RubiksCube {
 		// Initialize rootView for setting up buttons
 		this.rootView = rootView;
 
-		// Gives each layer it's buttons
-		up = new CubeLayer(rootView, layerList[0], Side.U);
-		left = new CubeLayer(rootView, layerList[1], Side.L);
-		front = new CubeLayer(rootView, layerList[2], Side.F);
-		right = new CubeLayer(rootView, layerList[3], Side.R);
-		back = new CubeLayer(rootView, layerList[4], Side.B);
-		down = new CubeLayer(rootView, layerList[5], Side.D);
+		up = new CubeLayer(rootView, layerList[0], SurfaceName.U);
+		left = new CubeLayer(rootView, layerList[1], SurfaceName.L);
+		front = new CubeLayer(rootView, layerList[2], SurfaceName.F);
+		right = new CubeLayer(rootView, layerList[3], SurfaceName.R);
+		back = new CubeLayer(rootView, layerList[4], SurfaceName.B);
+		down = new CubeLayer(rootView, layerList[5], SurfaceName.D);
 
 		rubiksCube.addMultiple(up, left, front, right, back, down);
 		resetCube();
@@ -54,7 +96,7 @@ public class RubiksCubeStructure implements RubiksCube {
 	 * the cubie's location.
 	 */
 	@Override
-	public ArrayList<CubeLayer> findLocationOfCubie(Integer[] stickers) {
+	public ArrayList<SurfaceName> findLocationOfCubie(Integer[] stickers) {
 		return null;
 	}
 
@@ -118,9 +160,9 @@ public class RubiksCubeStructure implements RubiksCube {
 	private CubeLayer findCubeLayer(String actualMove) {
 		CubeLayer resultLayer = null;
 		for (int i = 0; i < rubiksCube.size(); i++) {
-			Side sideName = rubiksCube.get(i).getSideName();
+			SurfaceName surfaceName = rubiksCube.get(i).getSideName();
 
-			if (sideName.toString().equals(actualMove)) {
+			if (surfaceName.toString().equals(actualMove)) {
 				resultLayer = rubiksCube.get(i);
 				break;
 			}
@@ -289,6 +331,217 @@ public class RubiksCubeStructure implements RubiksCube {
 	public AdvancedArrayList<CubeLayer> getLayersList(){
 		return this.rubiksCube;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+	private Integer convertToIntegerColor(String stringColor) {
+
+		Map<String, Integer> colorsMap = RubiksCube.colorsMap;
+		return colorsMap.get(stringColor);
+	}
+
+	/**
+	 * This method converts a string of colors names into an actual list of
+	 * color pairs of type Integer.
+	 *
+	 * @param colorString
+	 * @return
+	 */
+	private ArrayList<ArrayList<Integer>> createColorPairs(String colorString) {
+
+		ArrayList<ArrayList<Integer>> resultColorPairs = new ArrayList<>();
+
+		String[] individualCubie = colorString.split(",");
+		for (String cubie : individualCubie) {
+			cubie = cubie.trim();
+			String[] listOfStickers = cubie.split(" ");
+			ArrayList<Integer> integerColorPair = new ArrayList<>();
+			for (String sticker : listOfStickers) {
+				Integer integerColor = convertToIntegerColor(sticker);
+				integerColorPair.add(integerColor);
+			}
+			resultColorPairs.add(integerColorPair);
+		}
+
+		return resultColorPairs;
+	}
+
+	private void getValidCubies(ArrayList<ArrayList<Integer>> validCubies, CubieType validType) {
+
+		final Integer INVALID_STICKER = 999;
+
+		for (ArrayList<Integer> validStickers : validCubies) {
+			for (CubeLayer layer : this.getLayersList()) {
+				for (Cubie cubie : layer.getAllCubies()) {
+
+					CubieType cubieType = cubie.getCubieType();
+					ArrayList<Integer> cubieStickers = cubie.getStickerColors();
+
+					//NOTE: this method finds all of the pieces that are valid.
+					if ((validType == cubieType) && cubieStickers.containsAll(validStickers)) {
+						validStickers.add(INVALID_STICKER);
+						validCubiesFoundList.add(cubie);
+						break;
+					}
+				}
+			}
+
+			validStickers.remove(INVALID_STICKER);
+		}
+	}
+
+	private void getInvalidCubies(ArrayList<ArrayList<Integer>> validCubies, CubieType validType) {
+		//final Integer INVALID_STICKER = 999;
+
+		//NOTE: this method finds all of the pieces that are invalid.
+		for (CubeLayer layer : this.getLayersList()) {
+			for (Cubie cubie : layer.getAllCubies()) {
+
+				ArrayList<Integer> cubieStickers = cubie.getStickerColors();
+				boolean isValidPiece = false;
+				int index = 0;
+				while (index < validCubies.size() && !isValidPiece) {
+					ArrayList<Integer> validCubie = validCubies.get(index);
+					//validCubie.remove(INVALID_STICKER);
+
+					if ((validType == cubie.getCubieType())
+							&& cubieStickers.containsAll(validCubie)) {
+						isValidPiece = true;
+					}
+					//Different types automatically go through here because there is no way to tell yet.
+					if (validType != cubie.getCubieType()) {
+						isValidPiece = true;
+					}
+					index++;
+				}
+
+				//This cubie was not found in the valid cubie list
+				if (!isValidPiece) {
+					invalidCubiesFoundList.add(cubie);
+					validCubies.add(cubie.getStickerColors());//TODO- figure out where to remove this?
+				}
+
+			}
+		}
+	}
+
+	private String arrayListToCubieString(ArrayList<Integer> cubieStickers) {
+		String cubieString = "";
+
+		switch (cubieStickers.size()) {
+			case 1:
+				cubieString += CubieType.CENTER + ": ";
+				break;
+			case 2:
+				cubieString += CubieType.EDGE + ": ";
+				break;
+			case 3:
+				cubieString += CubieType.CORNER + ": ";
+				break;
+			default:
+				break;
+		}
+
+		for (Integer color : cubieStickers) {
+			String colorStr = CubeLayer.colorIntToString(color);
+			cubieString += colorStr + " ";
+		}
+
+		return cubieString;
+	}
+
+	private void getMissingCubies(ArrayList<ArrayList<Integer>> validPieces, ArrayList<Cubie> validCubiesFound) {
+
+		for (ArrayList<Integer> piece : validPieces) {
+
+			int index = 0;
+			boolean found = false;
+			while ((index < validCubiesFound.size()) && !found) {
+				ArrayList<Integer> cubieStickers = validCubiesFound.get(index).getStickerColors();
+
+				//If type is same
+				if (piece.size() == validCubiesFound.get(index).getStickerColors().size()) {
+					if (cubieStickers.containsAll(piece)) {
+						found = true;
+					}
+				}
+
+				index++;
+			}
+
+			if (!found) {
+				missingCubiesList.add(arrayListToCubieString(piece));
+			}
+		}
+	}
+
+	public boolean isValidState() {
+		boolean isValid = false;
+		String validEdgesStr = "RED WHITE,RED BLUE,RED YELLOW,RED GREEN,"// Top
+				+ "BLUE WHITE,BLUE YELLOW,YELLOW GREEN,GREEN WHITE, "// Middle
+				+ "ORANGE WHITE, ORANGE BLUE, ORANGE YELLOW, ORANGE GREEN";// Bottom
+
+		String validCornersStr = "RED WHITE BLUE, RED BLUE YELLOW, RED YELLOW GREEN, RED GREEN WHITE,"// Top
+				+ "BLUE WHITE ORANGE, BLUE ORANGE YELLOW, YELLOW ORANGE GREEN, GREEN ORANGE WHITE";// Bottom
+
+		String validCentersStr = "RED, WHITE, BLUE, ORANGE, YELLOW, GREEN";// All
+
+		ArrayList<ArrayList<Integer>> validEdges = createColorPairs(validEdgesStr);
+		ArrayList<ArrayList<Integer>> validCorners = createColorPairs(validCornersStr);
+		ArrayList<ArrayList<Integer>> validCenters = createColorPairs(validCentersStr);
+
+		//NOTE: Initializes validCubiesFoundList
+		getValidCubies(validEdges, CubieType.EDGE);
+		getValidCubies(validCorners, CubieType.CORNER);
+		getValidCubies(validCenters, CubieType.CENTER);
+
+		//NOTE: Initializes missingCubiesList
+		getMissingCubies(validEdges, validCubiesFoundList);
+		getMissingCubies(validCorners, validCubiesFoundList);
+		getMissingCubies(validCenters, validCubiesFoundList);
+
+		final int CORRECT_PIECES = 26;
+		validCubieDisplay += "Valid Cubies: " + validCubiesFoundList.size() + " of " + CORRECT_PIECES + "\n\n";
+
+		//NOTE: If you want to use validEdges, validCorners, or validCenters below this code then
+		//  you might need to clear them and recreate them because after getInvalidCubies() uses them
+		//  it modifies their values.
+		getInvalidCubies(validEdges, CubieType.EDGE);
+		getInvalidCubies(validCorners, CubieType.CORNER);
+		getInvalidCubies(validCenters, CubieType.CENTER);
+
+		//NOTE: change to
+		//   - validCubiesFoundList<Cubie>
+		//   - invalidCubiesFoundList<Cubie>
+		//   - missingCubiesList<String>
+		for (String cubie : missingCubiesList) {
+			validCubieDisplay += cubie + "\n";//TODO- add .toString() if using Cubie Object
+		}
+
+		if (validCubiesFoundList.size() == CORRECT_PIECES) {
+			isValid = true;
+		}
+
+		return isValid;
+	}
+
+
+
+
+
+
+
+
+
 
 	@Override
 	public String toString() {

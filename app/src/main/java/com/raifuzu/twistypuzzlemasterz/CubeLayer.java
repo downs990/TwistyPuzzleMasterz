@@ -5,22 +5,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-import com.raifuzu.twistypuzzlemasterz.RubiksCube.Side;
+import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
 
-import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// THERE IS NO OTHER WAY TO GET THE BACKGROUND COLOR OF A BUTTON. 
-//
-// Example:
-// button.setTextColor(color1); button.setBackgroundColor(color1);
-// button.getCurrentTextColor();
 
 public class CubeLayer {
 
-    private Side sideName;
+    private SurfaceName surfaceName;
     private Button[] surfaceButtons;
     private Button[] surfaceBackButtons;
     private Button[] surfaceRightButtons;
@@ -31,9 +24,20 @@ public class CubeLayer {
 
     private View rootView;// Keep this. You might need to Toast.
 
-    public CubeLayer(View rootView, AdvancedArrayList<Button[]> surfaceAndBorder, Side sideName) {
+
+    public CubeLayer(View rootView, String initialLayerColors) {
         this.rootView = rootView;
-        this.sideName = sideName;
+        this.surfaceName = SurfaceName.F; // TODO: First char in initialLayerColors
+        setAllLayerButtons(surfaceAndBorder);
+//        this.surfaceAndBorder = surfaceAndBorder;
+//        initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
+//                surfaceLeftButtons);
+    }
+
+
+    public CubeLayer(View rootView, AdvancedArrayList<Button[]> surfaceAndBorder, SurfaceName surfaceName) {
+        this.rootView = rootView;
+        this.surfaceName = surfaceName;
         setAllLayerButtons(surfaceAndBorder);
         this.surfaceAndBorder = surfaceAndBorder;
         initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
@@ -41,8 +45,8 @@ public class CubeLayer {
     }
 
     @SuppressWarnings("unchecked")
-    public CubeLayer(Side sideName, AdvancedArrayList<Integer>... colorLists) {
-        this.sideName = sideName;
+    public CubeLayer(SurfaceName surfaceName, AdvancedArrayList<Integer>... colorLists) {
+        this.surfaceName = surfaceName;
         // surface, surface back, surface right, surface front, surface left.
         initializeScrambledColors(colorLists[0], colorLists[1], colorLists[2], colorLists[3], colorLists[4]);
         initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
@@ -196,8 +200,8 @@ public class CubeLayer {
         return colorIntToString(centerColor);
     }
 
-    public Side getSideName() {
-        return sideName;
+    public SurfaceName getSideName() {
+        return surfaceName;
     }
 
     public static String colorIntToString(Integer colorNum) {
@@ -253,7 +257,7 @@ public class CubeLayer {
         Integer[] surfaceLeftColors = getButtonColors(surfaceLeftButtons);
 
         String surfaceString = arrayToString(surfaceColors);
-        output += "\n\nSurface: " + sideName.toString() + "\n" + surfaceString;
+        output += "\n\nSurface: " + surfaceName.toString() + "\n" + surfaceString;
         String surfaceBackString = arrayToString(surfaceBackColors);
         output += "\nSurface Back: \n" + surfaceBackString;
         String surfaceRightString = arrayToString(surfaceRightColors);
