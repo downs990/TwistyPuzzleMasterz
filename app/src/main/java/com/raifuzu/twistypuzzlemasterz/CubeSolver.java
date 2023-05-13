@@ -1,7 +1,9 @@
 package com.raifuzu.twistypuzzlemasterz;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import android.view.View;
 import android.widget.Toast;
@@ -37,19 +39,63 @@ public class CubeSolver {
      */
     public String crossSolutionSteps(  Integer[][] stickersToSolve){
 
-            Map< Integer[], ArrayList<SurfaceName>> cubieLocationsMap = new HashMap<>();
+        StringBuilder solutionAlgorithm = new StringBuilder();
 
-            for(Integer[] cubie : stickersToSolve){
-                ArrayList<SurfaceName> intersectingLayers = this.rubiksCube.findLocationOfCubie(cubie);
-                cubieLocationsMap.put(cubie, intersectingLayers);
+        for(Integer[] cubie : stickersToSolve){
+            List<Integer> cubieAsList = Arrays.asList(cubie);
+            ArrayList<SurfaceName> intersectingLayers = this.rubiksCube.findLocationOfCubie(cubieAsList);
+
+            // If cubie on 'up' layer
+            if(intersectingLayers.contains(SurfaceName.U)){
+                if(intersectingLayers.contains(SurfaceName.R)){
+                    solutionAlgorithm.append("R2 ");
+                }
+                else if(intersectingLayers.contains(SurfaceName.F)){
+                    solutionAlgorithm.append("F2 ");
+                }
+                else if(intersectingLayers.contains(SurfaceName.L)){
+                    solutionAlgorithm.append("L2 ");
+                }
+                else if(intersectingLayers.contains(SurfaceName.B)){
+                    solutionAlgorithm.append("B2 ");
+                }
+            }
+            // If the cubie on 'down' layer
+            else if(intersectingLayers.contains(SurfaceName.D)){
+                // LOGIC:
+                // - Maintain location on down layer while putting other cubies down here.
+                // - Rotate down layer such that there is no white cubie on the spot
+                //      that intersects with down and the chosen layer to move.
             }
 
-        return null;
+            // If the cubie on 'middle' layer
+            else{
+                // [L, F] ->   L  or F'
+                // [R, F] ->   R' or F
+                // [L, B] ->   L' or B
+                // [R, B] ->   R  or B'
+
+                // LOGIC:
+                // - Prefer the move that puts the cubie in the correct location.
+                //                or
+                // - Move that wont kick out an already positioned white cross cubie on down layer.
+            }
+
+        }
+
+
+
+        return solutionAlgorithm.toString();
     }
+
+
+
+
+
 
     public void solveCross(){
 
-        Integer[][] stickersToSolve =  {
+        Integer[][] stickersToSolve = {
                 {RubiksCube.WHITE, RubiksCube.GREEN},
                 {RubiksCube.WHITE, RubiksCube.BLUE},
                 {RubiksCube.WHITE, RubiksCube.ORANGE},

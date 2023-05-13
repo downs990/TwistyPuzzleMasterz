@@ -5,6 +5,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.raifuzu.twistypuzzlemasterz.CubeLayer.Cubie;
@@ -65,6 +66,7 @@ public class RubiksCubeStructure implements RubiksCube {
 		right = new CubeLayer(rootView, surfaces.get(0) );
 		back = new CubeLayer(rootView,  surfaces.get(0) );
 		down = new CubeLayer(rootView,  surfaces.get(0) );
+		rubiksCube.addMultiple(up, left, front, right, back, down);
 
 	}
 
@@ -96,8 +98,34 @@ public class RubiksCubeStructure implements RubiksCube {
 	 * the cubie's location.
 	 */
 	@Override
-	public ArrayList<SurfaceName> findLocationOfCubie(Integer[] stickers) {
-		return null;
+	public ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers) {
+
+		ArrayList<SurfaceName> intersectingSurfaces = new ArrayList<>();
+
+		for(CubeLayer layer : rubiksCube){
+			boolean successfullyFoundCubie = false;
+			for(Cubie cubie : layer.myCubies){
+
+				// Same type of cubie (i.e Edge, Corner, Center)
+				if(stickers.size() == cubie.stickerColorsList.size()){
+					ArrayList<Boolean> foundList = new ArrayList<>();
+
+					for(Integer color : stickers){
+						boolean stickerFound = cubie
+								.stickerColorsList
+								.contains(color);
+
+						foundList.add(stickerFound);
+					}
+					successfullyFoundCubie = !foundList.contains(false);
+
+					if(successfullyFoundCubie){
+						intersectingSurfaces.add(layer.getSideName());
+					}
+				}
+			}
+		}
+		return intersectingSurfaces;
 	}
 
 

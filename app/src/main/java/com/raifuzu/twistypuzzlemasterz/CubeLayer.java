@@ -20,7 +20,7 @@ public class CubeLayer {
     private Button[] surfaceFrontButtons;
     private Button[] surfaceLeftButtons;
     private AdvancedArrayList<Button[]> surfaceAndBorder;
-    private AdvancedArrayList<Cubie> myCubies;
+    public AdvancedArrayList<Cubie> myCubies;
 
     private View rootView;// Keep this. You might need to Toast.
 
@@ -286,7 +286,7 @@ public class CubeLayer {
 
         private ArrayList<Button> stickers = new ArrayList<>();
         private CubieType cubieType = null;//TODO - find out if you even need this.
-        private ArrayList<Integer> stickerColorsList = new ArrayList<>();
+        public ArrayList<Integer> stickerColorsList = new ArrayList<>();
 
         public Cubie(CubieType cubieType, Button... stickers) {
 

@@ -4,6 +4,7 @@ package com.raifuzu.twistypuzzlemasterz;
 import android.graphics.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface RubiksCube {
@@ -33,7 +34,7 @@ public interface RubiksCube {
 	}};
 
 
-	ArrayList<SurfaceName> findLocationOfCubie(Integer[] stickers);
+	ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers);
 
 
 	String getCubeOrientation();

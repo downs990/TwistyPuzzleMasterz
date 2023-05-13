@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
- 
+
 public class SolverFragment extends Fragment {
 	
 	private Integer RED = Color.RED;
