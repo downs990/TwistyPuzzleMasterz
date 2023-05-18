@@ -1,6 +1,7 @@
 package com.raifuzu.twistypuzzlemasterz;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -227,12 +228,12 @@ public class CubeLayer {
 
 
     private String arrayToString(Integer[] listOfColors) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
-        for (int i = 0; i < listOfColors.length; i++) {
-            output += " " + colorIntToString(listOfColors[i]);
+        for (Integer listOfColor : listOfColors) {
+            output.append(" ").append(colorIntToString(listOfColor));
         }
-        return output;
+        return output.toString();
     }
 
     private Integer[] getButtonColors(Button[] buttons) {
@@ -291,10 +292,7 @@ public class CubeLayer {
         public Cubie(CubieType cubieType, Button... stickers) {
 
             this.cubieType = cubieType;
-
-            for (Button sticker : stickers) {
-                this.stickers.add(sticker);
-            }
+            this.stickers.addAll(Arrays.asList(stickers));
         }
 
         public void setCubieStickerColors() {
