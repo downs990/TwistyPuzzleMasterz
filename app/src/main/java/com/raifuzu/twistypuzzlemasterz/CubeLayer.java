@@ -282,6 +282,9 @@ public class CubeLayer {
 
         // Location is a string representation of all faces that intersects this cubie
         private String location; // Ex. "FRU" or "BL"
+
+
+        // TODO: Create a way to use [RED,WHITE,BLUE] centers as the orientation reference
         private boolean correctOrientation = false;
 
 

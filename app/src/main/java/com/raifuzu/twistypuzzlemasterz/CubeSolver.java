@@ -2,9 +2,7 @@ package com.raifuzu.twistypuzzlemasterz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import android.view.View;
 import android.widget.Toast;
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
@@ -17,6 +15,16 @@ import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
 public class CubeSolver {
 
 
+    Integer[][] topCubies = {
+            {RubiksCube.YELLOW, RubiksCube.BLUE, RubiksCube.ORANGE},
+            {RubiksCube.YELLOW, RubiksCube.BLUE} ,
+            {RubiksCube.YELLOW, RubiksCube.BLUE, RubiksCube.RED} ,
+            {RubiksCube.YELLOW, RubiksCube.RED},
+            {RubiksCube.YELLOW, RubiksCube.RED, RubiksCube.GREEN},
+            {RubiksCube.YELLOW, RubiksCube.GREEN} ,
+            {RubiksCube.YELLOW, RubiksCube.GREEN, RubiksCube.ORANGE} ,
+            {RubiksCube.YELLOW, RubiksCube.ORANGE}
+    };
 
     private final RubiksCubeStructure rubiksCube;
     private final View rootView;
@@ -34,8 +42,8 @@ public class CubeSolver {
      *   4. Iff 2 cubies are in incorrect locations then swap them
      *   5. Iff needed, set those 2 cubies to correct orientation
      *
-     * @param stickersToSolve
-     * @return
+     * @param stickersToSolve Unique stickers list of the specific cubies to solve
+     * @return string representation of the solution algorithm to put those cubies in the correct places.
      */
     public String crossSolutionSteps(  Integer[][] stickersToSolve){
 
@@ -108,7 +116,7 @@ public class CubeSolver {
 
 
     public String f2lSolutionSteps(  Integer[][][] stickersToSolve){
-
+        // TODO: Complete solution implementation
         return null;
     }
 
@@ -123,23 +131,27 @@ public class CubeSolver {
         String f2lSolutionAlgorithm = f2lSolutionSteps( stickersToSolve );
         this.rubiksCube.executeAlgorithm(f2lSolutionAlgorithm);
     }
-    public void solveOLL(){
-//        String ollSolutionAlgorithm = solveStickers(
-//                SolutionSteps.OLL,
-//                "[" +
-//                "TOP_SURFACE"+
-//                "]");
-//
-//        this.rubiksCube.executeAlgorithm(ollSolutionAlgorithm);
+
+    public String ollSolutionSteps(  Integer[][] stickersToSolve){
+        // TODO: Complete solution implementation
+        return null;
     }
+
+    public void solveOLL(){
+        String ollSolutionAlgorithm = ollSolutionSteps( topCubies );
+        this.rubiksCube.executeAlgorithm(ollSolutionAlgorithm);
+    }
+
+
+
+    public String pllSolutionSteps(  Integer[][] stickersToSolve){
+        // TODO: Complete solution implementation
+        return null;
+    }
+
     public void solvePLL(){
-//        String pllSolutionAlgorithm = solveStickers(
-//                SolutionSteps.PLL,
-//                "[" +
-//                "TOP_BORDER"+
-//                "]");
-//
-//        this.rubiksCube.executeAlgorithm(pllSolutionAlgorithm);
+        String pllSolutionAlgorithm = pllSolutionSteps( topCubies );
+        this.rubiksCube.executeAlgorithm(pllSolutionAlgorithm);
     }
 
 
