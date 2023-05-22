@@ -70,35 +70,33 @@ public class CubeSolver {
             }
             // If the cubie on 'down' layer
             else if(intersectingLayers.contains(SurfaceName.D)){
-                // LOGIC:
-                // - Maintain location on down layer while putting other cubies down here.
-                // - Rotate down layer such that there is no white cubie on the spot
-                //      that intersects with down and the chosen layer to move.
+                // Continue to next cubie to solve.
             }
 
             // If the cubie on 'middle' layer
             else{
-                // [L, F] ->   L  or F'
-                // [R, F] ->   R' or F
+                // [L, F] ->   L  or F'                     <-- left
                 // [L, B] ->   L' or B
+                // [R, F] ->   R' or F                      <-- right
                 // [R, B] ->   R  or B'
 
-                // LOGIC:
-                // - Prefer the move that puts the cubie in the correct location.
-                //                or
-                // - Move that wont kick out an already positioned white cross cubie on down layer.
+                if(intersectingLayers.contains(SurfaceName.R)){
+
+                    // Check if a white cubie already exists at the location [R,D]
+                    // If it does, then do avoidance maneuver. Else, just do R or R'
+
+
+                }else if(intersectingLayers.contains(SurfaceName.L)){
+                    // Check if a white cubie already exists at the location [L,D]
+                    // If it does, then do avoidance maneuver. Else, just do L or L'
+                }
+
             }
 
         }
 
-
-
         return solutionAlgorithm.toString();
     }
-
-
-
-
 
 
     public void solveCross(){
