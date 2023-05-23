@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class AdvancedArrayList<T> extends ArrayList<T> {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The purpose of this class is to be able to create collections and cleanly

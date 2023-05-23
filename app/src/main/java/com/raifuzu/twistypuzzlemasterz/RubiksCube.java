@@ -36,6 +36,7 @@ public interface RubiksCube {
 
 	ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers);
 
+	List<Integer> getCubieAtLocation(List<SurfaceName> intersection);
 
 	String getCubeOrientation();
 
