@@ -33,6 +33,16 @@ public interface RubiksCube {
 		put("ORANGE", ORANGE);  // D
 	}};
 
+	Map<String, String[]> cubieLocationsMap = new HashMap<String, String[]>() {{
+		put("U", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F" , "U F" , "U R F" });
+		put("L", new String[]{"L B D" , "L B" , "L B U" , "L D" , "L" , "L U" , "L F D", "L F", "L F U" });
+		put("F", new String[]{"F L U" , "F U" , "F U R" , "F L" , "F" , "F R" , "F L D", "F D", "F R D" });
+		put("R", new String[]{"R F U" , "R U" , "R B U" , "R F" , "R" , "R B" , "R F D", "R D", "R B D" });
+//		put("B", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F", "U F", "U R F" });
+//		put("D", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F", "U F", "U R F" });
+
+		// TODO: Finish B and D. (double check all)
+	}};
 
 	ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers);
 

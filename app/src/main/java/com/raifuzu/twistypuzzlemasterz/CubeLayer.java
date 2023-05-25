@@ -2,6 +2,7 @@ package com.raifuzu.twistypuzzlemasterz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -41,24 +42,26 @@ public class CubeLayer {
         this.surfaceName = surfaceName;
         setAllLayerButtons(surfaceAndBorder);
         this.surfaceAndBorder = surfaceAndBorder;
-        initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
-                surfaceLeftButtons);
+        initializeCubies();
     }
 
-    @SuppressWarnings("unchecked")
-    public CubeLayer(SurfaceName surfaceName, AdvancedArrayList<Integer>... colorLists) {
-        this.surfaceName = surfaceName;
-        // surface, surface back, surface right, surface front, surface left.
-        initializeScrambledColors(colorLists[0], colorLists[1], colorLists[2], colorLists[3], colorLists[4]);
-        initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
-                surfaceLeftButtons);
-    }
+//    @SuppressWarnings("unchecked")
+//    public CubeLayer(SurfaceName surfaceName, AdvancedArrayList<Integer>... colorLists) {
+//        this.surfaceName = surfaceName;
+//        // surface, surface back, surface right, surface front, surface left.
+//        initializeScrambledColors(colorLists[0], colorLists[1], colorLists[2], colorLists[3], colorLists[4]);
+//        initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
+//                surfaceLeftButtons);
+//    }
 
     public void setAllCubieColors() {
         for (Cubie currentCubie : myCubies) {
             currentCubie.setCubieStickerColors();
         }
     }
+
+
+
 
 
     /**
@@ -72,19 +75,21 @@ public class CubeLayer {
         return null;
     }
 
-    private void initializeCubies(Button[] surfaceStickers, Button[] surfaceBStickers, Button[] surfaceRStickers,
-                                  Button[] surfaceFStickers, Button[] surfaceLStickers) {
+    private void initializeCubies() {
+
+        // Correctly set the locations of all cubies on this layer
+        String[] locations = RubiksCube.cubieLocationsMap.get(this.surfaceName.name());
 
         // Create cubies for this layer <3 <3
-        Cubie cubie1 = new Cubie(CubieType.CORNER, surfaceButtons[0], surfaceBackButtons[0], surfaceLeftButtons[2]);
-        Cubie cubie2 = new Cubie(CubieType.EDGE, surfaceButtons[1], surfaceBackButtons[1]);
-        Cubie cubie3 = new Cubie(CubieType.CORNER, surfaceButtons[2], surfaceBackButtons[2], surfaceRightButtons[0]);
-        Cubie cubie4 = new Cubie(CubieType.EDGE, surfaceButtons[3], surfaceLeftButtons[1]);
-        Cubie cubie5 = new Cubie(CubieType.CENTER, surfaceButtons[4]);
-        Cubie cubie6 = new Cubie(CubieType.EDGE, surfaceButtons[5], surfaceRightButtons[1]);
-        Cubie cubie7 = new Cubie(CubieType.CORNER, surfaceButtons[6], surfaceLeftButtons[0], surfaceFrontButtons[2]);
-        Cubie cubie8 = new Cubie(CubieType.EDGE, surfaceButtons[7], surfaceFrontButtons[1]);
-        Cubie cubie9 = new Cubie(CubieType.CORNER, surfaceButtons[8], surfaceRightButtons[2], surfaceFrontButtons[0]);
+        Cubie cubie1 = new Cubie(CubieType.CORNER, locations[0], surfaceButtons[0], surfaceBackButtons[0], surfaceLeftButtons[2]);
+        Cubie cubie2 = new Cubie(CubieType.EDGE,   locations[1], surfaceButtons[1], surfaceBackButtons[1]);
+        Cubie cubie3 = new Cubie(CubieType.CORNER, locations[2], surfaceButtons[2], surfaceBackButtons[2], surfaceRightButtons[0]);
+        Cubie cubie4 = new Cubie(CubieType.EDGE,   locations[3], surfaceButtons[3], surfaceLeftButtons[1]);
+        Cubie cubie5 = new Cubie(CubieType.CENTER, locations[4], surfaceButtons[4]);
+        Cubie cubie6 = new Cubie(CubieType.EDGE,   locations[5], surfaceButtons[5], surfaceRightButtons[1]);
+        Cubie cubie7 = new Cubie(CubieType.CORNER, locations[6], surfaceButtons[6], surfaceLeftButtons[0], surfaceFrontButtons[2]);
+        Cubie cubie8 = new Cubie(CubieType.EDGE,   locations[7], surfaceButtons[7], surfaceFrontButtons[1]);
+        Cubie cubie9 = new Cubie(CubieType.CORNER, locations[8], surfaceButtons[8], surfaceRightButtons[2], surfaceFrontButtons[0]);
 
         // Initialize myCubies
         myCubies = new AdvancedArrayList<>(cubie1, cubie2, cubie3, cubie4, cubie5, cubie6, cubie7, cubie8, cubie9);
@@ -281,7 +286,7 @@ public class CubeLayer {
     public class Cubie {
 
         // Location is a string representation of all faces that intersects this cubie
-        private String location; // Ex. "FRU" or "BL"
+        private String location; // Ex. "F,R,U" or "B,L"
 
 
         // TODO: Create a way to use [RED,WHITE,BLUE] centers as the orientation reference
@@ -292,8 +297,8 @@ public class CubeLayer {
         private CubieType cubieType = null;//TODO - find out if you even need this.
         public ArrayList<Integer> stickerColorsList = new ArrayList<>();
 
-        public Cubie(CubieType cubieType, Button... stickers) {
-
+        public Cubie(CubieType cubieType, String location, Button... stickers) {
+            this.location = location;
             this.cubieType = cubieType;
             this.stickers.addAll(Arrays.asList(stickers));
         }
@@ -304,6 +309,11 @@ public class CubeLayer {
                 stickerColorsList.add(sticker.getCurrentTextColor());
             }
         }
+
+        public String getLocation(){
+            return this.location;
+        }
+
 
         public ArrayList<Integer> getStickerColors() {
             return this.stickerColorsList;

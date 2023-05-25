@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 	Map<String, CubeLayer> rubiksCube;
+	Map<String, String[]> cubieLocationsMap;
 
 	private String validCubieDisplay = "";
 	private ArrayList<Cubie> validCubiesFoundList = new ArrayList<>();
@@ -64,6 +66,9 @@ public class RubiksCubeStructure implements RubiksCube {
 //		rubiksCube.addMultiple(up, left, front, right, back, down);
 
 	}
+
+
+
 
 	@SafeVarargs
 	public RubiksCubeStructure(View rootView, AdvancedArrayList<Button[]>... layerList) {
@@ -132,13 +137,19 @@ public class RubiksCubeStructure implements RubiksCube {
 	@Override
 	public List<Integer> getCubieAtLocation(List<SurfaceName> intersection){
 
-		// TODO: Compare each cubie with each other cubie in all layers of the intersection.
-		for (SurfaceName currentSurface : intersection ) {
-			CubeLayer currentLayer = rubiksCube.get(currentSurface.name());
+		// You don't need to loop through each location now that each cubie has a location.
+		SurfaceName currentSurface = intersection.get(0);
+		CubeLayer currentLayer = rubiksCube.get(currentSurface.name());
+		ArrayList<Cubie> cubies = currentLayer.getAllCubies();
 
-		}
+		// TODO: Get the cubie from the cubies list that has it's location
+		//       that matches intersection
+		Cubie correctCubie = cubies.get(0);
 
-		return null;
+
+
+		// return the colors of the cubie
+		return correctCubie.stickerColorsList;
 	}
 
 
@@ -234,10 +245,10 @@ public class RubiksCubeStructure implements RubiksCube {
 	private void rotateClockwise(CubeLayer layer) {
 
 		// Different from white board picture
-		AdvancedArrayList<Integer> newSurfaceList = new AdvancedArrayList<Integer>(getStickerColor(layer, 6),
-				getStickerColor(layer, 3), getStickerColor(layer, 0), getStickerColor(layer, 7),
-				getStickerColor(layer, 4), getStickerColor(layer, 1), getStickerColor(layer, 8),
-				getStickerColor(layer, 5), getStickerColor(layer, 2));
+		AdvancedArrayList<Integer> newSurfaceList = new AdvancedArrayList<>(
+				getStickerColor(layer, 6), getStickerColor(layer, 3), getStickerColor(layer, 0),
+				getStickerColor(layer, 7), getStickerColor(layer, 4), getStickerColor(layer, 1),
+				getStickerColor(layer, 8), getStickerColor(layer, 5), getStickerColor(layer, 2));
 
 		// Edges and Corners
 		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(
@@ -257,10 +268,10 @@ public class RubiksCubeStructure implements RubiksCube {
 	@SuppressWarnings("unchecked")
 	private void rotateCounterClockwise(CubeLayer layer) {
 		// Different from white board picture
-		AdvancedArrayList<Integer> newSurfaceList = new AdvancedArrayList<Integer>(getStickerColor(layer, 2),
-				getStickerColor(layer, 5), getStickerColor(layer, 8), getStickerColor(layer, 1),
-				getStickerColor(layer, 4), getStickerColor(layer, 7), getStickerColor(layer, 0),
-				getStickerColor(layer, 3), getStickerColor(layer, 6));
+		AdvancedArrayList<Integer> newSurfaceList = new AdvancedArrayList<>(
+				getStickerColor(layer, 2), getStickerColor(layer, 5), getStickerColor(layer, 8),
+				getStickerColor(layer, 1), getStickerColor(layer, 4), getStickerColor(layer, 7),
+				getStickerColor(layer, 0), getStickerColor(layer, 3), getStickerColor(layer, 6));
 
 		// Edges and Corners
 		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(
