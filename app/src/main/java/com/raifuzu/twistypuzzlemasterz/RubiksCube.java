@@ -36,17 +36,15 @@ public interface RubiksCube {
 	Map<String, String[]> cubieLocationsMap = new HashMap<String, String[]>() {{
 		put("U", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F" , "U F" , "U R F" });
 		put("L", new String[]{"L B D" , "L B" , "L B U" , "L D" , "L" , "L U" , "L F D", "L F", "L F U" });
-		put("F", new String[]{"F L U" , "F U" , "F U R" , "F L" , "F" , "F R" , "F L D", "F D", "F R D" });
+		put("F", new String[]{"F L U" , "F U" , "F R U" , "F L" , "F" , "F R" , "F L D", "F D", "F R D" });
 		put("R", new String[]{"R F U" , "R U" , "R B U" , "R F" , "R" , "R B" , "R F D", "R D", "R B D" });
-//		put("B", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F", "U F", "U R F" });
-//		put("D", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F", "U F", "U R F" });
-
-		// TODO: Finish B and D. (double check all)
+		put("B", new String[]{"B L D" , "B D" , "B R D" , "B L" , "B" , "B R" , "B L U", "B U", "B R U" });
+		put("D", new String[]{"D L F" , "D F" , "D F R" , "D L" , "D" , "D R" , "D L B", "D B", "D R B" });
 	}};
 
 	ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers);
 
-	List<Integer> getCubieAtLocation(List<SurfaceName> intersection);
+	List<Integer> getCubieAtLocation(String[] intersection);
 
 	String getCubeOrientation();
 

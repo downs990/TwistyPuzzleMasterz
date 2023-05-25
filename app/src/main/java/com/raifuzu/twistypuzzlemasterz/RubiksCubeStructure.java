@@ -1,11 +1,13 @@
 package com.raifuzu.twistypuzzlemasterz;
 
+import android.graphics.Color;
 import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -135,21 +137,31 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 	@Override
-	public List<Integer> getCubieAtLocation(List<SurfaceName> intersection){
+	public List<Integer> getCubieAtLocation(String[] intersection){
+
+		List<Integer> colorsAtLocation = new ArrayList<Integer>();
 
 		// You don't need to loop through each location now that each cubie has a location.
-		SurfaceName currentSurface = intersection.get(0);
-		CubeLayer currentLayer = rubiksCube.get(currentSurface.name());
+		String currentSurface = intersection[0];
+		CubeLayer currentLayer = rubiksCube.get( currentSurface );
 		ArrayList<Cubie> cubies = currentLayer.getAllCubies();
 
-		// TODO: Get the cubie from the cubies list that has it's location
+		// Get the cubie from the cubies list that has it's location
 		//       that matches intersection
-		Cubie correctCubie = cubies.get(0);
+		for(Cubie currentCubie : cubies){
 
+			String[] currentCubieLocation = currentCubie.getLocation().split(" ");
+			Arrays.sort(currentCubieLocation);
+			Arrays.sort(intersection);
+
+			if(Arrays.equals( intersection, currentCubieLocation )){
+				colorsAtLocation = currentCubie.stickerColorsList;
+			}
+		}
 
 
 		// return the colors of the cubie
-		return correctCubie.stickerColorsList;
+		return colorsAtLocation;
 	}
 
 

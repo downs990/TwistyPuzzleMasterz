@@ -81,10 +81,12 @@ public class CubeSolver {
                 // [R, B] ->   R  or B'
 
                 if(intersectingLayers.contains(SurfaceName.R)){
+
+
+                    String[] intersection = {SurfaceName.R.name() ,  SurfaceName.D.name()};
                     // Check if a white cubie already exists at the location [R,D]
                     // If it does, then do avoidance maneuver.
-                    List<Integer> currentCubie = this.rubiksCube.getCubieAtLocation(
-                            Arrays.asList(SurfaceName.R, SurfaceName.D) );
+                    List<Integer> currentCubie = this.rubiksCube.getCubieAtLocation( intersection );
 
                     if(currentCubie.contains(RubiksCube.WHITE)){
                         this.avoidanceManeuverForCross();
