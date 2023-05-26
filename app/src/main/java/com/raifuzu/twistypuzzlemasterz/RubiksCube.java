@@ -44,7 +44,7 @@ public interface RubiksCube {
 
 	ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers);
 
-	List<Integer> getCubieAtLocation(String[] intersection);
+	CubeLayer.Cubie getCubieAtLocation(String[] intersection);
 
 	String getCubeOrientation();
 

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
@@ -327,18 +329,19 @@ public class CubeLayer {
             return this.cubieType;
         }
 
+
         @Override
         public String toString() {
-            String output = "" + cubieType + ": ";
+            StringBuilder output = new StringBuilder("" + cubieType.name() + ": ");
             for (int i = 0; i < stickers.size(); i++) {
                 // Converts the sticker list into a string with sticker color
                 // names
                 Integer currentColor = stickers.get(i).getCurrentTextColor();
                 String stickerColorName = colorIntToString(currentColor);
-                output = output + " " + stickerColorName;
+                output.append(" ").append(stickerColorName);
             }
 
-            return output;
+            return output.toString();
         }
 
     }

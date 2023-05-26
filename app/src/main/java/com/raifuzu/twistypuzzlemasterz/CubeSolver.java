@@ -48,71 +48,75 @@ public class CubeSolver {
     public String crossSolutionSteps(  Integer[][] stickersToSolve){
 
         StringBuilder solutionAlgorithm = new StringBuilder();
+//
+//        for(Integer[] cubie : stickersToSolve){
+//            List<Integer> cubieAsList = Arrays.asList(cubie);
+//            ArrayList<SurfaceName> intersectingLayers = this.rubiksCube.findLocationOfCubie(cubieAsList);
+//
+//            // If cubie on 'up' layer
+//            if(intersectingLayers.contains(SurfaceName.U)){
+//                if(intersectingLayers.contains(SurfaceName.R)){
+//                    solutionAlgorithm.append("R2 ");
+//                }
+//                else if(intersectingLayers.contains(SurfaceName.F)){
+//                    solutionAlgorithm.append("F2 ");
+//                }
+//                else if(intersectingLayers.contains(SurfaceName.L)){
+//                    solutionAlgorithm.append("L2 ");
+//                }
+//                else if(intersectingLayers.contains(SurfaceName.B)){
+//                    solutionAlgorithm.append("B2 ");
+//                }
+//            }
+//            // If the cubie on 'down' layer
+//            else if(intersectingLayers.contains(SurfaceName.D)){
+//                // Continue to next cubie to solve.
+//            }
+//
+//            // If the cubie on 'middle' layer
+//            else{
+//                // [L, F] ->   L  or F'                     <-- left
+//                // [L, B] ->   L' or B
+//                // [R, F] ->   R' or F                      <-- right
+//                // [R, B] ->   R  or B'
+//
+//                if(intersectingLayers.contains(SurfaceName.R)){
+//
 
-        for(Integer[] cubie : stickersToSolve){
-            List<Integer> cubieAsList = Arrays.asList(cubie);
-            ArrayList<SurfaceName> intersectingLayers = this.rubiksCube.findLocationOfCubie(cubieAsList);
-
-            // If cubie on 'up' layer
-            if(intersectingLayers.contains(SurfaceName.U)){
-                if(intersectingLayers.contains(SurfaceName.R)){
-                    solutionAlgorithm.append("R2 ");
-                }
-                else if(intersectingLayers.contains(SurfaceName.F)){
-                    solutionAlgorithm.append("F2 ");
-                }
-                else if(intersectingLayers.contains(SurfaceName.L)){
-                    solutionAlgorithm.append("L2 ");
-                }
-                else if(intersectingLayers.contains(SurfaceName.B)){
-                    solutionAlgorithm.append("B2 ");
-                }
-            }
-            // If the cubie on 'down' layer
-            else if(intersectingLayers.contains(SurfaceName.D)){
-                // Continue to next cubie to solve.
-            }
-
-            // If the cubie on 'middle' layer
-            else{
-                // [L, F] ->   L  or F'                     <-- left
-                // [L, B] ->   L' or B
-                // [R, F] ->   R' or F                      <-- right
-                // [R, B] ->   R  or B'
-
-                if(intersectingLayers.contains(SurfaceName.R)){
-
-
-                    String[] intersection = {SurfaceName.R.name() ,  SurfaceName.D.name()};
+                    String[] intersection1 = {SurfaceName.R.name() ,  SurfaceName.D.name()};
                     // Check if a white cubie already exists at the location [R,D]
                     // If it does, then do avoidance maneuver.
-                    List<Integer> currentCubie = this.rubiksCube.getCubieAtLocation( intersection );
+                    CubeLayer.Cubie currentCubie1 = this.rubiksCube.getCubieAtLocation( intersection1 );
+                    ArrayList<Integer> currentCubie = currentCubie1.getStickerColors();
 
-                    if(currentCubie.contains(RubiksCube.WHITE)){
-                        this.avoidanceManeuverForCross();
-                    }else{
+                    String s = Arrays.toString(intersection1) + " = " + currentCubie1 + "\n";
+                    Toast.makeText(rootView.getContext(), s, Toast.LENGTH_LONG).show();
 
-                        // R'
-                        if(intersectingLayers.contains(SurfaceName.F)){
-                            solutionAlgorithm.append("R' ");
-                        }
-                        // R
-                        else if(intersectingLayers.contains(SurfaceName.B)){
-                            solutionAlgorithm.append("R ");
-                        }
-                    }
+//                    if(currentCubie.contains(RubiksCube.WHITE)){
+//                        this.avoidanceManeuverForCross();
+//                    }else{
+//
+//                        // R'
+//                        if(intersectingLayers.contains(SurfaceName.F)){
+//                            solutionAlgorithm.append("R' ");
+//                        }
+//                        // R
+//                        else if(intersectingLayers.contains(SurfaceName.B)){
+//                            solutionAlgorithm.append("R ");
+//                        }
+//                    }
+//
+//
+//
+//
+//                }else if(intersectingLayers.contains(SurfaceName.L)){
+//                    // Check if a white cubie already exists at the location [L,D]
+//                    // If it does, then do avoidance maneuver. Else, just do L or L'
+//                }
+//
+//            }
 
-
-
-
-                }else if(intersectingLayers.contains(SurfaceName.L)){
-                    // Check if a white cubie already exists at the location [L,D]
-                    // If it does, then do avoidance maneuver. Else, just do L or L'
-                }
-
-            }
-
-        }
+//        }
 
         return solutionAlgorithm.toString();
     }
@@ -133,7 +137,7 @@ public class CubeSolver {
         };
 
         String crossSolutionAlgorithm = crossSolutionSteps(   stickersToSolve  );
-        this.rubiksCube.executeAlgorithm(crossSolutionAlgorithm);
+//        this.rubiksCube.executeAlgorithm(crossSolutionAlgorithm);
     }
 
 
@@ -151,7 +155,7 @@ public class CubeSolver {
         };
 
         String f2lSolutionAlgorithm = f2lSolutionSteps( stickersToSolve );
-        this.rubiksCube.executeAlgorithm(f2lSolutionAlgorithm);
+//        this.rubiksCube.executeAlgorithm(f2lSolutionAlgorithm);
     }
 
     public String ollSolutionSteps(  Integer[][] stickersToSolve){
@@ -161,7 +165,7 @@ public class CubeSolver {
 
     public void solveOLL(){
         String ollSolutionAlgorithm = ollSolutionSteps( topCubies );
-        this.rubiksCube.executeAlgorithm(ollSolutionAlgorithm);
+//        this.rubiksCube.executeAlgorithm(ollSolutionAlgorithm);
     }
 
 
@@ -173,7 +177,7 @@ public class CubeSolver {
 
     public void solvePLL(){
         String pllSolutionAlgorithm = pllSolutionSteps( topCubies );
-        this.rubiksCube.executeAlgorithm(pllSolutionAlgorithm);
+//        this.rubiksCube.executeAlgorithm(pllSolutionAlgorithm);
     }
 
 
@@ -181,18 +185,18 @@ public class CubeSolver {
 
     public void solveCube(){
 
-        boolean cubeIsValid = rubiksCube.isValidState();
+//        boolean cubeIsValid = rubiksCube.isValidState();
 
-        if( cubeIsValid ){
+//        if( cubeIsValid ){
             solveCross();
             solveF2L();
             solveOLL();
             solvePLL();
 
-        }else{
-            Toast.makeText(rootView.getContext(), "Invalid State! ", Toast.LENGTH_LONG).show();
-
-        }
+//        }else{
+//            Toast.makeText(rootView.getContext(), "Invalid State! ", Toast.LENGTH_LONG).show();
+//
+//        }
 
     }
 

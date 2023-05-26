@@ -137,9 +137,9 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 	@Override
-	public List<Integer> getCubieAtLocation(String[] intersection){
+	public Cubie getCubieAtLocation(String[] intersection){
 
-		List<Integer> colorsAtLocation = new ArrayList<Integer>();
+		Cubie correctCubie = null;
 
 		// You don't need to loop through each location now that each cubie has a location.
 		String currentSurface = intersection[0];
@@ -155,13 +155,12 @@ public class RubiksCubeStructure implements RubiksCube {
 			Arrays.sort(intersection);
 
 			if(Arrays.equals( intersection, currentCubieLocation )){
-				colorsAtLocation = currentCubie.stickerColorsList;
+				correctCubie = currentCubie;
 			}
 		}
 
-
 		// return the colors of the cubie
-		return colorsAtLocation;
+		return correctCubie;
 	}
 
 
