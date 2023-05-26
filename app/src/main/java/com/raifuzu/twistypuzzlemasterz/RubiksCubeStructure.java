@@ -164,6 +164,7 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
+
 	@Override
 	public String getCubeOrientation() {
 		return 	"UP: " + rubiksCube.get(SurfaceName.U.name()).getCenterColor() +

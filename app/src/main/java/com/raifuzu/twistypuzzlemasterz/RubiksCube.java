@@ -46,6 +46,7 @@ public interface RubiksCube {
 
 	CubeLayer.Cubie getCubieAtLocation(String[] intersection);
 
+
 	String getCubeOrientation();
 
 	void rotate(CubeLayer layerToRotate, Rotation directionOfRotation);
