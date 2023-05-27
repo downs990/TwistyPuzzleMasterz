@@ -22,6 +22,8 @@ public class RubiksCubeStructure implements RubiksCube {
 	private Map<String, String[]> cubieLocationsMap;
 
 	private String validCubieDisplay = "";
+
+	// TODO: Should be setting these ArrayLists equal to new in the constructor. Init all member vars there.
 	private final ArrayList<CubeLayer.Cubie> validCubiesFoundList = new ArrayList<>();
 	private final ArrayList<CubeLayer.Cubie> invalidCubiesFoundList = new ArrayList<>();
 	private final ArrayList<String> missingCubiesList = new ArrayList<>();
