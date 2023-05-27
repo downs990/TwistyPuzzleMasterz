@@ -30,7 +30,7 @@ public class RubiksCubeStructure implements RubiksCube {
 	private ArrayList<String> missingCubiesList = new ArrayList<>();
 
 
-
+	String solutionAlgorithm = "";
 
 	private final View rootView;
 
@@ -167,7 +167,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	@Override
 	public String getCubeOrientation() {
-		return 	"UP: " + rubiksCube.get(SurfaceName.U.name()).getCenterColor() +
+		return 	"UP: "    + rubiksCube.get(SurfaceName.U.name()).getCenterColor() +
 				"RIGHT: " + rubiksCube.get(SurfaceName.R.name()).getCenterColor() +
 				"FRONT: " + rubiksCube.get(SurfaceName.F.name()).getCenterColor();
 	}
@@ -179,30 +179,34 @@ public class RubiksCubeStructure implements RubiksCube {
 	public void resetCube() {
 
 
-		CubeLayer up = rubiksCube.get(SurfaceName.U.name());
-		CubeLayer left = rubiksCube.get(SurfaceName.L.name());
+		CubeLayer up    = rubiksCube.get(SurfaceName.U.name());
+		CubeLayer left  = rubiksCube.get(SurfaceName.L.name());
 		CubeLayer front = rubiksCube.get(SurfaceName.F.name());
 		CubeLayer right = rubiksCube.get(SurfaceName.R.name());
-		CubeLayer back = rubiksCube.get(SurfaceName.B.name());
-		CubeLayer down = rubiksCube.get(SurfaceName.D.name());
+		CubeLayer back  = rubiksCube.get(SurfaceName.B.name());
+		CubeLayer down  = rubiksCube.get(SurfaceName.D.name());
 
 		// Valid representation.
 		//                       U ,     L  ,   F ,    R  ,    B  ,    D
         //				     { YELLOW, ORANGE, BLUE, RED, GREEN, WHITE };
-		up.initializeSolvedColors(YELLOW, GREEN, RED, BLUE, ORANGE);
-		left.initializeSolvedColors(ORANGE, YELLOW, BLUE, WHITE, GREEN);
-		front.initializeSolvedColors(BLUE, YELLOW, RED, WHITE, ORANGE);
-		right.initializeSolvedColors(RED, YELLOW, GREEN, WHITE, BLUE);
-		back.initializeSolvedColors(GREEN, YELLOW, ORANGE, WHITE, RED);
-		down.initializeSolvedColors(WHITE, BLUE, RED, GREEN, ORANGE);
+		up.initializeSolvedColors(    YELLOW, GREEN,  RED,    BLUE,  ORANGE);
+		left.initializeSolvedColors(  ORANGE, YELLOW, BLUE,   WHITE, GREEN);
+		front.initializeSolvedColors( BLUE,   YELLOW, RED,    WHITE, ORANGE);
+		right.initializeSolvedColors( RED,    YELLOW, GREEN,  WHITE, BLUE);
+		back.initializeSolvedColors(  GREEN,  YELLOW, ORANGE, WHITE, RED);
+		down.initializeSolvedColors(  WHITE,  BLUE,   RED,    GREEN, ORANGE);
 
 
 
 	}
 
 	@Override
-	public void executeAlgorithm(String algorithm) {
+	public void executeAlgorithm(String algorithm, RecordAlgorithm yesOrNo) {
 		// Example Algorithm: R' D' R D
+
+		if(yesOrNo.equals(RecordAlgorithm.YES)){
+			this.solutionAlgorithm += " " + algorithm;
+		}
 
 		String[] moves = algorithm.split(" ");
 		for (String individualMove : moves) {

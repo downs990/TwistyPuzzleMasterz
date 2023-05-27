@@ -17,6 +17,13 @@ public interface RubiksCube {
 		CLOCKWISE, COUNTER_CLOCKWISE
 	}
 
+
+	// The Rubiks Cube should record all movements that it makes to an algorithm
+	// string that can be displayed on screen and passed to the website to show solve animation.
+	enum RecordAlgorithm{
+		YES, NO
+	}
+
 	Integer RED = Color.RED;
 	Integer YELLOW = Color.YELLOW;
 	Integer BLUE = Color.BLUE;
@@ -33,6 +40,7 @@ public interface RubiksCube {
 		put("ORANGE", ORANGE);  // D
 	}};
 
+	// Using "Double Brace Initialization"
 	Map<String, String[]> cubieLocationsMap = new HashMap<String, String[]>() {{
 		put("U", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F" , "U F" , "U R F" });
 		put("L", new String[]{"L B D" , "L B" , "L B U" , "L D" , "L" , "L U" , "L F D", "L F", "L F U" });
@@ -52,7 +60,7 @@ public interface RubiksCube {
 	void rotate(CubeLayer layerToRotate, Rotation directionOfRotation);
 
 	// String algorithm can be either solution or scramble
-	void executeAlgorithm(String algorithm);
+	void executeAlgorithm(String algorithm, RecordAlgorithm yesOrNo);
 
 	void resetCube();
 
