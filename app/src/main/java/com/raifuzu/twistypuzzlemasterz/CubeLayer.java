@@ -57,7 +57,7 @@ public class CubeLayer {
 //    }
 
     public void setAllCubieColors() {
-        for (Cubie currentCubie : myCubies) {
+        for (Cubie currentCubie : this.myCubies) {
             currentCubie.setCubieStickerColors();
         }
     }
@@ -83,18 +83,18 @@ public class CubeLayer {
         String[] locations = RubiksCube.cubieLocationsMap.get(this.surfaceName.name());
 
         // Create cubies for this layer <3 <3
-        Cubie cubie1 = new Cubie(CubieType.CORNER, locations[0], surfaceButtons[0], surfaceBackButtons[0], surfaceLeftButtons[2]);
-        Cubie cubie2 = new Cubie(CubieType.EDGE,   locations[1], surfaceButtons[1], surfaceBackButtons[1]);
-        Cubie cubie3 = new Cubie(CubieType.CORNER, locations[2], surfaceButtons[2], surfaceBackButtons[2], surfaceRightButtons[0]);
-        Cubie cubie4 = new Cubie(CubieType.EDGE,   locations[3], surfaceButtons[3], surfaceLeftButtons[1]);
-        Cubie cubie5 = new Cubie(CubieType.CENTER, locations[4], surfaceButtons[4]);
-        Cubie cubie6 = new Cubie(CubieType.EDGE,   locations[5], surfaceButtons[5], surfaceRightButtons[1]);
-        Cubie cubie7 = new Cubie(CubieType.CORNER, locations[6], surfaceButtons[6], surfaceLeftButtons[0], surfaceFrontButtons[2]);
-        Cubie cubie8 = new Cubie(CubieType.EDGE,   locations[7], surfaceButtons[7], surfaceFrontButtons[1]);
-        Cubie cubie9 = new Cubie(CubieType.CORNER, locations[8], surfaceButtons[8], surfaceRightButtons[2], surfaceFrontButtons[0]);
+        Cubie cubie1 = new Cubie(locations[0], this.surfaceButtons[0], this.surfaceBackButtons[0], this.surfaceLeftButtons[2]);
+        Cubie cubie2 = new Cubie(locations[1], this.surfaceButtons[1], this.surfaceBackButtons[1]);
+        Cubie cubie3 = new Cubie(locations[2], this.surfaceButtons[2], this.surfaceBackButtons[2], this.surfaceRightButtons[0]);
+        Cubie cubie4 = new Cubie(locations[3], this.surfaceButtons[3], this.surfaceLeftButtons[1]);
+        Cubie cubie5 = new Cubie(locations[4], this.surfaceButtons[4]);
+        Cubie cubie6 = new Cubie(locations[5], this.surfaceButtons[5], this.surfaceRightButtons[1]);
+        Cubie cubie7 = new Cubie(locations[6], this.surfaceButtons[6], this.surfaceLeftButtons[0], this.surfaceFrontButtons[2]);
+        Cubie cubie8 = new Cubie(locations[7], this.surfaceButtons[7], this.surfaceFrontButtons[1]);
+        Cubie cubie9 = new Cubie(locations[8], this.surfaceButtons[8], this.surfaceRightButtons[2], this.surfaceFrontButtons[0]);
 
         // Initialize myCubies
-        myCubies = new AdvancedArrayList<>(cubie1, cubie2, cubie3, cubie4, cubie5, cubie6, cubie7, cubie8, cubie9);
+        this.myCubies = new AdvancedArrayList<>(cubie1, cubie2, cubie3, cubie4, cubie5, cubie6, cubie7, cubie8, cubie9);
     }
 
     public AdvancedArrayList<Cubie> getAllCubies() {
@@ -114,7 +114,7 @@ public class CubeLayer {
     }
 
     public Button[] getSurfaceButtons() {
-        return surfaceButtons;
+        return this.surfaceButtons;
     }
 
     public void setSurfaceButtons(Button[] surfaceButtons) {
@@ -122,7 +122,7 @@ public class CubeLayer {
     }
 
     public Button[] getSurfaceBackButtons() {
-        return surfaceBackButtons;
+        return this.surfaceBackButtons;
     }
 
     public void setSurfaceBackButtons(Button[] surfaceBackButtons) {
@@ -130,7 +130,7 @@ public class CubeLayer {
     }
 
     public Button[] getSurfaceRightButtons() {
-        return surfaceRightButtons;
+        return this.surfaceRightButtons;
     }
 
     public void setSurfaceRightButtons(Button[] surfaceRightButtons) {
@@ -138,7 +138,7 @@ public class CubeLayer {
     }
 
     public Button[] getSurfaceFrontButtons() {
-        return surfaceFrontButtons;
+        return this.surfaceFrontButtons;
     }
 
     public void setSurfaceFrontButtons(Button[] surfaceFrontButtons) {
@@ -146,7 +146,7 @@ public class CubeLayer {
     }
 
     public Button[] getSurfaceLeftButtons() {
-        return surfaceLeftButtons;
+        return this.surfaceLeftButtons;
     }
 
     public void setSurfaceLeftButtons(Button[] surfaceLeftButtons) {
@@ -173,7 +173,7 @@ public class CubeLayer {
         // surfaceAndBorder includes the following button arrays:
         // surface[], s back[], s right[], s front[], s left[]
         int index = 0;
-        for (Button[] buttons : surfaceAndBorder) {
+        for (Button[] buttons : this.surfaceAndBorder) {
             for (Button button : buttons) {
                 button.setBackgroundColor(layerColors[index]);
                 button.setTextColor(layerColors[index]);
@@ -190,7 +190,7 @@ public class CubeLayer {
         // surface[], s back[], s right[], s front[], s left[]
         int surfaceBorderIndex = 0;
         int stickerIndex = 0;
-        for (Button[] buttons : surfaceAndBorder) {
+        for (Button[] buttons : this.surfaceAndBorder) {
             for (Button button : buttons) {
                 button.setBackgroundColor(colorLists[surfaceBorderIndex].get(stickerIndex));
                 button.setTextColor(colorLists[surfaceBorderIndex].get(stickerIndex));
@@ -204,12 +204,12 @@ public class CubeLayer {
 
     public String getCenterColor() {
         final int CENTER_INDEX = 4;
-        Integer centerColor = surfaceButtons[CENTER_INDEX].getCurrentTextColor();
+        Integer centerColor = this.surfaceButtons[CENTER_INDEX].getCurrentTextColor();
         return colorIntToString(centerColor);
     }
 
     public SurfaceName getSideName() {
-        return surfaceName;
+        return this.surfaceName;
     }
 
     public static String colorIntToString(Integer colorNum) {
@@ -258,14 +258,14 @@ public class CubeLayer {
     public String toString() {
         String output = "";
 
-        Integer[] surfaceColors = getButtonColors(surfaceButtons);
-        Integer[] surfaceBackColors = getButtonColors(surfaceBackButtons);
-        Integer[] surfaceRightColors = getButtonColors(surfaceRightButtons);
-        Integer[] surfaceFrontColors = getButtonColors(surfaceFrontButtons);
-        Integer[] surfaceLeftColors = getButtonColors(surfaceLeftButtons);
+        Integer[] surfaceColors = getButtonColors(this.surfaceButtons);
+        Integer[] surfaceBackColors = getButtonColors(this.surfaceBackButtons);
+        Integer[] surfaceRightColors = getButtonColors(this.surfaceRightButtons);
+        Integer[] surfaceFrontColors = getButtonColors(this.surfaceFrontButtons);
+        Integer[] surfaceLeftColors = getButtonColors(this.surfaceLeftButtons);
 
         String surfaceString = arrayToString(surfaceColors);
-        output += "\n\nSurface: " + surfaceName.toString() + "\n" + surfaceString;
+        output += "\n\nSurface: " + this.surfaceName.toString() + "\n" + surfaceString;
         String surfaceBackString = arrayToString(surfaceBackColors);
         output += "\nSurface Back: \n" + surfaceBackString;
         String surfaceRightString = arrayToString(surfaceRightColors);
@@ -278,6 +278,8 @@ public class CubeLayer {
         return output;
     }
 
+
+
     /**
      * The purpose of the Cubie class is to make it easier to check if the user
      * input into the UI cube was valid. It also helps to make the process of
@@ -285,30 +287,37 @@ public class CubeLayer {
      *
      * @author downs
      */
-    public class Cubie {
+    public static class Cubie {
 
         // Location is a string representation of all faces that intersects this cubie
-        private String location; // Ex. "F,R,U" or "B,L"
+        private final String location; // Ex. "F,R,U" or "B,L"
 
 
-        // TODO: Create a way to use [RED,WHITE,BLUE] centers as the orientation reference
-        private boolean correctOrientation = false;
+        // TODO: use center pieces and sticker colors as reference for orientations.
+        private final boolean correctOrientation = false;
 
 
-        private ArrayList<Button> stickers = new ArrayList<>();
-        private CubieType cubieType = null;//TODO - find out if you even need this.
-        public ArrayList<Integer> stickerColorsList = new ArrayList<>();
+        private final ArrayList<Button> stickers = new ArrayList<>();
+        private final ArrayList<Integer> stickerColorsList = new ArrayList<>();
 
-        public Cubie(CubieType cubieType, String location, Button... stickers) {
+        private RubiksCube.CubieType type;
+        public Cubie(String location, Button... stickers) {
             this.location = location;
-            this.cubieType = cubieType;
             this.stickers.addAll(Arrays.asList(stickers));
+
+            if(stickers.length == 1){
+                this.type = RubiksCube.CubieType.CENTER;
+            }else if(stickers.length == 2){
+                this.type = RubiksCube.CubieType.EDGE;
+            }else if(stickers.length == 3){
+                this.type = RubiksCube.CubieType.CORNER;
+            }
         }
 
         public void setCubieStickerColors() {
-            stickerColorsList.clear();
-            for (Button sticker : stickers) {
-                stickerColorsList.add(sticker.getCurrentTextColor());
+            this.stickerColorsList.clear();
+            for (Button sticker : this.stickers) {
+                this.stickerColorsList.add(sticker.getCurrentTextColor());
             }
         }
 
@@ -325,18 +334,19 @@ public class CubeLayer {
             return this.stickers;
         }
 
-        public CubieType getCubieType() {
-            return this.cubieType;
+
+        public RubiksCube.CubieType getCubieType(){
+            return type;
         }
 
 
         @Override
         public String toString() {
-            StringBuilder output = new StringBuilder("" + cubieType.name() + ": ");
-            for (int i = 0; i < stickers.size(); i++) {
+            StringBuilder output = new StringBuilder( " : ");
+            for (int i = 0; i < this.stickers.size(); i++) {
                 // Converts the sticker list into a string with sticker color
                 // names
-                Integer currentColor = stickers.get(i).getCurrentTextColor();
+                Integer currentColor = this.stickers.get(i).getCurrentTextColor();
                 String stickerColorName = colorIntToString(currentColor);
                 output.append(" ").append(stickerColorName);
             }

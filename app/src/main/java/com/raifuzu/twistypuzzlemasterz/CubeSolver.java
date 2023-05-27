@@ -71,7 +71,7 @@ public class CubeSolver {
                 String[] locationDirectlyBelow = {nonUSurface.name(), SurfaceName.D.name()};
                 CubeLayer.Cubie cubieDirectlyBelow = this.rubiksCube.getCubieAtLocation(locationDirectlyBelow);
 
-                if(cubieDirectlyBelow.stickerColorsList.contains(RubiksCube.WHITE)) {
+                if(cubieDirectlyBelow.getStickerColors().contains(RubiksCube.WHITE)) {
 
                     // avoidance maneuver
                     avoidanceManeuverForCross(locationDirectlyBelow);
@@ -84,7 +84,7 @@ public class CubeSolver {
             }
 
             // If the cubie on 'middle' layer
-            if( ! intersectingLayers.contains(SurfaceName.D) && ! intersectingLayers.contains(SurfaceName.U) ){
+            else if( ! intersectingLayers.contains(SurfaceName.D) && ! intersectingLayers.contains(SurfaceName.U) ){
 
                 ArrayList<String> locationAsString = new ArrayList<>();
                 locationAsString.add( intersectingLayers.get(0).name() );
@@ -157,11 +157,12 @@ public class CubeSolver {
         ArrayList<Integer> stickers = cubieDirectlyBelow.getStickerColors();
 
         while(stickers.contains(RubiksCube.WHITE) ){
-            cubieDirectlyBelow = this.rubiksCube.getCubieAtLocation(locationDirectlyBelow);
-            stickers = cubieDirectlyBelow.getStickerColors();
 
             // Actually Execute a D rotation
             this.rubiksCube.executeAlgorithm("D", RubiksCube.RecordAlgorithm.YES);
+
+            cubieDirectlyBelow = this.rubiksCube.getCubieAtLocation(locationDirectlyBelow);
+            stickers = cubieDirectlyBelow.getStickerColors();
         }
 
 
@@ -179,7 +180,7 @@ public class CubeSolver {
         };
 
         crossSolutionSteps(   stickersToSolve  );
-        Toast.makeText(rootView.getContext(), "Solution: " + this.rubiksCube.solutionAlgorithm, Toast.LENGTH_LONG).show();
+        Toast.makeText(rootView.getContext(), "Solution: " + this.rubiksCube.getSolutionAlgorithm(), Toast.LENGTH_LONG).show();
     }
 
 

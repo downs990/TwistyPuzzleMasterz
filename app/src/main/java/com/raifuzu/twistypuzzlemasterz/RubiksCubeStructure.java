@@ -14,23 +14,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.raifuzu.twistypuzzlemasterz.CubeLayer.Cubie;
-
-
 
 public class RubiksCubeStructure implements RubiksCube {
 
 
-	Map<String, CubeLayer> rubiksCube;
-	Map<String, String[]> cubieLocationsMap;
+	private Map<String, CubeLayer> rubiksCube;
+	private Map<String, String[]> cubieLocationsMap;
 
 	private String validCubieDisplay = "";
-	private ArrayList<Cubie> validCubiesFoundList = new ArrayList<>();
-	private ArrayList<Cubie> invalidCubiesFoundList = new ArrayList<>();
-	private ArrayList<String> missingCubiesList = new ArrayList<>();
+	private final ArrayList<CubeLayer.Cubie> validCubiesFoundList = new ArrayList<>();
+	private final ArrayList<CubeLayer.Cubie> invalidCubiesFoundList = new ArrayList<>();
+	private final ArrayList<String> missingCubiesList = new ArrayList<>();
 
 
-	String solutionAlgorithm = "";
+	private String solutionAlgorithm;
 
 	private final View rootView;
 
@@ -75,7 +72,8 @@ public class RubiksCubeStructure implements RubiksCube {
 	@SafeVarargs
 	public RubiksCubeStructure(View rootView, AdvancedArrayList<Button[]>... layerList) {
 
-		rubiksCube = new HashMap<>();
+		this.rubiksCube = new HashMap<>();
+		this.solutionAlgorithm = "";
 
 		// Initialize rootView for setting up buttons
 		this.rootView = rootView;
@@ -89,7 +87,7 @@ public class RubiksCubeStructure implements RubiksCube {
 			AdvancedArrayList<Button[]> layerButtons = layerList[i];
 			SurfaceName nameOfSurface = surfaceNames[i];
 			CubeLayer currentLayer = new CubeLayer(rootView, layerButtons, nameOfSurface);
-			rubiksCube.put(nameOfSurface.name(), currentLayer);
+			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
 
 		resetCube();
@@ -110,17 +108,17 @@ public class RubiksCubeStructure implements RubiksCube {
 
 		ArrayList<SurfaceName> intersectingSurfaces = new ArrayList<>();
 
-		for(CubeLayer layer : rubiksCube.values()){
+		for(CubeLayer layer : this.rubiksCube.values()){
 			boolean successfullyFoundCubie = false;
-			for(Cubie cubie : layer.myCubies){
+			for(CubeLayer.Cubie cubie : layer.myCubies){
 
 				// Same type of cubie (i.e Edge, Corner, Center)
-				if(stickers.size() == cubie.stickerColorsList.size()){
+				if(stickers.size() == cubie.getStickerColors().size()){
 					ArrayList<Boolean> foundList = new ArrayList<>();
 
 					for(Integer color : stickers){
 						boolean stickerFound = cubie
-								.stickerColorsList
+								.getStickerColors()
 								.contains(color);
 
 						foundList.add(stickerFound);
@@ -137,18 +135,18 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 	@Override
-	public Cubie getCubieAtLocation(String[] intersection){
+	public CubeLayer.Cubie getCubieAtLocation(String[] intersection){
 
-		Cubie correctCubie = null;
+		CubeLayer.Cubie correctCubie = null;
 
 		// You don't need to loop through each location now that each cubie has a location.
 		String currentSurface = intersection[0];
-		CubeLayer currentLayer = rubiksCube.get( currentSurface );
-		ArrayList<Cubie> cubies = currentLayer.getAllCubies();
+		CubeLayer currentLayer = this.rubiksCube.get( currentSurface );
+		ArrayList<CubeLayer.Cubie> cubies = currentLayer.getAllCubies();
 
 		// Get the cubie from the cubies list that has it's location
 		//       that matches intersection
-		for(Cubie currentCubie : cubies){
+		for(CubeLayer.Cubie currentCubie : cubies){
 
 			String[] currentCubieLocation = currentCubie.getLocation().split(" ");
 			Arrays.sort(currentCubieLocation);
@@ -156,6 +154,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 			if(Arrays.equals( intersection, currentCubieLocation )){
 				correctCubie = currentCubie;
+				break;
 			}
 		}
 
@@ -164,12 +163,16 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
+	public String getSolutionAlgorithm(){
+		return this.solutionAlgorithm;
+	}
+
 
 	@Override
 	public String getCubeOrientation() {
-		return 	"UP: "    + rubiksCube.get(SurfaceName.U.name()).getCenterColor() +
-				"RIGHT: " + rubiksCube.get(SurfaceName.R.name()).getCenterColor() +
-				"FRONT: " + rubiksCube.get(SurfaceName.F.name()).getCenterColor();
+		return 	"UP: "    + this.rubiksCube.get(SurfaceName.U.name()).getCenterColor() +
+				"RIGHT: " + this.rubiksCube.get(SurfaceName.R.name()).getCenterColor() +
+				"FRONT: " + this.rubiksCube.get(SurfaceName.F.name()).getCenterColor();
 	}
 
 	/**
@@ -179,12 +182,12 @@ public class RubiksCubeStructure implements RubiksCube {
 	public void resetCube() {
 
 
-		CubeLayer up    = rubiksCube.get(SurfaceName.U.name());
-		CubeLayer left  = rubiksCube.get(SurfaceName.L.name());
-		CubeLayer front = rubiksCube.get(SurfaceName.F.name());
-		CubeLayer right = rubiksCube.get(SurfaceName.R.name());
-		CubeLayer back  = rubiksCube.get(SurfaceName.B.name());
-		CubeLayer down  = rubiksCube.get(SurfaceName.D.name());
+		CubeLayer up    = this.rubiksCube.get(SurfaceName.U.name());
+		CubeLayer left  = this.rubiksCube.get(SurfaceName.L.name());
+		CubeLayer front = this.rubiksCube.get(SurfaceName.F.name());
+		CubeLayer right = this.rubiksCube.get(SurfaceName.R.name());
+		CubeLayer back  = this.rubiksCube.get(SurfaceName.B.name());
+		CubeLayer down  = this.rubiksCube.get(SurfaceName.D.name());
 
 		// Valid representation.
 		//                       U ,     L  ,   F ,    R  ,    B  ,    D
@@ -197,6 +200,9 @@ public class RubiksCubeStructure implements RubiksCube {
 		down.initializeSolvedColors(  WHITE,  BLUE,   RED,    GREEN, ORANGE);
 
 
+		// TODO: Clear all other member variables to make sure that unwanted data
+		//	doesn't persist between scrambles and clears.
+		solutionAlgorithm = "";
 
 	}
 
@@ -222,13 +228,13 @@ public class RubiksCubeStructure implements RubiksCube {
 			if (individualMove.contains("2")) {
 				// Actual rotation and UI update
 				actualMove = individualMove.replace("2", "");
-				CubeLayer currentLayer = rubiksCube.get(actualMove);
+				CubeLayer currentLayer = this.rubiksCube.get(actualMove);
 				// Rotate 2 times
 				rotate(currentLayer, direction);
 				rotate(currentLayer, direction);
 			} else {
 				// Actual rotation and UI update
-				CubeLayer currentLayer = rubiksCube.get(actualMove);
+				CubeLayer currentLayer = this.rubiksCube.get(actualMove);
 				rotate(currentLayer, direction);// Moves colors on structure
 			}
 
@@ -254,6 +260,10 @@ public class RubiksCubeStructure implements RubiksCube {
 			} else {
 				rotateCounterClockwise(layerToRotate);
 			}
+
+			// Updates the corrects in the stickersColorsList for each Cubie after
+			// each cube rotation.
+			finalizeColors();
 		}
 	}
 
@@ -389,7 +399,7 @@ public class RubiksCubeStructure implements RubiksCube {
      * be triggered when desired.
      */
 	public void finalizeColors(){
-		for (CubeLayer layer: rubiksCube.values()) {
+		for (CubeLayer layer: this.rubiksCube.values()) {
 			layer.setAllCubieColors();
 		}
 	}
@@ -447,7 +457,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 		for (ArrayList<Integer> validStickers : validCubies) {
 			for (CubeLayer layer : this.getLayersList()) {
-				for (Cubie cubie : layer.getAllCubies()) {
+				for (CubeLayer.Cubie cubie : layer.getAllCubies()) {
 
 					CubieType cubieType = cubie.getCubieType();
 					ArrayList<Integer> cubieStickers = cubie.getStickerColors();
@@ -470,7 +480,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 		//NOTE: this method finds all of the pieces that are invalid.
 		for (CubeLayer layer : this.getLayersList()) {
-			for (Cubie cubie : layer.getAllCubies()) {
+			for (CubeLayer.Cubie cubie : layer.getAllCubies()) {
 
 				ArrayList<Integer> cubieStickers = cubie.getStickerColors();
 				boolean isValidPiece = false;
@@ -525,7 +535,7 @@ public class RubiksCubeStructure implements RubiksCube {
 		return cubieString;
 	}
 
-	private void getMissingCubies(ArrayList<ArrayList<Integer>> validPieces, ArrayList<Cubie> validCubiesFound) {
+	private void getMissingCubies(ArrayList<ArrayList<Integer>> validPieces, ArrayList<CubeLayer.Cubie> validCubiesFound) {
 
 		for (ArrayList<Integer> piece : validPieces) {
 
@@ -613,7 +623,7 @@ public class RubiksCubeStructure implements RubiksCube {
 	public String toString() {
 		StringBuilder output = new StringBuilder();
 
-		for (CubeLayer layer : rubiksCube.values()) {
+		for (CubeLayer layer : this.rubiksCube.values()) {
 			output.append(layer.toString());
 		}
 

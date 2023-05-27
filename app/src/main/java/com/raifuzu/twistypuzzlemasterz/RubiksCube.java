@@ -9,6 +9,12 @@ import java.util.Map;
 
 public interface RubiksCube {
 
+	enum CubieType {
+		EDGE,
+		CORNER,
+		CENTER
+	}
+
 	enum SurfaceName {
 		U, L, F, R, B, D
 	}
@@ -42,11 +48,12 @@ public interface RubiksCube {
 
 	// Using "Double Brace Initialization"
 	Map<String, String[]> cubieLocationsMap = new HashMap<String, String[]>() {{
+		// NOTE: Orient the physical cube such that the current layer (layer x) is facing you. (on F layer)
 		put("U", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F" , "U F" , "U R F" });
-		put("L", new String[]{"L B D" , "L B" , "L B U" , "L D" , "L" , "L U" , "L F D", "L F", "L F U" });
+		put("L", new String[]{"L B U" , "L U" , "L F U" , "L B" , "L" , "L F" , "L B D", "L D", "L F D" });
 		put("F", new String[]{"F L U" , "F U" , "F R U" , "F L" , "F" , "F R" , "F L D", "F D", "F R D" });
 		put("R", new String[]{"R F U" , "R U" , "R B U" , "R F" , "R" , "R B" , "R F D", "R D", "R B D" });
-		put("B", new String[]{"B L D" , "B D" , "B R D" , "B L" , "B" , "B R" , "B L U", "B U", "B R U" });
+		put("B", new String[]{"B R U" , "B U" , "B L U" , "B R" , "B" , "B L" , "B R D", "B D", "B L D" });
 		put("D", new String[]{"D L F" , "D F" , "D F R" , "D L" , "D" , "D R" , "D L B", "D B", "D R B" });
 	}};
 
