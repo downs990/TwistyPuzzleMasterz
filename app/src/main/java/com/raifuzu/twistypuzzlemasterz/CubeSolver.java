@@ -63,7 +63,6 @@ public class CubeSolver {
 
 
 
-
             // If cubie on 'up' layer
             if(intersectingLayers.contains(SurfaceName.U)){
 
@@ -75,12 +74,10 @@ public class CubeSolver {
 
                     // avoidance maneuver
                     avoidanceManeuverForCross(locationDirectlyBelow);
-
-                }else{
-
-                    String sideToRotate = nonUSurface.name() + "2";
-                    this.rubiksCube.executeAlgorithm( sideToRotate , RubiksCube.RecordAlgorithm.YES);
                 }
+
+                String sideToRotate = nonUSurface.name() + "2";
+                this.rubiksCube.executeAlgorithm( sideToRotate , RubiksCube.RecordAlgorithm.YES);
             }
 
             // If the cubie on 'middle' layer
