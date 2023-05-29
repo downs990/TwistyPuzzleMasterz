@@ -2,11 +2,13 @@ package com.raifuzu.twistypuzzlemasterz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
 
@@ -314,6 +316,25 @@ public class CubeLayer {
 
         public Map<String, String> getCubieOrientation(){
             return this.cubieOrientation;
+        }
+
+
+        // TODO: Use for F2L, PLL, and OLL
+        public boolean isOrientationCorrect(){
+
+            boolean isCorrectOrientation = true;
+            Set<String> keys = this.cubieOrientation.keySet();
+
+            // Make sure that each key is equal to it's corresponding value.
+            for(String key : keys){
+
+                String value =  this.cubieOrientation.get(key);
+                if( ! value.equals(key)){
+                    isCorrectOrientation = false;
+                }
+            }
+
+            return isCorrectOrientation;
         }
 
         public void setCubieStickerColors() {

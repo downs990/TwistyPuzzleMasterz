@@ -19,6 +19,7 @@
     <dimen name="cubie_shift">77dp</dimen>
     <dimen name="cubie_margin">1dp</dimen>
     <dimen name="faces_padding"> 3dp</dimen>
+    <dimen name="layers_padding"> 6dp</dimen>
     
     <!-- Color Selection Dimensions -->
     <dimen name="color_height">25dp</dimen>

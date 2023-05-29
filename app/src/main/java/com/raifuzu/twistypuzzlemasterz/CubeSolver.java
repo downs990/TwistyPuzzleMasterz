@@ -42,14 +42,10 @@ public class CubeSolver {
 
     /**
      *   1. Get all pieces on down layer
-     *   2. Rotate down layer until at least 2 pieces are in correct location
-     *   3. Set the cubies that are in correct locations to their correct orientation
-     *   4. Iff 2 cubies are in incorrect locations then swap them
-     *   5. Iff needed, set those 2 cubies to correct orientation
      *
      * @param stickersToSolve Unique stickers list of the specific cubies to solve
      */
-    public void crossSolutionSteps(  Integer[][] stickersToSolve){
+    public void crossStep1(  Integer[][] stickersToSolve){
 
         for(Integer[] cubie : stickersToSolve){
 
@@ -147,7 +143,6 @@ public class CubeSolver {
     }
 
 
-    // TODO: Test this
     private void avoidanceManeuverForCross(String[] locationDirectlyBelow){
 
         CubeLayer.Cubie cubieDirectlyBelow = this.rubiksCube.getCubieAtLocation(locationDirectlyBelow);
@@ -161,8 +156,44 @@ public class CubeSolver {
             cubieDirectlyBelow = this.rubiksCube.getCubieAtLocation(locationDirectlyBelow);
             stickers = cubieDirectlyBelow.getStickerColors();
         }
+    }
+
+    private int crossPiecesInCorrectLocation(){
+        String[] location1 = {SurfaceName.F.name(), SurfaceName.D.name()};
+        String[] location2 = {SurfaceName.R.name(), SurfaceName.D.name()};
+        String[] location3 = {SurfaceName.B.name(), SurfaceName.D.name()};
+        String[] location4 = {SurfaceName.L.name(), SurfaceName.D.name()};
+        String[][] locations = {location1, location2, location3, location4};
+
+        int numOfCorrectLocations = 0;
+        for(String[] location : locations){
+            boolean isCorrect = this.rubiksCube.isCorrectCubieAtThisLocation(location);
+            if(isCorrect){
+                numOfCorrectLocations++;
+            }
+        }
+        return numOfCorrectLocations;
+    }
 
 
+    public void crossStep2(){
+
+        int numOfCorrectLocations = crossPiecesInCorrectLocation();
+        while(numOfCorrectLocations < 2){
+
+            this.rubiksCube.executeAlgorithm("D", RubiksCube.RecordAlgorithm.YES);
+            numOfCorrectLocations = crossPiecesInCorrectLocation();
+        }
+    }
+
+
+
+
+    public void crossStep3(){
+
+    }
+
+    public void crossStep4(){
 
     }
 
@@ -176,7 +207,19 @@ public class CubeSolver {
                 {RubiksCube.WHITE, RubiksCube.RED},
         };
 
-        crossSolutionSteps(   stickersToSolve  );
+        // Get all cross pieces on down layer
+        crossStep1(   stickersToSolve  );
+        // Rotate bottom layer until at least 2 pieces are in correct locations
+        crossStep2();
+        //Set the cubies that are in correct locations to their correct orientations
+        crossStep3();
+
+        // Iff 2 cubies are in incorrect locations then swap them.
+        //  (set those 2 cubies to correct orientations IFF need to)
+        crossStep4();
+
+
+
 //        Toast.makeText(rootView.getContext(), "Solution: " + this.rubiksCube.getSolutionAlgorithm(), Toast.LENGTH_LONG).show();
     }
 

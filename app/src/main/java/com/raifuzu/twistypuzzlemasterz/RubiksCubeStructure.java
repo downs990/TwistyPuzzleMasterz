@@ -1,6 +1,7 @@
 package com.raifuzu.twistypuzzlemasterz;
 
 import android.graphics.Color;
+import android.view.CollapsibleActionView;
 import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
@@ -468,6 +469,28 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
+	// Check if the cubie at this location is in the correct location. (orientation might still be off)
+	public boolean isCorrectCubieAtThisLocation(String[] location){
+
+		CubeLayer.Cubie cubieAtLocation = this.getCubieAtLocation(location);
+		ArrayList<String> colorsOfCubie = cubieAtLocation.getStickerColorsStrings();
+
+		ArrayList<String> centerColorsOfLayers = new ArrayList<>();
+		for(String letter : location){
+			CubeLayer.Cubie centerCubieOfLayer = this.rubiksCube
+					.get(letter)
+					.getAllCubies()
+					.get(4);
+			String colorOfCenterCubie = centerCubieOfLayer.getStickerColorsStrings().get(0);
+			centerColorsOfLayers.add(colorOfCenterCubie);
+		}
+
+		Collections.sort(colorsOfCubie);
+		Collections.sort(centerColorsOfLayers);
+
+		return colorsOfCubie.equals(centerColorsOfLayers);
+
+	}
 
 
 
