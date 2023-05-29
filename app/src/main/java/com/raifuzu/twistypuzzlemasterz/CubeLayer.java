@@ -65,18 +65,6 @@ public class CubeLayer {
 
 
 
-
-    /**
-     *  This function gives each layer the ability to search for a specific
-     *  cubie.
-     *
-     * @param cubieID - A string representation of the unique colors that make up this cubie
-     * @return - A string representation of all surfaces/sides that intersect/contain this cubie
-     */
-    public String findCubie(String cubieID){
-        return null;
-    }
-
     private void initializeCubies() {
 
         // Correctly set the locations of all cubies on this layer
@@ -314,11 +302,17 @@ public class CubeLayer {
             }
         }
 
+        public void setCubieOrientation(){
+            // TODO: finish this!
+        }
+
         public void setCubieStickerColors() {
             this.stickerColorsList.clear();
             for (Button sticker : this.stickers) {
                 this.stickerColorsList.add(sticker.getCurrentTextColor());
             }
+
+            setCubieOrientation();
         }
 
         public String getLocation(){

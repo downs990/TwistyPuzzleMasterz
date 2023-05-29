@@ -62,8 +62,6 @@ public interface RubiksCube {
 	CubeLayer.Cubie getCubieAtLocation(String[] intersection);
 
 
-	String getCubeOrientation();
-
 	void rotate(CubeLayer layerToRotate, Rotation directionOfRotation);
 
 	// String algorithm can be either solution or scramble

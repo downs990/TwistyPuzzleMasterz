@@ -191,7 +191,7 @@ public class SolverFragment extends Fragment {
 			public void onClick(View arg0) {
 
 				// Even number
-				String scrambleAlg = rubiksCube.generateScrambleAlgorithm(26);
+				String scrambleAlg = rubiksCube.generateScrambleAlgorithm(18);
 				rubiksCube.executeAlgorithm(scrambleAlg , RubiksCube.RecordAlgorithm.NO );
 				Toast.makeText(getActivity(), "Scramble Algorithm: " + scrambleAlg, Toast.LENGTH_SHORT).show();
 			}

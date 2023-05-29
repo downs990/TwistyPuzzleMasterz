@@ -169,14 +169,6 @@ public class RubiksCubeStructure implements RubiksCube {
 		return this.solutionAlgorithm;
 	}
 
-
-	@Override
-	public String getCubeOrientation() {
-		return 	"UP: "    + this.rubiksCube.get(SurfaceName.U.name()).getCenterColor() +
-				"RIGHT: " + this.rubiksCube.get(SurfaceName.R.name()).getCenterColor() +
-				"FRONT: " + this.rubiksCube.get(SurfaceName.F.name()).getCenterColor();
-	}
-
 	/**
 	 * Puts the colors on the cube into a solved state.
 	 */
@@ -263,7 +255,7 @@ public class RubiksCubeStructure implements RubiksCube {
 				rotateCounterClockwise(layerToRotate);
 			}
 
-			// Updates the corrects in the stickersColorsList for each Cubie after
+			// Updates to the correct colors in the stickersColorsList for each Cubie after
 			// each cube rotation.
 			finalizeColors();
 		}
@@ -364,8 +356,8 @@ public class RubiksCubeStructure implements RubiksCube {
 	// remove all occurrences of exactly 2 identical symbols that are
 	// adjacent.
 	private String improveScrambleAlg(String initialAlg) {
-		String[] movesFor3x3 = initialAlg.split(" ");
-		AdvancedArrayList<String> cubeSymbols = new AdvancedArrayList<>(movesFor3x3);
+		String[] movesFor3x3x3 = initialAlg.split(" ");
+		AdvancedArrayList<String> cubeSymbols = new AdvancedArrayList<>(movesFor3x3x3);
 
 		for (int i = 0; i < cubeSymbols.size() - 2; i += 2) {
 			String symbol1 = cubeSymbols.get(i);
