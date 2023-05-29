@@ -478,11 +478,16 @@
         </TableRow>
     </TableLayout>
 
+
+
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:orientation="horizontal" >
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -532,7 +537,16 @@
                 android:layout_height="@dimen/color_height"
                 android:layout_margin="@dimen/color_cubie_margin"
                 android:background="@color/solver_btn_color" />
+
+
         </LinearLayout>
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/debugging_textview"
+        android:text="{ Debugging TextView }"
+        android:layout_width="700px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="720px"
+        android:layout_marginLeft="-1100px"
+        />
 </LinearLayout>

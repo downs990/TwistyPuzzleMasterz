@@ -258,6 +258,9 @@ public class RubiksCubeStructure implements RubiksCube {
 			// Updates to the correct colors in the stickersColorsList for each Cubie after
 			// each cube rotation.
 			finalizeColors();
+
+			// Update all cubie orientations
+			finalizeOrientation();
 		}
 	}
 
@@ -398,6 +401,48 @@ public class RubiksCubeStructure implements RubiksCube {
 		}
 	}
 
+
+
+	public void finalizeOrientation(){
+
+
+		for (CubeLayer layer: this.rubiksCube.values()) {
+			ArrayList<CubeLayer.Cubie> cubiesList = layer.getAllCubies();
+			for(CubeLayer.Cubie cubie : cubiesList){
+				Map<String, String> newOrientation = new HashMap<>();
+
+
+				ArrayList<String> cubieStickersColors = cubie.getStickerColorsStrings();
+				String[] cubieLocation = cubie.getLocation().split(" ");
+
+				for(int i = 0; i < cubieLocation.length; i++){
+
+					// Find the color that this layer should be
+					String surfaceLetter = cubieLocation[i];
+					CubeLayer cubieLayer = this.rubiksCube.get(surfaceLetter);
+					CubeLayer.Cubie centerCubie = cubieLayer.getAllCubies().get(4);
+					Integer centerColor = centerCubie.getStickerColors().get(0);
+					String layerCenterColor = CubeLayer.colorIntToString(centerColor);
+
+
+					// Find the sticker on this cubie that is on that layer
+					String stickerColor = cubieStickersColors.get(i);
+
+
+					// Store those two colors as a pair. If they are the same then the orientation is correct.
+					newOrientation.put(stickerColor, layerCenterColor);
+
+				}
+
+				cubie.setCubieOrientation(newOrientation);
+			}
+		}
+
+	}
+
+
+
+
 	public Collection<CubeLayer> getLayersList(){
 		return this.rubiksCube.values();
 	}
@@ -406,7 +451,20 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
-
+//	public String test(String xLayer){
+//
+//		StringBuilder output = new StringBuilder();
+//		// Print all cubies at x layer
+//		ArrayList<CubeLayer.Cubie> allCubies = this.rubiksCube.get(xLayer).getAllCubies();
+//		for(CubeLayer.Cubie cubie : allCubies){
+////			output.append(cubie.toString());
+//
+//			Map<String, String> orientation = cubie.getCubieOrientation();
+//			output.append(orientation.toString());
+//		}
+//
+//		return output.toString();
+//	}
 
 
 

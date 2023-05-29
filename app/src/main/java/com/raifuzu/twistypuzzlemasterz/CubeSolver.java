@@ -177,7 +177,7 @@ public class CubeSolver {
         };
 
         crossSolutionSteps(   stickersToSolve  );
-        Toast.makeText(rootView.getContext(), "Solution: " + this.rubiksCube.getSolutionAlgorithm(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(rootView.getContext(), "Solution: " + this.rubiksCube.getSolutionAlgorithm(), Toast.LENGTH_LONG).show();
     }
 
 

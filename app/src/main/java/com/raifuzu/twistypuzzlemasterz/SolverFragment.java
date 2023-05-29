@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 public class SolverFragment extends Fragment {
@@ -151,6 +154,10 @@ public class SolverFragment extends Fragment {
 				BFaceAndBorder, DFaceAndBorder);
 
 
+
+		final TextView debuggingText = (TextView)rootView.findViewById(R.id.debugging_textview);
+
+
 		// TODO: Use this cube instead.
 //		rubiksCubeProper = new RubiksCubeStructure(
 //				rootView,
@@ -167,7 +174,18 @@ public class SolverFragment extends Fragment {
 				rubiksCube.finalizeColors();
 				CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
 				mySolver.solveCube();
-//				displayAlert("Missing Cubies:", solutionAlg);
+
+				String entireSolution = rubiksCube.getSolutionAlgorithm();
+
+				String currentDisplayingText = debuggingText.getText().toString();
+				String newMessage = currentDisplayingText + "\nSolution: " + entireSolution;
+				debuggingText.setText(newMessage);
+				// TODO: Use for testing
+				//displayAlert("Solution Algorithm:", entireSolution);
+
+				// TODO: Remove after testing
+//				String x = rubiksCube.test("R");
+//				displayAlert("All Cubies - Right:", x);
 
 
 			}
@@ -179,9 +197,11 @@ public class SolverFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				rubiksCube.resetCube();
-				Toast.makeText(getActivity(), "Cube is reset!", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(), "Cube is reset!", Toast.LENGTH_SHORT).show();
+				debuggingText.setText("Cube is reset!");
 			}
 		});
+
 
 		Button scrambleButton = (Button) rootView.findViewById(R.id.scramble_button);
 		scrambleButton.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +213,9 @@ public class SolverFragment extends Fragment {
 				// Even number
 				String scrambleAlg = rubiksCube.generateScrambleAlgorithm(18);
 				rubiksCube.executeAlgorithm(scrambleAlg , RubiksCube.RecordAlgorithm.NO );
-				Toast.makeText(getActivity(), "Scramble Algorithm: " + scrambleAlg, Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(), "Scramble Algorithm: " + scrambleAlg, Toast.LENGTH_SHORT).show();
+
+				debuggingText.setText("Scramble: " + scrambleAlg);
 			}
 		});
 

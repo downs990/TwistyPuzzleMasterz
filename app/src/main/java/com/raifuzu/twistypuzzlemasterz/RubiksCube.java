@@ -48,13 +48,16 @@ public interface RubiksCube {
 
 	// Using "Double Brace Initialization"
 	Map<String, String[]> cubieLocationsMap = new HashMap<String, String[]>() {{
+		// IMPORTANT: These location orders must match the order that they are passed to the Cubie() constructors 
+		//    in CubeLayer.java  initializeCubies() method. 
+
 		// NOTE: Orient the physical cube such that the current layer (layer x) is facing you. (on F layer)
-		put("U", new String[]{"U L B" , "U B" , "U R B" , "U L" , "U" , "U R" , "U L F" , "U F" , "U R F" });
-		put("L", new String[]{"L B U" , "L U" , "L F U" , "L B" , "L" , "L F" , "L B D", "L D", "L F D" });
-		put("F", new String[]{"F L U" , "F U" , "F R U" , "F L" , "F" , "F R" , "F L D", "F D", "F R D" });
-		put("R", new String[]{"R F U" , "R U" , "R B U" , "R F" , "R" , "R B" , "R F D", "R D", "R B D" });
-		put("B", new String[]{"B R U" , "B U" , "B L U" , "B R" , "B" , "B L" , "B R D", "B D", "B L D" });
-		put("D", new String[]{"D L F" , "D F" , "D F R" , "D L" , "D" , "D R" , "D L B", "D B", "D R B" });
+		put("U", new String[]{"U B L" , "U B" , "U B R" , "U L" , "U" , "U R" , "U L F" , "U F" , "U F R" });
+		put("L", new String[]{"L U B" , "L U" , "L U F" , "L B" , "L" , "L F" , "L B D", "L D", "L F D" });
+		put("F", new String[]{"F U L" , "F U" , "F U R" , "F L" , "F" , "F R" , "F L D", "F D", "F R D" });
+		put("R", new String[]{"R U F" , "R U" , "R U B" , "R F" , "R" , "R B" , "R F D", "R D", "R B D" });
+		put("B", new String[]{"B U R" , "B U" , "B U L" , "B R" , "B" , "B L" , "B R D", "B D", "B L D" });
+		put("D", new String[]{"D F L" , "D F" , "D F R" , "D L" , "D" , "D R" , "D L B", "D B", "D R B" });
 	}};
 
 	ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers);

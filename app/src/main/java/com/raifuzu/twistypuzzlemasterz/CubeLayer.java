@@ -113,33 +113,33 @@ public class CubeLayer {
         return this.surfaceBackButtons;
     }
 
-    public void setSurfaceBackButtons(Button[] surfaceBackButtons) {
-        this.surfaceBackButtons = surfaceBackButtons;
-    }
+//    public void setSurfaceBackButtons(Button[] surfaceBackButtons) {
+//        this.surfaceBackButtons = surfaceBackButtons;
+//    }
 
     public Button[] getSurfaceRightButtons() {
         return this.surfaceRightButtons;
     }
 
-    public void setSurfaceRightButtons(Button[] surfaceRightButtons) {
-        this.surfaceRightButtons = surfaceRightButtons;
-    }
+//    public void setSurfaceRightButtons(Button[] surfaceRightButtons) {
+//        this.surfaceRightButtons = surfaceRightButtons;
+//    }
 
     public Button[] getSurfaceFrontButtons() {
         return this.surfaceFrontButtons;
     }
 
-    public void setSurfaceFrontButtons(Button[] surfaceFrontButtons) {
-        this.surfaceFrontButtons = surfaceFrontButtons;
-    }
+//    public void setSurfaceFrontButtons(Button[] surfaceFrontButtons) {
+//        this.surfaceFrontButtons = surfaceFrontButtons;
+//    }
 
     public Button[] getSurfaceLeftButtons() {
         return this.surfaceLeftButtons;
     }
 
-    public void setSurfaceLeftButtons(Button[] surfaceLeftButtons) {
-        this.surfaceLeftButtons = surfaceLeftButtons;
-    }
+//    public void setSurfaceLeftButtons(Button[] surfaceLeftButtons) {
+//        this.surfaceLeftButtons = surfaceLeftButtons;
+//    }
 
     /**
      * This method updates all of the colors of each layer in the cubes data
@@ -278,18 +278,24 @@ public class CubeLayer {
     public static class Cubie {
 
         // Location is a string representation of all faces that intersects this cubie
-        private final String location; // Ex. "F,R,U" or "B,L"
+        private final String location; // Ex. "F R U" or "B L"
+
+        private Map<String, String> cubieOrientation;
 
 
-        // TODO: use center pieces and sticker colors as reference for orientations.
-        private final boolean correctOrientation = false;
-
-
-        private final ArrayList<Button> stickers = new ArrayList<>();
-        private final ArrayList<Integer> stickerColorsList = new ArrayList<>();
+        private final ArrayList<Button> stickers;
+        private final ArrayList<Integer> stickerColorsList;
 
         private RubiksCube.CubieType type;
         public Cubie(String location, Button... stickers) {
+
+
+            this.cubieOrientation = new HashMap<>();
+            this.stickers = new ArrayList<>();
+            this.stickerColorsList = new ArrayList<>();
+
+
+
             this.location = location;
             this.stickers.addAll(Arrays.asList(stickers));
 
@@ -302,8 +308,12 @@ public class CubeLayer {
             }
         }
 
-        public void setCubieOrientation(){
-            // TODO: finish this!
+        public void setCubieOrientation(Map<String, String> newOrientation){
+            this.cubieOrientation = newOrientation;
+        }
+
+        public Map<String, String> getCubieOrientation(){
+            return this.cubieOrientation;
         }
 
         public void setCubieStickerColors() {
@@ -312,7 +322,6 @@ public class CubeLayer {
                 this.stickerColorsList.add(sticker.getCurrentTextColor());
             }
 
-            setCubieOrientation();
         }
 
         public String getLocation(){
@@ -322,6 +331,20 @@ public class CubeLayer {
 
         public ArrayList<Integer> getStickerColors() {
             return this.stickerColorsList;
+        }
+
+        public ArrayList<String> getStickerColorsStrings(){
+
+            ArrayList<String> result = new ArrayList<>();
+            for(Integer value : this.stickerColorsList){
+
+                String color = CubeLayer.colorIntToString(value);
+                result.add(color);
+            }
+
+
+
+            return result;
         }
 
         public ArrayList<Button> getStickers() {
