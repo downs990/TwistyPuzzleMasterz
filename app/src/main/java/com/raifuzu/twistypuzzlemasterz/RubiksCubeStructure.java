@@ -238,6 +238,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
+	// TODO: Add rotations and notations for Uw Uw' and M2
 	@Override
 	public void rotate(CubeLayer layerToRotate, Rotation directionOfRotation) {
 

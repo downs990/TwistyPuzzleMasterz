@@ -48,7 +48,7 @@ public interface RubiksCube {
 
 	// Using "Double Brace Initialization"
 	Map<String, String[]> cubieLocationsMap = new HashMap<String, String[]>() {{
-		// IMPORTANT: These location orders must match the order that they are passed to the Cubie() constructors 
+		// TODO: These location's orders must match the order that they are passed to the Cubie() constructors
 		//    in CubeLayer.java  initializeCubies() method. 
 
 		// NOTE: Orient the physical cube such that the current layer (layer x) is facing you. (on F layer)

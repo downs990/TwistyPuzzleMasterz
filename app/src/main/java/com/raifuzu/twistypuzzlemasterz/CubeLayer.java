@@ -31,16 +31,6 @@ public class CubeLayer {
     private View rootView;// Keep this. You might need to Toast.
 
 
-    public CubeLayer(View rootView, String initialLayerColors) {
-        this.rootView = rootView;
-        this.surfaceName = SurfaceName.F; // TODO: First char in initialLayerColors
-        setAllLayerButtons(surfaceAndBorder);
-//        this.surfaceAndBorder = surfaceAndBorder;
-//        initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
-//                surfaceLeftButtons);
-    }
-
-
     public CubeLayer(View rootView, AdvancedArrayList<Button[]> surfaceAndBorder, SurfaceName surfaceName) {
         this.rootView = rootView;
         this.surfaceName = surfaceName;
@@ -49,14 +39,6 @@ public class CubeLayer {
         initializeCubies();
     }
 
-//    @SuppressWarnings("unchecked")
-//    public CubeLayer(SurfaceName surfaceName, AdvancedArrayList<Integer>... colorLists) {
-//        this.surfaceName = surfaceName;
-//        // surface, surface back, surface right, surface front, surface left.
-//        initializeScrambledColors(colorLists[0], colorLists[1], colorLists[2], colorLists[3], colorLists[4]);
-//        initializeCubies(surfaceButtons, surfaceBackButtons, surfaceRightButtons, surfaceFrontButtons,
-//                surfaceLeftButtons);
-//    }
 
     public void setAllCubieColors() {
         for (Cubie currentCubie : this.myCubies) {
@@ -65,14 +47,14 @@ public class CubeLayer {
     }
 
 
-
-
     private void initializeCubies() {
 
         // Correctly set the locations of all cubies on this layer
         String[] locations = RubiksCube.cubieLocationsMap.get(this.surfaceName.name());
 
-        // Create cubies for this layer <3 <3
+        // TODO: The order of each of these buttons for each sticker should automatically create the
+        //     location String for each cubie. Instead of having to create RubiksCube.cubieLocationMap
+        //     and managing the order of each location manually.
         Cubie cubie1 = new Cubie(locations[0], this.surfaceButtons[0], this.surfaceBackButtons[0], this.surfaceLeftButtons[2]);
         Cubie cubie2 = new Cubie(locations[1], this.surfaceButtons[1], this.surfaceBackButtons[1]);
         Cubie cubie3 = new Cubie(locations[2], this.surfaceButtons[2], this.surfaceBackButtons[2], this.surfaceRightButtons[0]);
