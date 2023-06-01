@@ -1,10 +1,6 @@
 package com.raifuzu.twistypuzzlemasterz;
 
-import android.graphics.Color;
-import android.view.CollapsibleActionView;
-import android.view.Surface;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,48 +28,11 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	private String solutionAlgorithm;
 
-	private final View rootView;
+	private View rootView;
 
 
-	// TODO: Figure out how to remove buttons from this implementation.
-	// 		( However, I'd like to keep this in as an optional enable/disable. )
-	public RubiksCubeStructure(View rootView, String initialCubeState){
+	public RubiksCubeStructure(View rootView, List< AdvancedArrayList<Integer[]> > colorsList ){
 		this.rootView = rootView;
-
-		ArrayList<String> surfaces = new ArrayList<>();
-//
-//		int start = 0;
-//		int end = 0;
-//		for(int i = 0; i <= initialCubeState.length(); i++){
-//			if(i % 9 == 0 && i > 0){
-//				end = i;
-//				start = end - 9;
-
-				// TODO: Make sure you're using the correct cube orientations that match
-				// 		the opencv app.
-
-				// Take 9 chars from initialCubeState at a time, left to right.
-//				String currentSurface = initialCubeState.substring(start, end);
-//				surfaces.add( currentSurface );
-//			}
-//		}
-
-		// TODO: Update CubeLayer constructor to init layers from string of colors
-//		up = new CubeLayer(rootView, 	surfaces.get(0) );
-//		left = new CubeLayer(rootView,  surfaces.get(0) );
-//		front = new CubeLayer(rootView, surfaces.get(0) );
-//		right = new CubeLayer(rootView, surfaces.get(0) );
-//		back = new CubeLayer(rootView,  surfaces.get(0) );
-//		down = new CubeLayer(rootView,  surfaces.get(0) );
-//		rubiksCube.addMultiple(up, left, front, right, back, down);
-
-	}
-
-
-
-
-	@SafeVarargs
-	public RubiksCubeStructure(View rootView, AdvancedArrayList<Button[]>... layerList) {
 
 		this.rubiksCube = new HashMap<>();
 		this.solutionAlgorithm = "";
@@ -86,10 +45,10 @@ public class RubiksCubeStructure implements RubiksCube {
 				SurfaceName.R, SurfaceName.B, SurfaceName.D
 		};
 
-		for(int i = 0; i < layerList.length; i++){
-			AdvancedArrayList<Button[]> layerButtons = layerList[i];
+		for(int i = 0; i < colorsList.size(); i++){
+			AdvancedArrayList<Integer[]> layerColors = colorsList.get(i);
 			SurfaceName nameOfSurface = surfaceNames[i];
-			CubeLayer currentLayer = new CubeLayer(rootView, layerButtons, nameOfSurface);
+			CubeLayer currentLayer = new CubeLayer(rootView, layerColors, nameOfSurface);
 			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
 
@@ -276,14 +235,10 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 8), getStickerColor(layer, 5), getStickerColor(layer, 2));
 
 		// Edges and Corners
-		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceLeftButtons()));
-		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceBackButtons()));
-		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceRightButtons()));
-		AdvancedArrayList<Integer> newSurfaceLeft = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceFrontButtons()));
+		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(  layer.getSurfaceLeftColors()  );
+		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>( layer.getSurfaceBackColors()  );
+		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>( layer.getSurfaceRightColors() );
+		AdvancedArrayList<Integer> newSurfaceLeft = new AdvancedArrayList<>(  layer.getSurfaceFrontColors() );
 
 		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight, newSurfaceFront,
 				newSurfaceLeft);
@@ -299,32 +254,28 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 0), getStickerColor(layer, 3), getStickerColor(layer, 6));
 
 		// Edges and Corners
-		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceRightButtons()));
-		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceFrontButtons()));
-		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceLeftButtons()));
-		AdvancedArrayList<Integer> newSurfaceLeft = new AdvancedArrayList<>(
-				buttonsToColors(layer.getSurfaceBackButtons()));
+		// TODO: Test me!
+		AdvancedArrayList<Integer> newSurfaceBack  = new AdvancedArrayList<>(layer.getSurfaceRightColors() );
+		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>(layer.getSurfaceFrontColors()   );
+		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>(layer.getSurfaceLeftColors()    );
+		AdvancedArrayList<Integer> newSurfaceLeft  = new AdvancedArrayList<>(layer.getSurfaceBackColors()    );
 
-		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight, newSurfaceFront,
-				newSurfaceLeft);
+		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight,
+				newSurfaceFront, newSurfaceLeft);
 	}
 
-	private AdvancedArrayList<Integer> buttonsToColors(Button[] buttons) {
-		AdvancedArrayList<Integer> colors = new AdvancedArrayList<>();
-
-		for (Button button : buttons) {
-			colors.add(button.getCurrentTextColor());
-		}
-
-		return colors;
-	}
+//	private AdvancedArrayList<Integer> buttonsToColors(Button[] buttons) {
+//		AdvancedArrayList<Integer> colors = new AdvancedArrayList<>();
+//
+//		for (Button button : buttons) {
+//			colors.add(button.getCurrentTextColor());
+//		}
+//
+//		return colors;
+//	}
 
 	private Integer getStickerColor(CubeLayer layer, int index) {
-		Button button = layer.getSurfaceButtons()[index];
-		return button.getCurrentTextColor();
+		return layer.getSurfaceColors()[index];
 	}
 
 	// Size must always be even (26)
@@ -579,7 +530,7 @@ public class RubiksCubeStructure implements RubiksCube {
 				//This cubie was not found in the valid cubie list
 				if (!isValidPiece) {
 					invalidCubiesFoundList.add(cubie);
-					validCubies.add(cubie.getStickerColors());//TODO- figure out where to remove this?
+					validCubies.add(cubie.getStickerColors());
 				}
 
 			}

@@ -16,6 +16,10 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class SolverFragment extends Fragment {
 	
@@ -26,8 +30,19 @@ public class SolverFragment extends Fragment {
 	private Integer GREEN = Color.GREEN;
 	private Integer ORANGE = Color.rgb(255, 165, 0);
 	private Integer selectedColor = WHITE;
+
+	private final AdvancedArrayList<Integer[]> UFaceAndBorderColors = new AdvancedArrayList<>();
+	private final AdvancedArrayList<Integer[]> LFaceAndBorderColors = new AdvancedArrayList<>();
+	private final AdvancedArrayList<Integer[]> FFaceAndBorderColors = new AdvancedArrayList<>();
+	private final AdvancedArrayList<Integer[]> RFaceAndBorderColors = new AdvancedArrayList<>();
+	private final AdvancedArrayList<Integer[]> BFaceAndBorderColors = new AdvancedArrayList<>();
+	private final AdvancedArrayList<Integer[]> DFaceAndBorderColors = new AdvancedArrayList<>();
+
+	List< AdvancedArrayList<Integer[]> > allColorsList = Arrays.asList(
+			UFaceAndBorderColors, LFaceAndBorderColors, FFaceAndBorderColors,
+			RFaceAndBorderColors, BFaceAndBorderColors, DFaceAndBorderColors
+	);
 	private RubiksCubeStructure rubiksCube;
-	private RubiksCubeStructure rubiksCubeProper;
 
 	/**
 	 * The fragment argument representing the section number for this fragment.
@@ -116,17 +131,17 @@ public class SolverFragment extends Fragment {
 		Button[] downLeft = { leftFace[6], leftFace[7], leftFace[8] }; // 16,17,18
 
 		// These are all of the layers as list of buttons
-		AdvancedArrayList<Button[]> UFaceAndBorder = new AdvancedArrayList<Button[]>(upFace, upBack, upRight, upFront,
+		final AdvancedArrayList<Button[]> UFaceAndBorder = new AdvancedArrayList<Button[]>(upFace, upBack, upRight, upFront,
 				upLeft);
-		AdvancedArrayList<Button[]> LFaceAndBorder = new AdvancedArrayList<Button[]>(leftFace, leftBack, leftRight,
+		final AdvancedArrayList<Button[]> LFaceAndBorder = new AdvancedArrayList<Button[]>(leftFace, leftBack, leftRight,
 				leftFront, leftLeft);
-		AdvancedArrayList<Button[]> FFaceAndBorder = new AdvancedArrayList<Button[]>(frontFace, frontBack, frontRight,
+		final AdvancedArrayList<Button[]> FFaceAndBorder = new AdvancedArrayList<Button[]>(frontFace, frontBack, frontRight,
 				frontFront, frontLeft);
-		AdvancedArrayList<Button[]> RFaceAndBorder = new AdvancedArrayList<Button[]>(rightFace, rightBack, rightRight,
+		final AdvancedArrayList<Button[]> RFaceAndBorder = new AdvancedArrayList<Button[]>(rightFace, rightBack, rightRight,
 				rightFront, rightLeft);
-		AdvancedArrayList<Button[]> BFaceAndBorder = new AdvancedArrayList<Button[]>(backFace, backBack, backRight,
+		final AdvancedArrayList<Button[]> BFaceAndBorder = new AdvancedArrayList<Button[]>(backFace, backBack, backRight,
 				backFront, backLeft);
-		AdvancedArrayList<Button[]> DFaceAndBorder = new AdvancedArrayList<Button[]>(downFace, downBack, downRight,
+		final AdvancedArrayList<Button[]> DFaceAndBorder = new AdvancedArrayList<Button[]>(downFace, downBack, downRight,
 				downFront, downLeft);
 
 		// !!!!! THIS LIST IS ONLY USED TO ADD FUNCTIONALITY TO ALL BUTTONS !!
@@ -147,45 +162,53 @@ public class SolverFragment extends Fragment {
 		selectColor(color6);
 
 		setSelectableColors(color1, color2, color3, color4, color5, color6);
-		setCubieFunctionality(allCubieButtons);
-
-		// Dynamic Cube Data Structure
-		rubiksCube = new RubiksCubeStructure(rootView, UFaceAndBorder, LFaceAndBorder, FFaceAndBorder, RFaceAndBorder,
-				BFaceAndBorder, DFaceAndBorder);
-
+		setCubieFunctionality(allCubieButtons); // TODO: remove use of buttons ?
 
 
 		final TextView debuggingText = (TextView)rootView.findViewById(R.id.debugging_textview);
 
+		initRubiksCube(rootView, UFaceAndBorder, LFaceAndBorder, FFaceAndBorder,
+				RFaceAndBorder, BFaceAndBorder, DFaceAndBorder);
 
-		// TODO: Use this cube instead.
-//		rubiksCubeProper = new RubiksCubeStructure(
-//				rootView,
-//				"ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG");
 
-		// Cool pattern
-		// rubiksCube.executeAlgorithm("U F B' L2 U2 L2 F' B U2 L2 U");
+
+
+
+
 		Button solveButton = (Button) rootView.findViewById(R.id.solve_button);
 		solveButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 
+				// Grabs the current colors from the interface buttons.
+				// This needs to be in the solve listener for the case of the user setting colors manually on phone.
+				initRubiksCube(rootView,
+						UFaceAndBorder, LFaceAndBorder, FFaceAndBorder,
+						RFaceAndBorder, BFaceAndBorder, DFaceAndBorder);
+
 				rubiksCube.finalizeColors();
+
 				CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
 				mySolver.solveCube();
 
 				String entireSolution = rubiksCube.getSolutionAlgorithm();
 
+
+
+
+
 				String currentDisplayingText = debuggingText.getText().toString();
 				String newMessage = currentDisplayingText + "\nSolution: " + entireSolution;
 				debuggingText.setText(newMessage);
 				// TODO: Use for testing
-				//displayAlert("Solution Algorithm:", entireSolution);
+				// displayAlert("Solution Algorithm:", entireSolution);
+				// Toast.makeText(getActivity(), "Cube is reset!", Toast.LENGTH_SHORT).show();
+
 
 				// TODO: Remove after testing
-//				String x = rubiksCube.test("R");
-//				displayAlert("All Cubies - Right:", x);
+//				 String x = rubiksCube.test("R");
+//				 displayAlert("All Cubies - Right:", x);
 
 
 			}
@@ -196,8 +219,8 @@ public class SolverFragment extends Fragment {
 			@SuppressLint("ShowToast")
 			@Override
 			public void onClick(View arg0) {
+
 				rubiksCube.resetCube();
-//				Toast.makeText(getActivity(), "Cube is reset!", Toast.LENGTH_SHORT).show();
 				debuggingText.setText("Cube is reset!");
 			}
 		});
@@ -213,13 +236,60 @@ public class SolverFragment extends Fragment {
 				// Even number
 				String scrambleAlg = rubiksCube.generateScrambleAlgorithm(18);
 				rubiksCube.executeAlgorithm(scrambleAlg , RubiksCube.RecordAlgorithm.NO );
-//				Toast.makeText(getActivity(), "Scramble Algorithm: " + scrambleAlg, Toast.LENGTH_SHORT).show();
-
-				debuggingText.setText("Scramble: " + scrambleAlg);
+ 				debuggingText.setText("Scramble: " + scrambleAlg);
 			}
 		});
 
 		return rootView;
+
+	}
+
+	private List<AdvancedArrayList<Integer[]>> convertCubeStringToColorsLists(String cubeAsString){
+
+		// TODO: Initialize 'allColorsList' using the string
+		// TODO: Make sure you're using the correct cube orientations that match
+		// 		the opencv app.
+		return null;
+	}
+
+	@SafeVarargs
+	private final void initRubiksCube(View rootView, AdvancedArrayList<Button[]>... layerList){
+
+		// Getting all colors from all buttons.
+		// TODO: Test me!
+		initColorsFromButtons(rootView, layerList);
+
+		// TODO: Test me!
+		allColorsList = convertCubeStringToColorsLists(
+				"ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG");
+
+		// TODO: Test me!
+		rubiksCube = new RubiksCubeStructure(rootView, allColorsList);
+	}
+
+
+	@SafeVarargs
+	private final void initColorsFromButtons(View rootView, AdvancedArrayList<Button[]>... layerList){
+
+
+		for(int i = 0; i < layerList.length; i++){
+
+			AdvancedArrayList<Integer[]> colorsOfLayer = allColorsList.get(i);
+			AdvancedArrayList<Button[]> layersButtons = layerList[i];
+			for(Button[] buttonsList : layersButtons){
+
+				Integer[] colorsList = new Integer[buttonsList.length];
+				for(int j = 0; j < buttonsList.length; j++){
+
+					Button button = buttonsList[j];
+					int currentButtonColor = button.getCurrentTextColor();
+					colorsList[j] = currentButtonColor;
+				}
+
+				colorsOfLayer.add(colorsList);
+			}
+		}
+
 
 	}
 
