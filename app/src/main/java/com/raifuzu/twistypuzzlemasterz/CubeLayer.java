@@ -16,11 +16,11 @@ import android.view.View;
 public class CubeLayer {
 
     private SurfaceName surfaceName;
-    private Integer[] surfaceColors;
-    private Integer[] surfaceBackColors;
-    private Integer[] surfaceRightColors;
-    private Integer[] surfaceFrontColors;
-    private Integer[] surfaceLeftColors;
+    private Integer[] surfaceColors;        // Length = 9
+    private Integer[] surfaceBackColors;    // Length = 3
+    private Integer[] surfaceRightColors;   // Length = 3
+    private Integer[] surfaceFrontColors;   // Length = 3
+    private Integer[] surfaceLeftColors;    // Length = 3
     private AdvancedArrayList<Integer[]> surfaceAndBorder;
     public AdvancedArrayList<Cubie> myCubies;
 

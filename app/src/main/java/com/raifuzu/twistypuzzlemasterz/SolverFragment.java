@@ -244,12 +244,50 @@ public class SolverFragment extends Fragment {
 
 	}
 
+
+	// TODO: Finish me!
+	private Integer colorLetterToIntegerColor(char colorLetter){
+		return null;
+	}
+
 	private List<AdvancedArrayList<Integer[]>> convertCubeStringToColorsLists(String cubeAsString){
+
+		List<AdvancedArrayList<Integer[]>> result = new ArrayList<>();
+		// result.get(0)  --> { [ORYBYBRYR] [back_border] [right_border] [front_border] [left_border] }
 
 		// TODO: Initialize 'allColorsList' using the string
 		// TODO: Make sure you're using the correct cube orientations that match
 		// 		the opencv app.
-		return null;
+
+
+		// TODO: Add surfaces colors to each layer
+		AdvancedArrayList<Integer[]> currentLayer = new AdvancedArrayList<>();
+		Integer[] surfaceColors = new Integer[9];
+
+		int colorIndex = 0;
+		for(int i = 1; i <= cubeAsString.length(); i++){
+
+			char colorLetter = cubeAsString.charAt(i - 1);
+			Integer colorInteger = colorLetterToIntegerColor( colorLetter );
+			surfaceColors[colorIndex] = colorInteger;
+
+			if(i % 9 == 0){
+				currentLayer.add( surfaceColors );
+				result.add(currentLayer);
+				surfaceColors = new Integer[9];
+
+				colorIndex = 0;
+			}
+
+			colorIndex++;
+		}
+
+
+		// TODO: Add the 4 borders for each layer
+
+		Toast.makeText(getActivity(), "Cube Colors: " + result, Toast.LENGTH_SHORT).show();
+
+		return result;
 	}
 
 	@SafeVarargs
@@ -257,14 +295,21 @@ public class SolverFragment extends Fragment {
 
 		// Getting all colors from all buttons.
 		// TODO: Test me!
-		initColorsFromButtons(rootView, layerList);
+//		initColorsFromButtons(rootView, layerList);
+
+		// Top: B ; Front: Y ; ORYBYBRYR                      O | R | Y
+		// Top: Y ; Front: O ; WWOROWGOW                     -----------
+		// Top: Y ; Front: G ; BGBRGGYYY                      B | Y | B
+		// Top: G ; Front: W ; OORWWBWGG                     -----------
+		// Top: Y ; Front: R ; BYYRRWOOG                      R | Y | R
+		// Top: Y ; Front: B ; BYWGBBROG
 
 		// TODO: Test me!
 		allColorsList = convertCubeStringToColorsLists(
 				"ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG");
 
 		// TODO: Test me!
-		rubiksCube = new RubiksCubeStructure(rootView, allColorsList);
+//		rubiksCube = new RubiksCubeStructure(rootView, allColorsList);
 	}
 
 
