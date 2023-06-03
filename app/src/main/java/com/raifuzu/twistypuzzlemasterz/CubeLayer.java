@@ -69,7 +69,7 @@ public class CubeLayer {
         return this.myCubies;
     }
 
-    public AdvancedArrayList<Integer[]> getAllLayerButtons() {
+    public AdvancedArrayList<Integer[]> getSurfaceAndBorderColors() {
         return this.surfaceAndBorder;
     }
 

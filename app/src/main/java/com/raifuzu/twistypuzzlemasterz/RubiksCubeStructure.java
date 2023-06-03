@@ -54,7 +54,9 @@ public class RubiksCubeStructure implements RubiksCube {
 			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
 
-		resetCube();
+		finalizeColors();
+
+//		resetCube();
 	}
 
 	/**
@@ -344,11 +346,11 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
+
+	// TODO: Look into if this method is still needed!
     /**
      * The purpose of this method is to initialize all of the colors for
-     * each cubie in each layer of the cube. This can not be done in any
-     * constructor therefore it was made into a separate method that can
-     * be triggered when desired.
+     * each cubie in each layer.
      */
 	public void finalizeColors(){
 		for (CubeLayer layer: this.rubiksCube.values()) {

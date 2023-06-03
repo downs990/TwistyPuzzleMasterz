@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -182,26 +183,30 @@ public class SolverFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 
+				// TODO: Only needed when you want to init cube by setting colors on interface manually.
 				// Grabs the current colors from the interface buttons.
 				// This needs to be in the solve listener for the case of the user setting colors manually on phone.
-				initRubiksCube(rootView,
-						UFaceAndBorder, LFaceAndBorder, FFaceAndBorder,
-						RFaceAndBorder, BFaceAndBorder, DFaceAndBorder);
+//				initRubiksCube(rootView,UFaceAndBorder, LFaceAndBorder, FFaceAndBorder, RFaceAndBorder, BFaceAndBorder, DFaceAndBorder);
 
-				rubiksCube.finalizeColors();
 
+
+				// Solve cube
 				CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
 				mySolver.solveCube();
 
 				String entireSolution = rubiksCube.getSolutionAlgorithm();
 
-
-
-
-
+				// Show solve algorithm
 				String currentDisplayingText = debuggingText.getText().toString();
 				String newMessage = currentDisplayingText + "\nSolution: " + entireSolution;
 				debuggingText.setText(newMessage);
+
+				// Update buttons to match the cube's state
+				setButtonsToCurrentCube(UFaceAndBorder, LFaceAndBorder, FFaceAndBorder,
+						RFaceAndBorder, BFaceAndBorder, DFaceAndBorder);
+
+
+
 				// TODO: Use for testing
 				// displayAlert("Solution Algorithm:", entireSolution);
 				// Toast.makeText(getActivity(), "Cube is reset!", Toast.LENGTH_SHORT).show();
@@ -245,6 +250,19 @@ public class SolverFragment extends Fragment {
 
 	}
 
+	@SafeVarargs
+	private final void setButtonsToCurrentCube(AdvancedArrayList<Button[]>... layerList){
+		List<AdvancedArrayList<Integer[]>> surfaceAndBorderColors = new ArrayList<>();
+		Collection<CubeLayer> allCubeLayers = rubiksCube.getLayersList();
+		for (CubeLayer layer : allCubeLayers){
+			surfaceAndBorderColors.add( layer.getSurfaceAndBorderColors() ) ;
+		}
+
+		// Update the interface buttons with solution algorithm movements
+		updateButtonsWithColors(surfaceAndBorderColors, layerList);
+	}
+
+
 
 	// TODO: test me!
 	private Integer colorLetterToIntegerColor(char colorLetter){
@@ -267,45 +285,59 @@ public class SolverFragment extends Fragment {
 
 		List<AdvancedArrayList<Integer[]>> result = new ArrayList<>();
 		// result.get(0)  --> { [surface] [back_border] [right_border] [front_border] [left_border] }
-		// ...
-		// result.get(5)  --> { [surface] [back_border] [right_border] [front_border] [left_border] }
 
 
-//		String output = "";
-
-		// Adds surfaces colors to each layer
-		AdvancedArrayList<Integer[]> currentLayer = new AdvancedArrayList<>();
-		Integer[] surfaceColors = new Integer[9];
-
-		int colorIndex = 1;
-		for(int i = 1; i <= cubeAsString.length(); i++){
-
-			char colorLetter = cubeAsString.charAt(i - 1);
-			Integer colorInteger = colorLetterToIntegerColor( colorLetter );
-
-
-//			String colorString = CubeLayer.colorIntToString(colorInteger);
-//			output += colorString + " ";
-
-			surfaceColors[colorIndex - 1] = colorInteger;
-
-			colorIndex++;
-
-			if( i % 9 == 0){
-				currentLayer.add( surfaceColors );
-				result.add(currentLayer);
-				surfaceColors = new Integer[9];
-
-				colorIndex = 1;
+		// Orientation mapping to get the OpenCV app's cube string to correctly map to my RubiksCubeStructure
+		Integer[][][] colorMapping = {
+				// UP
+				{ {9,8,7,6,5,4,3,2,1},           {12,20,19},{39,38,37},{48,47,46},{12,11,10} },
+				// LEFT
+				{ {10,11,12,13,14,15,16,17,18} , {9,6,3   },{46,49,52},{36,33,30},{27,24,21} },
+				// FRONT
+				{ {46,47,48,49,50,51,52,53,54} , {3,2,1   },{37,40,43},{34,35,36},{18,15,12} },
+				// RIGHT
+				{ {37,38,39,40,41,42,43,44,45} , {1,4,7   },{19,22,25},{28,31,34},{54,51,48} },
+				// BACK
+				{ {19,20,21,22,23,24,25,26,27},  {7,8,9   },{10,13,16},{30,29,28},{45,42,39} },
+				// DOWN
+				{ {36,35,34,33,32,31,30,29,28},  {52,53,54},{43,44,45},{25,26,27},{16,17,18} },
+		};
 
 
-//				output += "\n\n";
+		for (Integer[][] currentLayer : colorMapping){
+
+			AdvancedArrayList<Integer[]> surface = new AdvancedArrayList<>();
+
+			// Color lists
+			Integer[] surfaceColors = new Integer[9];
+			Integer[] bBorder = new Integer[3]; // back
+			Integer[] rBorder = new Integer[3]; // right
+			Integer[] fBorder = new Integer[3]; // front
+			Integer[] lBorder = new Integer[3]; // left
+
+			surface.addMultiple(surfaceColors, bBorder,rBorder,fBorder,lBorder);
+
+			for (int i = 0; i < currentLayer.length; i++){
+				for(int j = 0; j < currentLayer[i].length; j++){
+
+					Integer indexOfColorLetter = currentLayer[i][j];
+
+					char colorLetter = cubeAsString.charAt(indexOfColorLetter - 1);
+					Integer colorAsInteger = colorLetterToIntegerColor(colorLetter);
+					Integer[] currentColorList = surface.get(i);
+					currentColorList[j] = colorAsInteger;
+				}
 			}
 
+			result.add(surface);
 		}
 
 
-		// TODO: Add the 4 borders for each layer
+
+//			String output = "";
+//			String colorString = CubeLayer.colorIntToString(colorInteger);
+//			output += colorString + " ";
+
 
 //		Toast.makeText(getActivity(), "Cube Colors: " + result, Toast.LENGTH_SHORT).show();
 
@@ -317,7 +349,6 @@ public class SolverFragment extends Fragment {
 	private final void initRubiksCube(View rootView, AdvancedArrayList<Button[]>... layerList){
 
 		// Getting all colors from all buttons.
-		// TODO: Test me!
 //		initColorsFromButtons(rootView, layerList);
 
 		// Top: B ; Front: Y ; ORYBYBRYR                      O | R | Y
@@ -332,10 +363,45 @@ public class SolverFragment extends Fragment {
 				"ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG");
 
 		// TODO: Test me!
-//		rubiksCube = new RubiksCubeStructure(rootView, allColorsList);
+		rubiksCube = new RubiksCubeStructure(rootView, allColorsList);
+
+		// TODO: Init buttons on screen using allColorsList
+		updateButtonsWithColors(allColorsList, layerList);
+
+	}
+
+	/**
+	 * Precondition - this.allColorsList and layersList parameter
+	 * 		MUST BE EXACT ONE TO ONE MATCH
+	 *
+	 * @param layerList
+	 */
+	@SafeVarargs
+	private final void updateButtonsWithColors(List<AdvancedArrayList<Integer[]>> colors,
+											   AdvancedArrayList<Button[]>... layerList){
+
+		for(int i = 0; i < layerList.length; i++){
+
+			AdvancedArrayList<Button[]> layer = layerList[i];
+			for(int j = 0; j < layer.size(); j++){
+
+				Button[] buttonsList = layer.get(j);
+				for(int k = 0; k < buttonsList.length; k++){
+					Button currentButton = buttonsList[k];
+					Integer currentColor = colors.get(i).get(j)[k];
+
+					currentButton.setBackgroundColor(currentColor);
+					currentButton.setTextColor(currentColor);
+				}
+			}
+		}
+
 	}
 
 
+
+	// TODO: Test me!
+	// TODO: Keep this if you still want to be able to setup a cube by clicking stickers on screen
 	@SafeVarargs
 	private final void initColorsFromButtons(View rootView, AdvancedArrayList<Button[]>... layerList){
 
