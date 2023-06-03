@@ -157,7 +157,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 		// TODO: Clear all other member variables to make sure that unwanted data
-		//	doesn't persist between scrambles and clears.
+		// 	doesn't persist between scrambles and clears.
 		solutionAlgorithm = "";
 
 	}

@@ -135,38 +135,32 @@ public class CubeLayer {
     public void initializeSolvedColors(Integer surfaceColor, Integer surfaceBackColor, Integer surfaceRightColor,
                                        Integer surfaceFrontColor, Integer surfaceLeftColor) {
 
-        Integer[] layerColors = {surfaceColor, surfaceBackColor, surfaceRightColor, surfaceFrontColor,
-                surfaceLeftColor};
 
-        // surfaceAndBorder includes the following button arrays:
+        // TODO: Test me!
+
+
+        // lengths =                9            3                  3                   3               3
+        Integer[] layerColors = {surfaceColor, surfaceBackColor, surfaceRightColor, surfaceFrontColor, surfaceLeftColor};
+
+        // surfaceAndBorder includes the following arrays:
         // surface[], s back[], s right[], s front[], s left[]
-
-        // TODO: Test me! (this seems off. really think about it)
-        this.surfaceAndBorder.add(layerColors);
-//        int index = 0;
-//        for (Integer[] buttons : this.surfaceAndBorder) {
-//            for (Integer button : buttons) {
-//                button.setBackgroundColor(layerColors[index]);
-//                button.setTextColor(layerColors[index]);
-//            }
-//            index++;
-//        }
+        int index = 0;
+        for (Integer[] stickersList : this.surfaceAndBorder) {
+            Arrays.fill(stickersList, layerColors[index]);
+            index++;
+        }
 
     }
 
+    // TODO: Test me!
     @SuppressWarnings("unchecked")
     public void initializeScrambledColors(AdvancedArrayList<Integer>... colorLists) {
 
-        // surfaceAndBorder includes the following button arrays:
-        // surface[], s back[], s right[], s front[], s left[]
         int surfaceBorderIndex = 0;
         int stickerIndex = 0;
-        for (Integer[] buttons : this.surfaceAndBorder) {
-            for (Integer button : buttons) {
-
-                // TODO: What goes here instead of commented out two lines below???
-//                button.setBackgroundColor(colorLists[surfaceBorderIndex].get(stickerIndex));
-//                button.setTextColor(colorLists[surfaceBorderIndex].get(stickerIndex));
+        for (Integer[] stickersList : this.surfaceAndBorder) {
+            for (int i = 0; i < stickersList.length; i++) {
+                stickersList[i] = colorLists[surfaceBorderIndex].get(stickerIndex);
                 stickerIndex++;
             }
             stickerIndex = 0;

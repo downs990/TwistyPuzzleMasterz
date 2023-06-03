@@ -266,38 +266,50 @@ public class SolverFragment extends Fragment {
 	private List<AdvancedArrayList<Integer[]>> convertCubeStringToColorsLists(String cubeAsString){
 
 		List<AdvancedArrayList<Integer[]>> result = new ArrayList<>();
-		// result.get(0)  --> { [ORYBYBRYR] [back_border] [right_border] [front_border] [left_border] }
+		// result.get(0)  --> { [surface] [back_border] [right_border] [front_border] [left_border] }
+		// ...
+		// result.get(5)  --> { [surface] [back_border] [right_border] [front_border] [left_border] }
 
-		// TODO: Make sure you're using the correct cube orientations that match the opencv app.
 
+//		String output = "";
 
-		// TODO: Add surfaces colors to each layer
+		// Adds surfaces colors to each layer
 		AdvancedArrayList<Integer[]> currentLayer = new AdvancedArrayList<>();
 		Integer[] surfaceColors = new Integer[9];
 
-		int colorIndex = 0;
+		int colorIndex = 1;
 		for(int i = 1; i <= cubeAsString.length(); i++){
 
 			char colorLetter = cubeAsString.charAt(i - 1);
 			Integer colorInteger = colorLetterToIntegerColor( colorLetter );
-			surfaceColors[colorIndex] = colorInteger;
 
-			if(i % 9 == 0){
+
+//			String colorString = CubeLayer.colorIntToString(colorInteger);
+//			output += colorString + " ";
+
+			surfaceColors[colorIndex - 1] = colorInteger;
+
+			colorIndex++;
+
+			if( i % 9 == 0){
 				currentLayer.add( surfaceColors );
 				result.add(currentLayer);
 				surfaceColors = new Integer[9];
 
-				colorIndex = 0;
+				colorIndex = 1;
+
+
+//				output += "\n\n";
 			}
 
-			colorIndex++;
 		}
 
 
 		// TODO: Add the 4 borders for each layer
 
-		Toast.makeText(getActivity(), "Cube Colors: " + result, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(getActivity(), "Cube Colors: " + result, Toast.LENGTH_SHORT).show();
 
+//		displayAlert("whole cube", output);
 		return result;
 	}
 
