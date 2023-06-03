@@ -31,6 +31,8 @@ public class RubiksCubeStructure implements RubiksCube {
 	private View rootView;
 
 
+
+	// TODO: Test me!
 	public RubiksCubeStructure(View rootView, List< AdvancedArrayList<Integer[]> > colorsList ){
 		this.rootView = rootView;
 
