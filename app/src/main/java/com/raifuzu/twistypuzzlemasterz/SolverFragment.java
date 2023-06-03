@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 
 public class SolverFragment extends Fragment {
@@ -245,9 +246,21 @@ public class SolverFragment extends Fragment {
 	}
 
 
-	// TODO: Finish me!
+	// TODO: test me!
 	private Integer colorLetterToIntegerColor(char colorLetter){
-		return null;
+
+		Integer value = Color.BLUE;
+		// R      W      B      O      Y      G
+		// RED   WHITE  BLUE   ORANGE YELLOW GREEN
+
+		Set<String> keys =  RubiksCube.colorsMap.keySet();
+		for(String fullNameOfColor : keys){
+			if(fullNameOfColor.charAt(0) == colorLetter){
+				value = RubiksCube.colorsMap.get(fullNameOfColor);
+			}
+		}
+
+		return value;
 	}
 
 	private List<AdvancedArrayList<Integer[]>> convertCubeStringToColorsLists(String cubeAsString){
@@ -255,9 +268,7 @@ public class SolverFragment extends Fragment {
 		List<AdvancedArrayList<Integer[]>> result = new ArrayList<>();
 		// result.get(0)  --> { [ORYBYBRYR] [back_border] [right_border] [front_border] [left_border] }
 
-		// TODO: Initialize 'allColorsList' using the string
-		// TODO: Make sure you're using the correct cube orientations that match
-		// 		the opencv app.
+		// TODO: Make sure you're using the correct cube orientations that match the opencv app.
 
 
 		// TODO: Add surfaces colors to each layer
