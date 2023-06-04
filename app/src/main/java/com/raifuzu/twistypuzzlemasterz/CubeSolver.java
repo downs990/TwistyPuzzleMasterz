@@ -210,7 +210,7 @@ public class CubeSolver {
         // Get all cross pieces on down layer
         crossStep1(   stickersToSolve  );
         // Rotate bottom layer until at least 2 pieces are in correct locations
-        crossStep2();
+//        crossStep2(); // TODO: Uncomment
         //Set the cubies that are in correct locations to their correct orientations
         crossStep3();
 

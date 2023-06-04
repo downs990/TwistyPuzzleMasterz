@@ -30,7 +30,7 @@ public class CubeLayer {
     public CubeLayer(View rootView, AdvancedArrayList<Integer[]> surfaceAndBorder, SurfaceName surfaceName) {
         this.rootView = rootView;
         this.surfaceName = surfaceName;
-        setAllLayerButtons(surfaceAndBorder);
+        setAllLayerColors(surfaceAndBorder);
         this.surfaceAndBorder = surfaceAndBorder;
         initializeCubies();
     }
@@ -73,7 +73,7 @@ public class CubeLayer {
         return this.surfaceAndBorder;
     }
 
-    public void setAllLayerButtons(AdvancedArrayList<Integer[]> allLayerButtons) {
+    public void setAllLayerColors(AdvancedArrayList<Integer[]> allLayerButtons) {
         this.surfaceColors = allLayerButtons.get(0);
         this.surfaceBackColors = allLayerButtons.get(1);
         this.surfaceRightColors = allLayerButtons.get(2);

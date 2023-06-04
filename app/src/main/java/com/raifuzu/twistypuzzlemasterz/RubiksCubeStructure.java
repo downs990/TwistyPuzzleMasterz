@@ -48,9 +48,9 @@ public class RubiksCubeStructure implements RubiksCube {
 		};
 
 		for(int i = 0; i < colorsList.size(); i++){
-			AdvancedArrayList<Integer[]> layerColors = colorsList.get(i);
+			AdvancedArrayList<Integer[]> surfaceAndBorderColors = colorsList.get(i);
 			SurfaceName nameOfSurface = surfaceNames[i];
-			CubeLayer currentLayer = new CubeLayer(rootView, layerColors, nameOfSurface);
+			CubeLayer currentLayer = new CubeLayer(rootView, surfaceAndBorderColors, nameOfSurface);
 			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
 
@@ -258,7 +258,6 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 0), getStickerColor(layer, 3), getStickerColor(layer, 6));
 
 		// Edges and Corners
-		// TODO: Test me!
 		AdvancedArrayList<Integer> newSurfaceBack  = new AdvancedArrayList<>(layer.getSurfaceRightColors() );
 		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>(layer.getSurfaceFrontColors()   );
 		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>(layer.getSurfaceLeftColors()    );

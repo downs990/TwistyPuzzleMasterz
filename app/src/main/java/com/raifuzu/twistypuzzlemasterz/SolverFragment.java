@@ -164,7 +164,7 @@ public class SolverFragment extends Fragment {
 		selectColor(color6);
 
 		setSelectableColors(color1, color2, color3, color4, color5, color6);
-		setCubieFunctionality(allCubieButtons); // TODO: remove use of buttons ?
+		setCubieFunctionality(allCubieButtons);
 
 
 		final TextView debuggingText = (TextView)rootView.findViewById(R.id.debugging_textview);
@@ -290,7 +290,7 @@ public class SolverFragment extends Fragment {
 		// Orientation mapping to get the OpenCV app's cube string to correctly map to my RubiksCubeStructure
 		Integer[][][] colorMapping = {
 				// UP
-				{ {9,8,7,6,5,4,3,2,1},           {12,20,19},{39,38,37},{48,47,46},{12,11,10} },
+				{ {9,8,7,6,5,4,3,2,1},           {21,20,19},{39,38,37},{48,47,46},{12,11,10} },
 				// LEFT
 				{ {10,11,12,13,14,15,16,17,18} , {9,6,3   },{46,49,52},{36,33,30},{27,24,21} },
 				// FRONT
