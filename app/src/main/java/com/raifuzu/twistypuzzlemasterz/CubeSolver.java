@@ -51,6 +51,11 @@ public class CubeSolver {
 
             // Length of cubieAtList and intersectingLayers will always be 2
             List<Integer> cubieAsList = Arrays.asList(cubie);
+
+//            ArrayList<String> cS = new ArrayList<>();
+//            for(Integer c : cubieAsList){
+//                cS.add( CubeLayer.colorIntToString(c) );
+//            }
             ArrayList<SurfaceName> intersectingLayers = this.rubiksCube.findLocationOfCubie(cubieAsList);
 
             int indexOfU = intersectingLayers.indexOf(SurfaceName.U);

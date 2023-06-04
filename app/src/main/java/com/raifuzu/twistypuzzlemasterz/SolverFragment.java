@@ -24,7 +24,9 @@ import java.util.Set;
 
 
 public class SolverFragment extends Fragment {
-	
+
+
+	// TODO: Remove these colors and just use the colors in RubiksCube  ...
 	private Integer RED = Color.RED;
 	private Integer YELLOW = Color.YELLOW;
 	private Integer BLUE = Color.BLUE;
@@ -196,6 +198,8 @@ public class SolverFragment extends Fragment {
 
 				String entireSolution = rubiksCube.getSolutionAlgorithm();
 
+				displayAlert("Solution Algorithm:", rubiksCube.toString());
+
 				// Show solve algorithm
 				String currentDisplayingText = debuggingText.getText().toString();
 				String newMessage = currentDisplayingText + "\nSolution: " + entireSolution;
@@ -228,6 +232,11 @@ public class SolverFragment extends Fragment {
 
 				rubiksCube.resetCube();
 				debuggingText.setText("Cube is reset!");
+
+				setButtonsToCurrentCube(UFaceAndBorder, LFaceAndBorder, FFaceAndBorder,
+						RFaceAndBorder, BFaceAndBorder, DFaceAndBorder);
+
+
 			}
 		});
 
@@ -243,6 +252,9 @@ public class SolverFragment extends Fragment {
 				String scrambleAlg = rubiksCube.generateScrambleAlgorithm(18);
 				rubiksCube.executeAlgorithm(scrambleAlg , RubiksCube.RecordAlgorithm.NO );
  				debuggingText.setText("Scramble: " + scrambleAlg);
+
+				setButtonsToCurrentCube(UFaceAndBorder, LFaceAndBorder, FFaceAndBorder,
+						RFaceAndBorder, BFaceAndBorder, DFaceAndBorder);
 			}
 		});
 
@@ -253,7 +265,7 @@ public class SolverFragment extends Fragment {
 	@SafeVarargs
 	private final void setButtonsToCurrentCube(AdvancedArrayList<Button[]>... layerList){
 		List<AdvancedArrayList<Integer[]>> surfaceAndBorderColors = new ArrayList<>();
-		Collection<CubeLayer> allCubeLayers = rubiksCube.getLayersList();
+		ArrayList<CubeLayer> allCubeLayers = rubiksCube.getLayersList();
 		for (CubeLayer layer : allCubeLayers){
 			surfaceAndBorderColors.add( layer.getSurfaceAndBorderColors() ) ;
 		}
@@ -264,7 +276,6 @@ public class SolverFragment extends Fragment {
 
 
 
-	// TODO: test me!
 	private Integer colorLetterToIntegerColor(char colorLetter){
 
 		Integer value = Color.BLUE;
@@ -332,16 +343,6 @@ public class SolverFragment extends Fragment {
 			result.add(surface);
 		}
 
-
-
-//			String output = "";
-//			String colorString = CubeLayer.colorIntToString(colorInteger);
-//			output += colorString + " ";
-
-
-//		Toast.makeText(getActivity(), "Cube Colors: " + result, Toast.LENGTH_SHORT).show();
-
-//		displayAlert("whole cube", output);
 		return result;
 	}
 
@@ -358,7 +359,6 @@ public class SolverFragment extends Fragment {
 		// Top: Y ; Front: R ; BYYRRWOOG                      R | Y | R
 		// Top: Y ; Front: B ; BYWGBBROG
 
-		// TODO: Test me!
 		allColorsList = convertCubeStringToColorsLists(
 				"ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG");
 
@@ -430,6 +430,7 @@ public class SolverFragment extends Fragment {
 	public void setSelectableColors(Button color1, Button color2, Button color3, Button color4, Button color5,
 			Button color6) {
 
+		// TODO: Use the colors from RubiksCube.java instead. Remove these colors from this file.
 		color1.setBackgroundColor(RED);
 		color1.setTextColor(RED);
 		color2.setBackgroundColor(YELLOW);
@@ -458,6 +459,8 @@ public class SolverFragment extends Fragment {
 
 	public void selectColor(final Button button) {
 
+
+		// TODO: Update this to use RubiksCube.colorsMap instead of more hardcoded strings.
 		button.setOnClickListener(new View.OnClickListener() {
 
 			@Override

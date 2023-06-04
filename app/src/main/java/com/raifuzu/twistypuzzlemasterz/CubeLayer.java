@@ -36,11 +36,11 @@ public class CubeLayer {
     }
 
 
-    public void setAllCubieColors() {
-        for (Cubie currentCubie : this.myCubies) {
-            currentCubie.setCubieStickerColors();
-        }
-    }
+//    public void setAllCubieColors() {
+//        for (Cubie currentCubie : this.myCubies) {
+//            currentCubie.setCubieStickerColors();
+//        }
+//    }
 
 
     private void initializeCubies() {
@@ -79,6 +79,10 @@ public class CubeLayer {
         this.surfaceRightColors = allLayerButtons.get(2);
         this.surfaceFrontColors = allLayerButtons.get(3);
         this.surfaceLeftColors = allLayerButtons.get(4);
+    }
+
+    public Cubie getCenterCubie(){
+         return null; // TODO: Implement me !
     }
 
     public Integer[] getSurfaceColors() {
@@ -150,6 +154,7 @@ public class CubeLayer {
             index++;
         }
 
+        initializeCubies();
     }
 
     // TODO: Test me!
@@ -157,16 +162,14 @@ public class CubeLayer {
     public void initializeScrambledColors(AdvancedArrayList<Integer>... colorLists) {
 
         int surfaceBorderIndex = 0;
-        int stickerIndex = 0;
         for (Integer[] stickersList : this.surfaceAndBorder) {
             for (int i = 0; i < stickersList.length; i++) {
-                stickersList[i] = colorLists[surfaceBorderIndex].get(stickerIndex);
-                stickerIndex++;
+                stickersList[i] = colorLists[surfaceBorderIndex].get(i);
             }
-            stickerIndex = 0;
             surfaceBorderIndex++;
         }
 
+        initializeCubies();
     }
 
     public String getCenterColor() {
@@ -262,21 +265,21 @@ public class CubeLayer {
         private Map<String, String> cubieOrientation;
 
 
-        private final ArrayList<Integer> stickers;
-        private final ArrayList<Integer> stickerColorsList;
+//        private final ArrayList<Integer> stickers;
+        private ArrayList<Integer> stickerColorsList;
 
         private RubiksCube.CubieType type;
         public Cubie(String location, Integer... stickers) {
 
 
             this.cubieOrientation = new HashMap<>();
-            this.stickers = new ArrayList<>();
-            this.stickerColorsList = new ArrayList<>();
+//            this.stickers = new ArrayList<>();
+            this.stickerColorsList = new ArrayList<>(Arrays.asList( stickers) );
 
 
 
             this.location = location;
-            this.stickers.addAll(Arrays.asList(stickers));
+//            this.stickers.addAll(Arrays.asList(stickers));
 
             if(stickers.length == 1){
                 this.type = RubiksCube.CubieType.CENTER;
@@ -314,11 +317,10 @@ public class CubeLayer {
             return isCorrectOrientation;
         }
 
-        public void setCubieStickerColors() {
-            this.stickerColorsList.clear();
-            this.stickerColorsList.addAll(this.stickers);
-
-        }
+//        public void setCubieStickerColors() {
+//            this.stickerColorsList.clear();
+//            this.stickerColorsList.addAll(this.stickers);
+//        }
 
         public String getLocation(){
             return this.location;
@@ -327,6 +329,10 @@ public class CubeLayer {
 
         public ArrayList<Integer> getStickerColors() {
             return this.stickerColorsList;
+        }
+
+        public void setStickersColors(ArrayList<Integer> newStickerColors){
+            this.stickerColorsList  = newStickerColors;
         }
 
         public ArrayList<String> getStickerColorsStrings(){
@@ -343,9 +349,9 @@ public class CubeLayer {
             return result;
         }
 
-        public ArrayList<Integer> getStickers() {
-            return this.stickers;
-        }
+//        public ArrayList<Integer> getStickers() {
+//            return this.stickers;
+//        }
 
 
         public RubiksCube.CubieType getCubieType(){
@@ -356,10 +362,10 @@ public class CubeLayer {
         @Override
         public String toString() {
             StringBuilder output = new StringBuilder( " : ");
-            for (int i = 0; i < this.stickers.size(); i++) {
+            for (int i = 0; i < this.stickerColorsList.size(); i++) {
                 // Converts the sticker list into a string with sticker color
                 // names
-                Integer currentColor = this.stickers.get(i);//.getCurrentTextColor();
+                Integer currentColor = this.stickerColorsList.get(i);//.getCurrentTextColor();
                 String stickerColorName = colorIntToString(currentColor);
                 output.append(" ").append(stickerColorName);
             }

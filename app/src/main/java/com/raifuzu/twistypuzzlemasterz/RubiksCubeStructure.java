@@ -32,7 +32,6 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
-	// TODO: Test me!
 	public RubiksCubeStructure(View rootView, List< AdvancedArrayList<Integer[]> > colorsList ){
 		this.rootView = rootView;
 
@@ -54,7 +53,9 @@ public class RubiksCubeStructure implements RubiksCube {
 			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
 
-		finalizeColors();
+
+
+//		finalizeColors();
 
 //		resetCube();
 	}
@@ -220,9 +221,14 @@ public class RubiksCubeStructure implements RubiksCube {
 				rotateCounterClockwise(layerToRotate);
 			}
 
+
+
+			// TODO: NOTE. This is now handled automatically after each rotation because
+			//  	CubeLayer.initializeCubies() is now called inside of CubeLayer.initializeScrambledColors()
+			//      which is called after each rotation.
 			// Updates to the correct colors in the stickersColorsList for each Cubie after
 			// each cube rotation.
-			finalizeColors();
+//			finalizeColors();
 
 			// Update all cubie orientations
 			finalizeOrientation();
@@ -346,18 +352,39 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
-	// TODO: Look into if this method is still needed!
     /**
      * The purpose of this method is to initialize all of the colors for
      * each cubie in each layer.
      */
-	public void finalizeColors(){
-		for (CubeLayer layer: this.rubiksCube.values()) {
-			layer.setAllCubieColors();
+//	public void finalizeColors(){
+//		for (CubeLayer layer: this.rubiksCube.values()) {
+//			AdvancedArrayList<CubeLayer.Cubie> currentLayersCubies = layer.getAllCubies();
+//			for(CubeLayer.Cubie currentCubie : currentLayersCubies){
+//				String[] location = currentCubie.getLocation().split(" ");
+//
+//				ArrayList<Integer> centerColorsOfIntersections = getCenterColorsOfLocation(location);
+//				currentCubie.setStickersColors( centerColorsOfIntersections );
+//			}
+//		}
+//	}
+
+
+
+	private ArrayList<Integer> getCenterColorsOfLocation(String[] location){
+
+		ArrayList<Integer> centerColors = new ArrayList<>();
+
+		for(String letter : location){
+			CubeLayer.Cubie centerCubieOfLayer = this.rubiksCube
+					.get(letter)
+					.getAllCubies()
+					.get(4);
+			Integer colorOfCenterCubie = centerCubieOfLayer.getStickerColors().get(0);
+			centerColors.add(colorOfCenterCubie);
 		}
+
+		return centerColors;
 	}
-
-
 
 	public void finalizeOrientation(){
 
@@ -399,8 +426,21 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
-	public Collection<CubeLayer> getLayersList(){
-		return this.rubiksCube.values();
+	public ArrayList<CubeLayer> getLayersList(){
+
+		// Forces this function to return the layers in the same order that the
+		// cube is initialized with.
+		String[] layerNames = {
+				SurfaceName.U.name(), SurfaceName.L.name(), SurfaceName.F.name(),
+				SurfaceName.R.name(), SurfaceName.B.name(), SurfaceName.D.name()
+		};
+
+		ArrayList<CubeLayer> allLayers = new ArrayList<>();
+		for(String layer : layerNames){
+			allLayers.add (this.rubiksCube.get( layer ) );
+		}
+
+		return allLayers;
 	}
 
 
@@ -430,20 +470,17 @@ public class RubiksCubeStructure implements RubiksCube {
 		CubeLayer.Cubie cubieAtLocation = this.getCubieAtLocation(location);
 		ArrayList<String> colorsOfCubie = cubieAtLocation.getStickerColorsStrings();
 
-		ArrayList<String> centerColorsOfLayers = new ArrayList<>();
-		for(String letter : location){
-			CubeLayer.Cubie centerCubieOfLayer = this.rubiksCube
-					.get(letter)
-					.getAllCubies()
-					.get(4);
-			String colorOfCenterCubie = centerCubieOfLayer.getStickerColorsStrings().get(0);
-			centerColorsOfLayers.add(colorOfCenterCubie);
+		ArrayList<String> centerColorsAsStrings = new ArrayList<>();
+		ArrayList<Integer> centerColorsOfLayers = getCenterColorsOfLocation(location);
+		for(Integer color : centerColorsOfLayers){
+			String colorAsString = CubeLayer.colorIntToString(color);
+			centerColorsAsStrings.add(colorAsString);
 		}
 
 		Collections.sort(colorsOfCubie);
-		Collections.sort(centerColorsOfLayers);
+		Collections.sort(centerColorsAsStrings);
 
-		return colorsOfCubie.equals(centerColorsOfLayers);
+		return colorsOfCubie.equals(centerColorsAsStrings);
 
 	}
 
