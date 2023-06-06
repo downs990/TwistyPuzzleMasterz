@@ -32,7 +32,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
-	public RubiksCubeStructure(View rootView, List< AdvancedArrayList<Integer[]> > colorsList ){
+	public RubiksCubeStructure(View rootView, AdvancedArrayList<Integer[]> surfacesColorsLists ){
 		this.rootView = rootView;
 
 		this.rubiksCube = new HashMap<>();
@@ -46,19 +46,94 @@ public class RubiksCubeStructure implements RubiksCube {
 				SurfaceName.R, SurfaceName.B, SurfaceName.D
 		};
 
-		for(int i = 0; i < colorsList.size(); i++){
-			AdvancedArrayList<Integer[]> surfaceAndBorderColors = colorsList.get(i);
+
+
+
+
+		for(int i = 0; i < surfacesColorsLists.size(); i++){
+			Integer[] surfaceColors = surfacesColorsLists.get(i);
 			SurfaceName nameOfSurface = surfaceNames[i];
+
+			AdvancedArrayList<Integer[]> surfaceAndBorderColors = new AdvancedArrayList<>();
+			AdvancedArrayList<Integer[]> border = initBorder(nameOfSurface, surfacesColorsLists);
+
+			assert border != null;
+			surfaceAndBorderColors.addMultiple(
+					surfaceColors, border.get(0), border.get(1), border.get(2), border.get(3));
+
 			CubeLayer currentLayer = new CubeLayer(rootView, surfaceAndBorderColors, nameOfSurface);
 			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
 
-
-
 //		finalizeColors();
-
 //		resetCube();
 	}
+
+
+
+	// TODO: Just pass around indexes of locations in the masterColorsList/colorMapping in
+	//  		SolvingFragment.java
+	private AdvancedArrayList<Integer[]> initBorder(SurfaceName layerName,
+													AdvancedArrayList<Integer[]> surfacesColorsLists){
+
+		Integer[] u = surfacesColorsLists.get(0);
+		Integer[] l = surfacesColorsLists.get(1);
+		Integer[] f = surfacesColorsLists.get(2);
+		Integer[] r = surfacesColorsLists.get(3);
+		Integer[] b = surfacesColorsLists.get(4);
+		Integer[] d = surfacesColorsLists.get(5);
+
+		// TODO: Test syntax!
+		AdvancedArrayList<Integer[]> upSurfaceBorder = new AdvancedArrayList<Integer[]>(
+				new Integer[]{  b[2] ,  b[1] , b[0]},
+				new Integer[]{  r[2] ,  r[1] , r[0]},
+				new Integer[]{  f[2] ,  f[1] , f[0]},
+				new Integer[]{  l[2] ,  l[1] , l[0]}
+		);
+		AdvancedArrayList<Integer[]> leftSurfaceBorder = new AdvancedArrayList<Integer[]>(
+				new Integer[]{  b[2] ,  b[1] ,  b[0]},
+				new Integer[]{  r[2] ,  r[1] ,  r[0]},
+				new Integer[]{  f[2] ,  f[1] ,  f[0]},
+				new Integer[]{  l[2] ,  l[1] ,  l[0]}
+		);
+		AdvancedArrayList<Integer[]> frontSurfaceBorder = new AdvancedArrayList<Integer[]>(
+
+		);
+		AdvancedArrayList<Integer[]> rightSurfaceBorder = new AdvancedArrayList<Integer[]>(
+
+		);
+		AdvancedArrayList<Integer[]> backSurfaceBorder = new AdvancedArrayList<Integer[]>(
+
+		);
+		AdvancedArrayList<Integer[]> downSurfaceBorder = new AdvancedArrayList<Integer[]>(
+
+		);
+
+
+ 		switch (layerName){
+			case U:
+				return upSurfaceBorder;
+			case L:
+				return leftSurfaceBorder;
+			case F:
+				return frontSurfaceBorder;
+			case R:
+				return rightSurfaceBorder;
+			case B:
+				return backSurfaceBorder;
+			case D:
+				return downSurfaceBorder;
+
+			default:
+				return new AdvancedArrayList<>();//empty list
+
+		 }
+
+	}
+
+
+
+
 
 	/**
 	 * The purpose of this method is to find the exact location of a cubie
