@@ -1,5 +1,6 @@
 package com.raifuzu.twistypuzzlemasterz;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Toast;
 
@@ -10,13 +11,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class RubiksCubeStructure implements RubiksCube {
 
 
 	private Map<String, CubeLayer> rubiksCube;
-	private Map<String, String[]> cubieLocationsMap;
 
 	private String validCubieDisplay = "";
 
@@ -27,19 +28,29 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 	private String solutionAlgorithm;
+	private String cubeAsString;
 
 	private View rootView;
 
 
 
-	public RubiksCubeStructure(View rootView, AdvancedArrayList<Integer[]> surfacesColorsLists ){
-		this.rootView = rootView;
-
-		this.rubiksCube = new HashMap<>();
-		this.solutionAlgorithm = "";
+	public RubiksCubeStructure(View rootView, String cubeAsString){
 
 		// Initialize rootView for setting up buttons
 		this.rootView = rootView;
+		this.rubiksCube = new HashMap<>();
+		this.cubeAsString = cubeAsString;
+		this.solutionAlgorithm = "";
+
+
+		initLayers();
+
+	}
+
+
+	private void initLayers(){
+		AdvancedArrayList<Integer[]> surfacesColorsLists = convertCubeStringToColorsLists();
+
 
 		SurfaceName[] surfaceNames = {
 				SurfaceName.U, SurfaceName.L, SurfaceName.F,
@@ -47,9 +58,7 @@ public class RubiksCubeStructure implements RubiksCube {
 		};
 
 
-
-
-
+		// TODO: Update all variables from buttons, colors, to indexes.
 		for(int i = 0; i < surfacesColorsLists.size(); i++){
 			Integer[] surfaceColors = surfacesColorsLists.get(i);
 			SurfaceName nameOfSurface = surfaceNames[i];
@@ -61,54 +70,96 @@ public class RubiksCubeStructure implements RubiksCube {
 			surfaceAndBorderColors.addMultiple(
 					surfaceColors, border.get(0), border.get(1), border.get(2), border.get(3));
 
-			CubeLayer currentLayer = new CubeLayer(rootView, surfaceAndBorderColors, nameOfSurface);
+			CubeLayer currentLayer = new CubeLayer(
+					this.rootView, this.cubeAsString, surfaceAndBorderColors, nameOfSurface);
+
 			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
-
-//		finalizeColors();
-//		resetCube();
 	}
 
 
+	public static AdvancedArrayList<Integer[]> convertCubeStringToColorsLists(){
 
-	// TODO: Just pass around indexes of locations in the masterColorsList/colorMapping in
-	//  		SolvingFragment.java
+		// Orientation mapping to get the OpenCV app's cube string to correctly map to
+		// my RubiksCubeStructure. These are indexes of the cubeAsString variable.
+		Integer[][] colorMapping = {
+				// UP
+				{9,8,7,6,5,4,3,2,1} ,
+				// LEFT
+				{10,11,12,13,14,15,16,17,18},
+				// FRONT
+				{46,47,48,49,50,51,52,53,54},
+				// RIGHT
+				{37,38,39,40,41,42,43,44,45},
+				// BACK
+				{19,20,21,22,23,24,25,26,27},
+				// DOWN
+				{36,35,34,33,32,31,30,29,28},
+		};
+
+		AdvancedArrayList<Integer[]> surface = new AdvancedArrayList<>();
+
+		for (Integer[] currentLayer : colorMapping){
+			// Color lists
+			Integer[] surfaceColors = new Integer[9];
+			for (int i = 0; i < currentLayer.length; i++){
+				surfaceColors[i] = currentLayer[i];
+			}
+
+			surface.addMultiple(surfaceColors);
+		}
+
+		return surface;
+	}
+
+
+	// Just pass around indexes of locations in the masterColorsList/colorMapping in SolvingFragment.java
 	private AdvancedArrayList<Integer[]> initBorder(SurfaceName layerName,
 													AdvancedArrayList<Integer[]> surfacesColorsLists){
 
-		Integer[] u = surfacesColorsLists.get(0);
-		Integer[] l = surfacesColorsLists.get(1);
-		Integer[] f = surfacesColorsLists.get(2);
-		Integer[] r = surfacesColorsLists.get(3);
-		Integer[] b = surfacesColorsLists.get(4);
-		Integer[] d = surfacesColorsLists.get(5);
+		final Integer[] u = surfacesColorsLists.get(0);
+		final Integer[] l = surfacesColorsLists.get(1);
+		final Integer[] f = surfacesColorsLists.get(2);
+		final Integer[] r = surfacesColorsLists.get(3);
+		final Integer[] b = surfacesColorsLists.get(4);
+		final Integer[] d = surfacesColorsLists.get(5);
 
-		// TODO: Test syntax!
-		AdvancedArrayList<Integer[]> upSurfaceBorder = new AdvancedArrayList<Integer[]>(
-				new Integer[]{  b[2] ,  b[1] , b[0]},
-				new Integer[]{  r[2] ,  r[1] , r[0]},
-				new Integer[]{  f[2] ,  f[1] , f[0]},
-				new Integer[]{  l[2] ,  l[1] , l[0]}
-		);
-		AdvancedArrayList<Integer[]> leftSurfaceBorder = new AdvancedArrayList<Integer[]>(
-				new Integer[]{  b[2] ,  b[1] ,  b[0]},
-				new Integer[]{  r[2] ,  r[1] ,  r[0]},
-				new Integer[]{  f[2] ,  f[1] ,  f[0]},
-				new Integer[]{  l[2] ,  l[1] ,  l[0]}
-		);
-		AdvancedArrayList<Integer[]> frontSurfaceBorder = new AdvancedArrayList<Integer[]>(
-
-		);
-		AdvancedArrayList<Integer[]> rightSurfaceBorder = new AdvancedArrayList<Integer[]>(
-
-		);
-		AdvancedArrayList<Integer[]> backSurfaceBorder = new AdvancedArrayList<Integer[]>(
-
-		);
-		AdvancedArrayList<Integer[]> downSurfaceBorder = new AdvancedArrayList<Integer[]>(
-
-		);
-
+		AdvancedArrayList<Integer[]> upSurfaceBorder = new AdvancedArrayList<Integer[]>(){{
+			add( new Integer[]{  b[2] ,  b[1] , b[0]} );
+			add( new Integer[]{  r[2] ,  r[1] , r[0]} );
+			add( new Integer[]{  f[2] ,  f[1] , f[0]} );
+			add( new Integer[]{  l[2] ,  l[1] , l[0]} );
+		}};
+		AdvancedArrayList<Integer[]> leftSurfaceBorder = new AdvancedArrayList<Integer[]>(){{
+			add( new Integer[]{  u[0] ,  u[3] ,  u[6]} );
+			add( new Integer[]{  f[0] ,  f[3] ,  f[6]} );
+			add( new Integer[]{  d[0] ,  d[3] ,  d[6]} );
+			add( new Integer[]{  b[8] ,  b[5] ,  b[2]} );
+		}};
+		AdvancedArrayList<Integer[]> frontSurfaceBorder = new AdvancedArrayList<Integer[]>(){{
+			add( new Integer[]{  u[6] ,  u[7] ,  u[8]} );
+			add( new Integer[]{  r[0] ,  r[3] ,  r[6]} );
+			add( new Integer[]{  d[2] ,  d[1] ,  d[0]} );
+			add( new Integer[]{  l[8] ,  l[5] ,  l[2]} );
+		}};
+		AdvancedArrayList<Integer[]> rightSurfaceBorder = new AdvancedArrayList<Integer[]>(){{
+			add( new Integer[]{  u[8] ,  u[5] ,  u[2]} );
+			add( new Integer[]{  b[0] ,  b[3] ,  b[6]} );
+			add( new Integer[]{  d[8] ,  d[5] ,  d[2]} );
+			add( new Integer[]{  f[8] ,  f[5] ,  f[2]} );
+		}};
+		AdvancedArrayList<Integer[]> backSurfaceBorder = new AdvancedArrayList<Integer[]>(){{
+			add( new Integer[]{  u[2] ,  u[1] ,  u[0]} );
+			add( new Integer[]{  l[0] ,  l[3] ,  l[6]} );
+			add( new Integer[]{  d[6] ,  d[7] ,  d[8]} );
+			add( new Integer[]{  r[8] ,  r[5] ,  r[2]} );
+		}};
+		AdvancedArrayList<Integer[]> downSurfaceBorder = new AdvancedArrayList<Integer[]>(){{
+			add( new Integer[]{  f[6] ,  f[7] ,  f[8]} );
+			add( new Integer[]{  r[6] ,  r[7] ,  r[8]} );
+			add( new Integer[]{  b[6] ,  b[7] ,  b[8]} );
+			add( new Integer[]{  l[6] ,  l[7] ,  l[8]} );
+		}};
 
  		switch (layerName){
 			case U:
@@ -125,6 +176,7 @@ public class RubiksCubeStructure implements RubiksCube {
 				return downSurfaceBorder;
 
 			default:
+				// IMPORTANT: This should never happen. If does then will crash.
 				return new AdvancedArrayList<>();//empty list
 
 		 }
@@ -132,7 +184,21 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
+	public static Integer colorLetterToIntegerColor(char colorLetter){
 
+		Integer value = Color.BLUE;
+		// R      W      B      O      Y      G
+		// RED   WHITE  BLUE   ORANGE YELLOW GREEN
+
+		Set<String> keys =  RubiksCube.colorsMap.keySet();
+		for(String fullNameOfColor : keys){
+			if(fullNameOfColor.charAt(0) == colorLetter){
+				value = RubiksCube.colorsMap.get(fullNameOfColor);
+			}
+		}
+
+		return value;
+	}
 
 
 	/**
@@ -216,28 +282,18 @@ public class RubiksCubeStructure implements RubiksCube {
 	public void resetCube() {
 
 
-		CubeLayer up    = this.rubiksCube.get(SurfaceName.U.name());
-		CubeLayer left  = this.rubiksCube.get(SurfaceName.L.name());
-		CubeLayer front = this.rubiksCube.get(SurfaceName.F.name());
-		CubeLayer right = this.rubiksCube.get(SurfaceName.R.name());
-		CubeLayer back  = this.rubiksCube.get(SurfaceName.B.name());
-		CubeLayer down  = this.rubiksCube.get(SurfaceName.D.name());
-
-		// Valid representation.
-		//                       U ,     L  ,   F ,    R  ,    B  ,    D
-        //				     { YELLOW, ORANGE, BLUE, RED, GREEN, WHITE };
-		up.initializeSolvedColors(    YELLOW, GREEN,  RED,    BLUE,  ORANGE);
-		left.initializeSolvedColors(  ORANGE, YELLOW, BLUE,   WHITE, GREEN);
-		front.initializeSolvedColors( BLUE,   YELLOW, RED,    WHITE, ORANGE);
-		right.initializeSolvedColors( RED,    YELLOW, GREEN,  WHITE, BLUE);
-		back.initializeSolvedColors(  GREEN,  YELLOW, ORANGE, WHITE, RED);
-		down.initializeSolvedColors(  WHITE,  BLUE,   RED,    GREEN, ORANGE);
+		this.cubeAsString = "YYYYYYYYYOOOOOOOOOGGGGGGGGGWWWWWWWWWRRRRRRRRRBBBBBBBBB";
+		initLayers();
 
 
 		// TODO: Clear all other member variables to make sure that unwanted data
 		// 	doesn't persist between scrambles and clears.
 		solutionAlgorithm = "";
 
+	}
+
+	public String getCubeAsString(){
+		return this.cubeAsString;
 	}
 
 	@Override
@@ -305,12 +361,15 @@ public class RubiksCubeStructure implements RubiksCube {
 			// each cube rotation.
 //			finalizeColors();
 
+
+
+			initLayers(); // TODO: 100% keep this here.
+
 			// Update all cubie orientations
 			finalizeOrientation();
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void rotateClockwise(CubeLayer layer) {
 
 		// Different from white board picture
@@ -319,44 +378,96 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 7), getStickerColor(layer, 4), getStickerColor(layer, 1),
 				getStickerColor(layer, 8), getStickerColor(layer, 5), getStickerColor(layer, 2));
 
-		// Edges and Corners
-		AdvancedArrayList<Integer> newSurfaceBack = new AdvancedArrayList<>(  layer.getSurfaceLeftColors()  );
-		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>( layer.getSurfaceBackColors()  );
-		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>( layer.getSurfaceRightColors() );
-		AdvancedArrayList<Integer> newSurfaceLeft = new AdvancedArrayList<>(  layer.getSurfaceFrontColors() );
+		// TODO: Update this.cubeAsString values at those locations to match the changes.
+		updateCubeAsString(layer, newSurfaceList,
+				// New Locations:     back,                       right                       front                     left
+				layer.getSurfaceLeftColors(),layer.getSurfaceBackColors(), layer.getSurfaceRightColors(), layer.getSurfaceFrontColors());
 
-		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight, newSurfaceFront,
-				newSurfaceLeft);
+//		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight, newSurfaceFront,
+//				newSurfaceLeft);
 
 	}
 
-	@SuppressWarnings("unchecked")
 	private void rotateCounterClockwise(CubeLayer layer) {
-		// Different from white board picture
+
 		AdvancedArrayList<Integer> newSurfaceList = new AdvancedArrayList<>(
 				getStickerColor(layer, 2), getStickerColor(layer, 5), getStickerColor(layer, 8),
 				getStickerColor(layer, 1), getStickerColor(layer, 4), getStickerColor(layer, 7),
 				getStickerColor(layer, 0), getStickerColor(layer, 3), getStickerColor(layer, 6));
 
-		// Edges and Corners
-		AdvancedArrayList<Integer> newSurfaceBack  = new AdvancedArrayList<>(layer.getSurfaceRightColors() );
-		AdvancedArrayList<Integer> newSurfaceRight = new AdvancedArrayList<>(layer.getSurfaceFrontColors()   );
-		AdvancedArrayList<Integer> newSurfaceFront = new AdvancedArrayList<>(layer.getSurfaceLeftColors()    );
-		AdvancedArrayList<Integer> newSurfaceLeft  = new AdvancedArrayList<>(layer.getSurfaceBackColors()    );
+		// TODO: Update this.cubeAsString values at those locations to match the changes.
 
-		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight,
-				newSurfaceFront, newSurfaceLeft);
+		updateCubeAsString(layer, newSurfaceList,
+
+				// New Locations:     back,                       right                       front                     left
+				layer.getSurfaceRightColors(),layer.getSurfaceFrontColors(), layer.getSurfaceLeftColors(), layer.getSurfaceBackColors());
+
+
+//		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight,
+//				newSurfaceFront, newSurfaceLeft);
 	}
 
-//	private AdvancedArrayList<Integer> buttonsToColors(Button[] buttons) {
-//		AdvancedArrayList<Integer> colors = new AdvancedArrayList<>();
-//
-//		for (Button button : buttons) {
-//			colors.add(button.getCurrentTextColor());
-//		}
-//
-//		return colors;
-//	}
+
+
+	public final void updateCubeAsString(CubeLayer layer, AdvancedArrayList<Integer> newSurfaceList,
+										 Integer[]... newSurfaceBorder){
+
+		// TODO: Add temps for border rotations.
+		Integer[] oldSurfaceBack  =  layer.getSurfaceBackColors();
+		Integer[] oldSurfaceRight =  layer.getSurfaceRightColors();
+		Integer[] oldSurfaceFront =  layer.getSurfaceFrontColors();
+		Integer[] oldSurfaceLeft  =  layer.getSurfaceLeftColors();
+
+		Integer[] newSurfaceBack  =  newSurfaceBorder[0];
+		Integer[] newSurfaceRight =  newSurfaceBorder[1];
+		Integer[] newSurfaceFront =  newSurfaceBorder[2];
+		Integer[] newSurfaceLeft  =  newSurfaceBorder[3];
+
+		String tempCubeString = new String(cubeAsString); // deep copy. preserve original cube while changing it.
+		char[] newCharArray = tempCubeString.toCharArray();
+		char[] originalCharArray = cubeAsString.toCharArray();
+
+		for(int i = 0; i < newSurfaceBack.length; i++){
+
+			int oldIndexBack  =  oldSurfaceBack[i] - 1;
+			int oldIndexRight =  oldSurfaceRight[i] - 1;
+			int oldIndexFront =  oldSurfaceFront[i] - 1;
+			int oldIndexLeft  =  oldSurfaceLeft[i] - 1;
+
+			int newIndexBack  =  newSurfaceBack[i] - 1;
+			int newIndexRight =  newSurfaceRight[i] - 1;
+			int newIndexFront =  newSurfaceFront[i] - 1;
+			int newIndexLeft  =  newSurfaceLeft[i] - 1;
+
+			char c1 = originalCharArray[newIndexBack];
+			char c2 = originalCharArray[newIndexRight];
+			char c3 = originalCharArray[newIndexFront];
+			char c4 = originalCharArray[newIndexLeft];
+
+			newCharArray[oldIndexBack]  = c1;
+			newCharArray[oldIndexRight] = c2;
+			newCharArray[oldIndexFront] = c3;
+			newCharArray[oldIndexLeft]  = c4;
+
+		}
+
+		Integer[] currentSurfaceList = layer.getSurfaceColors();
+
+
+
+		// Char at oldIndex now equals char at newIndex
+		for(int i = 0; i < newSurfaceList.size(); i++){
+
+			int oldIndex = currentSurfaceList[i] - 1;
+			int newIndex = newSurfaceList.get(i) - 1;
+			char c = originalCharArray[newIndex];
+			newCharArray[oldIndex] = c;
+		}
+
+		// Updates cubeAsAString to match changes after rotation.
+		cubeAsString = new String(newCharArray);
+	}
+
 
 	private Integer getStickerColor(CubeLayer layer, int index) {
 		return layer.getSurfaceColors()[index];

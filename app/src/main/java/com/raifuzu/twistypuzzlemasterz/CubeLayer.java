@@ -24,23 +24,29 @@ public class CubeLayer {
     private AdvancedArrayList<Integer[]> surfaceAndBorder;
     public AdvancedArrayList<Cubie> myCubies;
 
+    private String cubeAsString;
+
     private View rootView;// Keep this. You might need to Toast.
 
 
-    public CubeLayer(View rootView, AdvancedArrayList<Integer[]> surfaceAndBorder, SurfaceName surfaceName) {
+    public CubeLayer(View rootView, String cubeAsString, AdvancedArrayList<Integer[]> surfaceAndBorder, SurfaceName surfaceName) {
+
         this.rootView = rootView;
+        this.cubeAsString = cubeAsString;
         this.surfaceName = surfaceName;
-        setAllLayerColors(surfaceAndBorder);
+
+
         this.surfaceAndBorder = surfaceAndBorder;
+        setAllLayerColors();
+
         initializeCubies();
     }
 
 
-//    public void setAllCubieColors() {
-//        for (Cubie currentCubie : this.myCubies) {
-//            currentCubie.setCubieStickerColors();
-//        }
-//    }
+    public Integer toColor(int indexOfCubeAsString) {
+        char colorLetter = cubeAsString.charAt(indexOfCubeAsString - 1);
+        return RubiksCubeStructure.colorLetterToIntegerColor(colorLetter);
+    }
 
 
     private void initializeCubies() {
@@ -51,15 +57,17 @@ public class CubeLayer {
         // TODO: The order of each of these buttons for each sticker should automatically create the
         //     location String for each cubie. Instead of having to create RubiksCube.cubieLocationMap
         //     and managing the order of each location manually.
-        Cubie cubie1 = new Cubie(locations[0], this.surfaceColors[0], this.surfaceBackColors[0], this.surfaceLeftColors[2]);
-        Cubie cubie2 = new Cubie(locations[1], this.surfaceColors[1], this.surfaceBackColors[1]);
-        Cubie cubie3 = new Cubie(locations[2], this.surfaceColors[2], this.surfaceBackColors[2], this.surfaceRightColors[0]);
-        Cubie cubie4 = new Cubie(locations[3], this.surfaceColors[3], this.surfaceLeftColors[1]);
-        Cubie cubie5 = new Cubie(locations[4], this.surfaceColors[4]);
-        Cubie cubie6 = new Cubie(locations[5], this.surfaceColors[5], this.surfaceRightColors[1]);
-        Cubie cubie7 = new Cubie(locations[6], this.surfaceColors[6], this.surfaceLeftColors[0], this.surfaceFrontColors[2]);
-        Cubie cubie8 = new Cubie(locations[7], this.surfaceColors[7], this.surfaceFrontColors[1]);
-        Cubie cubie9 = new Cubie(locations[8], this.surfaceColors[8], this.surfaceRightColors[2], this.surfaceFrontColors[0]);
+
+        // TODO: Use '.this' everywhere ?
+        Cubie cubie1 = new Cubie(locations[0], toColor(surfaceColors[0]), toColor(surfaceBackColors[0]), toColor(surfaceLeftColors[2]) );
+        Cubie cubie2 = new Cubie(locations[1], toColor(surfaceColors[1]), toColor(surfaceBackColors[1]));
+        Cubie cubie3 = new Cubie(locations[2], toColor(surfaceColors[2]), toColor(surfaceBackColors[2]), toColor(surfaceRightColors[0]));
+        Cubie cubie4 = new Cubie(locations[3], toColor(surfaceColors[3]), toColor(surfaceLeftColors[1]));
+        Cubie cubie5 = new Cubie(locations[4], toColor(surfaceColors[4]) );
+        Cubie cubie6 = new Cubie(locations[5], toColor(surfaceColors[5]), toColor(surfaceRightColors[1]));
+        Cubie cubie7 = new Cubie(locations[6], toColor(surfaceColors[6]), toColor(surfaceLeftColors[0]), toColor(surfaceFrontColors[2]));
+        Cubie cubie8 = new Cubie(locations[7], toColor(surfaceColors[7]), toColor(surfaceFrontColors[1]));
+        Cubie cubie9 = new Cubie(locations[8], toColor(surfaceColors[8]), toColor(surfaceRightColors[2]), toColor(surfaceFrontColors[0]));
 
         // Initialize myCubies
         this.myCubies = new AdvancedArrayList<>(cubie1, cubie2, cubie3, cubie4, cubie5, cubie6, cubie7, cubie8, cubie9);
@@ -73,12 +81,12 @@ public class CubeLayer {
         return this.surfaceAndBorder;
     }
 
-    public void setAllLayerColors(AdvancedArrayList<Integer[]> allLayerButtons) {
-        this.surfaceColors = allLayerButtons.get(0);
-        this.surfaceBackColors = allLayerButtons.get(1);
-        this.surfaceRightColors = allLayerButtons.get(2);
-        this.surfaceFrontColors = allLayerButtons.get(3);
-        this.surfaceLeftColors = allLayerButtons.get(4);
+    public void setAllLayerColors() {
+        this.surfaceColors      = this.surfaceAndBorder.get(0);
+        this.surfaceBackColors  = this.surfaceAndBorder.get(1);
+        this.surfaceRightColors = this.surfaceAndBorder.get(2);
+        this.surfaceFrontColors = this.surfaceAndBorder.get(3);
+        this.surfaceLeftColors  = this.surfaceAndBorder.get(4);
     }
 
     public Cubie getCenterCubie(){
@@ -130,37 +138,35 @@ public class CubeLayer {
      * structure to a solved state. It also updates the UI to display the UI
      * cube in a solved state.
      *
-     * @param surfaceColor
-     * @param surfaceBackColor
-     * @param surfaceRightColor
-     * @param surfaceFrontColor
-     * @param surfaceLeftColor
+//     * @param surfaceColor
+//     * @param surfaceBackColor
+//     * @param surfaceRightColor
+//     * @param surfaceFrontColor
+//     * @param surfaceLeftColor
      */
-    public void initializeSolvedColors(Integer surfaceColor, Integer surfaceBackColor, Integer surfaceRightColor,
-                                       Integer surfaceFrontColor, Integer surfaceLeftColor) {
+//    public void initializeSolvedColors(Integer surfaceColor, Integer surfaceBackColor, Integer surfaceRightColor,
+//                                       Integer surfaceFrontColor, Integer surfaceLeftColor) {
+//
+//
+//        // lengths =                9            3                  3                   3               3
+//        Integer[] layerColors = {surfaceColor, surfaceBackColor, surfaceRightColor, surfaceFrontColor, surfaceLeftColor};
+//
+//        // surfaceAndBorder includes the following arrays:
+//        // surface[], s back[], s right[], s front[], s left[]
+//        int index = 0;
+//        for (Integer[] stickersList : this.surfaceAndBorder) {
+//            Arrays.fill(stickersList, layerColors[index]);
+//            index++;
+//        }
+//
+//        initializeCubies();
+//    }
 
-
-        // TODO: Test me!
-
-
-        // lengths =                9            3                  3                   3               3
-        Integer[] layerColors = {surfaceColor, surfaceBackColor, surfaceRightColor, surfaceFrontColor, surfaceLeftColor};
-
-        // surfaceAndBorder includes the following arrays:
-        // surface[], s back[], s right[], s front[], s left[]
-        int index = 0;
-        for (Integer[] stickersList : this.surfaceAndBorder) {
-            Arrays.fill(stickersList, layerColors[index]);
-            index++;
-        }
-
-        initializeCubies();
-    }
-
-    // TODO: Test me!
+    // TODO: Test me! Does this.surfaceAndBorder actually get updated???
     @SuppressWarnings("unchecked")
     public void initializeScrambledColors(AdvancedArrayList<Integer>... colorLists) {
 
+        // Setting surfaceAndBorder with what's passed as an argument.
         int surfaceBorderIndex = 0;
         for (Integer[] stickersList : this.surfaceAndBorder) {
             for (int i = 0; i < stickersList.length; i++) {
@@ -169,13 +175,8 @@ public class CubeLayer {
             surfaceBorderIndex++;
         }
 
+        setAllLayerColors();
         initializeCubies();
-    }
-
-    public String getCenterColor() {
-        final int CENTER_INDEX = 4;
-        Integer centerColor = this.surfaceColors[CENTER_INDEX];//.getCurrentTextColor();
-        return colorIntToString(centerColor);
     }
 
     public SurfaceName getSideName() {
