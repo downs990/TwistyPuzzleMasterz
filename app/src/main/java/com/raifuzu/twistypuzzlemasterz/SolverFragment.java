@@ -29,7 +29,15 @@ public class SolverFragment extends Fragment {
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
 
+
+	// TODO: Reset doesn't clear this scrambled cubeAsString for some reason???
 	private String cubeAsString = "ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG";
+//private String cubeAsString = "YYYYYYYYYOOOOOOOOOGGGGGGGGGWWWWWWWWWRRRRRRRRRBBBBBBBBB";
+
+
+
+
+
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
@@ -79,54 +87,6 @@ public class SolverFragment extends Fragment {
 				R.id.cubie46, R.id.cubie47, R.id.cubie48, //
 				R.id.cubie49, R.id.cubie50, R.id.cubie51, //
 				R.id.cubie52, R.id.cubie53, R.id.cubie54);//
-
-
-		// TODO: Logic for assigning borders to layers will be moved to RubiksCubeStructure.java constructor.
-		// Format: cubesideBoarderName ------------------------------- CubieIds
-		// U side borders
-//		Button[] upBack = { backFace[2], backFace[1], backFace[0] }; // 39,38,37
-//		Button[] upRight = { rightFace[2], rightFace[1], rightFace[0] }; // 30,29,28
-//		Button[] upFront = { frontFace[2], frontFace[1], frontFace[0] }; // 21,20,19
-//		Button[] upLeft = { leftFace[2], leftFace[1], leftFace[0] }; // 12,11,10
-//		// L side borders
-//		Button[] leftBack = { upFace[0], upFace[3], upFace[6] }; // 1,4,7
-//		Button[] leftRight = { frontFace[0], frontFace[3], frontFace[6] }; // 19,22,25
-//		Button[] leftFront = { downFace[0], downFace[3], downFace[6] }; // 46,49,52
-//		Button[] leftLeft = { backFace[8], backFace[5], backFace[2] }; // 45,42,39
-//		// F side borders
-//		Button[] frontBack = { upFace[6], upFace[7], upFace[8] }; // 7,8,9
-//		Button[] frontRight = { rightFace[0], rightFace[3], rightFace[6] }; // 28,31,34
-//		Button[] frontFront = { downFace[2], downFace[1], downFace[0] }; // 48,47,46
-//		Button[] frontLeft = { leftFace[8], leftFace[5], leftFace[2] }; // 18,15,12
-//		// R side borders
-//		Button[] rightBack = { upFace[8], upFace[5], upFace[2] }; // 9,6,3
-//		Button[] rightRight = { backFace[0], backFace[3], backFace[6] }; // 37,40,43
-//		Button[] rightFront = { downFace[8], downFace[5], downFace[2] }; // 54,51,48
-//		Button[] rightLeft = { frontFace[8], frontFace[5], frontFace[2] }; // 27,24,21
-//		// B side borders
-//		Button[] backBack = { upFace[2], upFace[1], upFace[0] }; // 3,2,1
-//		Button[] backRight = { leftFace[0], leftFace[3], leftFace[6] }; // 10,13,16
-//		Button[] backFront = { downFace[6], downFace[7], downFace[8] }; // 52,53,54
-//		Button[] backLeft = { rightFace[8], rightFace[5], rightFace[2] }; // 36,33,30
-//		// D side borders
-//		Button[] downBack = { frontFace[6], frontFace[7], frontFace[8] }; // 25,26,27
-//		Button[] downRight = { rightFace[6], rightFace[7], rightFace[8] }; // 34,35,36
-//		Button[] downFront = { backFace[6], backFace[7], backFace[8] }; // 43,44,45
-//		Button[] downLeft = { leftFace[6], leftFace[7], leftFace[8] }; // 16,17,18
-
-		// These are all of the layers as list of buttons
-//		final AdvancedArrayList<Button[]> UFaceAndBorder = new AdvancedArrayList<Button[]>(upFace, upBack, upRight, upFront,
-//				upLeft);
-//		final AdvancedArrayList<Button[]> LFaceAndBorder = new AdvancedArrayList<Button[]>(leftFace, leftBack, leftRight,
-//				leftFront, leftLeft);
-//		final AdvancedArrayList<Button[]> FFaceAndBorder = new AdvancedArrayList<Button[]>(frontFace, frontBack, frontRight,
-//				frontFront, frontLeft);
-//		final AdvancedArrayList<Button[]> RFaceAndBorder = new AdvancedArrayList<Button[]>(rightFace, rightBack, rightRight,
-//				rightFront, rightLeft);
-//		final AdvancedArrayList<Button[]> BFaceAndBorder = new AdvancedArrayList<Button[]>(backFace, backBack, backRight,
-//				backFront, backLeft);
-//		final AdvancedArrayList<Button[]> DFaceAndBorder = new AdvancedArrayList<Button[]>(downFace, downBack, downRight,
-//				downFront, downLeft);
 
 
 
@@ -342,7 +302,6 @@ public class SolverFragment extends Fragment {
 	public void setSelectableColors(Button color1, Button color2, Button color3, Button color4, Button color5,
 			Button color6) {
 
-		// TODO: Use the colors from RubiksCube.java instead. Remove these colors from this file.
 		color1.setBackgroundColor(RubiksCube.RED);
 		color1.setTextColor(RubiksCube.RED);
 		color2.setBackgroundColor(RubiksCube.YELLOW);

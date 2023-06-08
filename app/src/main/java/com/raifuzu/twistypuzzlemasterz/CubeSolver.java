@@ -50,12 +50,7 @@ public class CubeSolver {
         for(Integer[] cubie : stickersToSolve){
 
             // Length of cubieAtList and intersectingLayers will always be 2
-            List<Integer> cubieAsList = Arrays.asList(cubie);
-
-//            ArrayList<String> cS = new ArrayList<>();
-//            for(Integer c : cubieAsList){
-//                cS.add( CubeLayer.colorIntToString(c) );
-//            }
+            List<Integer> cubieAsList = Arrays.asList(cubie); 
             ArrayList<SurfaceName> intersectingLayers = this.rubiksCube.findLocationOfCubie(cubieAsList);
 
             int indexOfU = intersectingLayers.indexOf(SurfaceName.U);
@@ -215,7 +210,7 @@ public class CubeSolver {
         // Get all cross pieces on down layer
         crossStep1(   stickersToSolve  );
         // Rotate bottom layer until at least 2 pieces are in correct locations
-//        crossStep2(); // TODO: Uncomment
+       crossStep2(); 
         //Set the cubies that are in correct locations to their correct orientations
         crossStep3();
 

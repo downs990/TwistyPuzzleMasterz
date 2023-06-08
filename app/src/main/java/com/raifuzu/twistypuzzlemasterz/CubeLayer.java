@@ -104,34 +104,22 @@ public class CubeLayer {
     public Integer[] getSurfaceBackColors() {
         return this.surfaceBackColors;
     }
-
-//    public void setSurfaceBackButtons(Integer[] surfaceBackButtons) {
-//        this.surfaceBackButtons = surfaceBackButtons;
-//    }
+ 
 
     public Integer[] getSurfaceRightColors() {
         return this.surfaceRightColors;
     }
-
-//    public void setSurfaceRightButtons(Integer[] surfaceRightButtons) {
-//        this.surfaceRightButtons = surfaceRightButtons;
-//    }
+ 
 
     public Integer[] getSurfaceFrontColors() {
         return this.surfaceFrontColors;
     }
-
-//    public void setSurfaceFrontButtons(Integer[] surfaceFrontButtons) {
-//        this.surfaceFrontButtons = surfaceFrontButtons;
-//    }
+ 
 
     public Integer[] getSurfaceLeftColors() {
         return this.surfaceLeftColors;
     }
-
-//    public void setSurfaceLeftButtons(Integer[] surfaceLeftButtons) {
-//        this.surfaceLeftButtons = surfaceLeftButtons;
-//    }
+ 
 
     /**
      * This method updates all of the colors of each layer in the cubes data
@@ -265,22 +253,19 @@ public class CubeLayer {
 
         private Map<String, String> cubieOrientation;
 
-
-//        private final ArrayList<Integer> stickers;
+ 
         private ArrayList<Integer> stickerColorsList;
 
         private RubiksCube.CubieType type;
         public Cubie(String location, Integer... stickers) {
 
 
-            this.cubieOrientation = new HashMap<>();
-//            this.stickers = new ArrayList<>();
+            this.cubieOrientation = new HashMap<>(); 
             this.stickerColorsList = new ArrayList<>(Arrays.asList( stickers) );
 
 
 
-            this.location = location;
-//            this.stickers.addAll(Arrays.asList(stickers));
+            this.location = location; 
 
             if(stickers.length == 1){
                 this.type = RubiksCube.CubieType.CENTER;
@@ -317,11 +302,7 @@ public class CubeLayer {
 
             return isCorrectOrientation;
         }
-
-//        public void setCubieStickerColors() {
-//            this.stickerColorsList.clear();
-//            this.stickerColorsList.addAll(this.stickers);
-//        }
+ 
 
         public String getLocation(){
             return this.location;
@@ -348,12 +329,7 @@ public class CubeLayer {
 
 
             return result;
-        }
-
-//        public ArrayList<Integer> getStickers() {
-//            return this.stickers;
-//        }
-
+        } 
 
         public RubiksCube.CubieType getCubieType(){
             return type;
@@ -366,7 +342,7 @@ public class CubeLayer {
             for (int i = 0; i < this.stickerColorsList.size(); i++) {
                 // Converts the sticker list into a string with sticker color
                 // names
-                Integer currentColor = this.stickerColorsList.get(i);//.getCurrentTextColor();
+                Integer currentColor = this.stickerColorsList.get(i); 
                 String stickerColorName = colorIntToString(currentColor);
                 output.append(" ").append(stickerColorName);
             }

@@ -353,17 +353,7 @@ public class RubiksCubeStructure implements RubiksCube {
 			}
 
 
-
-			// TODO: NOTE. This is now handled automatically after each rotation because
-			//  	CubeLayer.initializeCubies() is now called inside of CubeLayer.initializeScrambledColors()
-			//      which is called after each rotation.
-			// Updates to the correct colors in the stickersColorsList for each Cubie after
-			// each cube rotation.
-//			finalizeColors();
-
-
-
-			initLayers(); // TODO: 100% keep this here.
+			initLayers(); 
 
 			// Update all cubie orientations
 			finalizeOrientation();
@@ -378,13 +368,9 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 7), getStickerColor(layer, 4), getStickerColor(layer, 1),
 				getStickerColor(layer, 8), getStickerColor(layer, 5), getStickerColor(layer, 2));
 
-		// TODO: Update this.cubeAsString values at those locations to match the changes.
 		updateCubeAsString(layer, newSurfaceList,
 				// New Locations:     back,                       right                       front                     left
 				layer.getSurfaceLeftColors(),layer.getSurfaceBackColors(), layer.getSurfaceRightColors(), layer.getSurfaceFrontColors());
-
-//		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight, newSurfaceFront,
-//				newSurfaceLeft);
 
 	}
 
@@ -395,24 +381,18 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 1), getStickerColor(layer, 4), getStickerColor(layer, 7),
 				getStickerColor(layer, 0), getStickerColor(layer, 3), getStickerColor(layer, 6));
 
-		// TODO: Update this.cubeAsString values at those locations to match the changes.
-
 		updateCubeAsString(layer, newSurfaceList,
 
 				// New Locations:     back,                       right                       front                     left
 				layer.getSurfaceRightColors(),layer.getSurfaceFrontColors(), layer.getSurfaceLeftColors(), layer.getSurfaceBackColors());
-
-
-//		layer.initializeScrambledColors(newSurfaceList, newSurfaceBack, newSurfaceRight,
-//				newSurfaceFront, newSurfaceLeft);
+ 
 	}
 
 
-
+	// Keeps cubeAsString up to date after each rotation change.
 	public final void updateCubeAsString(CubeLayer layer, AdvancedArrayList<Integer> newSurfaceList,
 										 Integer[]... newSurfaceBorder){
 
-		// TODO: Add temps for border rotations.
 		Integer[] oldSurfaceBack  =  layer.getSurfaceBackColors();
 		Integer[] oldSurfaceRight =  layer.getSurfaceRightColors();
 		Integer[] oldSurfaceFront =  layer.getSurfaceFrontColors();
@@ -535,25 +515,6 @@ public class RubiksCubeStructure implements RubiksCube {
 
 		return cubeSymbols.toString();
 	}
-
-
-
-    /**
-     * The purpose of this method is to initialize all of the colors for
-     * each cubie in each layer.
-     */
-//	public void finalizeColors(){
-//		for (CubeLayer layer: this.rubiksCube.values()) {
-//			AdvancedArrayList<CubeLayer.Cubie> currentLayersCubies = layer.getAllCubies();
-//			for(CubeLayer.Cubie currentCubie : currentLayersCubies){
-//				String[] location = currentCubie.getLocation().split(" ");
-//
-//				ArrayList<Integer> centerColorsOfIntersections = getCenterColorsOfLocation(location);
-//				currentCubie.setStickersColors( centerColorsOfIntersections );
-//			}
-//		}
-//	}
-
 
 
 	private ArrayList<Integer> getCenterColorsOfLocation(String[] location){
