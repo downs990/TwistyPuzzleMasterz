@@ -368,9 +368,11 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 7), getStickerColor(layer, 4), getStickerColor(layer, 1),
 				getStickerColor(layer, 8), getStickerColor(layer, 5), getStickerColor(layer, 2));
 
-		updateCubeAsString(layer, newSurfaceList,
-				// New Locations:     back,                       right                       front                     left
-				layer.getSurfaceLeftColors(),layer.getSurfaceBackColors(), layer.getSurfaceRightColors(), layer.getSurfaceFrontColors());
+		updateCubeAsString(
+			layer, newSurfaceList,
+			// New Locations:     back,                       right                       front                     left
+			layer.getSurfaceLeftColors(),layer.getSurfaceBackColors(), layer.getSurfaceRightColors(), layer.getSurfaceFrontColors()
+		);
 
 	}
 
@@ -381,10 +383,11 @@ public class RubiksCubeStructure implements RubiksCube {
 				getStickerColor(layer, 1), getStickerColor(layer, 4), getStickerColor(layer, 7),
 				getStickerColor(layer, 0), getStickerColor(layer, 3), getStickerColor(layer, 6));
 
-		updateCubeAsString(layer, newSurfaceList,
-
-				// New Locations:     back,                       right                       front                     left
-				layer.getSurfaceRightColors(),layer.getSurfaceFrontColors(), layer.getSurfaceLeftColors(), layer.getSurfaceBackColors());
+		updateCubeAsString(
+			layer, newSurfaceList,
+			// New Locations:     back,                       right                       front                     left
+			layer.getSurfaceRightColors(),layer.getSurfaceFrontColors(), layer.getSurfaceLeftColors(), layer.getSurfaceBackColors()
+		);
  
 	}
 

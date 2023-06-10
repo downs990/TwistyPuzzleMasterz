@@ -176,7 +176,8 @@ public class SolverFragment extends Fragment {
 				initRubiksCube(rootView, surfacesAsButtonLists);
 
 //				rubiksCube.resetCube();
-				debuggingText.setText("Cube is reset!");
+				String message = "Cube is reset!";
+				debuggingText.setText(message);
 
 //				setButtonsToCurrentCube(surfacesAsButtonLists);
 
