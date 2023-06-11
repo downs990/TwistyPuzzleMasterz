@@ -141,7 +141,7 @@ public class SolverFragment extends Fragment {
 
 				String entireSolution = rubiksCube.getSolutionAlgorithm();
 
-				displayAlert("Solution Algorithm:", rubiksCube.toString());
+//				displayAlert("Solution Algorithm:", rubiksCube.toString());
 
 				// Show solve algorithm
 				String currentDisplayingText = debuggingText.getText().toString();
@@ -221,9 +221,6 @@ public class SolverFragment extends Fragment {
 	}
 
 
-
-
-
 	private void initRubiksCube(View rootView, AdvancedArrayList<Button[]> layerList){
 
 		// Getting all colors from all buttons.
@@ -260,7 +257,6 @@ public class SolverFragment extends Fragment {
 				Button currentButton = layer[k];
 				Integer currentColorIndex = surfaceColorIndexes[k];
 
-				// TODO: Test me!
 				// Converting indexes back to colors.
 				char colorLetter = rubiksCube.getCubeAsString().charAt(currentColorIndex - 1);
 				Integer colorAsInteger = RubiksCubeStructure.colorLetterToIntegerColor(colorLetter);

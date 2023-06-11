@@ -203,8 +203,6 @@ public class CubeSolver {
 
     public void crossStep3() {
 
-//        String result = "";
-
         // Check the 4 cross pieces to see if their orientations are correct.
         // If a piece is not correct, then use the orientation correction algorithm.
         String[] location1 = new String[]{"F", "D"};
@@ -217,20 +215,31 @@ public class CubeSolver {
             CubeLayer.Cubie crossCubie = this.rubiksCube.getCubieAtLocation(location);
             Map<String, String> orientationOfCubie = crossCubie.getCubieOrientation();
 
-//            result += orientationOfCubie.toString();
             // If the white sticker on this cubie is not on the white side.
             if( ! orientationOfCubie.get("WHITE").equals("WHITE") ){
                 cubieOrientationCorrection(crossCubie);
             }
         }
 
-
 //        Toast.makeText(rootView.getContext(), "Cross Orientations: " + result, Toast.LENGTH_LONG).show();
+    }
 
+    private void swapCrossCubies(){
+
+        // 1. Check if the two remaining cross cubies are parallel pieces
+        //      GREEN <-> BLUE     -> F2 B2 U2 F2 B2
+        //      RED <-> ORANGE     -> R2 L2 U2 R2 L2
+
+        // 2. Check if the they are two adjacent pieces
+        
 
     }
 
     public void crossStep4() {
+
+        // TODO: Find the pair of cross pieces that need to be swapped.
+        // TODO: Swap them
+
 
     }
 
@@ -254,9 +263,6 @@ public class CubeSolver {
         // Iff 2 cubies are in incorrect locations then swap them.
         //  (set those 2 cubies to correct orientations IFF need to)
         crossStep4();
-
-
-//        Toast.makeText(rootView.getContext(), "Solution: " + this.rubiksCube.getSolutionAlgorithm(), Toast.LENGTH_LONG).show();
     }
 
 

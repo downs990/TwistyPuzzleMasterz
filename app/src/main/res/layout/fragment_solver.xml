@@ -545,7 +545,7 @@
     <TextView
         android:id="@+id/debugging_textview"
         android:text="{ Debugging TextView }"
-        android:layout_width="700px"
+        android:layout_width="1400px"
         android:layout_height="wrap_content"
         android:layout_marginTop="720px"
         android:layout_marginLeft="-1100px"
