@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.view.Surface;
 import android.view.View;
@@ -201,10 +202,14 @@ public class CubeSolver {
     }
 
 
-    public void crossStep3() {
 
-        // Check the 4 cross pieces to see if their orientations are correct.
-        // If a piece is not correct, then use the orientation correction algorithm.
+
+    // Check the 4 cross pieces to see if their orientations are correct.
+    // If a piece is not correct, then use the orientation correction algorithm.
+    public ArrayList<CubeLayer.Cubie> crossStep3() {
+
+        ArrayList<CubeLayer.Cubie> crossCubiesInWrongLocations = new ArrayList<>();
+
         String[] location1 = new String[]{"F", "D"};
         String[] location2 = new String[]{"R", "D"};
         String[] location3 = new String[]{"B", "D"};
@@ -219,28 +224,103 @@ public class CubeSolver {
             if( ! orientationOfCubie.get("WHITE").equals("WHITE") ){
                 cubieOrientationCorrection(crossCubie);
             }
+
+            // IMPORTANT: You must query the rubiks cube for a new instance of this cubie (i.e call
+            // .getCubieAtLocation() ) because cubieOrientationCorrection() calls executeAlgorithm,
+            // which changes the state of the cube.
+            crossCubie = this.rubiksCube.getCubieAtLocation(location);
+            orientationOfCubie = crossCubie.getCubieOrientation();
+            Set<String> keys  = orientationOfCubie.keySet();
+            for (String sticker : keys){
+
+                if(! orientationOfCubie.get(sticker).equals(sticker)){
+                    crossCubiesInWrongLocations.add(crossCubie);
+                    break;
+                }
+            }
+
+
         }
 
-//        Toast.makeText(rootView.getContext(), "Cross Orientations: " + result, Toast.LENGTH_LONG).show();
+
+        return crossCubiesInWrongLocations;
     }
 
-    private void swapCrossCubies(){
-
-        // 1. Check if the two remaining cross cubies are parallel pieces
-        //      GREEN <-> BLUE     -> F2 B2 U2 F2 B2
-        //      RED <-> ORANGE     -> R2 L2 U2 R2 L2
-
-        // 2. Check if the they are two adjacent pieces
-        
-
-    }
-
-    public void crossStep4() {
-
-        // TODO: Find the pair of cross pieces that need to be swapped.
-        // TODO: Swap them
 
 
+
+
+
+    // TODO:
+    //  IMPORTANT:
+    //      This implementation will have to change to something more dynamic if you
+    //      ever decide to change the initial orientation of the cube. Or if you add whole
+    //      cube rotations to the CubeSolver. Specifically, the way that you're checking for
+    //      parallel pieces is the problem.
+    public void crossStep4(ArrayList<CubeLayer.Cubie> crossCubiesToSwap) {
+
+        // Find the pair of cross pieces that need to be swapped.
+        // Size is either 2 or 0.
+        if(crossCubiesToSwap.size() > 0){
+
+            CubeLayer.Cubie cubie1 =  crossCubiesToSwap.get(0);
+            CubeLayer.Cubie cubie2 =  crossCubiesToSwap.get(1);
+
+            int whiteIndex = cubie1.getStickerColorsStrings().indexOf("WHITE"); //TODO: Use RubiksCube.WHITE
+            final String nonWhiteColor = (whiteIndex == 0) ?
+                    cubie1.getStickerColorsStrings().get(1) :
+                    cubie1.getStickerColorsStrings().get(0);
+
+            int whiteIndex2 = cubie2.getStickerColorsStrings().indexOf("WHITE");
+            final String nonWhiteColor2 = (whiteIndex2 == 0) ?
+                    cubie2.getStickerColorsStrings().get(1) :
+                    cubie2.getStickerColorsStrings().get(0);
+
+            ArrayList<String> nonWhiteColors = new ArrayList<String>(){{
+                addAll( Arrays.asList(nonWhiteColor, nonWhiteColor2) );
+            }};
+
+            // Check if the two remaining cross cubies are parallel pieces
+            if(nonWhiteColors.contains("GREEN") && nonWhiteColors.contains("BLUE")){
+                this.rubiksCube.executeAlgorithm("F2 B2 U2 F2 B2", RubiksCube.RecordAlgorithm.YES);
+            }else if(nonWhiteColors.contains("RED") && nonWhiteColors.contains("ORANGE")){
+                this.rubiksCube.executeAlgorithm("R2 L2 U2 R2 L2", RubiksCube.RecordAlgorithm.YES);
+            }
+
+            // Check if the two remaining cross cubies are adjacent pieces
+            else{
+                final ArrayList<SurfaceName> location1 = this.rubiksCube.findLocationOfCubie(cubie1.getStickerColors());
+                final ArrayList<SurfaceName> location2 = this.rubiksCube.findLocationOfCubie(cubie2.getStickerColors());
+
+                final ArrayList<String> location1AsStrings = new ArrayList<String>(){{
+                    add(location1.get(0).name()); add(location1.get(1).name());
+                }};
+                final ArrayList<String> location2AsStrings = new ArrayList<String>(){{
+                    add(location2.get(0).name()); add(location2.get(1).name());
+                }};
+                Collections.sort(location1AsStrings);
+                Collections.sort(location2AsStrings);
+
+                ArrayList<String> bothCubieLocations = new ArrayList<String>(){{
+                    add( location1AsStrings.get(0) + " " + location1AsStrings.get(1) );
+                    add( location2AsStrings.get(0) + " " + location2AsStrings.get(1) );
+                }};
+                Collections.sort(bothCubieLocations);
+                String keyOfLocations = bothCubieLocations.get(0) + " , " + bothCubieLocations.get(1);
+                Map<String, String> solutionMap = new HashMap<String, String>() {{
+                    put("D F , D R", "R2 U F2 U' R2");
+                    put("D F , D L", "F2 U L2 U' F2");
+                    put("B D , D L", "L2 U B2 U' L2");
+                    put("B D , D R", "B2 U R2 U' B2");
+                }};
+
+                // Once the two cubies to swap are in the correct locations, then perform swap alg.
+                String algorithm = solutionMap.get(keyOfLocations);
+                this.rubiksCube.executeAlgorithm(algorithm, RubiksCube.RecordAlgorithm.YES);
+
+            }
+
+        }
     }
 
 
@@ -258,11 +338,11 @@ public class CubeSolver {
         // Rotate bottom layer until at least 2 pieces are in correct locations
         crossStep2();
         //Set the cubies that are in correct locations to their correct orientations
-        crossStep3();
+        ArrayList<CubeLayer.Cubie> crossCubiesToSwap = crossStep3();
 
         // Iff 2 cubies are in incorrect locations then swap them.
         //  (set those 2 cubies to correct orientations IFF need to)
-        crossStep4();
+        crossStep4(crossCubiesToSwap);
     }
 
 

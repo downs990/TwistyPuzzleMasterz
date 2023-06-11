@@ -65,6 +65,9 @@ public interface RubiksCube {
 	CubeLayer.Cubie getCubieAtLocation(String[] intersection);
 
 
+	// TODO: Add other methods here that have been implemented in RubiksCubeStructure as non private 
+
+
 	void rotate(CubeLayer layerToRotate, Rotation directionOfRotation);
 
 	// String algorithm can be either solution or scramble

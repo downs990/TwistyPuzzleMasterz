@@ -33,7 +33,9 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/invisible_image"
+            android:text="Scramble"
+            android:textSize="23px"
+            android:background="#eee"
             />
     </LinearLayout>
 
