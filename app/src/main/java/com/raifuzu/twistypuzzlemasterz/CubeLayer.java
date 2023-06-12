@@ -7,9 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
-
 import android.view.View;
 
 
@@ -202,36 +200,20 @@ public class CubeLayer {
         return output.toString();
     }
 
-    private Integer[] getButtonColors(Integer[] buttons) {
-        Integer[] colors = new Integer[buttons.length];
-
-        for (int buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++) {
-            colors[buttonIndex] = buttons[buttonIndex];//.getCurrentTextColor();
-        }
-
-        return colors;
-    }
-
 
     @Override
     public String toString() {
         String output = "";
 
-        Integer[] surfaceColors = getButtonColors(this.surfaceColors);
-        Integer[] surfaceBackColors = getButtonColors(this.surfaceBackColors);
-        Integer[] surfaceRightColors = getButtonColors(this.surfaceRightColors);
-        Integer[] surfaceFrontColors = getButtonColors(this.surfaceFrontColors);
-        Integer[] surfaceLeftColors = getButtonColors(this.surfaceLeftColors);
-
-        String surfaceString = arrayToString(surfaceColors);
+        String surfaceString = arrayToString(this.surfaceColors);
         output += "\n\nSurface: " + this.surfaceName.toString() + "\n" + surfaceString;
-        String surfaceBackString = arrayToString(surfaceBackColors);
+        String surfaceBackString = arrayToString(this.surfaceBackColors);
         output += "\nSurface Back: \n" + surfaceBackString;
-        String surfaceRightString = arrayToString(surfaceRightColors);
+        String surfaceRightString = arrayToString(this.surfaceRightColors);
         output += "\nSurface Right: \n" + surfaceRightString;
-        String surfaceFrontString = arrayToString(surfaceFrontColors);
+        String surfaceFrontString = arrayToString(this.surfaceFrontColors);
         output += "\nSurface Front: \n" + surfaceFrontString;
-        String surfaceLeftString = arrayToString(surfaceLeftColors);
+        String surfaceLeftString = arrayToString(this.surfaceLeftColors);
         output += "\nSurface Left: \n" + surfaceLeftString;
 
         return output;
@@ -340,8 +322,7 @@ public class CubeLayer {
         public String toString() {
             StringBuilder output = new StringBuilder("");
             for (int i = 0; i < this.stickerColorsList.size(); i++) {
-                // Converts the sticker list into a string with sticker color
-                // names
+                // Converts the sticker list into a string with sticker color names
                 Integer currentColor = this.stickerColorsList.get(i); 
                 String stickerColorName = colorIntToString(currentColor);
                 output.append(" ").append(stickerColorName);

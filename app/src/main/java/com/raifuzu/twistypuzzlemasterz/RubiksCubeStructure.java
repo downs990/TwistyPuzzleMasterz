@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -520,7 +519,8 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
-	private ArrayList<Integer> getCenterColorsOfLocation(String[] location){
+	@Override
+	public ArrayList<Integer> getCenterColorsOfLocation(String[] location){
 
 		ArrayList<Integer> centerColors = new ArrayList<>();
 
@@ -615,6 +615,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 	// Check if the cubie at this location is in the correct location. (orientation might still be off)
+	@Override
 	public boolean isCorrectCubieAtThisLocation(String[] location){
 
 		CubeLayer.Cubie cubieAtLocation = this.getCubieAtLocation(location);

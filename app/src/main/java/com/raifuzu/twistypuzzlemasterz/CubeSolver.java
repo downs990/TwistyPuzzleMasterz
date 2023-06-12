@@ -7,11 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import android.view.Surface;
 import android.view.View;
-import android.widget.Toast;
-
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
 
 
