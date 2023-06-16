@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -635,6 +636,24 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	}
 
+	@Override
+	public List<SurfaceName> correctLocationOfCubie(Integer[] cubieColors) {
+
+		ArrayList<SurfaceName> correctLocation = new ArrayList<>();
+
+		for(Integer stickerColor : cubieColors){
+			for(CubeLayer currentLayer : this.rubiksCube.values()){
+				Integer colorOfSurface = currentLayer.getCenterColor();
+
+				if(Objects.equals(stickerColor, colorOfSurface)){
+					correctLocation.add( currentLayer.getSideName() );
+					break;
+				}
+			}
+		}
+
+		return correctLocation;
+	}
 
 
 	private Integer convertToIntegerColor(String stringColor) {

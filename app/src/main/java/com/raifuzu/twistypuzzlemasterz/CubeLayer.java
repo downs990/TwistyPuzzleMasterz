@@ -91,6 +91,10 @@ public class CubeLayer {
          return null; // TODO: Implement me !
     }
 
+    public Integer getCenterColor(){
+        return this.getAllCubies().get(0).getStickerColors().get(0);
+    }
+
     public Integer[] getSurfaceColors() {
         return this.surfaceColors;
     }

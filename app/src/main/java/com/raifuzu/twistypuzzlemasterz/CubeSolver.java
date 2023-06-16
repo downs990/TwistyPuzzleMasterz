@@ -342,15 +342,77 @@ public class CubeSolver {
     }
 
 
+
+    private void f2lStep1(Integer[][] f2lPairCubies){
+
+        // Locate both cubies of the current f2l pair
+        List<Integer> cubie1 = Arrays.asList( f2lPairCubies[0] );
+        List<Integer> cubie2 = Arrays.asList( f2lPairCubies[1] );
+        ArrayList<SurfaceName> cubie1Location = this.rubiksCube.findLocationOfCubie(cubie1);
+        ArrayList<SurfaceName> cubie2Location = this.rubiksCube.findLocationOfCubie(cubie2);
+        Collections.sort(cubie1Location);
+        Collections.sort(cubie2Location);
+
+        List<SurfaceName> cubie1CorrectLocation = this.rubiksCube.correctLocationOfCubie( f2lPairCubies[0] );
+        List<SurfaceName> cubie2CorrectLocation = this.rubiksCube.correctLocationOfCubie( f2lPairCubies[1] );
+        Collections.sort( cubie1CorrectLocation );
+        Collections.sort( cubie1CorrectLocation );
+
+        // If one or both are slotted incorrectly, then remove them from that location
+        // using the 'removal maneuver'
+        if(! cubie1Location.equals(cubie1CorrectLocation)){
+            removalManeuver(cubie1Location);
+        }
+        if(! cubie2Location.equals(cubie2CorrectLocation)){
+            removalManeuver(cubie2Location);
+        }
+
+    }
+
+
+    private void f2lStep2(Integer[][] f2lPair){
+
+        // TODO: If one or both of the F2L cubies are in the U layer,  then rotate the top
+        //  layer to correctly align the F2L pair.
+
+
+        // TODO: Execute the corresponding algorithm using the (orientation transform ) function.
+
+    }
+
+
+    // TODO: Finish me!
+    private String orientationTransform(){
+        return null;
+    }
+
+
+    private void removalManeuver(ArrayList<SurfaceName> cubiesLocation ){
+        // TODO: If cubie is edge then use:   U R U' R' U' F' U F
+        // TODO: If cubie is corner then use: R U R'
+
+        // TODO: The above two algorithms are assuming that the incorrectly
+        //     slotted cubie is on the [F, R] OR [F, R, D] location. Use the
+        //     'orientation transform' function to make this useful for any location.
+
+    }
+
+
+
     public void f2lSolutionSteps(Integer[][][] stickersToSolve) {
-        // TODO: Complete solution implementation
+
+        for(Integer[][] f2lPair : stickersToSolve){
+            f2lStep1(f2lPair);
+            f2lStep2(f2lPair);
+        }
+
     }
 
     public void solveF2L() {
         Integer[][][] stickersToSolve = {
-                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.ORANGE}, {RubiksCube.BLUE, RubiksCube.ORANGE}},
-                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.RED}, {RubiksCube.BLUE, RubiksCube.RED}},
-                {{RubiksCube.WHITE, RubiksCube.RED, RubiksCube.GREEN}, {RubiksCube.RED, RubiksCube.GREEN}},
+                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.ORANGE},  {RubiksCube.BLUE, RubiksCube.ORANGE}},
+                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.RED},     {RubiksCube.BLUE, RubiksCube.RED}},
+                {{RubiksCube.WHITE, RubiksCube.RED, RubiksCube.GREEN},    {RubiksCube.RED, RubiksCube.GREEN}},
                 {{RubiksCube.WHITE, RubiksCube.GREEN, RubiksCube.ORANGE}, {RubiksCube.GREEN, RubiksCube.ORANGE}},
         };
 
