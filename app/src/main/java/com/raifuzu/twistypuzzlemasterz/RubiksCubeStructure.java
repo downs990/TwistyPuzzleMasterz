@@ -242,6 +242,31 @@ public class RubiksCubeStructure implements RubiksCube {
 		return intersectingSurfaces;
 	}
 
+
+	// IMPORTANT: If you ever change the pre-programmed orientation of the rubikscube
+	// then you'll need to use this as well.
+	@Override
+	public SurfaceName findLayerByColor(Integer color) {
+
+		if(color.equals(RubiksCube.YELLOW)){
+			return SurfaceName.U;
+		}else if(color.equals(RubiksCube.ORANGE)){
+			return SurfaceName.L;
+		}else if(color.equals(RubiksCube.BLUE)){
+			return SurfaceName.F;
+		}else if(color.equals(RubiksCube.RED)){
+			return SurfaceName.R;
+		}else if(color.equals(RubiksCube.GREEN)){
+			return SurfaceName.B;
+		}else if(color.equals(RubiksCube.WHITE)){
+			return SurfaceName.D;
+		}
+
+
+
+		return null;
+	}
+
 	@Override
 	public CubeLayer.Cubie getCubieAtLocation(String[] intersection){
 
@@ -636,6 +661,8 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	}
 
+
+	// TODO: Test me!
 	@Override
 	public List<SurfaceName> correctLocationOfCubie(Integer[] cubieColors) {
 

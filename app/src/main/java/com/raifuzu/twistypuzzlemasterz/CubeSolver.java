@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import android.view.Surface;
 import android.view.View;
+
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
 
 
@@ -186,18 +189,16 @@ public class CubeSolver {
 
 
     private void cubieOrientationCorrection(CubeLayer.Cubie currentCubie) {
-        if(currentCubie.getLocation().contains(SurfaceName.R.name())){
+        if (currentCubie.getLocation().contains(SurfaceName.R.name())) {
             this.rubiksCube.executeAlgorithm("R2 U F R' F'", RubiksCube.RecordAlgorithm.YES);
-        }else if(currentCubie.getLocation().contains(SurfaceName.F.name())){
+        } else if (currentCubie.getLocation().contains(SurfaceName.F.name())) {
             this.rubiksCube.executeAlgorithm("F2 U L F' L'", RubiksCube.RecordAlgorithm.YES);
-        }else if(currentCubie.getLocation().contains(SurfaceName.L.name())){
+        } else if (currentCubie.getLocation().contains(SurfaceName.L.name())) {
             this.rubiksCube.executeAlgorithm("L2 U B L' B'", RubiksCube.RecordAlgorithm.YES);
-        }else if(currentCubie.getLocation().contains(SurfaceName.B.name())){
+        } else if (currentCubie.getLocation().contains(SurfaceName.B.name())) {
             this.rubiksCube.executeAlgorithm("B2 U R B' R'", RubiksCube.RecordAlgorithm.YES);
         }
     }
-
-
 
 
     // Check the 4 cross pieces to see if their orientations are correct.
@@ -217,7 +218,7 @@ public class CubeSolver {
             Map<String, String> orientationOfCubie = crossCubie.getCubieOrientation();
 
             // If the white sticker on this cubie is not on the white side.
-            if( ! orientationOfCubie.get("WHITE").equals("WHITE") ){
+            if (!orientationOfCubie.get("WHITE").equals("WHITE")) {
                 cubieOrientationCorrection(crossCubie);
             }
 
@@ -226,10 +227,10 @@ public class CubeSolver {
             // which changes the state of the cube.
             crossCubie = this.rubiksCube.getCubieAtLocation(location);
             orientationOfCubie = crossCubie.getCubieOrientation();
-            Set<String> keys  = orientationOfCubie.keySet();
-            for (String sticker : keys){
+            Set<String> keys = orientationOfCubie.keySet();
+            for (String sticker : keys) {
 
-                if(! orientationOfCubie.get(sticker).equals(sticker)){
+                if (!orientationOfCubie.get(sticker).equals(sticker)) {
                     crossCubiesInWrongLocations.add(crossCubie);
                     break;
                 }
@@ -243,10 +244,6 @@ public class CubeSolver {
     }
 
 
-
-
-
-
     // TODO:
     //  IMPORTANT:
     //      This implementation will have to change to something more dynamic if you
@@ -257,10 +254,10 @@ public class CubeSolver {
 
         // Find the pair of cross pieces that need to be swapped.
         // Size is either 2 or 0.
-        if(crossCubiesToSwap.size() > 0){
+        if (crossCubiesToSwap.size() > 0) {
 
-            CubeLayer.Cubie cubie1 =  crossCubiesToSwap.get(0);
-            CubeLayer.Cubie cubie2 =  crossCubiesToSwap.get(1);
+            CubeLayer.Cubie cubie1 = crossCubiesToSwap.get(0);
+            CubeLayer.Cubie cubie2 = crossCubiesToSwap.get(1);
 
             int whiteIndex = cubie1.getStickerColorsStrings().indexOf("WHITE"); //TODO: Use RubiksCube.WHITE
             final String nonWhiteColor = (whiteIndex == 0) ?
@@ -272,34 +269,36 @@ public class CubeSolver {
                     cubie2.getStickerColorsStrings().get(1) :
                     cubie2.getStickerColorsStrings().get(0);
 
-            ArrayList<String> nonWhiteColors = new ArrayList<String>(){{
-                addAll( Arrays.asList(nonWhiteColor, nonWhiteColor2) );
+            ArrayList<String> nonWhiteColors = new ArrayList<String>() {{
+                addAll(Arrays.asList(nonWhiteColor, nonWhiteColor2));
             }};
 
             // Check if the two remaining cross cubies are parallel pieces
-            if(nonWhiteColors.contains("GREEN") && nonWhiteColors.contains("BLUE")){
+            if (nonWhiteColors.contains("GREEN") && nonWhiteColors.contains("BLUE")) {
                 this.rubiksCube.executeAlgorithm("F2 B2 U2 F2 B2", RubiksCube.RecordAlgorithm.YES);
-            }else if(nonWhiteColors.contains("RED") && nonWhiteColors.contains("ORANGE")){
+            } else if (nonWhiteColors.contains("RED") && nonWhiteColors.contains("ORANGE")) {
                 this.rubiksCube.executeAlgorithm("R2 L2 U2 R2 L2", RubiksCube.RecordAlgorithm.YES);
             }
 
             // Check if the two remaining cross cubies are adjacent pieces
-            else{
+            else {
                 final ArrayList<SurfaceName> location1 = this.rubiksCube.findLocationOfCubie(cubie1.getStickerColors());
                 final ArrayList<SurfaceName> location2 = this.rubiksCube.findLocationOfCubie(cubie2.getStickerColors());
 
-                final ArrayList<String> location1AsStrings = new ArrayList<String>(){{
-                    add(location1.get(0).name()); add(location1.get(1).name());
+                final ArrayList<String> location1AsStrings = new ArrayList<String>() {{
+                    add(location1.get(0).name());
+                    add(location1.get(1).name());
                 }};
-                final ArrayList<String> location2AsStrings = new ArrayList<String>(){{
-                    add(location2.get(0).name()); add(location2.get(1).name());
+                final ArrayList<String> location2AsStrings = new ArrayList<String>() {{
+                    add(location2.get(0).name());
+                    add(location2.get(1).name());
                 }};
                 Collections.sort(location1AsStrings);
                 Collections.sort(location2AsStrings);
 
-                ArrayList<String> bothCubieLocations = new ArrayList<String>(){{
-                    add( location1AsStrings.get(0) + " " + location1AsStrings.get(1) );
-                    add( location2AsStrings.get(0) + " " + location2AsStrings.get(1) );
+                ArrayList<String> bothCubieLocations = new ArrayList<String>() {{
+                    add(location1AsStrings.get(0) + " " + location1AsStrings.get(1));
+                    add(location2AsStrings.get(0) + " " + location2AsStrings.get(1));
                 }};
                 Collections.sort(bothCubieLocations);
                 String keyOfLocations = bothCubieLocations.get(0) + " , " + bothCubieLocations.get(1);
@@ -342,35 +341,34 @@ public class CubeSolver {
     }
 
 
-
-    private void f2lStep1(Integer[][] f2lPairCubies){
+    private void f2lStep1(Integer[][] f2lPairCubies) {
 
         // Locate both cubies of the current f2l pair
-        List<Integer> cubie1 = Arrays.asList( f2lPairCubies[0] );
-        List<Integer> cubie2 = Arrays.asList( f2lPairCubies[1] );
+        List<Integer> cubie1 = Arrays.asList(f2lPairCubies[0]);
+        List<Integer> cubie2 = Arrays.asList(f2lPairCubies[1]);
         ArrayList<SurfaceName> cubie1Location = this.rubiksCube.findLocationOfCubie(cubie1);
         ArrayList<SurfaceName> cubie2Location = this.rubiksCube.findLocationOfCubie(cubie2);
         Collections.sort(cubie1Location);
         Collections.sort(cubie2Location);
 
-        List<SurfaceName> cubie1CorrectLocation = this.rubiksCube.correctLocationOfCubie( f2lPairCubies[0] );
-        List<SurfaceName> cubie2CorrectLocation = this.rubiksCube.correctLocationOfCubie( f2lPairCubies[1] );
-        Collections.sort( cubie1CorrectLocation );
-        Collections.sort( cubie1CorrectLocation );
+        List<SurfaceName> cubie1CorrectLocation = this.rubiksCube.correctLocationOfCubie(f2lPairCubies[0]);
+        List<SurfaceName> cubie2CorrectLocation = this.rubiksCube.correctLocationOfCubie(f2lPairCubies[1]);
+        Collections.sort(cubie1CorrectLocation);
+        Collections.sort(cubie1CorrectLocation);
 
         // If one or both are slotted incorrectly, then remove them from that location
         // using the 'removal maneuver'
-        if(! cubie1Location.equals(cubie1CorrectLocation)){
+        if (!cubie1Location.equals(cubie1CorrectLocation)) {
             removalManeuver(cubie1Location);
         }
-        if(! cubie2Location.equals(cubie2CorrectLocation)){
+        if (!cubie2Location.equals(cubie2CorrectLocation)) {
             removalManeuver(cubie2Location);
         }
 
     }
 
 
-    private void f2lStep2(Integer[][] f2lPair){
+    private void f2lStep2(Integer[][] f2lPair) {
 
         // TODO: If one or both of the F2L cubies are in the U layer,  then rotate the top
         //  layer to correctly align the F2L pair.
@@ -381,13 +379,44 @@ public class CubeSolver {
     }
 
 
-    // TODO: Finish me!
-    private String orientationTransform(){
+    // TODO: Order that you pass color1 and color2 matters??
+    private String orientationTransform(String originalAlgorithm, Integer color1, Integer color2) {
+
+
+
+         //   PAPER EXPECTED  -> [F, R, B, L] [F, R, B, L] [F, R, B, L] [F, R, B, L]
+         //   REPLACEMENT     -> [F, R, B, L] [R, B, L, F] [B, L, F, R] [L, F, R, B]
+         //                       _  _         _  _         _  _         _  _
+
+        SurfaceName correctSurface1 = this.rubiksCube.findLayerByColor(color1); // F
+        SurfaceName correctSurface2 = this.rubiksCube.findLayerByColor(color2); // R
+
+        // TODO: U -> no change
+        //       D -> no change
+        //       F -> correctSurface1
+        //       B -> (parallel color of F)
+        //       R -> correctSurface2
+        //       L -> (parallel color of R)
+
+        // Pre-programmed orientation (rubiks cube data structure)
+        Map<SurfaceName, Integer> preprogrammedOrientation = new HashMap<SurfaceName, Integer>() {
+            {
+//                put(SurfaceName.U, RubiksCube.YELLOW);
+//                put(SurfaceName.D, RubiksCube.WHITE);
+                put(SurfaceName.F, RubiksCube.BLUE);
+                put(SurfaceName.B, RubiksCube.GREEN);
+                put(SurfaceName.R, RubiksCube.RED);
+                put(SurfaceName.L, RubiksCube.ORANGE);
+            }
+        };
+
+        // TODO: String replace F, R, B, and L with correctSurface
+
         return null;
     }
 
 
-    private void removalManeuver(ArrayList<SurfaceName> cubiesLocation ){
+    private void removalManeuver(ArrayList<SurfaceName> cubiesLocation) {
         // TODO: If cubie is edge then use:   U R U' R' U' F' U F
         // TODO: If cubie is corner then use: R U R'
 
@@ -398,10 +427,9 @@ public class CubeSolver {
     }
 
 
-
     public void f2lSolutionSteps(Integer[][][] stickersToSolve) {
 
-        for(Integer[][] f2lPair : stickersToSolve){
+        for (Integer[][] f2lPair : stickersToSolve) {
             f2lStep1(f2lPair);
             f2lStep2(f2lPair);
         }
@@ -410,9 +438,9 @@ public class CubeSolver {
 
     public void solveF2L() {
         Integer[][][] stickersToSolve = {
-                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.ORANGE},  {RubiksCube.BLUE, RubiksCube.ORANGE}},
-                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.RED},     {RubiksCube.BLUE, RubiksCube.RED}},
-                {{RubiksCube.WHITE, RubiksCube.RED, RubiksCube.GREEN},    {RubiksCube.RED, RubiksCube.GREEN}},
+                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.ORANGE}, {RubiksCube.BLUE, RubiksCube.ORANGE}},
+                {{RubiksCube.WHITE, RubiksCube.BLUE, RubiksCube.RED}, {RubiksCube.BLUE, RubiksCube.RED}},
+                {{RubiksCube.WHITE, RubiksCube.RED, RubiksCube.GREEN}, {RubiksCube.RED, RubiksCube.GREEN}},
                 {{RubiksCube.WHITE, RubiksCube.GREEN, RubiksCube.ORANGE}, {RubiksCube.GREEN, RubiksCube.ORANGE}},
         };
 

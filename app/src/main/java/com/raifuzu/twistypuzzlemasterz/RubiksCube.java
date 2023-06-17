@@ -61,6 +61,7 @@ public interface RubiksCube {
 	}};
 
 	ArrayList<SurfaceName> findLocationOfCubie(List<Integer> stickers);
+	SurfaceName findLayerByColor(Integer color);
 
 	CubeLayer.Cubie getCubieAtLocation(String[] intersection);
 
