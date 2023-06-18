@@ -341,6 +341,9 @@ public class CubeSolver {
     }
 
 
+
+
+    // TODO: Test me!
     private void f2lStep1(Integer[][] f2lPairCubies) {
 
         // Locate both cubies of the current f2l pair
@@ -359,10 +362,10 @@ public class CubeSolver {
         // If one or both are slotted incorrectly, then remove them from that location
         // using the 'removal maneuver'
         if (!cubie1Location.equals(cubie1CorrectLocation)) {
-            removalManeuver(cubie1Location);
+            removalManeuver(cubie1);
         }
         if (!cubie2Location.equals(cubie2CorrectLocation)) {
-            removalManeuver(cubie2Location);
+            removalManeuver(cubie2);
         }
 
     }
@@ -379,50 +382,76 @@ public class CubeSolver {
     }
 
 
-    // TODO: Order that you pass color1 and color2 matters??
+    // TODO: Test me!
     private String orientationTransform(String originalAlgorithm, Integer color1, Integer color2) {
-
-
 
          //   PAPER EXPECTED  -> [F, R, B, L] [F, R, B, L] [F, R, B, L] [F, R, B, L]
          //   REPLACEMENT     -> [F, R, B, L] [R, B, L, F] [B, L, F, R] [L, F, R, B]
          //                       _  _         _  _         _  _         _  _
 
-        SurfaceName correctSurface1 = this.rubiksCube.findLayerByColor(color1); // F
-        SurfaceName correctSurface2 = this.rubiksCube.findLayerByColor(color2); // R
+        final SurfaceName correctSurface1 = this.rubiksCube.findLayerByColor(color1); // F
+        final SurfaceName correctSurface2 = this.rubiksCube.findLayerByColor(color2); // R
+        ArrayList<SurfaceName> frontAndRight = new ArrayList<>( Arrays.asList(
+                correctSurface1, correctSurface2)
+        );
 
-        // TODO: U -> no change
-        //       D -> no change
-        //       F -> correctSurface1
-        //       B -> (parallel color of F)
-        //       R -> correctSurface2
-        //       L -> (parallel color of R)
+        String[] paperExpected = {};
+        if ( frontAndRight.contains(SurfaceName.F) && frontAndRight.contains(SurfaceName.R) ){
+            paperExpected = new String[]{ "F", "R", "B", "L"};
+        }else if( frontAndRight.contains(SurfaceName.R) && frontAndRight.contains(SurfaceName.B) ){
+            paperExpected = new String[]{ "R", "B", "L", "F" };
+        }else if( frontAndRight.contains(SurfaceName.B) && frontAndRight.contains(SurfaceName.L) ){
+            paperExpected = new String[]{ "B", "L", "F", "R" };
+        }else if( frontAndRight.contains(SurfaceName.L) && frontAndRight.contains(SurfaceName.F) ){
+            paperExpected = new String[]{ "L", "F", "R", "B" };
+        }
 
         // Pre-programmed orientation (rubiks cube data structure)
-        Map<SurfaceName, Integer> preprogrammedOrientation = new HashMap<SurfaceName, Integer>() {
+        final String[] finalPaperExpected = paperExpected;
+        Map<String, String> transformMap = new HashMap<String, String>() {
             {
-//                put(SurfaceName.U, RubiksCube.YELLOW);
-//                put(SurfaceName.D, RubiksCube.WHITE);
-                put(SurfaceName.F, RubiksCube.BLUE);
-                put(SurfaceName.B, RubiksCube.GREEN);
-                put(SurfaceName.R, RubiksCube.RED);
-                put(SurfaceName.L, RubiksCube.ORANGE);
+                put(SurfaceName.F.name(), finalPaperExpected[0]);
+                put(SurfaceName.B.name(), finalPaperExpected[1]);
+                put(SurfaceName.R.name(), finalPaperExpected[2]);
+                put(SurfaceName.L.name(), finalPaperExpected[3]);
             }
         };
 
-        // TODO: String replace F, R, B, and L with correctSurface
+        char[] originalAlgAsArray = originalAlgorithm.toCharArray();
+        for(int i = 0; i < originalAlgAsArray.length; i++){
 
-        return null;
+            char currentMove = originalAlgAsArray[i];
+            String replacementChar = transformMap.get(Character.toString( currentMove ));
+            originalAlgAsArray[i] = replacementChar.charAt(0);
+        }
+
+        return new String( originalAlgAsArray );
     }
 
 
-    private void removalManeuver(ArrayList<SurfaceName> cubiesLocation) {
-        // TODO: If cubie is edge then use:   U R U' R' U' F' U F
-        // TODO: If cubie is corner then use: R U R'
 
-        // TODO: The above two algorithms are assuming that the incorrectly
-        //     slotted cubie is on the [F, R] OR [F, R, D] location. Use the
-        //     'orientation transform' function to make this useful for any location.
+    // TODO: Test me!
+    private void removalManeuver(List<Integer> cubieAsColors) {
+
+        // Keep the two non white colors
+        cubieAsColors.remove(RubiksCube.WHITE);
+
+        String removalAlgorithm = "";
+
+        // Corner Cubie
+        if (cubieAsColors.size() == 3){
+            removalAlgorithm = "R U R'";
+        }
+        // Edge Cubie
+        else if(cubieAsColors.size() == 2){
+            removalAlgorithm = "U R U' R' U' F' U F";
+        }
+
+        // Convert the removal algorithm into the correct orientation.
+        removalAlgorithm = orientationTransform(
+                            removalAlgorithm, cubieAsColors.get(0), cubieAsColors.get(1) );
+
+        this.rubiksCube.executeAlgorithm(removalAlgorithm, RubiksCube.RecordAlgorithm.YES);
 
     }
 
