@@ -373,11 +373,10 @@ public class CubeSolver {
 
     private void f2lStep2(Integer[][] f2lPair) {
 
-        // TODO: If one or both of the F2L cubies are in the U layer,  then rotate the top
-        //  layer to correctly align the F2L pair.
-
-
+        // TODO: If one or both of the F2L cubies are in the U layer,  then rotate the top layer to correctly align the F2L pair.
         // TODO: Execute the corresponding algorithm using the (orientation transform ) function.
+
+
 
     }
 

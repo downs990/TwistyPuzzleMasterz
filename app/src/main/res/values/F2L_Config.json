@@ -1,0 +1,21 @@
+{
+  "F2L": [
+
+    {
+      "Case": 1,
+          "Cubie1": {
+            "Orientation": {  },
+            "Location": ["F", "R", "D"]
+          },
+          "Cubie2": {
+            "Orientation": {  },
+            "Location": ["F", "R"]
+          },
+          "SolutionAlgorithm": "F' U F' U2 R' F2 R U2 F2"
+    }
+
+
+
+  ]
+
+}
