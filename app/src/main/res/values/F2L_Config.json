@@ -1,21 +1,61 @@
 {
   "F2L": [
-
     {
       "Case": 1,
-          "Cubie1": {
-            "Orientation": {  },
-            "Location": ["F", "R", "D"]
-          },
-          "Cubie2": {
-            "Orientation": {  },
-            "Location": ["F", "R"]
-          },
-          "SolutionAlgorithm": "F' U F' U2 R' F2 R U2 F2"
+      "Cubie1": {
+        "Orientation": {
+          "STICKER_COLOR_1": "SIDE_COLOR_1",
+          "STICKER_COLOR_2": "SIDE_COLOR_2",
+          "STICKER_COLOR_3": "SIDE_COLOR_3"
+        },
+        "Location": "F R D"
+      },
+      "Cubie2": {
+        "Orientation": {
+          "STICKER_COLOR_3": "SIDE_COLOR_2",
+          "STICKER_COLOR_2": "SIDE_COLOR_3"
+        },
+        "Location": "F R"
+      },
+      "SolutionAlgorithm": "F' U F' U2 R' F2 R U2 F2"
+    },
+    {
+      "Case": 2,
+      "Cubie1": {
+        "Orientation": {
+          "STICKER_COLOR_1": "SIDE_COLOR_1",
+          "STICKER_COLOR_2": "SIDE_COLOR_2",
+          "STICKER_COLOR_3": "SIDE_COLOR_3"
+        },
+        "Location": "F R D"
+      },
+      "Cubie2": {
+        "Orientation": {
+          "STICKER_COLOR_2": "SIDE_COLOR_2",
+          "STICKER_COLOR_3": "SIDE_COLOR_4"
+        },
+        "Location":  "F U"
+      },
+      "SolutionAlgorithm": "U R U' R' U' F' U F"
+    },
+    {
+      "Case": 3,
+      "Cubie1": {
+        "Orientation": {
+          "STICKER_COLOR_1": "SIDE_COLOR_1",
+          "STICKER_COLOR_2": "SIDE_COLOR_2",
+          "STICKER_COLOR_3": "SIDE_COLOR_3"
+        },
+        "Location":  "F R D"
+      },
+      "Cubie2": {
+        "Orientation": {
+          "STICKER_COLOR_2": "SIDE_COLOR_4",
+          "STICKER_COLOR_3": "SIDE_COLOR_3"
+        },
+        "Location": "R U"
+      },
+      "SolutionAlgorithm": "U' F' U' F U R U R'"
     }
-
-
-
   ]
-
 }

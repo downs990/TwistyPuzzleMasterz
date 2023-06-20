@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
-
-import android.view.Surface;
+import org.json.JSONException;
+import org.json.JSONObject;
 import android.view.View;
 
 import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
@@ -371,10 +372,49 @@ public class CubeSolver {
     }
 
 
-    private void f2lStep2(Integer[][] f2lPair) {
+    private JSONObject[] getF2L_Config(){
+        // TODO: Finish Me!
+        return null;
+    }
 
-        // TODO: If one or both of the F2L cubies are in the U layer,  then rotate the top layer to correctly align the F2L pair.
-        // TODO: Execute the corresponding algorithm using the (orientation transform ) function.
+
+    // TODO: Test Me!
+    private void f2lStep2(Integer[][] f2lPair) throws JSONException {
+
+
+        JSONObject[] f2lJSON = getF2L_Config();
+
+        List<Integer> cubie1 = Arrays.asList(f2lPair[0]);
+        List<Integer> cubie2 = Arrays.asList(f2lPair[1]);
+        ArrayList<SurfaceName> cubie1Location = this.rubiksCube.findLocationOfCubie(cubie1);
+        ArrayList<SurfaceName> cubie2Location = this.rubiksCube.findLocationOfCubie(cubie2);
+
+        // If one or both of the F2L cubies are in the U layer, then rotate the top layer to
+        //      correctly align the F2L pair.
+        if(cubie1Location.contains(SurfaceName.U) && cubie2Location.contains(SurfaceName.U)){
+
+            boolean correctAlignment = false;
+            while(! correctAlignment){
+                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+
+                String algorithmToExecute = "";
+                assert f2lJSON != null;
+                for(JSONObject f2lCase : f2lJSON){
+
+                    String currentOrientation = ""; // TODO: Get from cubie1 and cubie2 above.
+
+                    // TODO: Compare current orientation to the current f2l pair in the json file.
+                    if(Objects.equals( f2lCase.getString("Orientation") , currentOrientation) ){
+                        correctAlignment = true;
+                    }
+                }
+
+
+                // TODO: Execute the corresponding algorithm using the (orientation transform ) function.
+                algorithmToExecute = orientationTransform(algorithmToExecute, cubie1.get(0), cubie1.get(1));
+                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+            }
+        }
 
 
 
@@ -455,7 +495,7 @@ public class CubeSolver {
     }
 
 
-    public void f2lSolutionSteps(Integer[][][] stickersToSolve) {
+    public void f2lSolutionSteps(Integer[][][] stickersToSolve) throws JSONException {
 
         for (Integer[][] f2lPair : stickersToSolve) {
             f2lStep1(f2lPair);
@@ -472,7 +512,13 @@ public class CubeSolver {
                 {{RubiksCube.WHITE, RubiksCube.GREEN, RubiksCube.ORANGE}, {RubiksCube.GREEN, RubiksCube.ORANGE}},
         };
 
-        f2lSolutionSteps(stickersToSolve);
+        try {
+            f2lSolutionSteps(stickersToSolve);
+
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void ollSolutionSteps(Integer[][] stickersToSolve) {
