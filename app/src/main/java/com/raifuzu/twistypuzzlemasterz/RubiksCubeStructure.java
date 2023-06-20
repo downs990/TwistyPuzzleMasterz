@@ -661,8 +661,6 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	}
 
-
-	// TODO: Test me!
 	@Override
 	public List<SurfaceName> correctLocationOfCubie(Integer[] cubieColors) {
 
