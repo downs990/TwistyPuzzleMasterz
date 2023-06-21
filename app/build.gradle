@@ -26,4 +26,6 @@ android {
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
 }
