@@ -294,6 +294,38 @@ public class RubiksCubeStructure implements RubiksCube {
 		// return the colors of the cubie
 		return correctCubie;
 	}
+	
+
+	// TODO: Test me! 
+	@Override
+	public CubeLayer.Cubie getCubieByColorStickers(ArrayList<Integer> stickersList){
+
+		CubeLayer.Cubie result = null;
+
+		for(CubeLayer currentLayer : this.rubiksCube.values()){
+
+			ArrayList<CubeLayer.Cubie> cubiesFromThisLayer = currentLayer.getAllCubies();
+			for(CubeLayer.Cubie currentCubie : cubiesFromThisLayer){
+				
+				ArrayList<Integer> a = stickersList;
+				ArrayList<Integer> b = currentCubie.getStickerColors();
+
+				// Check if the two array list have the same contents despite of order.
+				boolean isEqual = a.containsAll(b) 
+									&& b.containsAll(a) 
+									&& a.size() == b.size();
+
+				if(isEqual){
+					result = currentCubie;
+					break;
+				}
+			}
+
+		}
+
+		return result;
+	}
+
 
 
 	public String getSolutionAlgorithm(){

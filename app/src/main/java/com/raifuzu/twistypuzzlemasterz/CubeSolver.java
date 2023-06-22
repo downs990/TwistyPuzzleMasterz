@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
@@ -392,12 +393,6 @@ public class CubeSolver {
             Object obj = parser.parse(new BufferedReader(new InputStreamReader(fileStream)));
             result = (JSONObject) obj;
 
-//            JSONArray subjects = (JSONArray)jsonObject.get("Subjects");
-//            System.out.println("Name: " + name);
-//            System.out.println("Course: " + course);
-//            System.out.println("Subjects:");
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -408,53 +403,60 @@ public class CubeSolver {
 
 
 
-
     // TODO: Test Me!
     private void f2lStep2(Integer[][] f2lPair) {
 
-
         JSONObject f2lJSON = getF2L_Config();
 
-
         JSONArray fullF2L = (JSONArray) f2lJSON.get("F2L");
-        String case1 = fullF2L.get(0).toString();
+//        String case1 = fullF2L.get(0).toString();
+
+        ArrayList<Integer> cubie1AsColors = new ArrayList<> (Arrays.asList(f2lPair[0]) );
+        ArrayList<Integer> cubie2AsColors = new ArrayList<> (Arrays.asList(f2lPair[1]) );
+
+        CubeLayer.Cubie cubie1 = this.rubiksCube.getCubieByColorStickers( cubie1AsColors );
+        CubeLayer.Cubie cubie2 = this.rubiksCube.getCubieByColorStickers( cubie2AsColors );
 
 
-        Toast.makeText(rootView.getContext(), "F2L File: " + case1, Toast.LENGTH_LONG).show();
+        // Rotate the top layer to correctly align the F2L pair iff:
+        //      1. Both of the F2L cubies are in the U layer.
+        //      2. One F2L cubie is in the U layer and the other is in the correct location.
+        if( ( cubie1.getLocation().contains("U") && cubie2.getLocation().contains("U") )
+                || (cubie1.getLocation().contains("U") && this.rubiksCube.isCorrectCubieAtThisLocation(cubie2.getLocation().split(" ")))
+                || (cubie2.getLocation().contains("U") && this.rubiksCube.isCorrectCubieAtThisLocation(cubie1.getLocation().split(" ")))
+        ){
+
+            boolean correctAlignment = false;
+            while(! correctAlignment){
+                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+
+                String algorithmToExecute = "";
+                for(Object currentF2LCase : fullF2L){
+
+                    JSONObject cubie1FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie1");
+                    JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
+
+                    JSONObject c1Orientation = (JSONObject) cubie1FromFile.get("Orientation");
+                    JSONObject c2Orientation = (JSONObject) cubie2FromFile.get("Orientation");
+
+                    Map<String, String> cubie1Orientation = cubie1.getCubieOrientation();
+                    Map<String, String> cubie2Orientation = cubie2.getCubieOrientation();
+
+                    // TODO: Compare current orientation to the current f2l pair in the json file.
+                    if( true ){
+                        correctAlignment = true;
+                    }
+                }
 
 
 
-//        List<Integer> cubie1 = Arrays.asList(f2lPair[0]);
-//        List<Integer> cubie2 = Arrays.asList(f2lPair[1]);
-//        ArrayList<SurfaceName> cubie1Location = this.rubiksCube.findLocationOfCubie(cubie1);
-//        ArrayList<SurfaceName> cubie2Location = this.rubiksCube.findLocationOfCubie(cubie2);
-//
-//        // If one or both of the F2L cubies are in the U layer, then rotate the top layer to
-//        //      correctly align the F2L pair.
-//        if(cubie1Location.contains(SurfaceName.U) && cubie2Location.contains(SurfaceName.U)){
-//
-//            boolean correctAlignment = false;
-//            while(! correctAlignment){
-//                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
-//
-//                String algorithmToExecute = "";
-//                assert f2lJSON != null;
-//                for(JSONObject f2lCase : f2lJSON){
-//
-//                    String currentOrientation = ""; // TODO: Get from cubie1 and cubie2 above.
-//
-//                    // TODO: Compare current orientation to the current f2l pair in the json file.
-//                    if(Objects.equals( f2lCase.getString("Orientation") , currentOrientation) ){
-//                        correctAlignment = true;
-//                    }
-//                }
-//
-//
-//                // TODO: Execute the corresponding algorithm using the (orientation transform ) function.
-//                algorithmToExecute = orientationTransform(algorithmToExecute, cubie1Location);
-//                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
-//            }
-//        }
+                ArrayList<SurfaceName> locationOfCubie1 = this.rubiksCube.findLocationOfCubie(cubie1AsColors);
+                algorithmToExecute = orientationTransform(algorithmToExecute, locationOfCubie1);
+
+                // TODO: Execute the corresponding algorithm using the (orientation transform ) function.
+                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+            }
+        }
 
 
     }
