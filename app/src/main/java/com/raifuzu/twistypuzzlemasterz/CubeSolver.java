@@ -453,24 +453,41 @@ public class CubeSolver {
     }
 
     // TODO: Test me !
-    private Map<String, String> convertFileOrientation(JSONObject cubie){
+    private ArrayList< Map<String, String> > convertFileOrientation(Object currentF2LCase){
 
 
-        Map<String, String> result = new HashMap<>();
+        ArrayList< Map<String, String> > result = new ArrayList<>();
 
-        ArrayList<Integer> sideColors = new ArrayList<>();
-        ArrayList<Integer> stickerColors = new ArrayList<>();
+        JSONObject cubie1FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie1");
+        JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
+        JSONObject[] bothCubies = {cubie1FromFile, cubie2FromFile};
 
-        String cubieLocationFromFile = (String) ((JSONObject)cubie).get("Location");
-        String[] locationSurfaces = cubieLocationFromFile.split(" ");
-        for(String currentSurface : locationSurfaces){
-            Integer surfaceColor = this.rubiksCube.getLayerByLetter(currentSurface).getCenterColor();
-            sideColors.add(surfaceColor);
+        for (JSONObject currentCubie : bothCubies) {
+
+            Map<String, String> orientation = new HashMap<>((JSONObject) currentCubie.get("Orientation"));
+            Set<String> keys = orientation.keySet();
+            Collection<String> values = orientation.values();
+
+            Map<String, String> coloredOrientation = new HashMap<>();
+            ArrayList<Integer> sideColors = new ArrayList<>();
+            ArrayList<Integer> stickerColors = new ArrayList<>();
 
 
+            String cubieLocationFromFile = (String) ((JSONObject) currentCubie).get("Location");
+            String[] locationSurfaces = cubieLocationFromFile.split(" ");
+            for (String currentSurface : locationSurfaces) {
+                Integer surfaceColor = this.rubiksCube.getLayerByLetter(currentSurface).getCenterColor();
+                sideColors.add(surfaceColor);
 
+            }
 
+            // TODO: Populate coloredOrientation map
+            //
+
+            result.add(coloredOrientation);
         }
+
+
 
 
 
@@ -499,13 +516,9 @@ public class CubeSolver {
     // TODO: Test me !
     private boolean correctF2LFound(Object currentF2LCase, CubeLayer.Cubie cubie1, CubeLayer.Cubie cubie2){
 
-
-
-        JSONObject cubie1FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie1");
-        Map<String, String> cubie1OrientationFromFile = convertFileOrientation(cubie1FromFile);
-
-        JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
-        Map<String, String> cubie2OrientationFromFile = convertFileOrientation(cubie2FromFile);
+        ArrayList< Map<String, String> > bothCubies = convertFileOrientation(currentF2LCase);
+        Map<String, String> cubie1OrientationFromFile = bothCubies.get(0);
+        Map<String, String> cubie2OrientationFromFile = bothCubies.get(1);
 
 
         boolean result = false;
@@ -513,6 +526,7 @@ public class CubeSolver {
         Map<String, String> cubie1Orientation = cubie1.getCubieOrientation();
         Map<String, String> cubie2Orientation = cubie2.getCubieOrientation();
 
+        // TODO: Parallel sort all four maps by their key lists?
         if(cubie1OrientationFromFile.equals(cubie1Orientation)
                 && cubie2OrientationFromFile.equals(cubie2Orientation) ){
             result = true;

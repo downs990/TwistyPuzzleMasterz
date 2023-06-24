@@ -56,6 +56,86 @@
         "Location": "R U"
       },
       "SolutionAlgorithm": "U' F' U' F U R U R'"
+    },
+    {
+      "Case": 4,
+      "Cubie1": {
+        "Orientation": {
+          "STICKER_COLOR_1": "SIDE_COLOR_2",
+          "STICKER_COLOR_2": "SIDE_COLOR_3",
+          "STICKER_COLOR_3": "SIDE_COLOR_1"
+        },
+        "Location":  "D F R"
+      },
+      "Cubie2": {
+        "Orientation": {
+          "STICKER_COLOR_2": "SIDE_COLOR_2",
+          "STICKER_COLOR_3": "SIDE_COLOR_3"
+        },
+        "Location": "R F"
+      },
+      "SolutionAlgorithm": "F' U2 F' U' F U' F' U2 F2"
+    },
+    {
+      "Case": 5,
+      "Cubie1": {
+        "Orientation": {
+          "STICKER_COLOR_1": "SIDE_COLOR_2",
+          "STICKER_COLOR_2": "SIDE_COLOR_3",
+          "STICKER_COLOR_3": "SIDE_COLOR_1"
+        },
+        "Location":  "D F R"
+      },
+      "Cubie2": {
+        "Orientation": {
+          "STICKER_COLOR_2": "SIDE_COLOR_3",
+          "STICKER_COLOR_3": "SIDE_COLOR_2"
+        },
+        "Location": "R F"
+      },
+      "SolutionAlgorithm": "F2 L' U' L U F U' F"
+    },
+    {
+      "Case": 6,
+      "Cubie1": {
+        "Orientation": {
+          "STICKER_COLOR_1": "SIDE_COLOR_2",
+          "STICKER_COLOR_2": "SIDE_COLOR_3",
+          "STICKER_COLOR_3": "SIDE_COLOR_1"
+        },
+        "Location":  "D F R"
+      },
+      "Cubie2": {
+        "Orientation": {
+          "STICKER_COLOR_2": "SIDE_COLOR_4",
+          "STICKER_COLOR_3": "SIDE_COLOR_3"
+        },
+        "Location": "R U"
+      },
+      "SolutionAlgorithm": "R U' R2 F R F'"
+    },
+
+
+
+
+    {
+      "Case": 41,
+      "Cubie1": {
+        "Orientation": {
+          "STICKER_COLOR_1": "SIDE_COLOR_4",
+          "STICKER_COLOR_2": "SIDE_COLOR_3",
+          "STICKER_COLOR_3": "SIDE_COLOR_2"
+        },
+        "Location":  "U F R"
+      },
+      "Cubie2": {
+        "Orientation": {
+          "STICKER_COLOR_2": "SIDE_COLOR_3",
+          "STICKER_COLOR_3": "SIDE_COLOR_4"
+        },
+        "Location": "R U"
+      },
+      "SolutionAlgorithm": "F' U' F' L F L' U2 F"
     }
   ]
 }
