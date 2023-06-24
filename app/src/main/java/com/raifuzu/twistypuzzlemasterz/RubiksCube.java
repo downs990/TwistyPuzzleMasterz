@@ -82,5 +82,8 @@ public interface RubiksCube {
 
 	String generateScrambleAlgorithm(int size);
 
+	CubeLayer getLayerByLetter(String layerLetter);
+	ArrayList<CubeLayer> getLayersList();
+
 
 }

@@ -434,11 +434,12 @@ public class CubeSolver {
                 String algorithmToExecute = "";
                 for(Object currentF2LCase : fullF2L){
 
-                    JSONObject cubie1FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie1");
-                    JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
-
                     // Compare current orientation to the current f2l pair in the json file.
-                    correctAlignment = correctF2LFound(cubie1FromFile, cubie2FromFile, cubie1, cubie2);
+                    correctAlignment = correctF2LFound(currentF2LCase, cubie1, cubie2);
+                    if(correctAlignment){
+                        algorithmToExecute = (String) ((JSONObject)currentF2LCase).get("SolutionAlgorithm");
+                        break;
+                    }
                 }
 
                 ArrayList<SurfaceName> locationOfCubie1 = this.rubiksCube.findLocationOfCubie(cubie1AsColors);
@@ -451,27 +452,71 @@ public class CubeSolver {
 
     }
 
+    // TODO: Test me !
+    private Map<String, String> convertFileOrientation(JSONObject cubie){
+
+
+        Map<String, String> result = new HashMap<>();
+
+        ArrayList<Integer> sideColors = new ArrayList<>();
+        ArrayList<Integer> stickerColors = new ArrayList<>();
+
+        String cubieLocationFromFile = (String) ((JSONObject)cubie).get("Location");
+        String[] locationSurfaces = cubieLocationFromFile.split(" ");
+        for(String currentSurface : locationSurfaces){
+            Integer surfaceColor = this.rubiksCube.getLayerByLetter(currentSurface).getCenterColor();
+            sideColors.add(surfaceColor);
+
+
+
+
+        }
+
+
+
+//        // EXAMPLE: CASE 1  (in comments below )
+//
+//        // {"WHITE":"WHITE","RED":"RED","GREEN":"GREEN"}
+//        JSONObject c1Orientation = (JSONObject) cubie1FromFile.get("Orientation");
+//        // {"GREEN":"RED","RED":"GREEN"}
+//        JSONObject c2Orientation = (JSONObject) cubie2FromFile.get("Orientation");
+//
+//        // {STICKER_C1 : SIDE_C1, STICKER_C2 : SIDE_C2, STICKER_C3 : SIDE_C3}
+//        Set<String> keys1 = cubie1Orientation.keySet();
+//        Collection<String> values1 = cubie1Orientation.values();
+//
+//        // {STICKER_C3 : SIDE_C2, STICKER_C2 : SIDE_C3}
+//        Set<String> keys2 = cubie2Orientation.keySet();
+//        Collection<String> values2 = cubie2Orientation.values();
+
+
+
+        return result;
+
+    }
+
 
     // TODO: Test me !
-    private boolean correctF2LFound(JSONObject cubie1FromFile, JSONObject cubie2FromFile,
-                                    CubeLayer.Cubie cubie1, CubeLayer.Cubie cubie2){
+    private boolean correctF2LFound(Object currentF2LCase, CubeLayer.Cubie cubie1, CubeLayer.Cubie cubie2){
+
+
+
+        JSONObject cubie1FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie1");
+        Map<String, String> cubie1OrientationFromFile = convertFileOrientation(cubie1FromFile);
+
+        JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
+        Map<String, String> cubie2OrientationFromFile = convertFileOrientation(cubie2FromFile);
+
 
         boolean result = false;
 
-        JSONObject c1Orientation = (JSONObject) cubie1FromFile.get("Orientation");
-        JSONObject c2Orientation = (JSONObject) cubie2FromFile.get("Orientation");
         Map<String, String> cubie1Orientation = cubie1.getCubieOrientation();
         Map<String, String> cubie2Orientation = cubie2.getCubieOrientation();
 
-
-        Set<String> keys1 = cubie1Orientation.keySet();
-        Collection<String> values1 = cubie1Orientation.values();
-
-        Set<String> keys2 = cubie2Orientation.keySet();
-        Collection<String> values2 = cubie2Orientation.values();
-
-
-
+        if(cubie1OrientationFromFile.equals(cubie1Orientation)
+                && cubie2OrientationFromFile.equals(cubie2Orientation) ){
+            result = true;
+        }
 
 
         return result;

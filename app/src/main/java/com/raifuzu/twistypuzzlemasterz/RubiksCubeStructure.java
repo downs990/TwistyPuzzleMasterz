@@ -294,9 +294,9 @@ public class RubiksCubeStructure implements RubiksCube {
 		// return the colors of the cubie
 		return correctCubie;
 	}
-	
 
-	// TODO: Test me! 
+
+	// TODO: Test me!
 	@Override
 	public CubeLayer.Cubie getCubieByColorStickers(ArrayList<Integer> stickersList){
 
@@ -306,13 +306,13 @@ public class RubiksCubeStructure implements RubiksCube {
 
 			ArrayList<CubeLayer.Cubie> cubiesFromThisLayer = currentLayer.getAllCubies();
 			for(CubeLayer.Cubie currentCubie : cubiesFromThisLayer){
-				
+
 				ArrayList<Integer> a = stickersList;
 				ArrayList<Integer> b = currentCubie.getStickerColors();
 
 				// Check if the two array list have the same contents despite of order.
-				boolean isEqual = a.containsAll(b) 
-									&& b.containsAll(a) 
+				boolean isEqual = a.containsAll(b)
+									&& b.containsAll(a)
 									&& a.size() == b.size();
 
 				if(isEqual){
@@ -410,7 +410,7 @@ public class RubiksCubeStructure implements RubiksCube {
 			}
 
 
-			initLayers(); 
+			initLayers();
 
 			// Update all cubie orientations
 			finalizeOrientation();
@@ -445,7 +445,7 @@ public class RubiksCubeStructure implements RubiksCube {
 			// New Locations:     back,                       right                       front                     left
 			layer.getSurfaceRightColors(),layer.getSurfaceFrontColors(), layer.getSurfaceLeftColors(), layer.getSurfaceBackColors()
 		);
- 
+
 	}
 
 
@@ -631,9 +631,13 @@ public class RubiksCubeStructure implements RubiksCube {
 
 	}
 
+	@Override
+	public CubeLayer getLayerByLetter(String layerLetter){
+		return this.rubiksCube.get(layerLetter);
+	}
 
 
-
+	@Override
 	public ArrayList<CubeLayer> getLayersList(){
 
 		// Forces this function to return the layers in the same order that the
