@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -467,21 +468,42 @@ public class CubeSolver {
         Integer color2 = this.rubiksCube.getLayerByLetter("F").getCenterColor();
         Integer color3 = this.rubiksCube.getLayerByLetter("R").getCenterColor();
         Integer color4 = this.rubiksCube.getLayerByLetter("U").getCenterColor();
-        Integer[] allColorsForMap = {color1, color2, color3, color4};
+        ArrayList<String> colorsList = new ArrayList<>(Arrays.asList(
+                CubeLayer.colorIntToString( color1 ) ,
+                CubeLayer.colorIntToString( color2 ) ,
+                CubeLayer.colorIntToString( color3 ) ,
+                CubeLayer.colorIntToString( color4 ) ));
 
-        // TODO: *_COLOR_1 = color1   *_COLOR_2 = color2   *_COLOR_3 = color3   *_COLOR_4 = color4
 
         for (JSONObject currentCubie : bothCubies) {
 
-            Map<String, String> orientation = new HashMap<>((JSONObject) currentCubie.get("Orientation"));
-            Set<String> keys = orientation.keySet();
-            Collection<String> values = orientation.values();
-
             Map<String, String> coloredOrientation = new HashMap<>();
 
-            // TODO: Loop through keys() and values() lists
-            // TODO: Check if each string contains 1, 2, 3, or 4
-            // TODO: Based on the number that is found create a new HashMap<> with the colorsX replacing X
+            // TODO: Check if this HashMap<> has expected values.
+            Map<String, String> orientation = new HashMap<>((JSONObject) currentCubie.get("Orientation"));
+            Object[] keys = orientation.keySet().toArray();
+            Iterator<String> values = orientation.values().iterator();
+
+            // Loop through keys() and values() lists
+            int keyIndex = 0;
+            while(values.hasNext() ){
+
+                String key = keys[keyIndex].toString();
+                String value = values.next();
+
+                String newKey = "";
+                String newValue = "";
+
+                // Check if each string contains 1, 2, 3, or 4
+                // Based on the number that is found create a new HashMap<> with the colorsX replacing X
+                newKey = getColorByNumber(key, colorsList);
+                newValue = getColorByNumber(value, colorsList);
+
+                coloredOrientation.put(newKey, newValue);
+
+
+                keyIndex++;
+            }
 
             result.add(coloredOrientation);
         }
@@ -489,6 +511,24 @@ public class CubeSolver {
 
         return result;
 
+    }
+
+    private String getColorByNumber(String currentString, ArrayList<String> colorsList){
+
+        // *_COLOR_1 = color1   *_COLOR_2 = color2   *_COLOR_3 = color3   *_COLOR_4 = color4
+
+        String result = "";
+        if(currentString.contains("1")){
+            result = colorsList.get(0);
+        }else if(currentString.contains("2")){
+            result = colorsList.get(1);
+        }else if(currentString.contains("3")){
+            result = colorsList.get(2);
+        }else if(currentString.contains("4")){
+            result = colorsList.get(3);
+        }
+
+        return result;
     }
 
 
