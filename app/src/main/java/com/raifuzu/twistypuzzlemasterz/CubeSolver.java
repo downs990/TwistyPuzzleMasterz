@@ -462,6 +462,15 @@ public class CubeSolver {
         JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
         JSONObject[] bothCubies = {cubie1FromFile, cubie2FromFile};
 
+
+        Integer color1 = this.rubiksCube.getLayerByLetter("D").getCenterColor();
+        Integer color2 = this.rubiksCube.getLayerByLetter("F").getCenterColor();
+        Integer color3 = this.rubiksCube.getLayerByLetter("R").getCenterColor();
+        Integer color4 = this.rubiksCube.getLayerByLetter("U").getCenterColor();
+        Integer[] allColorsForMap = {color1, color2, color3, color4};
+
+        // TODO: *_COLOR_1 = color1   *_COLOR_2 = color2   *_COLOR_3 = color3   *_COLOR_4 = color4
+
         for (JSONObject currentCubie : bothCubies) {
 
             Map<String, String> orientation = new HashMap<>((JSONObject) currentCubie.get("Orientation"));
@@ -469,43 +478,13 @@ public class CubeSolver {
             Collection<String> values = orientation.values();
 
             Map<String, String> coloredOrientation = new HashMap<>();
-            ArrayList<Integer> sideColors = new ArrayList<>();
-            ArrayList<Integer> stickerColors = new ArrayList<>();
 
-
-            String cubieLocationFromFile = (String) ((JSONObject) currentCubie).get("Location");
-            String[] locationSurfaces = cubieLocationFromFile.split(" ");
-            for (String currentSurface : locationSurfaces) {
-                Integer surfaceColor = this.rubiksCube.getLayerByLetter(currentSurface).getCenterColor();
-                sideColors.add(surfaceColor);
-
-            }
-
-            // TODO: Populate coloredOrientation map
-            //
+            // TODO: Loop through keys() and values() lists
+            // TODO: Check if each string contains 1, 2, 3, or 4
+            // TODO: Based on the number that is found create a new HashMap<> with the colorsX replacing X
 
             result.add(coloredOrientation);
         }
-
-
-
-
-
-//        // EXAMPLE: CASE 1  (in comments below )
-//
-//        // {"WHITE":"WHITE","RED":"RED","GREEN":"GREEN"}
-//        JSONObject c1Orientation = (JSONObject) cubie1FromFile.get("Orientation");
-//        // {"GREEN":"RED","RED":"GREEN"}
-//        JSONObject c2Orientation = (JSONObject) cubie2FromFile.get("Orientation");
-//
-//        // {STICKER_C1 : SIDE_C1, STICKER_C2 : SIDE_C2, STICKER_C3 : SIDE_C3}
-//        Set<String> keys1 = cubie1Orientation.keySet();
-//        Collection<String> values1 = cubie1Orientation.values();
-//
-//        // {STICKER_C3 : SIDE_C2, STICKER_C2 : SIDE_C3}
-//        Set<String> keys2 = cubie2Orientation.keySet();
-//        Collection<String> values2 = cubie2Orientation.values();
-
 
 
         return result;
