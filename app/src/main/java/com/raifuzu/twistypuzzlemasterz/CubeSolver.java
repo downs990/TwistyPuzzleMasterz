@@ -491,13 +491,10 @@ public class CubeSolver {
                 String key = keys[keyIndex].toString();
                 String value = values.next();
 
-                String newKey = "";
-                String newValue = "";
-
                 // Check if each string contains 1, 2, 3, or 4
                 // Based on the number that is found create a new HashMap<> with the colorsX replacing X
-                newKey = getColorByNumber(key, colorsList);
-                newValue = getColorByNumber(value, colorsList);
+                String newKey = getColorByNumber(key, colorsList);
+                String newValue = getColorByNumber(value, colorsList);
 
                 coloredOrientation.put(newKey, newValue);
 
