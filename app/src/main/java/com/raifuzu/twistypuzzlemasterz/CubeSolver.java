@@ -468,11 +468,17 @@ public class CubeSolver {
         Integer color2 = this.rubiksCube.getLayerByLetter("F").getCenterColor();
         Integer color3 = this.rubiksCube.getLayerByLetter("R").getCenterColor();
         Integer color4 = this.rubiksCube.getLayerByLetter("U").getCenterColor();
+        Integer color5 = this.rubiksCube.getLayerByLetter("L").getCenterColor();
+        Integer color6 = this.rubiksCube.getLayerByLetter("B").getCenterColor();
         ArrayList<String> colorsList = new ArrayList<>(Arrays.asList(
                 CubeLayer.colorIntToString( color1 ) ,
                 CubeLayer.colorIntToString( color2 ) ,
                 CubeLayer.colorIntToString( color3 ) ,
-                CubeLayer.colorIntToString( color4 ) ));
+                CubeLayer.colorIntToString( color4 ) ,
+                CubeLayer.colorIntToString( color5 ) ,
+                CubeLayer.colorIntToString( color6 )
+
+        ));
 
 
         for (JSONObject currentCubie : bothCubies) {
@@ -523,6 +529,10 @@ public class CubeSolver {
             result = colorsList.get(2);
         }else if(currentString.contains("4")){
             result = colorsList.get(3);
+        }else if(currentString.contains("5")){
+            result = colorsList.get(4);
+        }else if(currentString.contains("6")){
+            result = colorsList.get(5);
         }
 
         return result;
@@ -542,7 +552,11 @@ public class CubeSolver {
         Map<String, String> cubie1Orientation = cubie1.getCubieOrientation();
         Map<String, String> cubie2Orientation = cubie2.getCubieOrientation();
 
-        // TODO: Parallel sort all four maps by their key lists?
+        // TODO: Proper way to check if two HashMaps have equal key value pairs
+//        boolean isEqual = hashMap1.equals(hashMap2) && hashMap2.equals(hashMap1) &&
+//                hashMap1.entrySet().containsAll(hashMap2.entrySet()) &&
+//                hashMap2.entrySet().containsAll(hashMap1.entrySet());
+
         if(cubie1OrientationFromFile.equals(cubie1Orientation)
                 && cubie2OrientationFromFile.equals(cubie2Orientation) ){
             result = true;
