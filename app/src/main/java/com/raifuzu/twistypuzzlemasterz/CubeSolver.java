@@ -365,7 +365,7 @@ public class CubeSolver {
         List<SurfaceName> cubie1CorrectLocation = this.rubiksCube.correctLocationOfCubie(f2lPairCubies[0]);
         List<SurfaceName> cubie2CorrectLocation = this.rubiksCube.correctLocationOfCubie(f2lPairCubies[1]);
         Collections.sort(cubie1CorrectLocation);
-        Collections.sort(cubie1CorrectLocation);
+        Collections.sort(cubie2CorrectLocation);
 
         // If one or both are slotted incorrectly, then remove them from that location
         // using the 'removal maneuver'
@@ -373,7 +373,11 @@ public class CubeSolver {
         // If the corner cubie is in the incorrect spot on the D layer.
         if (!cubie1Location.equals(cubie1CorrectLocation) && cubie1Location.contains(SurfaceName.D)) {
             removalManeuver(cubie1Location);
+
+            cubie2Location = this.rubiksCube.findLocationOfCubie(cubie2);
+            Collections.sort(cubie2Location);
         }
+
 
         // If the edge cubie is in the incorrect spot on the middle layer.
         if (!cubie2Location.equals(cubie2CorrectLocation)
@@ -430,9 +434,9 @@ public class CubeSolver {
 
             boolean correctAlignment = false;
             while(! correctAlignment){
-                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
 
                 String algorithmToExecute = "";
+                int caseNumber = 0;
                 for(Object currentF2LCase : fullF2L){
 
                     // Compare current orientation to the current f2l pair in the json file.
@@ -441,47 +445,32 @@ public class CubeSolver {
                         algorithmToExecute = (String) ((JSONObject)currentF2LCase).get("SolutionAlgorithm");
                         break;
                     }
+                    caseNumber++;
                 }
 
-                ArrayList<SurfaceName> locationOfCubie1 = this.rubiksCube.findLocationOfCubie(cubie1AsColors);
-                algorithmToExecute = orientationTransform(algorithmToExecute, locationOfCubie1);
+                // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
+                if(Objects.equals(algorithmToExecute, "")){
 
-                // Execute the corresponding algorithm using the (orientation transform ) function.
-                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+                    this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+
+                    cubie1 = this.rubiksCube.getCubieByColorStickers( cubie1AsColors );
+                    cubie2 = this.rubiksCube.getCubieByColorStickers( cubie2AsColors );
+
+                }
+                // If you've found the correct case and alignment then execute it's transformed
+                // solution algorithm.
+                else{
+                    ArrayList<SurfaceName> locationOfCubie1 = this.rubiksCube.findLocationOfCubie(cubie1AsColors);
+                    algorithmToExecute = orientationTransform(algorithmToExecute, locationOfCubie1);
+
+                    this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+                }
+
+
             }
         }
 
     }
-
-
-//    private ArrayList<SurfaceName> convertSurfaceStringToEnum(String location){
-//
-//        ArrayList<SurfaceName> result = new ArrayList<>();
-//
-//        String[] intersections = location.split(" ");
-//        for(String intersection : intersections){
-//
-//            SurfaceName currentSurface = null;
-//            if(intersection.equals("U")){
-//                currentSurface = SurfaceName.U;
-//            }if(intersection.equals("L")){
-//                currentSurface = SurfaceName.L;
-//            }if(intersection.equals("F")){
-//                currentSurface = SurfaceName.F;
-//            }if(intersection.equals("R")){
-//                currentSurface = SurfaceName.R;
-//            }if(intersection.equals("B")){
-//                currentSurface = SurfaceName.B;
-//            }if(intersection.equals("D")){
-//                currentSurface = SurfaceName.D;
-//            }
-//
-//            result.add(currentSurface);
-//        }
-//
-//
-//        return result;
-//    }
 
 
     // TODO: Test me !
@@ -489,13 +478,12 @@ public class CubeSolver {
             Object currentF2LCase, CubeLayer.Cubie cubie2){
 
 
-
         // Gets the location letters of the sticker colors on the cubie.
         ArrayList<SurfaceName> correctLocation = (ArrayList<SurfaceName>)this.rubiksCube
                             .correctLocationOfCubie(
                                     cubie2
                                             .getStickerColors()
-                                            .toArray( new Integer[0]) ); // TODO: Make sure this works!
+                                            .toArray( new Integer[0]) );
 
         ArrayList< Map<String, String> > result = new ArrayList<>();
 
@@ -503,10 +491,7 @@ public class CubeSolver {
         JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
         JSONObject[] bothCubies = {cubie1FromFile, cubie2FromFile};
 
-//        String cubie2Location = cubie2FromFile.get("Location").toString();
-//        ArrayList<SurfaceName> cubie2LocationList = convertSurfaceStringToEnum(cubie2Location);
-
-        // TODO: Transform the colors list that gets populated on the f2l config file orientation hashmaps
+        // Transform the colors list that gets populated on the f2l config file orientation hashmaps
         String cubeOrientation = "D F R U L B"; // original orientation
         cubeOrientation = orientationTransform(cubeOrientation, correctLocation);
 
@@ -526,9 +511,7 @@ public class CubeSolver {
                 CubeLayer.colorIntToString( color4 ) ,
                 CubeLayer.colorIntToString( color5 ) ,
                 CubeLayer.colorIntToString( color6 )
-
         ));
-
 
         for (JSONObject currentCubie : bothCubies) {
 
@@ -599,11 +582,6 @@ public class CubeSolver {
         Map<String, String> cubie1Orientation = cubie1.getCubieOrientation();
         Map<String, String> cubie2Orientation = cubie2.getCubieOrientation();
 
-        // TODO: Proper way to check if two HashMaps have equal key value pairs (not sure if this is needed ? )
-//        boolean isEqual = hashMap1.equals(hashMap2) && hashMap2.equals(hashMap1) &&
-//                hashMap1.entrySet().containsAll(hashMap2.entrySet()) &&
-//                hashMap2.entrySet().containsAll(hashMap1.entrySet());
-
         if(cubie1OrientationFromFile.equals(cubie1Orientation)
                 && cubie2OrientationFromFile.equals(cubie2Orientation) ){
             result = true;
@@ -614,7 +592,6 @@ public class CubeSolver {
     }
 
 
-    // TODO: Test me!     (8/10 tested)
     private String orientationTransform(String originalAlgorithm, ArrayList<SurfaceName> cubiesCurrentLocation) {
 
         //   PAPER EXPECTED  -> [F, R, B, L] [F, R, B, L] [F, R, B, L] [F, R, B, L]
@@ -661,7 +638,6 @@ public class CubeSolver {
     }
 
 
-    // TODO: Test me!      (8/10 tested)
     private void removalManeuver(ArrayList<SurfaceName> cubiesCurrentLocation) {
 
 
