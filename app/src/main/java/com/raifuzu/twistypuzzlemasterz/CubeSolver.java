@@ -485,7 +485,6 @@ public class CubeSolver {
 
             Map<String, String> coloredOrientation = new HashMap<>();
 
-            // TODO: Check if this HashMap<> has expected values.
             Map<String, String> orientation = new HashMap<>((JSONObject) currentCubie.get("Orientation"));
             Object[] keys = orientation.keySet().toArray();
             Iterator<String> values = orientation.values().iterator();
@@ -542,7 +541,7 @@ public class CubeSolver {
     // TODO: Test me !
     private boolean correctF2LFound(Object currentF2LCase, CubeLayer.Cubie cubie1, CubeLayer.Cubie cubie2){
 
-        ArrayList< Map<String, String> > bothCubies = convertFileOrientation(currentF2LCase);
+        ArrayList< Map<String, String> > bothCubies = convertFileOrientation(currentF2LCase); // TODO: Not sure if you need to convert to colors
         Map<String, String> cubie1OrientationFromFile = bothCubies.get(0);
         Map<String, String> cubie2OrientationFromFile = bothCubies.get(1);
 
@@ -552,7 +551,9 @@ public class CubeSolver {
         Map<String, String> cubie1Orientation = cubie1.getCubieOrientation();
         Map<String, String> cubie2Orientation = cubie2.getCubieOrientation();
 
-        // TODO: Proper way to check if two HashMaps have equal key value pairs
+        // TODO: Check if the locations of cubie1 and cubie2 match the location at currentF2LCase
+        // TODO: Check if the orientations of cubie1 and cubie2 match that of currentF2LCase (without comparing colors)
+        // TODO: Proper way to check if two HashMaps have equal key value pairs (not sure if this is needed ? )
 //        boolean isEqual = hashMap1.equals(hashMap2) && hashMap2.equals(hashMap1) &&
 //                hashMap1.entrySet().containsAll(hashMap2.entrySet()) &&
 //                hashMap2.entrySet().containsAll(hashMap1.entrySet());
