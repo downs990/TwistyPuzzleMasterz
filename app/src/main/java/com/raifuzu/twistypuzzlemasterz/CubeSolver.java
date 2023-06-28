@@ -453,9 +453,49 @@ public class CubeSolver {
 
     }
 
-    // TODO: Test me !
-    private ArrayList< Map<String, String> > convertFileOrientation(Object currentF2LCase){
 
+//    private ArrayList<SurfaceName> convertSurfaceStringToEnum(String location){
+//
+//        ArrayList<SurfaceName> result = new ArrayList<>();
+//
+//        String[] intersections = location.split(" ");
+//        for(String intersection : intersections){
+//
+//            SurfaceName currentSurface = null;
+//            if(intersection.equals("U")){
+//                currentSurface = SurfaceName.U;
+//            }if(intersection.equals("L")){
+//                currentSurface = SurfaceName.L;
+//            }if(intersection.equals("F")){
+//                currentSurface = SurfaceName.F;
+//            }if(intersection.equals("R")){
+//                currentSurface = SurfaceName.R;
+//            }if(intersection.equals("B")){
+//                currentSurface = SurfaceName.B;
+//            }if(intersection.equals("D")){
+//                currentSurface = SurfaceName.D;
+//            }
+//
+//            result.add(currentSurface);
+//        }
+//
+//
+//        return result;
+//    }
+
+
+    // TODO: Test me !
+    private ArrayList< Map<String, String> > convertFileOrientation(
+            Object currentF2LCase, CubeLayer.Cubie cubie2){
+
+
+
+        // Gets the location letters of the sticker colors on the cubie.
+        ArrayList<SurfaceName> correctLocation = (ArrayList<SurfaceName>)this.rubiksCube
+                            .correctLocationOfCubie(
+                                    cubie2
+                                            .getStickerColors()
+                                            .toArray( new Integer[0]) ); // TODO: Make sure this works!
 
         ArrayList< Map<String, String> > result = new ArrayList<>();
 
@@ -463,13 +503,22 @@ public class CubeSolver {
         JSONObject cubie2FromFile = (JSONObject) ((JSONObject)currentF2LCase).get("Cubie2");
         JSONObject[] bothCubies = {cubie1FromFile, cubie2FromFile};
 
+//        String cubie2Location = cubie2FromFile.get("Location").toString();
+//        ArrayList<SurfaceName> cubie2LocationList = convertSurfaceStringToEnum(cubie2Location);
 
-        Integer color1 = this.rubiksCube.getLayerByLetter("D").getCenterColor();
-        Integer color2 = this.rubiksCube.getLayerByLetter("F").getCenterColor();
-        Integer color3 = this.rubiksCube.getLayerByLetter("R").getCenterColor();
-        Integer color4 = this.rubiksCube.getLayerByLetter("U").getCenterColor();
-        Integer color5 = this.rubiksCube.getLayerByLetter("L").getCenterColor();
-        Integer color6 = this.rubiksCube.getLayerByLetter("B").getCenterColor();
+        // TODO: Transform the colors list that gets populated on the f2l config file orientation hashmaps
+        String cubeOrientation = "D F R U L B"; // original orientation
+        cubeOrientation = orientationTransform(cubeOrientation, correctLocation);
+
+        String[] cubeOrientationList = cubeOrientation.split(" ");
+
+
+        Integer color1 = this.rubiksCube.getLayerByLetter(cubeOrientationList[0]).getCenterColor();
+        Integer color2 = this.rubiksCube.getLayerByLetter(cubeOrientationList[1]).getCenterColor();
+        Integer color3 = this.rubiksCube.getLayerByLetter(cubeOrientationList[2]).getCenterColor();
+        Integer color4 = this.rubiksCube.getLayerByLetter(cubeOrientationList[3]).getCenterColor();
+        Integer color5 = this.rubiksCube.getLayerByLetter(cubeOrientationList[4]).getCenterColor();
+        Integer color6 = this.rubiksCube.getLayerByLetter(cubeOrientationList[5]).getCenterColor();
         ArrayList<String> colorsList = new ArrayList<>(Arrays.asList(
                 CubeLayer.colorIntToString( color1 ) ,
                 CubeLayer.colorIntToString( color2 ) ,
@@ -541,18 +590,15 @@ public class CubeSolver {
     // TODO: Test me !
     private boolean correctF2LFound(Object currentF2LCase, CubeLayer.Cubie cubie1, CubeLayer.Cubie cubie2){
 
-        ArrayList< Map<String, String> > bothCubies = convertFileOrientation(currentF2LCase); // TODO: Not sure if you need to convert to colors
+        ArrayList< Map<String, String> > bothCubies = convertFileOrientation(currentF2LCase, cubie2);
         Map<String, String> cubie1OrientationFromFile = bothCubies.get(0);
         Map<String, String> cubie2OrientationFromFile = bothCubies.get(1);
-
 
         boolean result = false;
 
         Map<String, String> cubie1Orientation = cubie1.getCubieOrientation();
         Map<String, String> cubie2Orientation = cubie2.getCubieOrientation();
 
-        // TODO: Check if the locations of cubie1 and cubie2 match the location at currentF2LCase
-        // TODO: Check if the orientations of cubie1 and cubie2 match that of currentF2LCase (without comparing colors)
         // TODO: Proper way to check if two HashMaps have equal key value pairs (not sure if this is needed ? )
 //        boolean isEqual = hashMap1.equals(hashMap2) && hashMap2.equals(hashMap1) &&
 //                hashMap1.entrySet().containsAll(hashMap2.entrySet()) &&

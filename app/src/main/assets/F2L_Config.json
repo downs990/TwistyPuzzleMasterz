@@ -487,8 +487,8 @@
       },
       "Cubie2": {
         "Orientation": {
-          "STICKER_COLOR_3": "SIDE_COLOR_2",
-          "STICKER_COLOR_2": "SIDE_COLOR_5"
+          "STICKER_COLOR_2": "SIDE_COLOR_5",
+          "STICKER_COLOR_3": "SIDE_COLOR_4"
         },
         "Location": "L U"
       },
@@ -582,8 +582,8 @@
       },
       "Cubie2": {
         "Orientation": {
-          "STICKER_COLOR_3": "SIDE_COLOR_4",
-          "STICKER_COLOR_2": "SIDE_COLOR_3"
+          "STICKER_COLOR_2": "SIDE_COLOR_3",
+          "STICKER_COLOR_3": "SIDE_COLOR_4"
         },
         "Location": "R U"
       },
