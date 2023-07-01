@@ -254,7 +254,6 @@ public class CubeSolver {
     }
 
 
-    // TODO:
     //  IMPORTANT:
     //      This implementation will have to change to something more dynamic if you
     //      ever decide to change the initial orientation of the cube. Or if you add whole
@@ -409,13 +408,10 @@ public class CubeSolver {
 
 
 
-    // TODO: Test Me!
     private void f2lStep2(Integer[][] f2lPair) {
 
         JSONObject f2lJSON = getF2L_Config();
-
         JSONArray fullF2L = (JSONArray) f2lJSON.get("F2L");
-//        String case1 = fullF2L.get(0).toString();
 
         ArrayList<Integer> cubie1AsColors = new ArrayList<> (Arrays.asList(f2lPair[0]) );
         ArrayList<Integer> cubie2AsColors = new ArrayList<> (Arrays.asList(f2lPair[1]) );
@@ -424,19 +420,38 @@ public class CubeSolver {
         CubeLayer.Cubie cubie2 = this.rubiksCube.getCubieByColorStickers( cubie2AsColors );
 
 
+
+        // If both pieces are solved already then do nothing.
+        if( this.rubiksCube.isCubieAtLocationSolved(cubie1.getLocation().split(" "))
+                                            &&
+            this.rubiksCube.isCubieAtLocationSolved(cubie2.getLocation().split(" ")) )
+        {
+            return;
+        }
+
+
+
         // Rotate the top layer to correctly align the F2L pair iff:
         //      1. Both of the F2L cubies are in the U layer.
+        boolean case1 = ( cubie1.getLocation().contains("U") && cubie2.getLocation().contains("U") );
         //      2. One F2L cubie is in the U layer and the other is in the correct location.
-        if( ( cubie1.getLocation().contains("U") && cubie2.getLocation().contains("U") )
-                || (cubie1.getLocation().contains("U") && this.rubiksCube.isCorrectCubieAtThisLocation(cubie2.getLocation().split(" ")))
-                || (cubie2.getLocation().contains("U") && this.rubiksCube.isCorrectCubieAtThisLocation(cubie1.getLocation().split(" ")))
-        ){
+        boolean case2 = (cubie1.getLocation().contains("U") && this.rubiksCube
+                               .isCorrectCubieAtThisLocation(cubie2.getLocation().split(" ")))
+                                                    ||
+                         (cubie2.getLocation().contains("U") &&  this.rubiksCube
+                                .isCorrectCubieAtThisLocation(cubie1.getLocation().split(" ")));
+
+        //      3. Both F2L cubies are in the correct location (with wrong orientation)
+        boolean case3 = this.rubiksCube.isCorrectCubieAtThisLocation(cubie1.getLocation().split(" "))
+                                                    &&
+                        this.rubiksCube.isCorrectCubieAtThisLocation(cubie2.getLocation().split(" "));
+
+        if(  case1 || case2 || case3 ){
 
             boolean correctAlignment = false;
             while(! correctAlignment){
 
                 String algorithmToExecute = "";
-                int caseNumber = 0;
                 for(Object currentF2LCase : fullF2L){
 
                     // Compare current orientation to the current f2l pair in the json file.
@@ -445,7 +460,6 @@ public class CubeSolver {
                         algorithmToExecute = (String) ((JSONObject)currentF2LCase).get("SolutionAlgorithm");
                         break;
                     }
-                    caseNumber++;
                 }
 
                 // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
@@ -473,7 +487,6 @@ public class CubeSolver {
     }
 
 
-    // TODO: Test me !
     private ArrayList< Map<String, String> > convertFileOrientation(
             Object currentF2LCase, CubeLayer.Cubie cubie2){
 
@@ -570,7 +583,6 @@ public class CubeSolver {
     }
 
 
-    // TODO: Test me !
     private boolean correctF2LFound(Object currentF2LCase, CubeLayer.Cubie cubie1, CubeLayer.Cubie cubie2){
 
         ArrayList< Map<String, String> > bothCubies = convertFileOrientation(currentF2LCase, cubie2);

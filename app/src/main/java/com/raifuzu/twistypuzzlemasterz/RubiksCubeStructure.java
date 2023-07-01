@@ -698,6 +698,26 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 	@Override
+	public boolean isCubieAtLocationSolved(String[] location){
+		boolean correctOrientation = true;
+		boolean correctLocation = isCorrectCubieAtThisLocation(location);
+
+		CubeLayer.Cubie cubieAtLocation = this.getCubieAtLocation(location);
+		Map<String, String> orientation = cubieAtLocation.getCubieOrientation();
+
+		Set<String> keySet = orientation.keySet();
+
+		for(String key : keySet){
+			if( ! orientation.get(key).equals(key) ){
+				correctOrientation = false;
+				break;
+			}
+		}
+
+		return correctLocation && correctOrientation;
+	}
+
+	@Override
 	public List<SurfaceName> correctLocationOfCubie(Integer[] cubieColors) {
 
 		ArrayList<SurfaceName> correctLocation = new ArrayList<>();

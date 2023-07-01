@@ -76,6 +76,8 @@ public interface RubiksCube {
 	ArrayList<Integer> getCenterColorsOfLocation(String[] location);
 	boolean isCorrectCubieAtThisLocation(String[] location);
 
+	boolean isCubieAtLocationSolved(String[] location);
+
 	List<SurfaceName> correctLocationOfCubie(Integer[] cubieColors );
 
 	void resetCube();

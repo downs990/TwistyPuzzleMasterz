@@ -178,6 +178,12 @@ public class SolverFragment extends Fragment {
 //				setButtonsToCurrentCube(surfacesAsButtonLists);
 
 
+				// TODO: Remove this after testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//				rubiksCube.executeAlgorithm("R U R'", RubiksCube.RecordAlgorithm.NO);
+//				setButtonsToCurrentCube(surfacesAsButtonLists);
+				// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 			}
 		});
 
