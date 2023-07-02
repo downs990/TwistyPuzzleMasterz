@@ -7,15 +7,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_1",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location": "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location": "F R"
+        }
       },
       "SolutionAlgorithm": "F' U F' U2 R' F2 R U2 F2"
     },
@@ -26,15 +24,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_1",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location": "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location":  "F U"
+        }
       },
       "SolutionAlgorithm": "U R U' R' U' F' U F"
     },
@@ -45,15 +41,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_1",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "U' F' U' F U R U R'"
     },
@@ -64,15 +58,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_1",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_2"
-        },
-        "Location": "R F"
+        }
       },
       "SolutionAlgorithm": "F' U2 F' U' F U' F' U2 F2"
     },
@@ -83,15 +75,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_1",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_3",
           "STICKER_COLOR_3": "SIDE_COLOR_2"
-        },
-        "Location": "R F"
+        }
       },
       "SolutionAlgorithm": "F2 L' U' L U F U' F"
     },
@@ -102,15 +92,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_1",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "R U' R2 F R F'"
     },
@@ -121,15 +109,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_1",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_3",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "U' R U' R' F' U' F"
     },
@@ -140,15 +126,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_1",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_2"
-        },
-        "Location": "R F"
+        }
       },
       "SolutionAlgorithm": "F2 U2 F U F' U F U2 F"
     },
@@ -159,15 +143,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_1",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_3",
           "STICKER_COLOR_3": "SIDE_COLOR_2"
-        },
-        "Location": "R F"
+        }
       },
       "SolutionAlgorithm": "R2 B U B' U' R' U R'"
     },
@@ -178,15 +160,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_1",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "F' U F2 R' F' R"
     },
@@ -197,15 +177,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_1",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "D F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "U F' U F R U R'"
     },
@@ -216,15 +194,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location": "F R"
+        }
       },
       "SolutionAlgorithm": "L D' L' U L D L'"
     },
@@ -235,15 +211,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location": "F R"
+        }
       },
       "SolutionAlgorithm": "U F' U' F U' R U R'"
     },
@@ -254,15 +228,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "U' F' U F"
     },
@@ -273,15 +245,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "U F' U2 F U' R U R'"
     },
@@ -292,15 +262,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_5",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "L U"
+        }
       },
       "SolutionAlgorithm": "R2 B U B' U' R2"
     },
@@ -311,15 +279,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_5",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "L U"
+        }
       },
       "SolutionAlgorithm": "F2 U' L' U L F2"
     },
@@ -330,15 +296,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_6",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "B U"
+        }
       },
       "SolutionAlgorithm": "R U R'"
     },
@@ -349,15 +313,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_6",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "B U"
+        }
       },
       "SolutionAlgorithm": "F' U' L' U2 L U' F"
     },
@@ -368,15 +330,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "U' R U' R' U R U R'"
     },
@@ -387,15 +347,13 @@
           "STICKER_COLOR_3": "SIDE_COLOR_4",
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_1": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_3",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "F' L' B' U B L F"
     },
@@ -406,15 +364,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location": "F R"
+        }
       },
       "SolutionAlgorithm": "B' D B U' B' D' B"
     },
@@ -425,15 +381,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location": "F R"
+        }
       },
       "SolutionAlgorithm": "U' R U R' U F' U' F"
     },
@@ -444,15 +398,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "U F' U F U' F' U' F"
     },
@@ -463,15 +415,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "R B L U' L' B' R'"
     },
@@ -482,15 +432,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_5",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "L U"
+        }
       },
       "SolutionAlgorithm": "F' U' F"
     },
@@ -501,15 +449,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_5",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "L U"
+        }
       },
       "SolutionAlgorithm": "U' R U2 R' U2 R U' R'"
     },
@@ -520,15 +466,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_6",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "B U"
+        }
       },
       "SolutionAlgorithm": "F2 L' U' L U F2"
     },
@@ -539,15 +483,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_6",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "B U"
+        }
       },
       "SolutionAlgorithm": "R2 U B U' B' R2"
     },
@@ -558,15 +500,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "U R U' R'"
     },
@@ -577,15 +517,13 @@
           "STICKER_COLOR_2": "SIDE_COLOR_4",
           "STICKER_COLOR_1": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_3",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "U' R U2 R' U F' U' F"
     },
@@ -596,15 +534,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_2"
-        },
-        "Location": "R F"
+        }
       },
       "SolutionAlgorithm": "F2 U' F2 U' F2 U2 F2"
     },
@@ -615,15 +551,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_3",
           "STICKER_COLOR_3": "SIDE_COLOR_2"
-        },
-        "Location": "R F"
+        }
       },
       "SolutionAlgorithm": "F' U F R U2 R'"
     },
@@ -634,15 +568,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_2",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "F' U2 F U F' U' F"
     },
@@ -653,15 +585,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "F U"
+        }
       },
       "SolutionAlgorithm": "R U R B' R' B U2 R'"
     },
@@ -672,15 +602,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_5",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "L U"
+        }
       },
       "SolutionAlgorithm": "U' F' U' L F' L' F2"
     },
@@ -691,15 +619,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_5",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "L U"
+        }
       },
       "SolutionAlgorithm": "R B U2 B' R'"
     },
@@ -710,15 +636,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_6",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "B U"
+        }
       },
       "SolutionAlgorithm": "U R U B' R B R2"
     },
@@ -729,15 +653,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_6",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "B U"
+        }
       },
       "SolutionAlgorithm": "F' L' U2 L F"
     },
@@ -748,15 +670,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_3": "SIDE_COLOR_3",
           "STICKER_COLOR_2": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "R U2 R' U' R U R'"
     },
@@ -767,15 +687,13 @@
           "STICKER_COLOR_1": "SIDE_COLOR_4",
           "STICKER_COLOR_3": "SIDE_COLOR_2",
           "STICKER_COLOR_2": "SIDE_COLOR_3"
-        },
-        "Location":  "U F R"
+        }
       },
       "Cubie2": {
         "Orientation": {
           "STICKER_COLOR_2": "SIDE_COLOR_3",
           "STICKER_COLOR_3": "SIDE_COLOR_4"
-        },
-        "Location": "R U"
+        }
       },
       "SolutionAlgorithm": "F' U' F' L F L' U2 F"
     }
