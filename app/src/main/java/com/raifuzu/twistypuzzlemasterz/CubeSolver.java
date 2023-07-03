@@ -31,7 +31,7 @@ import com.raifuzu.twistypuzzlemasterz.RubiksCube.SurfaceName;
  */
 public class CubeSolver {
 
-    // change in development
+    // change in development. change 2
 
     Integer[][] topCubies = {
             {RubiksCube.YELLOW, RubiksCube.BLUE, RubiksCube.ORANGE},
