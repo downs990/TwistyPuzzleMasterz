@@ -197,6 +197,7 @@ public class CubeSolver {
     }
 
 
+    // TODO: Use orientationTransform() method instead.
     private void cubieOrientationCorrection(CubeLayer.Cubie currentCubie) {
         if (currentCubie.getLocation().contains(SurfaceName.R.name())) {
             this.rubiksCube.executeAlgorithm("R2 U F R' F'", RubiksCube.RecordAlgorithm.YES);
@@ -310,6 +311,9 @@ public class CubeSolver {
                 }};
                 Collections.sort(bothCubieLocations);
                 String keyOfLocations = bothCubieLocations.get(0) + " , " + bothCubieLocations.get(1);
+
+                // TODO: Possible improvement. Get the 2 colors that are not D from the two cubies.
+                //      Pass those to the transformOrientation() ??
                 Map<String, String> solutionMap = new HashMap<String, String>() {{
                     put("D F , D R", "R2 U F2 U' R2");
                     put("D F , D L", "F2 U L2 U' F2");
@@ -319,6 +323,9 @@ public class CubeSolver {
 
                 // Once the two cubies to swap are in the correct locations, then perform swap alg.
                 String algorithm = solutionMap.get(keyOfLocations);
+
+
+
                 this.rubiksCube.executeAlgorithm(algorithm, RubiksCube.RecordAlgorithm.YES);
 
             }
@@ -349,7 +356,6 @@ public class CubeSolver {
     }
 
 
-    // TODO: Test me!   (8/10 tested)
     private void f2lStep1(Integer[][] f2lPairCubies) {
 
         // Locate both cubies of the current f2l pair

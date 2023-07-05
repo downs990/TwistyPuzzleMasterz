@@ -172,16 +172,16 @@ public class SolverFragment extends Fragment {
 				initRubiksCube(rootView, surfacesAsButtonLists);
 
 //				rubiksCube.resetCube();
+//				setButtonsToCurrentCube(surfacesAsButtonLists);
 				String message = "Cube is reset!";
 				debuggingText.setText(message);
 
-//				setButtonsToCurrentCube(surfacesAsButtonLists);
-
-
 				// TODO: Remove this after testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//				rubiksCube.executeAlgorithm("R U R'", RubiksCube.RecordAlgorithm.NO);
-//				setButtonsToCurrentCube(surfacesAsButtonLists);
-				// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				// TODO: Error: "Fw R U R' U' Fw'"
+				// TODO: Error: "Fw Rw'"
+				rubiksCube.executeAlgorithm("Fw Rw'", RubiksCube.RecordAlgorithm.NO);
+				setButtonsToCurrentCube(surfacesAsButtonLists);
+				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 			}

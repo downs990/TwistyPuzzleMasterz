@@ -67,7 +67,7 @@ public interface RubiksCube {
 
 	CubeLayer.Cubie getCubieByColorStickers(ArrayList<Integer> stickersList);
 
-	void rotate(CubeLayer layerToRotate, Rotation directionOfRotation);
+	void rotate(CubeLayer layerToRotate, Rotation directionOfRotation, boolean isRotateW);
 
 	// String algorithm can be either solution or scramble
 	void executeAlgorithm(String algorithm, RecordAlgorithm yesOrNo);

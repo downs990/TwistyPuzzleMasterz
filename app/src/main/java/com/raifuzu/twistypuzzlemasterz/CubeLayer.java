@@ -19,6 +19,11 @@ public class CubeLayer {
     private Integer[] surfaceRightColors;   // Length = 3
     private Integer[] surfaceFrontColors;   // Length = 3
     private Integer[] surfaceLeftColors;    // Length = 3
+
+
+    private Integer[] w1, w2, w3, w4;
+
+
     private AdvancedArrayList<Integer[]> surfaceAndBorder;
     public AdvancedArrayList<Cubie> myCubies;
 
@@ -85,7 +90,21 @@ public class CubeLayer {
         this.surfaceRightColors = this.surfaceAndBorder.get(2);
         this.surfaceFrontColors = this.surfaceAndBorder.get(3);
         this.surfaceLeftColors  = this.surfaceAndBorder.get(4);
+
+        // Init W
+        this.w1 = this.surfaceAndBorder.get(5);
+        this.w2 = this.surfaceAndBorder.get(6);
+        this.w3 = this.surfaceAndBorder.get(7);
+        this.w4 = this.surfaceAndBorder.get(8);
     }
+
+
+    public Integer[] getW1(){return this.w1;}
+    public Integer[] getW2(){return this.w2;}
+    public Integer[] getW3(){return this.w3;}
+    public Integer[] getW4(){return this.w4;}
+
+
 
     public Cubie getCenterCubie(){
          return null; // TODO: Implement me !
