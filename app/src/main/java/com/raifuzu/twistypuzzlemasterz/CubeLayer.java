@@ -106,10 +106,6 @@ public class CubeLayer {
 
 
 
-    public Cubie getCenterCubie(){
-         return null; // TODO: Implement me !
-    }
-
     public Integer getCenterColor(){
         return this.getAllCubies().get(4).getStickerColors().get(0);
     }

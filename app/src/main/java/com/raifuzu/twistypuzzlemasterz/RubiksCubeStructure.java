@@ -124,10 +124,10 @@ public class RubiksCubeStructure implements RubiksCube {
 
 		// W layer for -> Left, Right
 		AdvancedArrayList<Integer[]> xW = new AdvancedArrayList<Integer[]>(){{
-			add( new Integer[]{  u[1] ,  u[4] , u[7]} );
+			add( new Integer[]{  u[7] ,  u[4] , u[1]} );
 			add( new Integer[]{  b[1] ,  b[4] , b[7]} );
-			add( new Integer[]{  d[1] ,  d[4] , d[7]} );
-			add( new Integer[]{  f[1] ,  f[4] , f[7]} );
+			add( new Integer[]{  d[7] ,  d[4] , d[1]} );
+			add( new Integer[]{  f[7] ,  f[4] , f[1]} );
 		}};
 		// W layer for -> Up, Down
 		final AdvancedArrayList<Integer[]> yW = new AdvancedArrayList<Integer[]>(){{
@@ -140,8 +140,8 @@ public class RubiksCubeStructure implements RubiksCube {
 		AdvancedArrayList<Integer[]> zW = new AdvancedArrayList<Integer[]>(){{
 			add( new Integer[]{  u[3] ,  u[4] ,  u[5]} );
 			add( new Integer[]{  r[1] ,  r[4] ,  r[7]} );
-			add( new Integer[]{  d[3] ,  d[4] ,  d[5]} );
-			add( new Integer[]{  l[1] ,  l[4] ,  l[7]} );
+			add( new Integer[]{  d[5] ,  d[4] ,  d[3]} );
+			add( new Integer[]{  l[7] ,  l[4] ,  l[1]} );
 		}};
 
 		result.add(xW);

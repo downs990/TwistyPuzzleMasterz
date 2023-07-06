@@ -177,10 +177,8 @@ public class SolverFragment extends Fragment {
 				debuggingText.setText(message);
 
 				// TODO: Remove this after testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				// TODO: Error: "Fw R U R' U' Fw'"
-				// TODO: Error: "Fw Rw'"
-				rubiksCube.executeAlgorithm("Fw Rw'", RubiksCube.RecordAlgorithm.NO);
-				setButtonsToCurrentCube(surfacesAsButtonLists);
+//				rubiksCube.executeAlgorithm("Fw Rw'", RubiksCube.RecordAlgorithm.NO);
+//				setButtonsToCurrentCube(surfacesAsButtonLists);
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
