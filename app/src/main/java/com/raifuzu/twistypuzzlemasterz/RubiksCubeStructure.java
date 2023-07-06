@@ -113,7 +113,6 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
-	// TODO: Test me!
 	private ArrayList< AdvancedArrayList<Integer[]> > createWBorders(
 			final Integer[] u, final Integer[] l, final Integer[] f, final Integer[] r,
 			final Integer[] b, final Integer[] d){
@@ -481,8 +480,9 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
-	// TODO: Test Me!
 	private void rotateClockwise(CubeLayer layer, boolean isRotateW) {
+
+		String layerName = layer.getSideName().name();
 
 		// Different from white board picture
 		AdvancedArrayList<Integer> newSurfaceList = new AdvancedArrayList<>(
@@ -501,19 +501,19 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 		// Don't rotate w by default.
-		ArrayList<Integer[]> wBorder = new ArrayList<>(
-				Arrays.asList( layer.getW1(), layer.getW2(),layer.getW3(),layer.getW4() ));
+		ArrayList<Integer[]> wBorder = new ArrayList<>(Arrays.asList( layer.getW1(), layer.getW2(),layer.getW3(),layer.getW4() ));
 
 
 		if(isRotateW){
-			wBorder = new ArrayList<>(
-					Arrays.asList(layer.getW4(), layer.getW1(),layer.getW2(),layer.getW3() ));
 
-			if(layer.getSideName().name().equals("L")
-					|| layer.getSideName().name().equals("U")
-					|| layer.getSideName().name().equals("B")){
+			wBorder = new ArrayList<>( Arrays.asList( layer.getW4(), layer.getW1(),layer.getW2(),layer.getW3() ));
 
-				wBorder = new ArrayList<>( Arrays.asList( layer.getW2(), layer.getW3(),layer.getW4(),layer.getW1() ));
+
+			// L and R share the same w Axis of x. Therefore, L is the same as R' on the w layer.
+			// This is why we have to invert rotations on each axis from L, U, and B
+			if(layerName.equals("L") || layerName.equals("U")  || layerName.equals("B")){
+
+				wBorder = new ArrayList<>(Arrays.asList( layer.getW2(), layer.getW3(),layer.getW4(),layer.getW1() ));
 			}
 		}
 
@@ -524,8 +524,9 @@ public class RubiksCubeStructure implements RubiksCube {
 	}
 
 
-	// TODO: Test Me!
 	private void rotateCounterClockwise(CubeLayer layer, boolean isRotateW) {
+
+		String layerName = layer.getSideName().name();
 
 		AdvancedArrayList<Integer> newSurfaceList = new AdvancedArrayList<>(
 				getStickerColor(layer, 2), getStickerColor(layer, 5), getStickerColor(layer, 8),
@@ -543,18 +544,16 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 		// Don't rotate w by default.
-		ArrayList<Integer[]> wBorder = new ArrayList<>(
-				Arrays.asList( layer.getW1(), layer.getW2(),layer.getW3(),layer.getW4() ));
+		ArrayList<Integer[]> wBorder = new ArrayList<>(Arrays.asList( layer.getW1(), layer.getW2(),layer.getW3(),layer.getW4() ));
 
 
 		if(isRotateW){
 			wBorder = new ArrayList<>( Arrays.asList( layer.getW2(), layer.getW3(),layer.getW4(),layer.getW1() ));
 
-			if(layer.getSideName().name().equals("L")
-					|| layer.getSideName().name().equals("U")
-					|| layer.getSideName().name().equals("B")){
-				wBorder = new ArrayList<>(
-						Arrays.asList(layer.getW4(), layer.getW1(),layer.getW2(),layer.getW3() ));
+			// L and R share the same w Axis of x. Therefore, L is the same as R' on the w layer.
+			// This is why we have to invert rotations on each axis from L, U, and B
+			if(layerName.equals("L") || layerName.equals("U") || layerName.equals("B")){
+				wBorder = new ArrayList<>( Arrays.asList(layer.getW4(), layer.getW1(),layer.getW2(),layer.getW3() ));
 			}
 		}
 
@@ -593,48 +592,25 @@ public class RubiksCubeStructure implements RubiksCube {
 
 		for(int i = 0; i < newSurfaceBack.length; i++){
 
-			int oldIndexBack  =  oldSurfaceBack[i] - 1;
-			int oldIndexRight =  oldSurfaceRight[i] - 1;
-			int oldIndexFront =  oldSurfaceFront[i] - 1;
-			int oldIndexLeft  =  oldSurfaceLeft[i] - 1;
+			int[] oldBorderIndexes = {
 
-			int newIndexBack  =  newSurfaceBack[i] - 1;
-			int newIndexRight =  newSurfaceRight[i] - 1;
-			int newIndexFront =  newSurfaceFront[i] - 1;
-			int newIndexLeft  =  newSurfaceLeft[i] - 1;
+					oldSurfaceBack[i] - 1, 	oldSurfaceRight[i] - 1, oldSurfaceFront[i] - 1, oldSurfaceLeft[i] - 1,
+					oldW1[i] - 1, 			oldW2[i] - 1, 			oldW3[i] - 1, 			oldW4[i] - 1
+			};
 
-			int oldIndexW1 = oldW1[i] - 1;
-			int oldIndexW2 = oldW2[i] - 1;
-			int oldIndexW3 = oldW3[i] - 1;
-			int oldIndexW4 = oldW4[i] - 1;
-
-			int newIndexW1 = newW1[i] - 1;
-			int newIndexW2 = newW2[i] - 1;
-			int newIndexW3 = newW3[i] - 1;
-			int newIndexW4 = newW4[i] - 1;
+			int[] newBorderIndexes = {
+					newSurfaceBack[i] - 1, 	newSurfaceRight[i] - 1, newSurfaceFront[i] - 1, newSurfaceLeft[i] - 1,
+					newW1[i] - 1,	 		newW2[i] - 1, 			newW3[i] - 1, 			newW4[i] - 1
+			};
 
 
+			for(int j = 0; j < newBorderIndexes.length; j++){
+				int newIndex = newBorderIndexes[j];
+				int oldIndex = oldBorderIndexes[j];
+				char c = originalCharArray[ newIndex ];
 
-			char c1 = originalCharArray[newIndexBack];
-			char c2 = originalCharArray[newIndexRight];
-			char c3 = originalCharArray[newIndexFront];
-			char c4 = originalCharArray[newIndexLeft];
-
-			char c5 = originalCharArray[newIndexW1];
-			char c6 = originalCharArray[newIndexW2];
-			char c7 = originalCharArray[newIndexW3];
-			char c8 = originalCharArray[newIndexW4];
-
-			newCharArray[oldIndexBack]  = c1;
-			newCharArray[oldIndexRight] = c2;
-			newCharArray[oldIndexFront] = c3;
-			newCharArray[oldIndexLeft]  = c4;
-			newCharArray[oldIndexW1]  = c5;
-			newCharArray[oldIndexW2]  = c6;
-			newCharArray[oldIndexW3]  = c7;
-			newCharArray[oldIndexW4]  = c8;
-
-
+				newCharArray[oldIndex]  = c;
+			}
 		}
 
 		Integer[] currentSurfaceList = layer.getSurfaceColors();
