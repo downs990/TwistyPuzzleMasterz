@@ -177,7 +177,7 @@ public class SolverFragment extends Fragment {
 				debuggingText.setText(message);
 
 				// TODO: Remove this after testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//				rubiksCube.executeAlgorithm("Fw R U R' U' Fw'", RubiksCube.RecordAlgorithm.NO);
+//				rubiksCube.executeAlgorithm("M' U M U2 M' U M", RubiksCube.RecordAlgorithm.NO);
 //				setButtonsToCurrentCube(surfacesAsButtonLists);
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

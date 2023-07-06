@@ -403,8 +403,7 @@ public class RubiksCubeStructure implements RubiksCube {
 		return this.cubeAsString;
 	}
 
-
-	// TODO: Update this to parse w, w', M, M'
+ 
 	@Override
 	public void executeAlgorithm(String algorithm, RecordAlgorithm yesOrNo) {
 		// Example Algorithm: R' D' R D
@@ -426,32 +425,104 @@ public class RubiksCubeStructure implements RubiksCube {
 			}
 
 
-			if(individualMove.contains("w")){
-				isRotateW = true;
-				individualMove = actualMove.replace("w", "");
-				actualMove = individualMove;
+
+			if(individualMove.contains("M")){
+				if(individualMove.contains("2")){
+
+					// M2
+					rotateSliceM(direction);
+					rotateSliceM(direction);
+				}else{
+					// M
+					rotateSliceM(direction);
+				}	
+
+			}else{
+
+				if(individualMove.contains("w")){
+					isRotateW = true;
+					individualMove = actualMove.replace("w", "");
+					actualMove = individualMove;
+				}
+
+
+				if (individualMove.contains("2")) {
+					// Actual rotation and UI update
+					actualMove = individualMove.replace("2", "");
+					CubeLayer currentLayer = this.rubiksCube.get(actualMove);
+					// Rotate 2 times
+					rotate(currentLayer, direction, isRotateW);
+					rotate(currentLayer, direction, isRotateW);
+				} else {
+					// Actual rotation and UI update
+					CubeLayer currentLayer = this.rubiksCube.get(actualMove);
+					rotate(currentLayer, direction, isRotateW);// Moves colors on structure
+				}
+
 			}
 
 
-			if (individualMove.contains("2")) {
-				// Actual rotation and UI update
-				actualMove = individualMove.replace("2", "");
-				CubeLayer currentLayer = this.rubiksCube.get(actualMove);
-				// Rotate 2 times
-				rotate(currentLayer, direction, isRotateW);
-				rotate(currentLayer, direction, isRotateW);
-			} else {
-				// Actual rotation and UI update
-				CubeLayer currentLayer = this.rubiksCube.get(actualMove);
-				rotate(currentLayer, direction, isRotateW);// Moves colors on structure
-			}
 
+			 
 		}
 	}
 
 
+	private void rotateSliceM(Rotation directionOfRotation){
 
-	// TODO: Add rotations and notations for    ()w ()w' ()w2 ()w2'
+
+		Integer[] u = this.getLayerByLetter("U").getSurfaceColors();
+		Integer[] b = this.getLayerByLetter("B").getSurfaceColors();
+		Integer[] d = this.getLayerByLetter("D").getSurfaceColors();
+		Integer[] f = this.getLayerByLetter("F").getSurfaceColors();
+
+		int[] m1 = {u[7], u[4], u[1]};
+		int[] m2 = {b[1], b[4], b[7]};
+		int[] m3 = {d[7], d[4], d[1]};
+		int[] m4 = {f[7], f[4], f[1]};
+
+
+		int[][] currentSliceIndexes = {m1, m2, m3, m4};
+		int[][] newSlicesIndexes;
+		if(directionOfRotation == Rotation.CLOCKWISE){
+			// Clockwise
+			newSlicesIndexes = new int[][]{m4, m1, m2, m3};
+		}else{
+			// Counter Clockwise
+			newSlicesIndexes = new int[][]{m2, m3, m4, m1};
+		}
+
+
+		String tempCubeString = new String(cubeAsString); // deep copy.
+		char[] newCharArray = tempCubeString.toCharArray();
+		char[] originalCharArray = cubeAsString.toCharArray();
+
+
+		// Char at oldIndex now equals char at newIndex
+		for(int i = 0; i < newSlicesIndexes.length; i++){
+			for(int j = 0; j < newSlicesIndexes[i].length; j++){
+
+				int oldIndex = currentSliceIndexes[i][j] - 1;
+				int newIndex = newSlicesIndexes[i][j] - 1;
+				char c = originalCharArray[newIndex];
+				newCharArray[oldIndex] = c;
+			}
+		}
+
+		// Updates cubeAsAString to match changes after rotation.
+		cubeAsString = new String(newCharArray);
+
+
+		initLayers();
+		finalizeOrientation();	// Update all cubie orientations
+	}
+
+
+
+
+
+
+
 	// TODO: Add rotations and notations for    M M' M2
 	@Override
 	public void rotate(CubeLayer layerToRotate, Rotation directionOfRotation, boolean isRotateW) {
