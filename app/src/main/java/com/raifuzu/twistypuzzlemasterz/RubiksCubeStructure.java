@@ -853,9 +853,7 @@ public class RubiksCubeStructure implements RubiksCube {
 		return allLayers;
 	}
 
-
-
-
+ 
 
 //	public String test(String xLayer){
 //

@@ -393,13 +393,13 @@ public class CubeSolver {
     }
 
 
-    private JSONObject getF2L_Config() {
+    private JSONObject getAlgorithmsFromConfig(String filename) {
 
         JSONObject result = null;
         JSONParser parser = new JSONParser();
         try {
 
-            InputStream fileStream = rootView.getContext().getAssets().open("F2L_Config.json");
+            InputStream fileStream = rootView.getContext().getAssets().open(filename);
             Object obj = parser.parse(new BufferedReader(new InputStreamReader(fileStream)));
             result = (JSONObject) obj;
 
@@ -415,7 +415,7 @@ public class CubeSolver {
 
     private void f2lStep2(Integer[][] f2lPair) {
 
-        JSONObject f2lJSON = getF2L_Config();
+        JSONObject f2lJSON = getAlgorithmsFromConfig("F2L_algorithms.json");
         JSONArray fullF2L = (JSONArray) f2lJSON.get("F2L");
 
         ArrayList<Integer> cubie1AsColors = new ArrayList<> (Arrays.asList(f2lPair[0]) );
@@ -704,12 +704,60 @@ public class CubeSolver {
 
     }
 
-    public void ollSolutionSteps(Integer[][] stickersToSolve) {
-        // TODO: Complete solution implementation
+    // TODO: Test me!
+    private boolean correctOLLFound(Object currentOLLCase, ArrayList<String[]> topLayersColors){
+
+        boolean result = false;
+
+        return result;
     }
 
+
+
+    // TODO: Test me!
+    public void ollSolutionSteps() {
+        JSONObject ollJSON = getAlgorithmsFromConfig("OLL_algorithms.json");
+        JSONArray fullOLL = (JSONArray) ollJSON.get("OLL");
+
+
+        // TODO: If OLL is solved already then do nothing.
+
+
+        boolean correctAlignment = false;
+        while(! correctAlignment){
+
+            CubeLayer up = this.rubiksCube.getLayerByLetter("U");
+            ArrayList<String[]> topLayersColors = up.getAllColorsOnLayer();
+
+            String algorithmToExecute = "";
+            for(Object currentOLLCase : fullOLL){
+
+                // Compare current orientation to the current oll in the json file.
+                correctAlignment = correctOLLFound(currentOLLCase, topLayersColors);
+                if(correctAlignment){
+                    algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
+                    break;
+                }
+            }
+
+            // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
+            if(Objects.equals(algorithmToExecute, "")){
+                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+            }
+
+
+            // If you've found the correct case and alignment then execute it's transformed
+            // solution algorithm.
+            else{
+                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+            }
+
+        }
+    }
+
+
     public void solveOLL() {
-        ollSolutionSteps(topCubies);
+        ollSolutionSteps();
     }
 
 
@@ -729,7 +777,7 @@ public class CubeSolver {
 //        if( cubeIsValid ){
         solveCross();
         solveF2L();
-        solveOLL();
+//        solveOLL();
         solvePLL();
 
 //        }else{

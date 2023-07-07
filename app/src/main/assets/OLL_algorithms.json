@@ -1,0 +1,31 @@
+{
+  "OLL": [
+
+    {
+      "Case": 1,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "",
+        "Y",  "" , "Y", "Y",   "",
+        "" ,  "Y", "Y", "Y",   "",
+
+              "", "" , ""
+      ],
+      "SolutionAlgorithm": "M' U M U2 M' U M"
+    },
+    {
+      "Case": 2,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "",
+        "" ,  "Y", "Y", "Y",   "",
+        "" ,  "Y", "" , "Y",   "",
+
+              "", "Y" , ""
+      ],
+      "SolutionAlgorithm": "R U R' U' M' U R U' Rw'"
+    }
+  ]
+}

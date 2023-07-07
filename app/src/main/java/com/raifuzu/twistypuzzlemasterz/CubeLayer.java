@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -136,6 +137,45 @@ public class CubeLayer {
     public Integer[] getSurfaceLeftColors() {
         return this.surfaceLeftColors;
     }
+
+
+    // TODO: Test me!
+	public ArrayList<String[]> getAllColorsOnLayer(){
+
+		ArrayList<String[]> result = new ArrayList<>();
+ 
+		Integer[] surfaceColorsIndexes       = this.getSurfaceColors();
+		
+		Integer[] surfaceBackColorsIndexes   = this.getSurfaceBackColors();
+		Integer[] surfaceRightColorsIndexes  = this.getSurfaceRightColors();
+		Integer[] surfaceFrontColorsIndexes  = this.getSurfaceFrontColors();
+		Integer[] surfaceLeftColorsIndexes   = this.getSurfaceLeftColors();
+
+
+		ArrayList<Integer[]> allIndexes = new ArrayList<>( Arrays.asList(
+                surfaceColorsIndexes, surfaceBackColorsIndexes, surfaceRightColorsIndexes,
+                surfaceFrontColorsIndexes, surfaceLeftColorsIndexes
+        ));
+
+
+		for(int i = 0; i < allIndexes.size(); i++){
+
+			Integer[] layerSection = allIndexes.get(i);
+			String[] colorLettersList = new String[ layerSection.length ];
+
+			for(int j = 0; j < layerSection.length; j++){
+				char colorLetter = this.cubeAsString.charAt(layerSection[j] - 1);
+                colorLettersList[j] = Character.toString(colorLetter);
+			}
+
+			result.add(colorLettersList);
+		}
+
+
+		return result;
+	}
+
+
  
 
     /**
