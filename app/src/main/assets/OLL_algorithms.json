@@ -246,7 +246,7 @@
 
                "", "Y" , ""
       ],
-      "SolutionAlgorithm": "Rw' R U R U R' U' Rw Rw' L R2' U R U'"
+      "SolutionAlgorithm": "R' U2 F R U R' U' Uw' D R2' U2 R B"
     },
     {
       "Case": 20,
@@ -506,7 +506,7 @@
 
               "", "Y" , "Y"
       ],
-      "SolutionAlgorithm": "L F' L' U' L U F U' L'"
+      "SolutionAlgorithm": "R B' R' U' R U Uw D' R U' F'"
     },
     {
       "Case": 40,
@@ -519,7 +519,7 @@
 
               "Y", "Y" , ""
       ],
-      "SolutionAlgorithm": "R' F R U R' U' F' U R"
+      "SolutionAlgorithm": "L' B L U L' U' Uw' D L' U F"
     },
     {
       "Case": 41,
