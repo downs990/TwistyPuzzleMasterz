@@ -325,6 +325,422 @@
                "Y", "" , ""
       ],
       "SolutionAlgorithm": "R' F R B' R' F' R B"
+    },
+    {
+      "Case": 26,
+      "YellowMap_TopSurface": [
+               "", "" , "",
+
+        "Y",  "" , "Y", "Y",   "" ,
+        "" ,  "Y", "Y", "Y",   "" ,
+        "" ,  "" , "Y", "" ,   "Y",
+
+              "Y", "" , ""
+      ],
+      "SolutionAlgorithm": "R U2 R' U' R U' R'"
+    },
+    {
+      "Case": 27,
+      "YellowMap_TopSurface": [
+              "Y", "" , "",
+
+        "" ,  "" , "Y", "" ,   "Y",
+        "" ,  "Y", "Y", "Y",   "" ,
+        "" ,  "Y", "Y", "" ,   "" ,
+
+              "", "" , "Y"
+      ],
+      "SolutionAlgorithm": "R U R' U R U2 R'"
+    },
+    {
+      "Case": 28,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "" ,
+        "Y",  "" , "Y", "Y",   "" ,
+        "" ,  "Y", "Y", "Y",   "" ,
+
+              "", "" , ""
+      ],
+      "SolutionAlgorithm": "M' U M U2 M' U M"
+    },
+    {
+      "Case": 29,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "" ,
+        "" ,  "Y", "Y", "" ,   "Y",
+        "Y",  "" , "Y", "" ,   "Y",
+
+              "", "" , ""
+      ],
+      "SolutionAlgorithm": "L2 U' L B L' U L2 U' Rw' U' Rw"
+    },
+    {
+      "Case": 30,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "" ,
+        "Y",  "" , "Y", "Y",   "" ,
+        "Y",  "" , "Y", "" ,   "Y",
+
+               "", "" , ""
+      ],
+      "SolutionAlgorithm": "R2' U R' B' R U' R2' U Lw U Lw'"
+    },
+    {
+      "Case": 31,
+      "YellowMap_TopSurface": [
+              "Y", "" , "",
+
+        "" ,  "" , "Y", "Y",   "",
+        "Y",  "" , "Y", "Y",   "",
+        "" ,  "" , "" , "Y",   "",
+
+              "Y", "Y" , ""
+      ],
+      "SolutionAlgorithm": "R' U' F U R U' R' F R"
+    },
+    {
+      "Case": 32,
+      "YellowMap_TopSurface": [
+              "Y", "Y" , "",
+
+        "" ,  "", "" , "Y",   "",
+        "Y",  "", "Y", "Y",   "",
+        "" ,  "", "Y", "Y",   "",
+
+               "Y", "" , ""
+      ],
+      "SolutionAlgorithm": "R Dw L' Dw' R' U Lw U Lw'"
+    },
+    {
+      "Case": 33,
+      "YellowMap_TopSurface": [
+              "Y", "Y" , "",
+
+        "" ,  "" , "" , "Y",   "",
+        "" ,  "Y", "Y", "Y",   "",
+        "" ,  "" , "" , "Y",   "",
+
+               "Y", "Y" , ""
+      ],
+      "SolutionAlgorithm": "R U R' U' R' F R F'"
+    },
+    {
+      "Case": 34,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "Y",  "" , "" , "" ,   "Y",
+        "" ,  "Y", "Y", "Y",   "" ,
+        "" ,  "Y", "" , "Y",   "" ,
+
+              "", "Y" , ""
+      ],
+      "SolutionAlgorithm": "R U R2' U' R' F R U R U' F'"
+    },
+    {
+      "Case": 35,
+      "YellowMap_TopSurface": [
+               "", "Y" , "",
+
+        "" ,  "Y", "" , "" ,  "Y",
+        "Y",  "" , "Y", "Y",  "" ,
+        "" ,  "" , "Y", "Y",  "" ,
+
+              "Y", "" , ""
+      ],
+      "SolutionAlgorithm": "R U2 R2 F R F' R U2 R'"
+    },
+    {
+      "Case": 36,
+      "YellowMap_TopSurface": [
+              "", "" , "Y",
+
+        "" ,  "Y", "Y", "" ,   "",
+        "Y",  "" , "Y", "Y",   "",
+        "Y",  "" , "" , "Y",   "",
+
+               "", "Y" , ""
+      ],
+      "SolutionAlgorithm": "L' U' L U' L' U L U L F' L' F"
+    },
+    {
+      "Case": 37,
+      "YellowMap_TopSurface": [
+               "", "" , "",
+
+        "" ,  "Y", "Y", "",   "Y",
+        "" ,  "Y", "Y", "",   "Y",
+        "" ,  "" , "", "Y",   "",
+
+              "Y", "Y" , ""
+      ],
+      "SolutionAlgorithm": "F R U' R' U' R U R' F'"
+    },
+    {
+      "Case": 38,
+      "YellowMap_TopSurface": [
+              "Y", "" , "",
+
+        "" ,  "" , "Y", "Y",   "" ,
+        "" ,  "Y", "Y", "" ,   "Y",
+        "" ,  "Y", "" , "" ,   "Y",
+
+              "", "Y" , ""
+      ],
+      "SolutionAlgorithm": "R U R' U R U' R' U' R' F R F'"
+    },
+    {
+      "Case": 39,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "Y",  "" , "" , "Y",   "",
+        "" ,  "Y", "Y", "Y",   "",
+        "" ,  "Y", "" , "" ,   "",
+
+              "", "Y" , "Y"
+      ],
+      "SolutionAlgorithm": "L F' L' U' L U F U' L'"
+    },
+    {
+      "Case": 40,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "" ,   "Y",
+        "" ,  "Y", "Y", "Y",   "" ,
+        "" ,  "" , "" , "Y",   "" ,
+
+              "Y", "Y" , ""
+      ],
+      "SolutionAlgorithm": "R' F R U R' U' F' U R"
+    },
+    {
+      "Case": 41,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "",
+        "Y",  "" , "Y", "Y",   "",
+        "" ,  "" , "Y", "" ,   "",
+
+              "Y", "" , "Y"
+      ],
+      "SolutionAlgorithm": "R U' R' U2 R U Uw D' R U' R' U' F'"
+    },
+    {
+      "Case": 42,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "" ,
+        "" ,  "Y", "Y", "" ,   "Y",
+        "" ,  "" , "Y", "" ,   "" ,
+
+              "Y", "" , "Y"
+      ],
+      "SolutionAlgorithm": "L' U L U2' L' U' Uw' D L' U L U F"
+    },
+    {
+      "Case": 43,
+      "YellowMap_TopSurface": [
+               "", "Y" , "",
+
+        "" ,  "Y", "" , "",   "Y",
+        "" ,  "Y", "Y", "",   "Y",
+        "" ,  "Y", "Y", "",   "Y",
+
+               "", "" , ""
+      ],
+      "SolutionAlgorithm": "Fw' L' U' L U Fw"
+    },
+    {
+      "Case": 44,
+      "YellowMap_TopSurface": [
+               "", "Y" , "",
+
+        "Y" ,  "" , "" , "Y",   "",
+        "Y" ,  "" , "Y", "Y",   "",
+        "Y" ,  "" , "Y", "Y",   "",
+
+               "", "" , ""
+      ],
+      "SolutionAlgorithm": "Fw R U R' U' Fw'"
+    },
+    {
+      "Case": 45,
+      "YellowMap_TopSurface": [
+               "", "Y" , "",
+
+        "Y" ,  "" , "" , "Y",   "",
+        ""  ,  "Y", "Y", "Y",   "",
+        "Y" ,  "" , "" , "Y",   "",
+
+               "", "Y" , ""
+      ],
+      "SolutionAlgorithm": "F R U R' U' F'"
+    },
+    {
+      "Case": 46,
+      "YellowMap_TopSurface": [
+              "", "" , "",
+
+        "" ,  "Y", "Y", "",   "Y",
+        "Y",  "" , "Y", "",   "Y",
+        "" ,  "Y", "Y", "",   "Y",
+
+               "", "" , ""
+      ],
+      "SolutionAlgorithm": "R' U' R' F R F' U R"
+    },
+    {
+      "Case": 47,
+      "YellowMap_TopSurface": [
+              "Y", "" , "",
+
+        "" ,  "", "Y", "",   "Y",
+        "Y",  "", "Y", "Y",   "",
+        "" ,  "" , "", "",   "Y",
+
+              "Y", "Y" , ""
+      ],
+      "SolutionAlgorithm": "F' L' U' L U L' U' L U F"
+    },
+    {
+      "Case": 48,
+      "YellowMap_TopSurface": [
+              "", "" , "Y",
+
+        "Y" ,  "", "Y", "",   "",
+        "" ,  "Y", "Y", "",   "Y",
+        "Y" ,  "" , "", "",   "",
+
+               "", "Y" , "Y"
+      ],
+      "SolutionAlgorithm": "F R U R' U' R U R' U' F'"
+    },
+    {
+      "Case": 49,
+      "YellowMap_TopSurface": [
+              "", "" , "Y",
+
+        "Y" ,  "", "Y", "" ,  "",
+        "Y" ,  "", "Y", "Y",  "",
+        "Y" ,  "" , "", "" ,  "",
+
+              "", "Y" , "Y"
+      ],
+      "SolutionAlgorithm": "R' F R' F' R2 U2 Uw D' R' F R F'"
+    },
+    {
+      "Case": 50,
+      "YellowMap_TopSurface": [
+              "", "Y" , "Y",
+
+        "Y" ,  "", "" , "" ,   "",
+        "Y" ,  "", "Y", "Y",   "",
+        "Y" ,  "", "Y", "" ,   "",
+
+              "", "" , "Y"
+      ],
+      "SolutionAlgorithm": "R B' R B R2' U2 F R' F' R"
+    },
+    {
+      "Case": 51,
+      "YellowMap_TopSurface": [
+              "", "Y" , "Y",
+
+        "Y",  "" , "" , "" ,   "",
+        "" ,  "Y", "Y", "Y",   "",
+        "Y",  "" , "" , "" ,   "",
+
+              "", "Y" , "Y"
+      ],
+      "SolutionAlgorithm": "Fw R U R' U' R U R' U' Fw'"
+    },
+    {
+      "Case": 52,
+      "YellowMap_TopSurface": [
+              "Y", "" , "",
+
+        "" ,  "", "Y", "",   "Y",
+        "Y",  "", "Y", "",   "Y",
+        "" ,  "", "Y", "",   "Y",
+
+              "Y", "" , ""
+      ],
+      "SolutionAlgorithm": "R U R' U R Dw' R U' R' F'"
+    },
+    {
+      "Case": 53,
+      "YellowMap_TopSurface": [
+               "", "Y" , "",
+
+        "Y" ,  "", "" , "" ,   "Y",
+        "Y" ,  "", "Y", "Y",   "" ,
+        "Y" ,  "", "Y", "" ,   "Y",
+
+               "", "" , ""
+      ],
+      "SolutionAlgorithm": "Rw' U' R U' R' U R U' R' U2 Rw"
+    },
+    {
+      "Case": 54,
+      "YellowMap_TopSurface": [
+              "", "" , "",
+
+        "Y" ,  "", "Y", "",   "Y",
+        "Y" ,  "", "Y", "Y",   "",
+        "Y" ,  "" , "", "",   "Y",
+
+              "", "Y" , ""
+      ],
+      "SolutionAlgorithm": "Rw U R' U R U' R' U R U2' Rw'"
+    },
+    {
+      "Case": 55,
+      "YellowMap_TopSurface": [
+              "", "" , "",
+
+        "Y" ,  "", "Y", "",   "Y",
+        "Y" ,  "", "Y", "",   "Y",
+        "Y" ,  "", "Y", "",   "Y",
+
+              "", "" , ""
+      ],
+      "SolutionAlgorithm": "R U2 R2 U' R U' R' U2 F R F'"
+    },
+    {
+      "Case": 56,
+      "YellowMap_TopSurface": [
+              "Y", "" , "Y",
+
+        "" ,  "", "Y", "",   "" ,
+        "Y",  "", "Y", "",   "Y",
+        "" ,  "", "Y", "",   "" ,
+
+              "Y", "" , "Y"
+      ],
+      "SolutionAlgorithm": "Fw R U R' U' Fw' F R U R' U' R U R' U' F'"
+    },
+    {
+      "Case": 57,
+      "YellowMap_TopSurface": [
+              "", "Y" , "",
+
+        "" ,  "Y", "" , "Y",   "",
+        "" ,  "Y", "Y", "Y",   "",
+        "" ,  "Y", "" , "Y",   "",
+
+              "", "Y" , ""
+      ],
+      "SolutionAlgorithm": "R U R' U' M' U R U' Rw'"
     }
 
 
