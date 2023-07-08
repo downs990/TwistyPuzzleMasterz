@@ -394,15 +394,15 @@
     {
       "Case": 31,
       "YellowMap_TopSurface": [
-              "Y", "" , "",
+              "", "Y" , "Y",
 
-        "" ,  "" , "Y", "Y",   "",
-        "Y",  "" , "Y", "Y",   "",
-        "" ,  "" , "" , "Y",   "",
+        "" ,  "Y" , "" , "",   "" ,
+        "" ,  "Y" , "Y", "",   "Y",
+        "" ,  "Y" , "Y", "",   "" ,
 
-              "Y", "Y" , ""
+              "", "" , "Y"
       ],
-      "SolutionAlgorithm": "R' U' F U R U' R' F R"
+      "SolutionAlgorithm": "L' Dw' R Dw L U' Rw' U' Rw"
     },
     {
       "Case": 32,

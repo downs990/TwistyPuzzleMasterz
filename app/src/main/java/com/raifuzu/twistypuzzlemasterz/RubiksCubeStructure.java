@@ -130,10 +130,10 @@ public class RubiksCubeStructure implements RubiksCube {
 		}};
 		// W layer for -> Up, Down
 		final AdvancedArrayList<Integer[]> yW = new AdvancedArrayList<Integer[]>(){{
-			add( new Integer[]{  f[3] ,  f[4] ,  f[5]} );
-			add( new Integer[]{  r[3] ,  r[4] ,  r[5]} );
-			add( new Integer[]{  b[3] ,  b[4] ,  b[5]} );
-			add( new Integer[]{  l[3] ,  l[4] ,  l[5]} );
+			add( new Integer[]{  b[5] ,  b[4] ,  b[3]} );
+			add( new Integer[]{  r[5] ,  r[4] ,  r[3]} );
+			add( new Integer[]{  f[5] ,  f[4] ,  f[3]} );
+			add( new Integer[]{  l[5] ,  l[4] ,  l[3]} );
 		}};
 		// W layer for -> Front, Back
 		AdvancedArrayList<Integer[]> zW = new AdvancedArrayList<Integer[]>(){{
@@ -448,7 +448,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 				if (individualMove.contains("2")) {
 					// Actual rotation and UI update
-					actualMove = individualMove.replace("2", "");
+					actualMove = actualMove.replace("2", "");
 					CubeLayer currentLayer = this.rubiksCube.get(actualMove);
 					// Rotate 2 times
 					rotate(currentLayer, direction, isRotateW);
@@ -486,10 +486,10 @@ public class RubiksCubeStructure implements RubiksCube {
 		int[][] newSlicesIndexes;
 		if(directionOfRotation == Rotation.CLOCKWISE){
 			// Clockwise
-			newSlicesIndexes = new int[][]{m4, m1, m2, m3};
+			newSlicesIndexes = new int[][]{m2, m3, m4, m1};
 		}else{
 			// Counter Clockwise
-			newSlicesIndexes = new int[][]{m2, m3, m4, m1};
+			newSlicesIndexes = new int[][]{m4, m1, m2, m3};
 		}
 
 
@@ -520,10 +520,6 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 
-
-
-
-	// TODO: Add rotations and notations for    M M' M2
 	@Override
 	public void rotate(CubeLayer layerToRotate, Rotation directionOfRotation, boolean isRotateW) {
 
@@ -582,8 +578,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 			// L and R share the same w Axis of x. Therefore, L is the same as R' on the w layer.
 			// This is why we have to invert rotations on each axis from L, U, and B
-			if(layerName.equals("L") || layerName.equals("U")  || layerName.equals("B")){
-
+			if(layerName.equals("L") || layerName.equals("D")  || layerName.equals("B")){
 				wBorder = new ArrayList<>(Arrays.asList( layer.getW2(), layer.getW3(),layer.getW4(),layer.getW1() ));
 			}
 		}
@@ -623,7 +618,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 			// L and R share the same w Axis of x. Therefore, L is the same as R' on the w layer.
 			// This is why we have to invert rotations on each axis from L, U, and B
-			if(layerName.equals("L") || layerName.equals("U") || layerName.equals("B")){
+			if(layerName.equals("L") || layerName.equals("D") || layerName.equals("B")){
 				wBorder = new ArrayList<>( Arrays.asList(layer.getW4(), layer.getW1(),layer.getW2(),layer.getW3() ));
 			}
 		}

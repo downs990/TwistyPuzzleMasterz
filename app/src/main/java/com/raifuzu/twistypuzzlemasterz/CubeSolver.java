@@ -766,8 +766,6 @@ public class CubeSolver {
             String algorithmToExecute = "";
             for(Object currentOLLCase : fullOLL){
 
-                // TODO: How to convert currentOLLCase to String[] correctly? Currently breaks.
-
                 Object[] ollCase = ((JSONArray)((JSONObject)currentOLLCase).get("YellowMap_TopSurface")).toArray();
 
                 // Compare current orientation to the current oll in the json file.
