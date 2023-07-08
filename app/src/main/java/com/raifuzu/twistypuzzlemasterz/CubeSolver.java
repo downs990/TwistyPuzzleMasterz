@@ -705,11 +705,45 @@ public class CubeSolver {
     }
 
     // TODO: Test me!
-    private boolean correctOLLFound(Object currentOLLCase, ArrayList<String[]> topLayersColors){
+    private boolean correctOLLFound(Object[] currentOLLCase, ArrayList<String[]> topLayersColors){
 
-        boolean result = false;
+        boolean correctMatch = true;
 
-        return result;
+        String[] surface = {
+                currentOLLCase[4].toString()  , currentOLLCase[5].toString()  , currentOLLCase[6].toString(),
+                currentOLLCase[9].toString()  , currentOLLCase[10].toString() , currentOLLCase[11].toString(),
+                currentOLLCase[14].toString() , currentOLLCase[15].toString() , currentOLLCase[16].toString()
+        };
+
+        String[] backBorder   = {currentOLLCase[0].toString(), currentOLLCase[1].toString(), currentOLLCase[2].toString()};
+        String[] rightBorder  = {currentOLLCase[7].toString(), currentOLLCase[12].toString(), currentOLLCase[17].toString()};
+        String[] frontBorder  = {currentOLLCase[20].toString(), currentOLLCase[19].toString(), currentOLLCase[18].toString()};
+        String[] leftBorder   = {currentOLLCase[13].toString(), currentOLLCase[8].toString(), currentOLLCase[3].toString()};
+
+
+        ArrayList<String[]> caseFromJSON = new ArrayList<>(Arrays.asList(
+                surface, backBorder, rightBorder, frontBorder, leftBorder
+        ));
+
+        for(int i = 0; i < caseFromJSON.size(); i++){
+            for(int j = 0; j < caseFromJSON.get(i).length; j++){
+
+                String colorFromJSON = caseFromJSON.get(i)[j];
+                String colorsFromLayer = topLayersColors.get(i)[j];
+
+                if(colorFromJSON.equals("Y")){
+                    if(! colorsFromLayer.equals("Y")){
+                        correctMatch = false;
+                        break;
+                    }
+                }
+
+
+
+            }
+        }
+
+        return correctMatch;
     }
 
 
@@ -732,8 +766,12 @@ public class CubeSolver {
             String algorithmToExecute = "";
             for(Object currentOLLCase : fullOLL){
 
+                // TODO: How to convert currentOLLCase to String[] correctly? Currently breaks.
+
+                Object[] ollCase = ((JSONArray)((JSONObject)currentOLLCase).get("YellowMap_TopSurface")).toArray();
+
                 // Compare current orientation to the current oll in the json file.
-                correctAlignment = correctOLLFound(currentOLLCase, topLayersColors);
+                correctAlignment = correctOLLFound(ollCase, topLayersColors);
                 if(correctAlignment){
                     algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
                     break;
@@ -777,7 +815,7 @@ public class CubeSolver {
 //        if( cubeIsValid ){
         solveCross();
         solveF2L();
-//        solveOLL();
+        solveOLL();
         solvePLL();
 
 //        }else{
