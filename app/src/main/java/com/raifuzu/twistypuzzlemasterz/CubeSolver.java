@@ -788,14 +788,82 @@ public class CubeSolver {
     }
 
 
+
+
+
+    private boolean correctPLLFound(Object[] pllCase,  ArrayList<CubeLayer.Cubie> topLayerCubies){
+        //  TODO:
+        //      - Loop through pllCase and find the non self values.
+        //      - For each non-self index from pllCase, find that value in the static_top_locations array.
+        //      - For each value from static_top_locations with the same index of non-self array, get that cubie from topLayerCubies
+        //      - Check if those cubies are in the correct locations
+        //      - If they are not in the correct locations then check if they need to be swapped like pllCase.
+
+        String[] static_top_locations = {
+                "U L B" , "U B"  , "U R B" ,
+                "U L"   , "U"    , "U R"   ,
+                "U L F" , "U F"  , "U R F"
+        };
+
+
+        return static_top_locations[0].equals("");
+    }
+
+
+
+
     public void solveOLL() {
         ollSolutionSteps();
     }
 
 
+    // TODO: Test me!
+    // TODO: How to generalize this method with oll to reduce the code duplication.
     public void pllSolutionSteps(Integer[][] stickersToSolve) {
-        // TODO: Complete solution implementation
-    }
+
+        JSONObject pllJSON = getAlgorithmsFromConfig("PLL_algorithms.json");
+        JSONArray fullPLL = (JSONArray) pllJSON.get("PLL");
+
+
+        // TODO: If PLL is solved already then do nothing. Will currently infinite loop if already solved.
+
+
+        // Loop through each of the 21 cases to check if you have any of them
+        // If not, then perform a U rotation and check all 21 again
+        boolean correctAlignment = false;
+        while(! correctAlignment) {
+
+            CubeLayer up = this.rubiksCube.getLayerByLetter("U");
+            ArrayList<CubeLayer.Cubie> topLayerCubies = up.getAllCubies();
+
+            String algorithmToExecute = "";
+            for(Object currentOLLCase : fullPLL){
+
+                Object[] pllCase = ((JSONArray)((JSONObject)currentOLLCase).get("MoveTo")).toArray();
+
+                // Compare current orientation to the current pll in the json file.
+                correctAlignment = correctPLLFound(pllCase, topLayerCubies);
+                if(correctAlignment){
+                    algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
+                    break;
+                }
+            }
+
+            // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
+            if(Objects.equals(algorithmToExecute, "")){
+                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+            }
+
+            // If you've found the correct case and alignment then execute it's transformed
+            // solution algorithm.
+            else{
+                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+            }
+        }
+
+
+
+        }
 
     public void solvePLL() {
         pllSolutionSteps(topCubies);

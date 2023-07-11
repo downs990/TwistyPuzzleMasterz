@@ -1,0 +1,53 @@
+{
+  "PLL": [
+
+    {
+      "Case": 1,
+      "MoveTo": [
+        "2"    , "self" , "8",
+        "self" , "self" , "self",
+        "self" , "self" , "0"
+      ],
+      "SolutionAlgorithm": "Lw' U R' D2 R U' R' D2 R2"
+    },
+    {
+      "Case": 2,
+      "MoveTo": [
+        "6"    , "self" , "0",
+        "self" , "self" , "self",
+        "2"    , "self" , "self"
+      ],
+      "SolutionAlgorithm": "Rw' L R2 D2 R U R' D2 R U' R"
+    },
+    {
+      "Case": 3,
+      "MoveTo": [
+        "6"    , "self" , "8",
+        "self" , "self" , "self",
+        "0"    , "self" , "2"
+      ],
+      "SolutionAlgorithm": "Rw L' R U' R' D R U R' Uw2' R' U R D R' U' R"
+    },
+    {
+      "Case": 4,
+      "MoveTo": [
+        "self" , "3"    , "self",
+        "1"    , "self" , "7",
+        "self" , "5"    , "self"
+      ],
+      "SolutionAlgorithm": "M2' U M2' U M' U2 M2' U2 M' U2"
+    },
+    {
+      "Case": 5,
+      "MoveTo": [
+        "self" , "7"    , "self",
+        "5"    , "self" , "3",
+        "self" , "1"    , "self"
+      ],
+      "SolutionAlgorithm": "M2' U M2' U2 M2' U M2'"
+    }
+
+
+
+  ]
+}
