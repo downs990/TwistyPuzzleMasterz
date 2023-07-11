@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import org.json.JSONObject;
 
 public class RubiksCubeStructure implements RubiksCube {
 
@@ -471,10 +470,10 @@ public class RubiksCubeStructure implements RubiksCube {
 	private void rotateSliceM(Rotation directionOfRotation){
 
 
-		Integer[] u = this.getLayerByLetter("U").getSurfaceColors();
-		Integer[] b = this.getLayerByLetter("B").getSurfaceColors();
-		Integer[] d = this.getLayerByLetter("D").getSurfaceColors();
-		Integer[] f = this.getLayerByLetter("F").getSurfaceColors();
+		Integer[] u = this.getLayerByLetter("U").getSurfaceColorIndexes();
+		Integer[] b = this.getLayerByLetter("B").getSurfaceColorIndexes();
+		Integer[] d = this.getLayerByLetter("D").getSurfaceColorIndexes();
+		Integer[] f = this.getLayerByLetter("F").getSurfaceColorIndexes();
 
 		int[] m1 = {u[7], u[4], u[1]};
 		int[] m2 = {b[1], b[4], b[7]};
@@ -560,10 +559,10 @@ public class RubiksCubeStructure implements RubiksCube {
 		ArrayList<Integer[]> normalBorder = new ArrayList<>(
 			Arrays.asList(
 												// Current locations      // New Locations:
-					layer.getSurfaceLeftColors(),		// <-            	 // back
-					layer.getSurfaceBackColors(), 		// <-             	 // right
-					layer.getSurfaceRightColors(),		// <-            	 // front
-					layer.getSurfaceFrontColors()));	// <-           	 // left
+					layer.getSurfaceLeftColorIndexes(),		// <-            	 // back
+					layer.getSurfaceBackColorIndexes(), 		// <-             	 // right
+					layer.getSurfaceRightColorIndexes(),		// <-            	 // front
+					layer.getSurfaceFrontColorIndexes()));	// <-           	 // left
 
 
 
@@ -602,10 +601,10 @@ public class RubiksCubeStructure implements RubiksCube {
 
 		ArrayList<Integer[]> normalBorder = new ArrayList<>(
 				Arrays.asList( 							// Current locations      // New Locations:
-						layer.getSurfaceRightColors(), 			// <-            	 // back
-						layer.getSurfaceFrontColors(), 			// <-            	 // right
-						layer.getSurfaceLeftColors(), 			// <-            	 // front
-						layer.getSurfaceBackColors() 			// <-            	 // left
+						layer.getSurfaceRightColorIndexes(), 			// <-            	 // back
+						layer.getSurfaceFrontColorIndexes(), 			// <-            	 // right
+						layer.getSurfaceLeftColorIndexes(), 			// <-            	 // front
+						layer.getSurfaceBackColorIndexes() 			// <-            	 // left
 				));
 
 
@@ -631,10 +630,10 @@ public class RubiksCubeStructure implements RubiksCube {
 	public final void updateCubeAsString(CubeLayer layer, AdvancedArrayList<Integer> newSurfaceList,
 										 ArrayList<Integer[]> newSurfaceBorder, ArrayList<Integer[]> newWBorder){
 
-		Integer[] oldSurfaceBack  =  layer.getSurfaceBackColors();
-		Integer[] oldSurfaceRight =  layer.getSurfaceRightColors();
-		Integer[] oldSurfaceFront =  layer.getSurfaceFrontColors();
-		Integer[] oldSurfaceLeft  =  layer.getSurfaceLeftColors();
+		Integer[] oldSurfaceBack  =  layer.getSurfaceBackColorIndexes();
+		Integer[] oldSurfaceRight =  layer.getSurfaceRightColorIndexes();
+		Integer[] oldSurfaceFront =  layer.getSurfaceFrontColorIndexes();
+		Integer[] oldSurfaceLeft  =  layer.getSurfaceLeftColorIndexes();
 		Integer[] newSurfaceBack  =  newSurfaceBorder.get(0);
 		Integer[] newSurfaceRight =  newSurfaceBorder.get(1);
 		Integer[] newSurfaceFront =  newSurfaceBorder.get(2);
@@ -679,7 +678,7 @@ public class RubiksCubeStructure implements RubiksCube {
 			}
 		}
 
-		Integer[] currentSurfaceList = layer.getSurfaceColors();
+		Integer[] currentSurfaceList = layer.getSurfaceColorIndexes();
 
 
 
@@ -703,7 +702,7 @@ public class RubiksCubeStructure implements RubiksCube {
 
 
 	private Integer getStickerColor(CubeLayer layer, int index) {
-		return layer.getSurfaceColors()[index];
+		return layer.getSurfaceColorIndexes()[index];
 	}
 
 	// Size must always be even (26)

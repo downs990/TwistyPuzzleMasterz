@@ -704,7 +704,7 @@ public class CubeSolver {
 
     }
 
-    // TODO: Test me!
+
     private boolean correctOLLFound(Object[] currentOLLCase, ArrayList<String[]> topLayersColors){
 
         boolean correctMatch = true;
@@ -737,9 +737,6 @@ public class CubeSolver {
                         break;
                     }
                 }
-
-
-
             }
         }
 
@@ -748,13 +745,12 @@ public class CubeSolver {
 
 
 
-    // TODO: Test me!
     public void ollSolutionSteps() {
         JSONObject ollJSON = getAlgorithmsFromConfig("OLL_algorithms.json");
         JSONArray fullOLL = (JSONArray) ollJSON.get("OLL");
 
 
-        // TODO: If OLL is solved already then do nothing.
+        // TODO: If OLL is solved already then do nothing. Will currently infinite loop if already solved.
 
 
         boolean correctAlignment = false;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -15,11 +14,11 @@ import android.view.View;
 public class CubeLayer {
 
     private SurfaceName surfaceName;
-    private Integer[] surfaceColors;        // Length = 9
-    private Integer[] surfaceBackColors;    // Length = 3
-    private Integer[] surfaceRightColors;   // Length = 3
-    private Integer[] surfaceFrontColors;   // Length = 3
-    private Integer[] surfaceLeftColors;    // Length = 3
+    private Integer[] surfaceColorIndexes;        // Length = 9
+    private Integer[] surfaceBackColorIndexes;    // Length = 3
+    private Integer[] surfaceRightColorIndexes;   // Length = 3
+    private Integer[] surfaceFrontColorIndexes;   // Length = 3
+    private Integer[] surfaceLeftColorIndexes;    // Length = 3
 
 
     private Integer[] w1, w2, w3, w4;
@@ -63,15 +62,15 @@ public class CubeLayer {
         //     and managing the order of each location manually.
 
         // TODO: Use '.this' everywhere ?
-        Cubie cubie1 = new Cubie(locations[0], toColor(surfaceColors[0]), toColor(surfaceBackColors[0]), toColor(surfaceLeftColors[2]) );
-        Cubie cubie2 = new Cubie(locations[1], toColor(surfaceColors[1]), toColor(surfaceBackColors[1]));
-        Cubie cubie3 = new Cubie(locations[2], toColor(surfaceColors[2]), toColor(surfaceBackColors[2]), toColor(surfaceRightColors[0]));
-        Cubie cubie4 = new Cubie(locations[3], toColor(surfaceColors[3]), toColor(surfaceLeftColors[1]));
-        Cubie cubie5 = new Cubie(locations[4], toColor(surfaceColors[4]) );
-        Cubie cubie6 = new Cubie(locations[5], toColor(surfaceColors[5]), toColor(surfaceRightColors[1]));
-        Cubie cubie7 = new Cubie(locations[6], toColor(surfaceColors[6]), toColor(surfaceLeftColors[0]), toColor(surfaceFrontColors[2]));
-        Cubie cubie8 = new Cubie(locations[7], toColor(surfaceColors[7]), toColor(surfaceFrontColors[1]));
-        Cubie cubie9 = new Cubie(locations[8], toColor(surfaceColors[8]), toColor(surfaceRightColors[2]), toColor(surfaceFrontColors[0]));
+        Cubie cubie1 = new Cubie(locations[0], toColor(surfaceColorIndexes[0]), toColor(surfaceBackColorIndexes[0]), toColor(surfaceLeftColorIndexes[2]) );
+        Cubie cubie2 = new Cubie(locations[1], toColor(surfaceColorIndexes[1]), toColor(surfaceBackColorIndexes[1]));
+        Cubie cubie3 = new Cubie(locations[2], toColor(surfaceColorIndexes[2]), toColor(surfaceBackColorIndexes[2]), toColor(surfaceRightColorIndexes[0]));
+        Cubie cubie4 = new Cubie(locations[3], toColor(surfaceColorIndexes[3]), toColor(surfaceLeftColorIndexes[1]));
+        Cubie cubie5 = new Cubie(locations[4], toColor(surfaceColorIndexes[4]) );
+        Cubie cubie6 = new Cubie(locations[5], toColor(surfaceColorIndexes[5]), toColor(surfaceRightColorIndexes[1]));
+        Cubie cubie7 = new Cubie(locations[6], toColor(surfaceColorIndexes[6]), toColor(surfaceLeftColorIndexes[0]), toColor(surfaceFrontColorIndexes[2]));
+        Cubie cubie8 = new Cubie(locations[7], toColor(surfaceColorIndexes[7]), toColor(surfaceFrontColorIndexes[1]));
+        Cubie cubie9 = new Cubie(locations[8], toColor(surfaceColorIndexes[8]), toColor(surfaceRightColorIndexes[2]), toColor(surfaceFrontColorIndexes[0]));
 
         // Initialize myCubies
         this.myCubies = new AdvancedArrayList<>(cubie1, cubie2, cubie3, cubie4, cubie5, cubie6, cubie7, cubie8, cubie9);
@@ -86,11 +85,11 @@ public class CubeLayer {
     }
 
     public void setAllLayerColors() {
-        this.surfaceColors      = this.surfaceAndBorder.get(0);
-        this.surfaceBackColors  = this.surfaceAndBorder.get(1);
-        this.surfaceRightColors = this.surfaceAndBorder.get(2);
-        this.surfaceFrontColors = this.surfaceAndBorder.get(3);
-        this.surfaceLeftColors  = this.surfaceAndBorder.get(4);
+        this.surfaceColorIndexes = this.surfaceAndBorder.get(0);
+        this.surfaceBackColorIndexes = this.surfaceAndBorder.get(1);
+        this.surfaceRightColorIndexes = this.surfaceAndBorder.get(2);
+        this.surfaceFrontColorIndexes = this.surfaceAndBorder.get(3);
+        this.surfaceLeftColorIndexes = this.surfaceAndBorder.get(4);
 
         // Init W
         this.w1 = this.surfaceAndBorder.get(5);
@@ -111,45 +110,44 @@ public class CubeLayer {
         return this.getAllCubies().get(4).getStickerColors().get(0);
     }
 
-    public Integer[] getSurfaceColors() {
-        return this.surfaceColors;
+    public Integer[] getSurfaceColorIndexes() {
+        return this.surfaceColorIndexes;
     }
 
-    public void setSurfaceColors(Integer[] surfaceColors) {
-        this.surfaceColors = surfaceColors;
+    public void setSurfaceColorIndexes(Integer[] surfaceColorIndexes) {
+        this.surfaceColorIndexes = surfaceColorIndexes;
     }
 
-    public Integer[] getSurfaceBackColors() {
-        return this.surfaceBackColors;
-    }
- 
-
-    public Integer[] getSurfaceRightColors() {
-        return this.surfaceRightColors;
+    public Integer[] getSurfaceBackColorIndexes() {
+        return this.surfaceBackColorIndexes;
     }
  
 
-    public Integer[] getSurfaceFrontColors() {
-        return this.surfaceFrontColors;
+    public Integer[] getSurfaceRightColorIndexes() {
+        return this.surfaceRightColorIndexes;
     }
  
 
-    public Integer[] getSurfaceLeftColors() {
-        return this.surfaceLeftColors;
+    public Integer[] getSurfaceFrontColorIndexes() {
+        return this.surfaceFrontColorIndexes;
+    }
+ 
+
+    public Integer[] getSurfaceLeftColorIndexes() {
+        return this.surfaceLeftColorIndexes;
     }
 
 
-    // TODO: Test me!
 	public ArrayList<String[]> getAllColorsOnLayer(){
 
 		ArrayList<String[]> result = new ArrayList<>();
  
-		Integer[] surfaceColorsIndexes       = this.getSurfaceColors();
+		Integer[] surfaceColorsIndexes       = this.getSurfaceColorIndexes();
 		
-		Integer[] surfaceBackColorsIndexes   = this.getSurfaceBackColors();
-		Integer[] surfaceRightColorsIndexes  = this.getSurfaceRightColors();
-		Integer[] surfaceFrontColorsIndexes  = this.getSurfaceFrontColors();
-		Integer[] surfaceLeftColorsIndexes   = this.getSurfaceLeftColors();
+		Integer[] surfaceBackColorsIndexes   = this.getSurfaceBackColorIndexes();
+		Integer[] surfaceRightColorsIndexes  = this.getSurfaceRightColorIndexes();
+		Integer[] surfaceFrontColorsIndexes  = this.getSurfaceFrontColorIndexes();
+		Integer[] surfaceLeftColorsIndexes   = this.getSurfaceLeftColorIndexes();
 
 
 		ArrayList<Integer[]> allIndexes = new ArrayList<>( Arrays.asList(
@@ -228,6 +226,7 @@ public class CubeLayer {
         return this.surfaceName;
     }
 
+
     public static String colorIntToString(Integer colorNum) {
         String colorString = "unknown_color"; // impossible, hopefully.
 
@@ -254,7 +253,8 @@ public class CubeLayer {
         StringBuilder output = new StringBuilder();
 
         for (Integer listOfColor : listOfColors) {
-            output.append(" ").append(colorIntToString(listOfColor));
+            String color = colorIntToString(toColor( listOfColor));
+            output.append(" ").append( color );
         }
         return output.toString();
     }
@@ -264,15 +264,15 @@ public class CubeLayer {
     public String toString() {
         String output = "";
 
-        String surfaceString = arrayToString(this.surfaceColors);
+        String surfaceString = arrayToString(this.surfaceColorIndexes);
         output += "\n\nSurface: " + this.surfaceName.toString() + "\n" + surfaceString;
-        String surfaceBackString = arrayToString(this.surfaceBackColors);
+        String surfaceBackString = arrayToString(this.surfaceBackColorIndexes);
         output += "\nSurface Back: \n" + surfaceBackString;
-        String surfaceRightString = arrayToString(this.surfaceRightColors);
+        String surfaceRightString = arrayToString(this.surfaceRightColorIndexes);
         output += "\nSurface Right: \n" + surfaceRightString;
-        String surfaceFrontString = arrayToString(this.surfaceFrontColors);
+        String surfaceFrontString = arrayToString(this.surfaceFrontColorIndexes);
         output += "\nSurface Front: \n" + surfaceFrontString;
-        String surfaceLeftString = arrayToString(this.surfaceLeftColors);
+        String surfaceLeftString = arrayToString(this.surfaceLeftColorIndexes);
         output += "\nSurface Left: \n" + surfaceLeftString;
 
         return output;
@@ -287,14 +287,12 @@ public class CubeLayer {
      *
      * @author downs
      */
-    public static class Cubie {
+    public class Cubie {
 
         // Location is a string representation of all faces that intersects this cubie
         private final String location; // Ex. "F R U" or "B L"
 
         private Map<String, String> cubieOrientation;
-
- 
         private ArrayList<Integer> stickerColorsList;
 
         private RubiksCube.CubieType type;
@@ -326,7 +324,7 @@ public class CubeLayer {
         }
 
 
-        // TODO: Use for F2L, PLL, and OLL
+        // TODO: Use for F2L, OLL, and PLL
         public boolean isOrientationCorrect(){
 
             boolean isCorrectOrientation = true;
@@ -377,13 +375,19 @@ public class CubeLayer {
         }
 
 
+        private String colorIndexToString(int indexOfCubeAsString){
+            char colorLetter = cubeAsString.charAt(indexOfCubeAsString - 1);
+            Integer colorAsInt = RubiksCubeStructure.colorLetterToIntegerColor(colorLetter);
+            return colorIntToString(colorAsInt);
+        }
+
         @Override
         public String toString() {
             StringBuilder output = new StringBuilder("");
             for (int i = 0; i < this.stickerColorsList.size(); i++) {
                 // Converts the sticker list into a string with sticker color names
                 Integer currentColor = this.stickerColorsList.get(i); 
-                String stickerColorName = colorIntToString(currentColor);
+                String stickerColorName = colorIndexToString(currentColor);
                 output.append(" ").append(stickerColorName);
             }
 

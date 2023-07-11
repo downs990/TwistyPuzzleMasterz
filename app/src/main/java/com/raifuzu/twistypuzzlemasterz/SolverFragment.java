@@ -213,7 +213,7 @@ public class SolverFragment extends Fragment {
 
 		ArrayList<CubeLayer> allCubeLayers = rubiksCube.getLayersList();
 		for (CubeLayer layer : allCubeLayers){
-			surfaceColors.add( layer.getSurfaceColors() ) ;
+			surfaceColors.add( layer.getSurfaceColorIndexes() ) ;
 		}
 
 		// Update the interface buttons with solution algorithm movements
