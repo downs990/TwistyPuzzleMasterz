@@ -790,23 +790,54 @@ public class CubeSolver {
 
 
 
+    // TODO: Test Me!
+    private boolean correctPLLFound(Object[] pllCase){
 
-    private boolean correctPLLFound(Object[] pllCase,  ArrayList<CubeLayer.Cubie> topLayerCubies){
-        //  TODO:
-        //      - Loop through pllCase and find the non self values.
-        //      - For each non-self index from pllCase, find that value in the static_top_locations array.
-        //      - For each value from static_top_locations with the same index of non-self array, get that cubie from topLayerCubies
-        //      - Check if those cubies are in the correct locations
-        //      - If they are not in the correct locations then check if they need to be swapped like pllCase.
+        boolean foundCase;
 
-        String[] static_top_locations = {
+        String[] staticTopLocations = {
                 "U L B" , "U B"  , "U R B" ,
                 "U L"   , "U"    , "U R"   ,
                 "U L F" , "U F"  , "U R F"
         };
 
+        ArrayList<Boolean> matchingCubies = new ArrayList<>();
 
-        return static_top_locations[0].equals("");
+        for(int i = 0; i < pllCase.length; i++){
+
+            String movingToLocation = pllCase[i].toString();
+            if( ! movingToLocation.equals("self")){
+
+                String[] movingToLocationList = movingToLocation.split(" ");
+                String[] existingLocation = staticTopLocations[i].split(" ");
+                CubeLayer.Cubie cubieAtExistingLocation = this.rubiksCube.getCubieAtLocation(existingLocation);
+
+                // Check if cubie is at the correct orientation
+                Integer[] cubieColors = cubieAtExistingLocation.getStickerColors().toArray(new Integer[0]);
+                List<SurfaceName> correctLocation = this.rubiksCube.correctLocationOfCubie(cubieColors);
+
+
+                // Compare correctLocation with movingToLocationList
+                //      -   Check if they have the same surface letter, ignore order.
+                ArrayList<String> cl = new ArrayList<>();
+                for(SurfaceName sn : correctLocation){
+                    cl.add( sn.name() );
+                }
+
+                ArrayList<String> mtll = new ArrayList<>(Arrays.asList(movingToLocationList));
+                Collections.sort(mtll);
+                Collections.sort(cl);
+
+                if(cl.equals(mtll)){
+                    matchingCubies.add(true);
+                }else{
+                    matchingCubies.add(false);
+                }
+            }
+        }
+
+        foundCase = matchingCubies.contains(false);
+        return foundCase;
     }
 
 
@@ -833,16 +864,13 @@ public class CubeSolver {
         boolean correctAlignment = false;
         while(! correctAlignment) {
 
-            CubeLayer up = this.rubiksCube.getLayerByLetter("U");
-            ArrayList<CubeLayer.Cubie> topLayerCubies = up.getAllCubies();
-
             String algorithmToExecute = "";
             for(Object currentOLLCase : fullPLL){
 
                 Object[] pllCase = ((JSONArray)((JSONObject)currentOLLCase).get("MoveTo")).toArray();
 
                 // Compare current orientation to the current pll in the json file.
-                correctAlignment = correctPLLFound(pllCase, topLayerCubies);
+                correctAlignment = correctPLLFound(pllCase);
                 if(correctAlignment){
                     algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
                     break;

@@ -1,51 +1,109 @@
 {
   "PLL": [
-
     {
       "Case": 1,
       "MoveTo": [
-        "2"    , "self" , "8",
+        "U R B", "self" , "U R F",
         "self" , "self" , "self",
-        "self" , "self" , "0"
+        "self" , "self" , "U L B"
       ],
-      "SolutionAlgorithm": "Lw' U R' D2 R U' R' D2 R2"
+      "SolutionAlgorithm": "Rw L' R' U R' D2 R U' R' D2 R2"
     },
     {
       "Case": 2,
       "MoveTo": [
-        "6"    , "self" , "0",
-        "self" , "self" , "self",
-        "2"    , "self" , "self"
+        "U R F" , "self" , "U L B",
+        "self"  , "self" , "self",
+        "self" , "self" , "U R B"
       ],
-      "SolutionAlgorithm": "Rw' L R2 D2 R U R' D2 R U' R"
+      "SolutionAlgorithm": "Rw L' R2 D2 R U R' D2 R U' R"
     },
     {
       "Case": 3,
       "MoveTo": [
-        "6"    , "self" , "8",
-        "self" , "self" , "self",
-        "0"    , "self" , "2"
+        "U L F"  , "self" , "U R F",
+        "self"   , "self" , "self",
+        "U L B"  , "self" , "U R B"
       ],
-      "SolutionAlgorithm": "Rw L' R U' R' D R U R' Uw2' R' U R D R' U' R"
+      "SolutionAlgorithm": "Rw' L R U' R' D R U R' D' R U R' D R U' R' D'"
     },
     {
       "Case": 4,
       "MoveTo": [
-        "self" , "3"    , "self",
-        "1"    , "self" , "7",
-        "self" , "5"    , "self"
+        "self" , "self"  , "self",
+        "U F"  , "self" , "U L",
+        "self" , "U R"  , "self"
       ],
-      "SolutionAlgorithm": "M2' U M2' U M' U2 M2' U2 M' U2"
+      "SolutionAlgorithm": "R U' R U R U R U' R' U' R2"
     },
     {
       "Case": 5,
       "MoveTo": [
-        "self" , "7"    , "self",
-        "5"    , "self" , "3",
-        "self" , "1"    , "self"
+        "self" , "self"  , "self",
+        "U R"  , "self" , "U F",
+        "self" , "U L"  , "self"
+      ],
+      "SolutionAlgorithm": "R2 U R U R' U' R' U' R' U R'"
+    },
+    {
+      "Case": 6,
+      "MoveTo": [
+        "self" , "U L"  , "self",
+        "U B"  , "self" , "U F",
+        "self" , "U R"  , "self"
+      ],
+      "SolutionAlgorithm": "M2' U M2' U M' U2 M2' U2 M' U2"
+    },
+    {
+      "Case": 7,
+      "MoveTo": [
+        "self" , "U F"  , "self",
+        "U R"  , "self" , "U L",
+        "self" , "U B"  , "self"
       ],
       "SolutionAlgorithm": "M2' U M2' U2 M2' U M2'"
+    },
+    {
+      "Case": 8,
+      "MoveTo": [
+        "U R B" , "U L"  , "U L B",
+        "U B"  , "self" , "self",
+        "self" , "self"  , "self"
+      ],
+      "SolutionAlgorithm": "R' U L' U2 R U' R' U2 L R U'"
+    },
+    {
+      "Case": 9,
+      "MoveTo": [
+        "self" , "self" , "U R F",
+        "self" , "self" , "U F",
+        "self" , "U R"  , "U R B"
+      ],
+      "SolutionAlgorithm": "R U R' F' R U R' U' R' F R2 U' R' U'"
+    },
+    {
+      "Case": 10,
+      "MoveTo": [
+        "self" , "self" , "U R F",
+        "U R"  , "self" , "U L",
+        "self" , "self" , "U R B"
+      ],
+      "SolutionAlgorithm": "R U R' U' R' F R2 U' R' U' R U R' F'"
+    },
+    {
+      "Case": 11,
+      "MoveTo": [
+        "U R B" , "self"  , "U L B",
+        "U F"   , "self" , "self",
+        "self" , "U L"  , "self"
+      ],
+      "SolutionAlgorithm": "L U2' L' U2' L F' L' U' L U L F L2' U"
     }
+
+
+
+
+
 
 
 
