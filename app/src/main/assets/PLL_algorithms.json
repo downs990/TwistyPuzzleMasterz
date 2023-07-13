@@ -98,7 +98,44 @@
         "self" , "U L"  , "self"
       ],
       "SolutionAlgorithm": "L U2' L' U2' L F' L' U' L U L F L2' U"
+    },
+    {
+      "Case": 12,
+      "MoveTo": [
+        "U R B" , "self" , "U L B",
+        "self"  , "self" , "U F",
+        "self"  , "U R"  , "self"
+      ],
+      "SolutionAlgorithm": "R' U2 R U2 R' F R U R' U' R' F' R2 U'"
+    },
+    {
+      "Case": 13,
+      "MoveTo": [
+        "self" , "U F"  , "U R F",
+        "self" , "self" , "self",
+        "self" , "U B"  , "U R B"
+      ],
+      "SolutionAlgorithm": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"
+    },
+    {
+      "Case": 14,
+      "MoveTo": [
+        "U R B" , "U L"  , "U L F",
+        "U R"   , "self" , "U B",
+        "U L B" , "self"  , "self"
+      ],
+      "SolutionAlgorithm": "R2' Uw R' U R'U' R Uw' R2' Uw' D R' U R"
+    },
+    {
+      "Case": 15,
+      "MoveTo": [
+        "U L F" , "U F"  , "U L B",
+        "U B"   , "self" , "self",
+        "U R F" , "U L"  , "U L B"
+      ],
+      "SolutionAlgorithm": "R' U' R Uw D' R2' Uw R' U R U' R Uw' R2'"
     }
+
 
 
 

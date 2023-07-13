@@ -836,7 +836,7 @@ public class CubeSolver {
             }
         }
 
-        foundCase = matchingCubies.contains(false);
+        foundCase = ! matchingCubies.contains(false);
         return foundCase;
     }
 
@@ -850,7 +850,7 @@ public class CubeSolver {
 
     // TODO: Test me!
     // TODO: How to generalize this method with oll to reduce the code duplication.
-    public void pllSolutionSteps(Integer[][] stickersToSolve) {
+    public void pllSolutionSteps() {
 
         JSONObject pllJSON = getAlgorithmsFromConfig("PLL_algorithms.json");
         JSONArray fullPLL = (JSONArray) pllJSON.get("PLL");
@@ -894,7 +894,7 @@ public class CubeSolver {
         }
 
     public void solvePLL() {
-        pllSolutionSteps(topCubies);
+        pllSolutionSteps();
     }
 
 
