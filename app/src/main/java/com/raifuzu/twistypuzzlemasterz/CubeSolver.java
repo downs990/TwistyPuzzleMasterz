@@ -791,7 +791,7 @@ public class CubeSolver {
 
 
     // TODO: Test Me!
-    private boolean correctPLLFound(Object[] pllCase){
+    private boolean correctPLLFound(Object[] moveTo){
 
         boolean foundCase;
 
@@ -803,9 +803,9 @@ public class CubeSolver {
 
         ArrayList<Boolean> matchingCubies = new ArrayList<>();
 
-        for(int i = 0; i < pllCase.length; i++){
+        for(int i = 0; i < moveTo.length; i++){
 
-            String movingToLocation = pllCase[i].toString();
+            String movingToLocation = moveTo[i].toString();
             if( ! movingToLocation.equals("self")){
 
                 String[] movingToLocationList = movingToLocation.split(" ");
@@ -879,7 +879,11 @@ public class CubeSolver {
 
             // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
             if(Objects.equals(algorithmToExecute, "")){
-                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+                this.rubiksCube.executeAlgorithm("Uw", RubiksCube.RecordAlgorithm.YES);
+                // TODO: Whole cube rotation (F to L) or (F to R)
+                // TODO: Algorithm transform
+                // TODO: Uw N times and then Uw' N times
+
             }
 
             // If you've found the correct case and alignment then execute it's transformed
