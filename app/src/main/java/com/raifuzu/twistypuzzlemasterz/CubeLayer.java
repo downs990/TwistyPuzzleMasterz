@@ -375,22 +375,19 @@ public class CubeLayer {
         }
 
 
-        private String colorIndexToString(int indexOfCubeAsString){
-            char colorLetter = cubeAsString.charAt(indexOfCubeAsString - 1);
-            Integer colorAsInt = RubiksCubeStructure.colorLetterToIntegerColor(colorLetter);
-            return colorIntToString(colorAsInt);
-        }
+
 
         @Override
         public String toString() {
-            StringBuilder output = new StringBuilder("");
+            StringBuilder output = new StringBuilder("{");
             for (int i = 0; i < this.stickerColorsList.size(); i++) {
                 // Converts the sticker list into a string with sticker color names
                 Integer currentColor = this.stickerColorsList.get(i); 
-                String stickerColorName = colorIndexToString(currentColor);
+                String stickerColorName = colorIntToString(currentColor);
                 output.append(" ").append(stickerColorName);
             }
 
+            output.append("}");
             return output.toString();
         }
 

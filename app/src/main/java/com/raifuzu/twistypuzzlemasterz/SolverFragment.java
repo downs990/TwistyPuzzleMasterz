@@ -150,7 +150,7 @@ public class SolverFragment extends Fragment {
 
 
 				// TODO: Use for testing
-				// displayAlert("Solution Algorithm:", entireSolution);
+//				 displayAlert("Up: ", rubiksCube.getLayerByLetter("U").getAllCubies().toString() );
 				// Toast.makeText(getActivity(), "Cube is reset!", Toast.LENGTH_SHORT).show();
 
 

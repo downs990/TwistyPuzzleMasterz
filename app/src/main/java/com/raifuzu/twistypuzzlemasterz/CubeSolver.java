@@ -879,7 +879,7 @@ public class CubeSolver {
 
             // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
             if(Objects.equals(algorithmToExecute, "")){
-                this.rubiksCube.executeAlgorithm("Uw", RubiksCube.RecordAlgorithm.YES);
+                this.rubiksCube.executeAlgorithm("Uw D'", RubiksCube.RecordAlgorithm.YES);
                 // TODO: Whole cube rotation (F to L) or (F to R)
                 // TODO: Algorithm transform
                 // TODO: Uw N times and then Uw' N times
@@ -894,8 +894,7 @@ public class CubeSolver {
         }
 
 
-
-        }
+    }
 
     public void solvePLL() {
         pllSolutionSteps();
@@ -911,6 +910,10 @@ public class CubeSolver {
         solveF2L();
         solveOLL();
         solvePLL();
+
+
+
+
 
 //        }else{
 //            Toast.makeText(rootView.getContext(), "Invalid State! ", Toast.LENGTH_LONG).show();
