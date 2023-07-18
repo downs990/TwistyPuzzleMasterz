@@ -177,9 +177,9 @@ public class SolverFragment extends Fragment {
 				debuggingText.setText(message);
 
 				// TODO: Remove this after testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//				rubiksCube.executeAlgorithm("M", RubiksCube.RecordAlgorithm.NO);
+//				rubiksCube.executeAlgorithm("L D U2 R U2 F' L2 U' L F L F' D' L2 B' R L R'", RubiksCube.RecordAlgorithm.NO);
 //				setButtonsToCurrentCube(surfacesAsButtonLists);
-				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 			}
@@ -201,6 +201,7 @@ public class SolverFragment extends Fragment {
 				debuggingText.setText(text);
 
 				setButtonsToCurrentCube(surfacesAsButtonLists);
+//				displayAlert("Front: ", rubiksCube.getLayerByLetter("F").getAllCubies().toString() );
 			}
 		});
 

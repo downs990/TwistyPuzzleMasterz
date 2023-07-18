@@ -93,8 +93,8 @@
     {
       "Case": 11,
       "MoveTo": [
-        "U R B" , "self"  , "U L B",
-        "U F"   , "self" , "self",
+        "U R B",  "self", "U L B",
+        "U F"  , "self" , "self",
         "self" , "U L"  , "self"
       ],
       "SolutionAlgorithm": "L U2' L' U2' L F' L' U' L U L F L2' U"
@@ -124,7 +124,7 @@
         "U R"   , "self" , "U B",
         "U L B" , "self"  , "self"
       ],
-      "SolutionAlgorithm": "R2' Uw R' U R'U' R Uw' R2' Uw' D R' U R"
+      "SolutionAlgorithm": "R2' Uw R' U R' U' R Uw' R2' Uw' D R' U R"
     },
     {
       "Case": 15,
@@ -156,7 +156,7 @@
     {
       "Case": 18,
       "MoveTo": [
-        "U R f" , "U R"  , "self",
+        "U R F" , "U R"  , "self",
         "self"  , "self" , "U B",
         "self"  , "self" , "U L B"
       ],
