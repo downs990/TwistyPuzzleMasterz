@@ -335,7 +335,13 @@ public class OpenCVActivity extends AppCompatActivity {
             }
 
             // update cubeView
-            cubeView.setFrontColors(detectedColor);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    cubeView.setFrontColors(detectedColor);
+                }
+            });
+
 
             // draw frame and detected color
             for (int i = 0; i < 3; i++) {
