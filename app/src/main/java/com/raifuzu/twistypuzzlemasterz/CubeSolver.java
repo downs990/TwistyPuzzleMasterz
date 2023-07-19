@@ -890,7 +890,7 @@ public class CubeSolver {
 
                     me: for(int j = 0; j < 4; j++) {
                             for (int i = 0; i < 4; i++) {
-                                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+                                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.NO);
                                 correctAlignment = correctPLLFound(pllCase);
 
                                 if (correctAlignment) {
@@ -898,7 +898,7 @@ public class CubeSolver {
                                 }
                             }
 
-                            this.rubiksCube.executeAlgorithm("Uw D'", RubiksCube.RecordAlgorithm.YES);
+                            this.rubiksCube.executeAlgorithm("Uw D'", RubiksCube.RecordAlgorithm.NO);
                             correctAlignment = correctPLLFound(pllCase);
 
                             if (correctAlignment) {
@@ -947,7 +947,7 @@ public class CubeSolver {
         solveCross();
         solveF2L();
         solveOLL();
-//        solvePLL();
+        solvePLL();
 
 
 

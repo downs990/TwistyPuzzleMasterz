@@ -24,6 +24,8 @@
     <!-- Color Selection Dimensions -->
     <dimen name="color_height">25dp</dimen>
     <dimen name="color_width">50dp</dimen>
-    
+
+
+    <dimen name="button_text_size">24sp</dimen>
 
 </resources>

@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\downs\AndroidStudioProjects\AndroidRubikCubeSolver\opencv\.cxx\Debug\z3o4v3o6\x86_64'
+ninja: no work to do.

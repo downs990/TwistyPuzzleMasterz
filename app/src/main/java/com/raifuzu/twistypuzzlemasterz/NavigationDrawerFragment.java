@@ -9,9 +9,10 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -112,12 +113,16 @@ public class NavigationDrawerFragment extends Fragment {
 		
 		
 		// Add new list view items here
-		String[] listItems = { getString(R.string.title_section1), getString(R.string.title_section2),
+		String[] listItems = {
+				getString(R.string.title_section1), getString(R.string.title_section2),
 				getString(R.string.title_section3), getString(R.string.title_section4),
-				getString(R.string.title_section5), getString(R.string.title_section6), getString(R.string.title_section7) };
+				getString(R.string.title_section5), getString(R.string.title_section6),
+				getString(R.string.title_section7), getString(R.string.title_section8)
+
+		};
 
 		// TODO - how do I add images to my list view. Will I need to build a
-		// custom list view?
+		//         custom list view?
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActionBar().getThemedContext(),
 				android.R.layout.simple_list_item_activated_1, android.R.id.text1, listItems) {
 
@@ -184,7 +189,8 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerToggle = new ActionBarDrawerToggle(
 				getActivity(), /* host Activity */
 				mDrawerLayout, /* DrawerLayout object */
-				R.drawable.ic_drawer, /*
+				//R.drawable.ic_drawer,
+										/*
 										 * nav drawer image to replace 'Up'
 										 * caret
 										 */

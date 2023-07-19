@@ -1,19 +1,19 @@
 package com.raifuzu.twistypuzzlemasterz;
 
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -104,9 +104,16 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 			break;
+		case 6:
+			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+			Intent intent = new Intent(this, OpenCVActivity.class);
+			startActivity(intent);
+			break;
+
 
 		default:
-			break;
+		break;
 		}
 	}
 
@@ -127,6 +134,16 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		case 5:
 			mTitle = getString(R.string.title_section5);
 			break;
+		case 6:
+			mTitle = getString(R.string.title_section6);
+			break;
+		case 7:
+			mTitle = getString(R.string.title_section7);
+			break;
+		case 8:
+			mTitle = getString(R.string.title_section8);
+			break;
+
 		}
 	}
 

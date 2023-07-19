@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\downs\AndroidStudioProjects\TwistyPuzzleMasterz\opencv\.cxx\Debug\z3o4v3o6\x86'
+ninja: no work to do.

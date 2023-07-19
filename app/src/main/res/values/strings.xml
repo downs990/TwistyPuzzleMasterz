@@ -10,8 +10,10 @@
     <string name="title_section3">Advanced</string>
     <string name="title_section4">Fridrich Method (CFOP)</string>
     <string name="title_section5">Beginner</string>
-    <string name="title_section6">Cube Solver</string>
-    <string name="title_section7">Notations</string>
+    <string name="title_section6">Cube Solver - 2D</string>
+    <string name="title_section7">Cube Solver - 3D</string>
+    <string name="title_section8">Notations</string>
+
     
     
     
@@ -35,5 +37,22 @@
 	<!-- Fridrich List view -->
 	<string name="sample_algorithm">This is some sample text that should never been seen by user</string>
 
+
+
+    <string name="reset_btn_name">RESET</string>
+    <string name="scan_btn_name">SCAN</string>
+    <!-- solved dialog -->
+    <string name="solved_dialog_title">Solved!!</string>
+    <string name="solved_dialog_msg_prefix">Top : Yellow, Front : Green.</string>
+    <string name="solved_dialog_positive">OK</string>
+    <string name="solved_dialog_animation">Animation</string>
+    <!-- invalid cube dialog -->
+    <string name="invalid_dialog_title">Invalid Cube…</string>
+    <string name="invalid_dialog_positive">RESET</string>
+    <string name="invalid_dialog_neutral">FIX</string>
+    <!-- Right Face? dialog-->
+    <string name="right_face_dialog_title">Right Face?</string>
+    <string name="right_face_dialog_negative">RESCAN</string>
+    <string name="right_face_dialog_positive">YES</string>
 	
 </resources>
