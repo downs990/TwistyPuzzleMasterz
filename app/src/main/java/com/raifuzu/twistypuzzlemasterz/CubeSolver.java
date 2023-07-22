@@ -336,6 +336,10 @@ public class CubeSolver {
 
     public void solveCross() {
 
+
+        // TODO: If cross is already solved them do nothing.
+        // TODO: Add transformOrientation() to cross.
+
         Integer[][] stickersToSolve = {
                 {RubiksCube.WHITE, RubiksCube.GREEN},
                 {RubiksCube.WHITE, RubiksCube.BLUE},
@@ -750,41 +754,57 @@ public class CubeSolver {
         JSONArray fullOLL = (JSONArray) ollJSON.get("OLL");
 
 
-        // TODO: If OLL is solved already then do nothing. Will currently infinite loop if already solved.
 
-
+        boolean ollSolved = true;
         boolean correctAlignment = false;
-        while(! correctAlignment){
 
-            CubeLayer up = this.rubiksCube.getLayerByLetter("U");
-            ArrayList<String[]> topLayersColors = up.getAllColorsOnLayer();
+        // Checks if OLL is solved already.
+        CubeLayer up = this.rubiksCube.getLayerByLetter("U");
+        Integer[] topSurfaceColorsIndexes = up.getSurfaceColorIndexes();
+        for(Integer colorIndex : topSurfaceColorsIndexes){
+            char color = this.rubiksCube.getCubeAsString().charAt(colorIndex - 1);
+            if(color != 'Y'){
+                ollSolved = false; // All surface colors must be yellow
+                correctAlignment = true;
+                break;
+            }
+        }
 
-            String algorithmToExecute = "";
-            for(Object currentOLLCase : fullOLL){
+        if(! ollSolved){
+            while(! correctAlignment){
 
-                Object[] ollCase = ((JSONArray)((JSONObject)currentOLLCase).get("YellowMap_TopSurface")).toArray();
+                up = this.rubiksCube.getLayerByLetter("U");
+                ArrayList<String[]> topLayersColors = up.getAllColorsOnLayer();
 
-                // Compare current orientation to the current oll in the json file.
-                correctAlignment = correctOLLFound(ollCase, topLayersColors);
-                if(correctAlignment){
-                    algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
-                    break;
+                String algorithmToExecute = "";
+                for(Object currentOLLCase : fullOLL){
+
+                    Object[] ollCase = ((JSONArray)((JSONObject)currentOLLCase).get("YellowMap_TopSurface")).toArray();
+
+                    // Compare current orientation to the current oll in the json file.
+                    correctAlignment = correctOLLFound(ollCase, topLayersColors);
+                    if(correctAlignment){
+                        algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
+                        break;
+                    }
                 }
-            }
 
-            // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
-            if(Objects.equals(algorithmToExecute, "")){
-                this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
-            }
+                // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
+                if(Objects.equals(algorithmToExecute, "")){
+                    this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.YES);
+                }
 
 
-            // If you've found the correct case and alignment then execute it's transformed
-            // solution algorithm.
-            else{
-                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+                // If you've found the correct case and alignment then execute it's transformed
+                // solution algorithm.
+                else{
+                    this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+                }
+
             }
 
         }
+
     }
 
 
@@ -945,9 +965,9 @@ public class CubeSolver {
 
 //        if( cubeIsValid ){
         solveCross();
-        solveF2L();
-        solveOLL();
-        solvePLL();
+//        solveF2L();
+//        solveOLL();
+//        solvePLL();
 
 
 

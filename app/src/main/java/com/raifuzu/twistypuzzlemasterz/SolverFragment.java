@@ -27,9 +27,11 @@ public class SolverFragment extends Fragment {
 
 
 	// TODO: Reset doesn't clear this scrambled cubeAsString for some reason???
-	private String cubeAsString = "ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG";
+//	private String cubeAsString = "ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG";
 //private String cubeAsString = "YYYYYYYYYOOOOOOOOOGGGGGGGGGWWWWWWWWWRRRRRRRRRBBBBBBBBB";
 
+	// TODO: Cross, FRL, and OLL solved already. Just need a U turn. But crashes
+	private String cubeAsString = "YYYYYYYYYGGGOOOOOORRRGGGGGGWWWWWWWWWBBBRRRRRROOOBBBBBB";
 
 
 

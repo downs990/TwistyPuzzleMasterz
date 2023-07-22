@@ -128,7 +128,32 @@ public class OpenCVActivity extends AppCompatActivity {
                 // solve
                 currentFaceIdx++;
                 updateIndicator();
-                new SolveTask().execute(scannedCube);
+
+                // TODO: Library solution code
+//                new SolveTask().execute(scannedCube);
+
+                // TODO: My solution code
+                View rootView = this.getCurrentFocus();
+                RubiksCubeStructure rubiksCube = new RubiksCubeStructure(rootView, scannedCube);
+                CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
+                mySolver.solveCube();
+                String solution = rubiksCube.getSolutionAlgorithm();
+
+
+
+                new MaterialAlertDialogBuilder(OpenCVActivity.this)
+                        .setTitle(R.string.solved_dialog_title)
+                        .setMessage(getString(R.string.solved_dialog_msg_prefix) + "\n" + solution)
+                        .setPositiveButton(R.string.solved_dialog_positive, null)
+                        .setNeutralButton(R.string.solved_dialog_animation, (dialog, i) -> { ;
+                            Uri webpage = ImageUtil.generateAnimationLink(solution);
+                            Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                            Log.i(TAG, "Start Animation");
+                            startActivity(intent);
+                        })
+                        .setCancelable(false)
+                        .show();
+
             }
         });
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
