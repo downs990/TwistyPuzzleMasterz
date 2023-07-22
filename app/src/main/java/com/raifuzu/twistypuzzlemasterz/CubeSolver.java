@@ -339,6 +339,7 @@ public class CubeSolver {
 
         // TODO: If cross is already solved them do nothing.
         // TODO: Add transformOrientation() to cross.
+        // TODO: Get the 2D manual config interface buttons working again for setting up a cube.
 
         Integer[][] stickersToSolve = {
                 {RubiksCube.WHITE, RubiksCube.GREEN},
@@ -756,7 +757,7 @@ public class CubeSolver {
 
 
         boolean ollSolved = true;
-        boolean correctAlignment = false;
+        boolean correctAlignment = true;
 
         // Checks if OLL is solved already.
         CubeLayer up = this.rubiksCube.getLayerByLetter("U");
@@ -765,7 +766,7 @@ public class CubeSolver {
             char color = this.rubiksCube.getCubeAsString().charAt(colorIndex - 1);
             if(color != 'Y'){
                 ollSolved = false; // All surface colors must be yellow
-                correctAlignment = true;
+                correctAlignment = false;
                 break;
             }
         }
@@ -965,9 +966,9 @@ public class CubeSolver {
 
 //        if( cubeIsValid ){
         solveCross();
-//        solveF2L();
-//        solveOLL();
-//        solvePLL();
+        solveF2L();
+        solveOLL();
+        solvePLL();
 
 
 
