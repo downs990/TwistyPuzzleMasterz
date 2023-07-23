@@ -968,7 +968,7 @@ public class CubeSolver {
         solveCross();
         solveF2L();
         solveOLL();
-        solvePLL();
+//        solvePLL();
 
 
 

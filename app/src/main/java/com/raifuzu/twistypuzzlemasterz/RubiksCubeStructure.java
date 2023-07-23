@@ -74,6 +74,10 @@ public class RubiksCubeStructure implements RubiksCube {
 
 			this.rubiksCube.put(nameOfSurface.name(), currentLayer);
 		}
+
+
+
+		finalizeOrientation();
 	}
 
 

@@ -24,16 +24,7 @@ public class SolverFragment extends Fragment {
 	 * The fragment argument representing the section number for this fragment.
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
-
-
-	// TODO: Reset doesn't clear this scrambled cubeAsString for some reason???
-//	private String cubeAsString = "ORYBYBRYRWWOROWGOWBGBRGGYYYOORWWBWGGBYYRRWOOGBYWGBBROG";
-private String cubeAsString = "YYYYYYYYYOOOOOOOOOGGGGGGGGGWWWWWWWWWRRRRRRRRRBBBBBBBBB";
-
-	// TODO: Cross, FRL, and OLL solved already. Just need a U turn. But crashes
-//	private String cubeAsString = "YYYYYYYYYGGGOOOOOORRRGGGGGGWWWWWWWWWBBBRRRRRROOOBBBBBB";
-
-
+	private String cubeAsString = "YYYYYYYYYOOOOOOOOOGGGGGGGGGWWWWWWWWWRRRRRRRRRBBBBBBBBB";
 
 
 
