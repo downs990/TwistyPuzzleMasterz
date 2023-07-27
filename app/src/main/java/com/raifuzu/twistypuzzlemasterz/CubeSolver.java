@@ -907,25 +907,33 @@ public class CubeSolver {
 
                 correctAlignment = correctPLLFound(pllCase);
 
+                StringBuilder alignPLLAlgorithm = new StringBuilder();
                 if(! correctAlignment){
 
                     me: for(int j = 0; j < 4; j++) {
                             for (int i = 0; i < 4; i++) {
+                                alignPLLAlgorithm.append(" " + "U");
                                 this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.NO);
                                 correctAlignment = correctPLLFound(pllCase);
 
                                 if (correctAlignment) {
+                                    this.rubiksCube.solutionAlgorithm += alignPLLAlgorithm;
                                     break me;
                                 }
                             }
 
+
+                            alignPLLAlgorithm.append(" " + "Uw D'");
                             this.rubiksCube.executeAlgorithm("Uw D'", RubiksCube.RecordAlgorithm.NO);
                             correctAlignment = correctPLLFound(pllCase);
 
                             if (correctAlignment) {
+                                this.rubiksCube.solutionAlgorithm += alignPLLAlgorithm;
                                 break;
                             }
                     }
+
+
                 }
 
                 if(correctAlignment){
@@ -968,11 +976,7 @@ public class CubeSolver {
         solveCross();
         solveF2L();
         solveOLL();
-//        solvePLL();
-
-
-
-
+        solvePLL();
 
 //        }else{
 //            Toast.makeText(rootView.getContext(), "Invalid State! ", Toast.LENGTH_LONG).show();

@@ -85,10 +85,16 @@ public class OpenCVActivity extends AppCompatActivity {
         System.loadLibrary("opencv_java4");
     }
 
+
+    private View rootView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opencv);
+
+
+        rootView = this.getCurrentFocus();
 
         scanIndicator = findViewById(R.id.scanIndicator);
         imageView = findViewById(R.id.imageView);
@@ -129,30 +135,13 @@ public class OpenCVActivity extends AppCompatActivity {
                 currentFaceIdx++;
                 updateIndicator();
 
-                // TODO: Library solution code
-//                new SolveTask().execute(scannedCube);
-
-                // TODO: My solution code
-                View rootView = this.getCurrentFocus();
-                RubiksCubeStructure rubiksCube = new RubiksCubeStructure(rootView, scannedCube);
-                CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
-                mySolver.solveCube();
-                String solution = rubiksCube.getSolutionAlgorithm();
+                new SolveTask().execute(scannedCube);
 
 
 
-                new MaterialAlertDialogBuilder(OpenCVActivity.this)
-                        .setTitle(R.string.solved_dialog_title)
-                        .setMessage(getString(R.string.solved_dialog_msg_prefix) + "\n" + solution)
-                        .setPositiveButton(R.string.solved_dialog_positive, null)
-                        .setNeutralButton(R.string.solved_dialog_animation, (dialog, i) -> { ;
-                            Uri webpage = ImageUtil.generateAnimationLink(solution);
-                            Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                            Log.i(TAG, "Start Animation");
-                            startActivity(intent);
-                        })
-                        .setCancelable(false)
-                        .show();
+                // TODO: Task out the AsyncTask and put all of it's execute code here with my solve code?
+
+
 
             }
         });
@@ -245,20 +234,33 @@ public class OpenCVActivity extends AppCompatActivity {
             Log.i(TAG, "Scrambled : " + scrambledCube);
             lastErrorCode = Tools.verify(scrambledCube);
             if (lastErrorCode == 0) {
-                return new Search().solution(scrambledCube, 21, 100000000, 10000, Search.APPEND_LENGTH);
+
+
+                //  TODO: Library solution code
+//                return new Search().solution(scrambledCube, 21, 100000000, 10000, Search.APPEND_LENGTH);
+
+
+
+                // TODO: My solution code
+                RubiksCubeStructure rubiksCube = new RubiksCubeStructure(rootView, scannedCube);
+                CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
+                mySolver.solveCube();
+                String solution = rubiksCube.getSolutionAlgorithm();
+                return solution;
+
             }
-            return null;
+            return "ErrorCode:" + lastErrorCode;
         }
 
         @Override
-        protected void onPostExecute(String moves) {
+        protected void onPostExecute(String solution) {
             if (lastErrorCode == 0) {
                 new MaterialAlertDialogBuilder(OpenCVActivity.this)
                         .setTitle(R.string.solved_dialog_title)
-                        .setMessage(getString(R.string.solved_dialog_msg_prefix) + "\n" + moves)
+                        .setMessage(getString(R.string.solved_dialog_msg_prefix) + "\n" + solution)
                         .setPositiveButton(R.string.solved_dialog_positive, null)
                         .setNeutralButton(R.string.solved_dialog_animation, (dialog, i) -> {
-                            String solution = moves.substring(0, moves.indexOf('(') - 1);
+//                            String solution = moves.substring(0, moves.indexOf('(') - 1);
                             Uri webpage = ImageUtil.generateAnimationLink(solution);
                             Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                             Log.i(TAG, "Start Animation");

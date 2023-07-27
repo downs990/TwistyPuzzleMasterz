@@ -26,7 +26,7 @@ public class RubiksCubeStructure implements RubiksCube {
 	private final ArrayList<String> missingCubiesList = new ArrayList<>();
 
 
-	private String solutionAlgorithm;
+	public String solutionAlgorithm;
 	private String cubeAsString;
 
 	private View rootView;
