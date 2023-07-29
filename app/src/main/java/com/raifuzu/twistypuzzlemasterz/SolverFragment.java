@@ -170,7 +170,8 @@ public class SolverFragment extends Fragment {
 				debuggingText.setText(message);
 
 				// TODO: Remove this after testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//				rubiksCube.executeAlgorithm("L D U2 R U2 F' L2 U' L F L F' D' L2 B' R L R'", RubiksCube.RecordAlgorithm.NO);
+				// PLL Skip that requires a U
+//				rubiksCube.executeAlgorithm("F B' U B R' U2 L' R' F' R' D' R F' B' D' L2 U2 D2", RubiksCube.RecordAlgorithm.NO);
 //				setButtonsToCurrentCube(surfacesAsButtonLists);
 				// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

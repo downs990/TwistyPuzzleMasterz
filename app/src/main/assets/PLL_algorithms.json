@@ -129,7 +129,7 @@
     {
       "Case": 15,
       "MoveTo": [
-        "U L F" , "U F"  , "U L B",
+        "U L F" , "U F"  , "self",
         "U B"   , "self" , "self",
         "U R F" , "U L"  , "U L B"
       ],
@@ -149,7 +149,7 @@
       "MoveTo": [
         "U R B" , "U L"  , "U L F",
         "U F"   , "self" , "self",
-        "U L B" , "U B"  , "U L B"
+        "U L B" , "U B"  , "self"
       ],
       "SolutionAlgorithm": "R U R' Uw' D R2' Uw' R U' R' U R' Uw R2"
     },

@@ -855,6 +855,7 @@ public class CubeSolver {
                     matchingCubies.add(true);
                 }else{
                     matchingCubies.add(false);
+                    break;
                 }
             }else{
 
@@ -864,6 +865,7 @@ public class CubeSolver {
                     matchingCubies.add(true);
                 }else{
                     matchingCubies.add(false);
+                    break;
                 }
             }
         }
@@ -880,7 +882,6 @@ public class CubeSolver {
     }
 
 
-    // TODO: Test me!
     // TODO: How to generalize this method with oll to reduce the code duplication.
     public void pllSolutionSteps() {
 
@@ -888,29 +889,37 @@ public class CubeSolver {
         JSONArray fullPLL = (JSONArray) pllJSON.get("PLL");
 
 
-        // TODO: If PLL is solved already then do nothing. Will currently infinite loop if already solved.
+        // If PLL is solved already then do nothing.
+        CubeLayer up = this.rubiksCube.getLayerByLetter("U");
+        ArrayList<CubeLayer.Cubie> upCubies = up.getAllCubies();
+        boolean isPLLSolved = true;
+        for(CubeLayer.Cubie currentCubie : upCubies){
+
+            if(! currentCubie.isOrientationCorrect() ){
+                isPLLSolved = false;
+            }
+        }
 
 
-        // Loop through each of the 21 cases to check if you have any of them
-        // If not, then perform a U rotation and check all 21 again
-        boolean correctAlignment = false;
-        while(! correctAlignment) {
+        if(! isPLLSolved ){
+            // Loop through each of the 21 cases to check if you have any of them
+            // If not, then perform a U rotation and check all 21 again
+            boolean correctAlignment = false;
+            pllLoop: while(! correctAlignment) {
 
-            String algorithmToExecute = "";
-            for(Object currentOLLCase : fullPLL){
+                String algorithmToExecute = "";
+                for(Object currentOLLCase : fullPLL){
 
-                Object[] pllCase = ((JSONArray)((JSONObject)currentOLLCase).get("MoveTo")).toArray();
-                long caseNum = (long)((JSONObject)currentOLLCase).get("Case");
+                    Object[] pllCase = ((JSONArray)((JSONObject)currentOLLCase).get("MoveTo")).toArray();
+                    long caseNum = (long)((JSONObject)currentOLLCase).get("Case");
 
-                // Compare current orientation to the current pll in the json file.
+                    // Compare current orientation to the current pll in the json file.
+                    correctAlignment = correctPLLFound(pllCase);
 
+                    StringBuilder alignPLLAlgorithm = new StringBuilder();
+                    if(! correctAlignment){
 
-                correctAlignment = correctPLLFound(pllCase);
-
-                StringBuilder alignPLLAlgorithm = new StringBuilder();
-                if(! correctAlignment){
-
-                    me: for(int j = 0; j < 4; j++) {
+                        me: for(int j = 0; j < 4; j++) {
                             for (int i = 0; i < 4; i++) {
                                 alignPLLAlgorithm.append(" " + "U");
                                 this.rubiksCube.executeAlgorithm("U", RubiksCube.RecordAlgorithm.NO);
@@ -931,34 +940,44 @@ public class CubeSolver {
                                 this.rubiksCube.solutionAlgorithm += alignPLLAlgorithm;
                                 break;
                             }
+                        }
+
+
+                    }
+
+                    if(correctAlignment){
+                        algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
+                        break;
+                    }else{
+
+                        // If you've searched all PLL cases and found no match, then break the loop.
+                        // You most likely have a case that is a PLL skip but still requires a U or U'
+                        if(caseNum == 21){
+                            break pllLoop;
+                        }
                     }
 
 
                 }
 
-                if(correctAlignment){
-                    algorithmToExecute = (String) ((JSONObject)currentOLLCase).get("SolutionAlgorithm");
-                    break;
+                // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
+                if(Objects.equals(algorithmToExecute, "")){
+                    //this.rubiksCube.executeAlgorithm("Uw D'", RubiksCube.RecordAlgorithm.YES);
+                    // TODO: Whole cube rotation y or y'
+                    // TODO: Algorithm transform
+                    // TODO: Uw N times and then Uw' N times
+
                 }
 
-
-            }
-
-            // If you've looped through all cases and haven't found a valid one yet, then do a U rotation.
-            if(Objects.equals(algorithmToExecute, "")){
-                //this.rubiksCube.executeAlgorithm("Uw D'", RubiksCube.RecordAlgorithm.YES);
-                // TODO: Whole cube rotation y or y'
-                // TODO: Algorithm transform
-                // TODO: Uw N times and then Uw' N times
-
-            }
-
-            // If you've found the correct case and alignment then execute it's transformed
-            // solution algorithm.
-            else{
-                this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+                // If you've found the correct case and alignment then execute it's transformed
+                // solution algorithm.
+                else{
+                    this.rubiksCube.executeAlgorithm(algorithmToExecute, RubiksCube.RecordAlgorithm.YES);
+                }
             }
         }
+
+
 
 
     }
