@@ -20,6 +20,7 @@ import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 
@@ -37,6 +38,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.opencv.android.Utils;
@@ -49,6 +51,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.ml.KNearest;
 import org.opencv.utils.Converters;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -94,7 +97,9 @@ public class OpenCVActivity extends AppCompatActivity {
         setContentView(R.layout.activity_opencv);
 
 
-        rootView = this.getCurrentFocus();
+//        rootView = this.getCurrentFocus();
+        rootView = findViewById(android.R.id.content);
+
 
         scanIndicator = findViewById(R.id.scanIndicator);
         imageView = findViewById(R.id.imageView);
@@ -135,13 +140,32 @@ public class OpenCVActivity extends AppCompatActivity {
                 currentFaceIdx++;
                 updateIndicator();
 
-                new SolveTask().execute(scannedCube);
+
+                // TODO: Library solution
+//                new SolveTask().execute(scannedCube);
 
 
 
-                // TODO: Task out the AsyncTask and put all of it's execute code here with my solve code?
 
 
+                try {
+                    // TODO: Task out the AsyncTask and put all of it's execute code here with my solve code?
+                    RubiksCubeStructure rubiksCube = new RubiksCubeStructure(rootView, scannedCube);
+                    CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
+                    mySolver.solveCube();
+                    String solution = rubiksCube.getSolutionAlgorithm();
+
+
+                    // Doesn't execute thread. Just used for popup stuff.
+                    SolveTask st = new SolveTask();
+                    st.doInPost(scannedCube, solution);
+
+                }catch (Exception e){
+                    Log.e("ERROR_ABC", e.toString());
+
+                    Snackbar.make(view, e.toString(), Snackbar.LENGTH_LONG).show();
+
+                }
 
             }
         });
@@ -237,23 +261,29 @@ public class OpenCVActivity extends AppCompatActivity {
 
 
                 //  TODO: Library solution code
-//                return new Search().solution(scrambledCube, 21, 100000000, 10000, Search.APPEND_LENGTH);
+                return new Search().solution(scrambledCube, 21, 100000000, 10000, Search.APPEND_LENGTH);
 
 
 
                 // TODO: My solution code
-                RubiksCubeStructure rubiksCube = new RubiksCubeStructure(rootView, scannedCube);
-                CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
-                mySolver.solveCube();
-                String solution = rubiksCube.getSolutionAlgorithm();
-                return solution;
+//                RubiksCubeStructure rubiksCube = new RubiksCubeStructure(rootView, scannedCube);
+//                CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
+//                mySolver.solveCube();
+//                String solution = rubiksCube.getSolutionAlgorithm();
+//                return solution;
 
             }
-            return "ErrorCode:" + lastErrorCode;
+            return null;
         }
 
-        @Override
-        protected void onPostExecute(String solution) {
+
+        private void doInPost(String scannedCube, String solution){
+
+            Log.i(TAG, "Scanned : " + scannedCube);
+            String scrambledCube = ImageUtil.convertCubeAnnotation(scannedCube);
+            Log.i(TAG, "Scrambled : " + scrambledCube);
+            lastErrorCode = Tools.verify(scrambledCube);
+
             if (lastErrorCode == 0) {
                 new MaterialAlertDialogBuilder(OpenCVActivity.this)
                         .setTitle(R.string.solved_dialog_title)
@@ -282,6 +312,11 @@ public class OpenCVActivity extends AppCompatActivity {
                 Log.e(TAG, "[solver] Invalid cube (errorCode : " + lastErrorCode + ")");
             }
             enableButtons();
+        }
+
+        @Override
+        protected void onPostExecute(String solution) {
+           doInPost(null, solution);
         }
     }
 

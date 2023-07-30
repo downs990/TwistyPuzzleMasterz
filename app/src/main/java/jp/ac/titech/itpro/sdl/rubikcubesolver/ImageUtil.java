@@ -144,9 +144,9 @@ public class ImageUtil {
         url += String.format("&alg=%s", Uri.encode(solution));
         // url += String.format("&colored=%s" , "*");
         url += String.format("&hover=%s" , "4");
-        url += String.format("&speed=%s" , "1000");
+        url += String.format("&speed=%s" , "2000");
         url += String.format("&flags=%s" , "showalg");
-        url += String.format("&colors=%s" , Uri.encode("U:y L:r F:g R:o B:b D:w", ":"));
+        url += String.format("&colors=%s" , Uri.encode("U:y L:o F:b R:r B:g D:w", ":"));
         url += String.format("&pov=%s" , "Ufr");
         url += String.format("&algdisplay=%s" , "rotations");
 
