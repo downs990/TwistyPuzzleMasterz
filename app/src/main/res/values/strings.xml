@@ -43,7 +43,7 @@
     <string name="scan_btn_name">SCAN</string>
     <!-- solved dialog -->
     <string name="solved_dialog_title">Solved!!</string>
-    <string name="solved_dialog_msg_prefix">Top : Yellow, Front : Green.</string>
+    <string name="solved_dialog_msg_prefix">Top : Yellow, Front : Blue.</string>
     <string name="solved_dialog_positive">OK</string>
     <string name="solved_dialog_animation">Animation</string>
     <!-- invalid cube dialog -->
