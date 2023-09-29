@@ -260,17 +260,8 @@ public class OpenCVActivity extends AppCompatActivity {
             if (lastErrorCode == 0) {
 
 
-                //  TODO: Library solution code
+                // Code that solves (Not my algorithms)
                 return new Search().solution(scrambledCube, 21, 100000000, 10000, Search.APPEND_LENGTH);
-
-
-
-                // TODO: My solution code
-//                RubiksCubeStructure rubiksCube = new RubiksCubeStructure(rootView, scannedCube);
-//                CubeSolver mySolver = new CubeSolver(rootView, rubiksCube);
-//                mySolver.solveCube();
-//                String solution = rubiksCube.getSolutionAlgorithm();
-//                return solution;
 
             }
             return null;
